@@ -1,43 +1,8 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>其他 on darkmoon的博客</title>
-    <link>https://cppxl.github.io/others/</link>
-    <description>Recent content in 其他 on darkmoon的博客</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Tue, 09 Nov 2021 22:18:45 +0800</lastBuildDate><atom:link href="https://cppxl.github.io/others/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>杂记</title>
-      <link>https://cppxl.github.io/others/misc/</link>
-      <pubDate>Thu, 25 Nov 2021 17:51:59 +0800</pubDate>
-      
-      <guid>https://cppxl.github.io/others/misc/</guid>
-      <description>开启Windows路由转发功能 将HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\IPEnableRoute 设置为1，开启Routing and Remote Access 服务并更改属性为自动启动
-reg add HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters /v IPEnableRouter /D 1 /f sc config RemoteAccess start= auto sc start RemoteAccess </description>
-    </item>
-    
-    <item>
-      <title>在Windows server 2019上重置密码</title>
-      <link>https://cppxl.github.io/others/how-to-reset-password-administrator-on-windows-server-2019/</link>
-      <pubDate>Wed, 17 Nov 2021 14:40:40 +0800</pubDate>
-      
-      <guid>https://cppxl.github.io/others/how-to-reset-password-administrator-on-windows-server-2019/</guid>
-      <description>重置windows server 2019的administrator密码 之前在Vmware上的Windows server 2019的Administrator密码忘记了，使用网上的方法时找不到用PE启动系统的办法，无奈只能使用其他办法。写此文记录一下。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>其他 on darkmoon的博客</title><link>https://cppxl.github.io/others/</link><description>Recent content in 其他 on darkmoon的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 09 Nov 2021 22:18:45 +0800</lastBuildDate><atom:link href="https://cppxl.github.io/others/index.xml" rel="self" type="application/rss+xml"/><item><title>在Windows server 2019上重置密码</title><link>https://cppxl.github.io/others/how-to-reset-password-administrator-on-windows-server-2019/</link><pubDate>Wed, 17 Nov 2021 14:40:40 +0800</pubDate><guid>https://cppxl.github.io/others/how-to-reset-password-administrator-on-windows-server-2019/</guid><description>重置windows server 2019的administrator密码 之前在Vmware上的Windows server 2019的Administrator密码忘记了，使用网上的方法时找不到用PE启动系统的办法，无奈只能使用其他办法。写此文记录一下。
 设置CD/DVD 首先在虚拟机-设置的硬件选项卡下面的CD/DVD设置为使用ISO映像文件并找到windows server 2019镜像位置，如下图
 之后选择虚拟机-电源-开机时打开固件启动虚拟机，虚拟机就会进入BIOS，在BIOS里选择CD/DVD启动，即会进入下图。
 参考链接
- https://www.osradar.com/how-to-reset-password-administrator-on-windows-server-2019/
- </description>
-    </item>
-    
-    <item>
-      <title>基于Vmware的小型域网络搭建</title>
-      <link>https://cppxl.github.io/others/vmware-based-implementation-of-small-domain-network-construction/</link>
-      <pubDate>Wed, 08 Sep 2021 21:14:32 +0800</pubDate>
-      
-      <guid>https://cppxl.github.io/others/vmware-based-implementation-of-small-domain-network-construction/</guid>
-      <description>基于Vmware的小型域网络搭建 摘要 在渗透的日常学习过程中经常需要一个内网环境，本篇文章介绍如何使用Vmware和MikroTik搭建简易的二层内网环境。
+https://www.osradar.com/how-to-reset-password-administrator-on-windows-server-2019/</description></item><item><title>基于Vmware的小型域网络搭建</title><link>https://cppxl.github.io/others/vmware-based-implementation-of-small-domain-network-construction/</link><pubDate>Wed, 08 Sep 2021 21:14:32 +0800</pubDate><guid>https://cppxl.github.io/others/vmware-based-implementation-of-small-domain-network-construction/</guid><description>基于Vmware的小型域网络搭建 摘要 在渗透的日常学习过程中经常需要一个内网环境，本篇文章介绍如何使用Vmware和MikroTik搭建简易的二层内网环境。
 网络结构 整个网络分为结构分为三层，第一层模拟外网环境，第二层为DMZ区域，该区域通过边界路由器的端口映射，将第二层网络主机的一些端口映射到边界路由器上对外提供服务，第三层模拟办公网，该层网络为域网络，同时可以控制第二层网络的主机。
 整个网络拓扑图如下：
 IP设置：
@@ -72,9 +37,4 @@ windows7：172.16.2.3/24 网关172.16.2.254 DNS172.16.2.4
 之后在IP-&amp;gt;Firewall-&amp;gt;NAT中新建规则，chain：srcnat，out.interface:ether2-lan,action:masquerade
 该规则将使得路由器两边的网络联通。
 参考
- https://www.huaweicloud.com/articles/401014315f14d0fb8d5e3f5489693621.html http://www.roszj.com/1692.html http://www.irouteros.com/?p=583
- </description>
-    </item>
-    
-  </channel>
-</rss>
+https://www.huaweicloud.com/articles/401014315f14d0fb8d5e3f5489693621.html http://www.roszj.com/1692.html http://www.irouteros.com/?p=583</description></item></channel></rss>
