@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>学习记录 on darkmoon的博客</title><link>https://cppxl.github.io/</link><description>Recent content in 学习记录 on darkmoon的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 08 Sep 2021 21:17:33 +0800</lastBuildDate><atom:link href="https://cppxl.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>在Windows server 2019上重置密码</title><link>https://cppxl.github.io/others/how-to-reset-password-administrator-on-windows-server-2019/</link><pubDate>Wed, 17 Nov 2021 14:40:40 +0800</pubDate><guid>https://cppxl.github.io/others/how-to-reset-password-administrator-on-windows-server-2019/</guid><description>重置windows server 2019的administrator密码 之前在Vmware上的Windows server 2019的Administrator密码忘记了，使用网上的方法时找不到用PE启动系统的办法，无奈只能使用其他办法。写此文记录一下。
+设置CD/DVD 首先在虚拟机-设置的硬件选项卡下面的CD/DVD设置为使用ISO映像文件并找到windows server 2019镜像位置，如下图
+之后选择虚拟机-电源-开机时打开固件启动虚拟机，虚拟机就会进入BIOS，在BIOS里选择CD/DVD启动，即会进入下图。
+参考链接
+https://www.osradar.com/how-to-reset-password-administrator-on-windows-server-2019/</description></item><item><title>CVE 2021 40449 分析</title><link>https://cppxl.github.io/vulnerability-analysis/cve-2021-40449-analyse/</link><pubDate>Tue, 09 Nov 2021 15:16:28 +0800</pubDate><guid>https://cppxl.github.io/vulnerability-analysis/cve-2021-40449-analyse/</guid><description>CVE-2021-40449 Win32k提权漏洞及POC分析 背景 CVE-2021-40449是卡巴斯基实验室在2021年8月下旬到9月上旬在Windows服务器上捕获的恶意样本利用的提权漏洞，该漏洞存在于win32kfull.sys驱动内，利用该漏洞可以在windows中完成从users到system的权限提升。
+基本概念 内核对象：内核对象即在内核空间存在的对象，只能由内核分配，内核访问。
+内核对象的引用计数：在操作系统中，可能有多个进程访问同一个内核对象，如果没有进程需要使用该对象内核就应该释放该对象，所以为了准确的释放该对象就有了引用计数。当内核对象被创建时，引用计数被标记为1，调用CloseHandle()时内核对象的引用计数就-1，这可以类比Java GC的引用计数法：
+在对象中添加一个引用计数器，每当一个地方引用它时，计数器就加一；当引用失效时，计数器值就减一；任何时刻计数器为零的对象就是不可能再被使用的。
+句柄：由于内核对象只能由内核分配、访问、修改，当ring 3层的应用程序想要操作这些内核对象的时候，并不能直接操控内核对象。当内核对象创建好后，操作系统会使用一个句柄来标识该对象并返回给应用程序，应用程序通过操作系统提供的ring 3层API来操作句柄，ring3层API经过系统调用进入内核。在内核处句柄对应着具体的内核对象，这样ring3层的应用程序就可以通过操作句柄来间接操作内核对象。
+句柄表：当一个进程初始化的时候，系统会给该进程分配一个句柄表，当进程创建内核对象的时候，内核创建对应内核对象，并遍历该进程的句柄表，在句柄表的空闲位置设置内核对象、对象指针等，并获取该位置的索引，作为进程创建对象的函数的返回值，即为句柄。
+https://www.cnblogs.com/MisterXu/p/10846918.html
+DC：是一个内核对象，全称device context，设备上下文对象
+HDC：DC对象的句柄。
+释放后重用：指一个内存空间被操作系统释放后，内存空间变为空闲状态，如果用户在这一刻申请内存，操作系统会优先分配刚释放的内存，则用户大概率可以申请到刚刚释放的内存并修改该内存空间的内容。如果在释放空间之前有指针指向该空间，在释放空间之后指针并未按照理想状态置为NULL，由于释放后可以重新申请该内存并修改内存内容，后续如果继续使用该指针，但内存内内容并不是预期的释放之前的内容，则会产生非预期行为。
+eg：
+#include &amp;lt;stdio.h&amp;gt; #include &amp;lt;stdlib.h&amp;gt; void method(); void badMethod(); // 定义函数指针 typedef void (*function)(); class test { public: function p; test() { } }; int main() { // new test对象 test *t = new test(); test *p = t; t-&amp;gt;p = method; p-&amp;gt;p(); // 释放t指向的test对象的空间 delete t; test *pt; for (size_t i = 0; i &amp;lt; 10000; i++) { // 占用刚释放的对象的内存空间 pt = (test *)malloc(sizeof(test)); // 将申请的空间当作test对象，并将对象的函数指针设置为恶意函数地址 pt-&amp;gt;p = badMethod; } // 这里原意想要调用method函数，但是实际调用了badMethod函数 printf(&amp;#34;第二次调用\n&amp;#34;); p-&amp;gt;p(); return 0; } void method() { printf(&amp;#34;method\n&amp;#34;); } void badMethod() { printf(&amp;#34;bad method\n&amp;#34;); } 漏洞形成分析 该漏洞产生于win32kfull!</description></item><item><title>SSH隧道</title><link>https://cppxl.github.io/research/tunnel-best-practice/application-layer-tunnel/ssh-tunnel/</link><pubDate>Mon, 13 Sep 2021 10:58:23 +0800</pubDate><guid>https://cppxl.github.io/research/tunnel-best-practice/application-layer-tunnel/ssh-tunnel/</guid><description>SSH隧道 SSH提供了三种转发模式：本地端口转发、远程端口转发以及动态端口转发，本文将介绍这三种转发模式的用法。
+一些基本概念 本地主机：SSH客户端所在的主机。
+远程主机：相对于本地主机的概念，在本地主机之外的主机叫远程主机。
+SSH命令行参数解释
+-C:压缩传输，提高传输速度 -f:将ssh转入后台执行 -N:建立静默连接（连接后看不到具体会话） -g:允许远程主机连接本地用于转发的端口 -L:本地端口转发 -R:远程端口转发 本地端口转发 本地端口转发，即将本地端口转发到远程主机上，命令格式：ssh -L &amp;lt;local port&amp;gt;:&amp;lt;remote host&amp;gt;:&amp;lt;remote port&amp;gt; &amp;lt;username&amp;gt;@&amp;lt;SSH hostname&amp;gt;
+举例：
+SSH Client IP:x.x.x.x SSH Server IP:a.b.c.d 在SSH Client运行命令ssh -CfNg -L 127.0.0.1:1313:127.0.0.1:1313 root@a.b.c.d ，将127.0.0.1:1313端口转发到SSH Server的127.0.0.1:1313端口上。此时SSH Client访问127.0.0.1:1313的结果跟访问在SSH Server端的127.0.0.1:1313结果一样。
+在SSH Client上
+此时在SSH Client上的ssh会监听127.0.0.1:1313这个端口，该端口的TCP数据通过ssh隧道传输到SSH server上。
+在SSH Server上，先监听127.0.0.1:1313端口，本文监听使用hugo 启动一个server。
+在SSH Client上使用curl 127.0.0.1:1313命令时返回的内容即为SSH Server上127.0.0.1:1313的内容
+同时本地端口转发命令中remote ip不止限制在127.0.0.1上，remote ip可以是任何一个SSH Server能够连接的host，实际上本地端口转发过程中，实际上是把SSH Server当作跳板机，连通SSH Client和SSH Server另外一端的主机，如下：
+|SSH Client| &amp;lt;-------------&amp;gt;|SSH Server| &amp;lt;--------------&amp;gt;|SSH Client不能访问但是SSH Server能访问的主机|
+本地端口转发一般应用场景为在渗透测试过程中控制了目标网络中带有SSH Server的一台机器，通过这台机器做为跳板机来访问内网其他主机上的服务。一定程度上规避防火墙的流量告警（因为ssh流量为加密流量）
+远程端口转发。 远程端口转发即和本地端口转发是相反的概念，本地端口转发是将本地端口转发到远程端口上，连接本地端口即跟连接远程端口一个效果。而远程端口转发即将远程端口转发到本地，使得连接远程端口即跟连接本地端口一样。命令格式：ssh -R &amp;lt;remote port&amp;gt;:&amp;lt;local ip&amp;gt;:&amp;lt;local port&amp;gt; &amp;lt;username&amp;gt;@&amp;lt;SSH hostname&amp;gt;</description></item><item><title>基于Vmware的小型域网络搭建</title><link>https://cppxl.github.io/others/vmware-based-implementation-of-small-domain-network-construction/</link><pubDate>Wed, 08 Sep 2021 21:14:32 +0800</pubDate><guid>https://cppxl.github.io/others/vmware-based-implementation-of-small-domain-network-construction/</guid><description>基于Vmware的小型域网络搭建 摘要 在渗透的日常学习过程中经常需要一个内网环境，本篇文章介绍如何使用Vmware和MikroTik搭建简易的二层内网环境。
+网络结构 整个网络分为结构分为三层，第一层模拟外网环境，第二层为DMZ区域，该区域通过边界路由器的端口映射，将第二层网络主机的一些端口映射到边界路由器上对外提供服务，第三层模拟办公网，该层网络为域网络，同时可以控制第二层网络的主机。
+整个网络拓扑图如下：
+IP设置：
+第一层网络为（外网）：192.168.59.0/24
+第二层网络为（DMZ区域）：192.168.72.0/24
+第三层网络为（办公网）：172.16.2.0/24
+路由器IP地址：
+边界路由器：192.168.59.141 | 192.168.72.2
+内网路由器：192.168.72.254 | 172.16.2.254
+网络搭建 网络设置 首先使用VMware的虚拟网络编辑器增加两个网络VMnet2、VMnet3，都勾选仅主机模式，同时取消下面两个勾，如下图：
+VMnet3同理，同时在DHCP设置处设置相应的IP地址和掩码。其中外层网络为nat模式，VMnet2为DMZ区域网络，VMnet3为办公网络
+虚拟机搭建 整个网络在最少情况下一共需要六台虚拟机，分为两台ROS，四台网络中的主机。
+ROS从hxxps://mikrotik.com/download下载stable版本的ova格式的镜像，之后导入到VMware中。一共需要导入两次，分别命名为ROS，ROS-1。除了下载镜像之外还需要下载winbox方便对路由器进行设置。
+网络中主机分布：
+DMZ：Ubuntu 2004、windows7
+办公网：Windows server2019、windows7
+创建上述虚拟机，并将DMZ区域的主机的网卡设置为VMnet2，办公网的主机设置为VMnet3.
+将边界路由器ROS网卡设置为net模式和VMnet2模式，内网路由器设置为VMnet2和VMnet3模式。
+IP地址及路由器设置 经历上面的步骤之后，基本的网络拓扑已经搭建完成，接下来需要对网络内的主机和路由器进行设置使得网络中的主机能够相互ping通。
+首先设置两个网络中的主机IP地址
+DMZ：
+Windows7：192.168.72.4/24 网关192.168.72.2 DNS114.114.114.114
+Ubuntu ：192.168.72.3/24 网关192.168.72.2 DNS114.
+114.114.114
+办公网：
+Windows server 2019：172.16.2.4/24 网关172.16. 2.254 DNS127.0.0.1
+windows7：172.16.2.3/24 网关172.16.2.254 DNS172.16.2.4
+至此，两个网络的主机应该可以ping通同一个网络的主机。接下来设置两个ROS的IP地址。
+打开winbox，点击Neighbors按钮，会自动嗅探网络内的存活的路由器，如下图所示。
+上图为边界路由器的IP地址，如果分配了IP地址则可以在浏览器通过IP地址浏览路由器的web界面，在如果没有分配IP地址则通过wibbox使用MAC地址登录
+进入之后，在左侧选项卡会列出路由器拥有的所有网卡接口，点击之后进入到接口详情界面，在里面会列出该接口的一些基本信息，可以通过网卡的MAC分辨该网卡对应在vmware中的网卡，将两个网卡名称分别设置为ether1-wan和ether2-lan，之后在ip-&amp;gt;addresses选项卡中将ether-lan设置为下图。ether1-wan不用设置，因为该网卡网络类型为nat会自动dhcp分配
+之后在IP-&amp;gt;Firewall-&amp;gt;NAT中新建规则，chain：srcnat，out.interface:ether2-lan,action:masquerade
+该规则将使得路由器两边的网络联通。
+参考
+https://www.huaweicloud.com/articles/401014315f14d0fb8d5e3f5489693621.html http://www.roszj.com/1692.html http://www.irouteros.com/?p=583</description></item></channel></rss>
