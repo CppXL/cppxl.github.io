@@ -1,5 +1,19 @@
 [
 {
+	"uri": "https://cppxl.github.io/research/kerberos-protocol/kerberos-protocol-in-windows/",
+	"title": "Windows中的kerberos协议",
+	"tags": [],
+	"description": "",
+	"content": "Chapter X Some Chapter title Lorem Ipsum.\n"
+},
+{
+	"uri": "https://cppxl.github.io/research/kerberos-protocol/",
+	"title": "Kerberos 协议",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
 	"uri": "https://cppxl.github.io/tools/",
 	"title": "工具",
 	"tags": [],
@@ -60,7 +74,7 @@
 	"title": "学习记录",
 	"tags": [],
 	"description": "",
-	"content": "学习记录 记录一些平时学习记录，灵感来自@Kiprey\nasdf\r3 days aa 0 ago\radsfadfasd\n2022\rtest\r3.000000 3 days 3 days aa 1 ago\radsfadfasd\n2022\rtest\r3.000000 3 days 3 days aa 2 ago\radsfadfasd\n2022\rtest\r3.000000 3 days 3 days aa 3 ago\radsfadfasd\n2022\rtest\r3.000000 3 days 3 days aa 4 ago\radsfadfasd\n2022\rtest\r3.000000 3 days 3 days aa 5 ago\radsfadfasd\n2022\rtest\r3.000000 3 days 3 days aa 6 ago\radsfadfasd\n2022\rtest\r3.000000 3 days 3 days aa 7 ago\radsfadfasd\n2022\rtest\r3.000000 3 days 3 days aa 8 ago\radsfadfasd\n2022\rCurrent position\r1 year 1 month 403.000000 8 days 611 days aa 9 ago\rI\u0026rsquo;m working here你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好\n2022\rOld position\r1 year 366.000000 1 day 977 days aa 10 ago\rI worked here\nadsfz 2022\r2021.11.22 - 2021.11.26 "
+	"content": "学习记录 记录一些平时学习记录，灵感来自@Kiprey\nasdf\r4 days aa 0 ago\radsfadfasd\n2022\rtest\r3.000000 3 days 4 days aa 1 ago\radsfadfasd\n2022\rtest\r3.000000 3 days 4 days aa 2 ago\radsfadfasd\n2022\rtest\r3.000000 3 days 4 days aa 3 ago\radsfadfasd\n2022\rtest\r3.000000 3 days 4 days aa 4 ago\radsfadfasd\n2022\rtest\r3.000000 3 days 4 days aa 5 ago\radsfadfasd\n2022\rtest\r3.000000 3 days 4 days aa 6 ago\radsfadfasd\n2022\rtest\r3.000000 3 days 4 days aa 7 ago\radsfadfasd\n2022\rtest\r3.000000 3 days 4 days aa 8 ago\radsfadfasd\n2022\rCurrent position\r1 year 1 month 403.000000 8 days 612 days aa 9 ago\rI\u0026rsquo;m working here你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好\n2022\rOld position\r1 year 366.000000 1 day 978 days aa 10 ago\rI worked here\nadsfz 2022\r"
 },
 {
 	"uri": "https://cppxl.github.io/others/",
@@ -68,6 +82,13 @@
 	"tags": [],
 	"description": "",
 	"content": "Chapter X Some Chapter title Lorem Ipsum.\n"
+},
+{
+	"uri": "https://cppxl.github.io/research/kerberos-protocol/authentication-principle/",
+	"title": "认证原理",
+	"tags": [],
+	"description": "",
+	"content": "认证原理 一、Kerberos概念 Kerberos是计算机网络授权协议，用于在非安全网络中，对个人通信过程中用安全的手段进行身份认证。其中客户端和服务端能够相互认证，识别对方身份。Kerberos是第三方认证，依赖于第三方服务器对彼此进行身份验证，Kerberos服务器本身成为KDC。 由三部分组成：\nKerberos知道用户和集群内服务以及各自的密码数据库 AS验证用户身份，验证通过就会返回给Client端一个TGT Client通过TGT向TGS获取ST 服务验证ST有效性，如果有效则Client可以访问服务 二、Kerberos名词解释 AS（Authentication Server）认证服务器 KDC（Key Distribution Center）密钥分发中心 TGT（Ticket Granting Ticket）票据授权票据，给票据授权的票据 TGS（Ticket Granting Service）票据授权服务 SS（Service Server）服务提供服务器 ST（Server Ticket）服务端票据 一般KDC同时包含AS和TGS\n三、Kerberos验证过程 Client登录，用户输入用户名和密码，会用单向函数根据密码生成客户端密钥（Client Secret Key）\nClient向AS发送A消息请求TGT\nA消息内容 用户名 请求服务名称，这里是TGS 网络地址 请求TGT的生命周期 该消息不会加密，也不会发送密码或者密码生成的密钥 AS检查用户名是否存在AS用户名数据库内，并使用数据库中用户密码生成的NTLM哈希解密客户端消息\n如果数据库内有该用户名则随机生成TGS会话密钥（TGS Session Key），同时给Client端发送两条消息\nB消息内容用客户端密钥加密 TGS名称 时间戳 生命周期 TGS会话密钥（TGS Session Key） C消息内容（TGT）用TGS密钥（TGS Secret Key）加密 用户名 TGS名称 时间戳 用户网络地址 生命周期 TGS会话密钥（TGS Session Key） Client用通过密码生成的客户端密钥解密B消息，如果密码正确则可以得到TGS会话密钥（TGS Session Key），将C消息（TGT）存储在本地凭据缓存内。\nClient向TGS请求ST，期间需要向TGS发送两条消息明文\nD消息内容 想要请求的服务ID即SS 生命周期 TGT E消息内容使用TGS会话密钥（TGS Session Key）加密即身份验证器 用户名 时间戳 TGS验证Client请求服务是否存在，存在则进入下一步。\nTGS提取D消息内的TGT，用TGS密钥解密（TGS Secret Key），从中提取TGS会话密钥（TGS Session Key），再用TGS会话密钥解密E得到用户名和时间戳，现在TGS得到了用户名和消息E的时间戳，以及消息C的用户名和时间戳\n比较两个用户名和时间戳 检查TGT生命周期是否过期 检查身份验证器（E消息）是否在缓存内(存疑) TGS生成随机服务会话（service session key）密钥，并发送两条消息给Client\nF消息内容用服务密钥(Service Secret Key)加密 用户名 服务名 时间戳 网络地址 生命周期 服务会话密钥 G消息内容用TGS会话密钥加密 服务名 时间戳 生命周期 服务会话密钥 因为Client有TGS会话密钥所以可以解密消息G得到服务会话密钥（service session key）\n客户端和SS连接，发送两条消息\n消息H用服务会话密钥加密内容身份验证器： 用户名 时间戳 消息L 即消息F SS收到请求，用服务密钥解密消息I即消息F得到服务会话密钥及用户名时间戳等信息，再用服务会话密钥解密消息H得到用户名和时间戳\nSS进行身份验证\n比较消息H内用户名和消息F内的用户名 比较消息H和消息F内的是时间戳 检查消息F内生命周期 检查身份验证器是否在缓存内 SS向Client验证身份，向其发送消息\n消息J使用服务会话密钥加密身份验证器 服务ID 时间戳（在消息H内的时间戳） 客户端收到SS的身份验证器消息（J），使用缓存内的服务会话密钥进行解密得到服务ID及时间戳，并验证是否有效\n参考链接\nhttps://www.vanimpe.eu/2017/05/26/kerberos-made-easy/ https://zh.wikipedia.org/wiki/Kerberos http://www.nosqlnotes.com/technotes/kerberos-protocol/ https://juejin.im/post/6844903955416219661\n简化模型 Client向AS发送明文消息，申请访问的服务 AS检查用户名是否存在本地数据库中，存在则返回两条消息 A：Client/TGS会话密钥(Client/TGS Session Key)用于Client和TGS通信，通过用户密钥加密 B：TGT（包含Client/TGS会话密钥、用户、用户网络地址、TGT有效期），通过TGS密钥加密 Client收到消息AB，用自己的用户密钥解密消息A得到和TGS通信的密钥TGS会话密钥 Client向TGS请求服务，发送两条消息 C：消息B和申请的服务ID（明文） D：认证符（包括用户ID、时间戳）通过(Client/TGS Session Key)加密 TGS拿到服务ID检查是否有该服务，如果有该服务则用TGS密钥解密消息B得到(Client/TGS Session Key)再用TGS会话密钥解密消息D得到用户ID、时间戳，与TGT内的用户ID和时间戳比对验证有效性。 通过之后TGS返回两条消息给Client E：ST（SS会话密钥、用户ID、用户网络地址、有效期）通过SS密钥加密 F：SS会话密钥，通过TGS会话密钥加密 Client通过TGS会话密钥解密消息F得到SS会话密钥 Client给SS发送两条消息 G：即消息E H：认证符，包含用户ID，时间戳，通过SS会话密钥加密 SS收到两条消息之后用SS密钥解密消息G（E）得到SS会话密钥，在通过会话密钥解密消息H得到用户ID、时间戳等信息，如果和消息G（E）内的时间戳和用户ID比对，通过则返回消息给Client I：消息H内的时间戳，通过SS会话密钥加密 Client收到消息之后用SS会话密钥解密得到时间戳，并验证，通过则可以向SS发送请求。 "
 },
 {
 	"uri": "https://cppxl.github.io/others/how-to-reset-password-administrator-on-windows-server-2019/",
