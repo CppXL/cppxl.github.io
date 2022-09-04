@@ -70,4 +70,4 @@ windows7：172.16.2.3/24 网关172.16.2.254 DNS172.16.2.4
 之后在IP-&amp;gt;Firewall-&amp;gt;NAT中新建规则，chain：srcnat，out.interface:ether2-lan,action:masquerade
 该规则将使得路由器两边的网络联通。
 参考
-https://www.huaweicloud.com/articles/401014315f14d0fb8d5e3f5489693621.html http://www.roszj.com/1692.html http://www.irouteros.com/?p=583</description></item></channel></rss>
+https://www.huaweicloud.com/articles/401014315f14d0fb8d5e3f5489693621.html http://www.roszj.com/1692.html http://www.irouteros.com/?p=583</description></item><item><title>友链</title><link>https://cppxl.github.io/friends-link/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cppxl.github.io/friends-link/</guid><description/></item></channel></rss>
