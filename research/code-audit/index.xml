@@ -1,1 +1,10 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>代码审计 on 可可的博客</title><link>https://blog.ecut.online/research/code-audit/</link><description>Recent content in 代码审计 on 可可的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 05 Sep 2022 18:36:05 +0800</lastBuildDate><atom:link href="https://blog.ecut.online/research/code-audit/index.xml" rel="self" type="application/rss+xml"/></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>代码审计 on 可可的博客</title><link>https://blog.ecut.online/research/code-audit/</link><description>Recent content in 代码审计 on 可可的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 05 Sep 2022 18:36:05 +0800</lastBuildDate><atom:link href="https://blog.ecut.online/research/code-audit/index.xml" rel="self" type="application/rss+xml"/><item><title>News Server审计</title><link>https://blog.ecut.online/research/code-audit/news-server/</link><pubDate>Tue, 06 Sep 2022 00:52:28 +0800</pubDate><guid>https://blog.ecut.online/research/code-audit/news-server/</guid><description>代码地址
+https://trailofbits.github.io/ctf/vulnerabilities/source_workshop/news_server.c
+https://trailofbits.github.io/ctf/vulnerabilities/source_workshop/news_install.sh
+编译：gcc -m32 -g -o news_server news_server.c
+目标：找出10个bug和漏洞
+news_server默认工作在根目录，没有通过chdir切换工作目录（不知道算不算bug）
+修复：
+void handleConnection(FILE *logfile, int sock) { chdir(&amp;#34;/root/code/c/news_server/&amp;#34;); 在authenticate函数存在admin后门
+if (memcmp(pass, &amp;#34;baCkDoOr&amp;#34;, 9) == 0) { return 1; } authenticate 中直接拼接用户输入到命令，命令注入
+int authenticate(FILE *logfile, char *user, char *pass) { char search[512]; char path[1024]; char userfile[1024]; char data[1024]; FILE *file; int ret; memset(path, 0, sizeof(1024)); /* FIXME: hard coded admin backdoor for password recovery */ if (memcmp(pass, &amp;#34;baCkDoOr&amp;#34;, 9) == 0) { return 1; } /* look up user by checking user files: done via system() to /bin/ls|grep user */ logData(logfile, &amp;#34;performing lookup for user via system()!</description></item></channel></rss>
