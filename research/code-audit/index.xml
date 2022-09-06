@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>代码审计 on 可可的博客</title><link>https://blog.ecut.online/research/code-audit/</link><description>Recent content in 代码审计 on 可可的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 05 Sep 2022 18:36:05 +0800</lastBuildDate><atom:link href="https://blog.ecut.online/research/code-audit/index.xml" rel="self" type="application/rss+xml"/><item><title>News Server审计</title><link>https://blog.ecut.online/research/code-audit/news-server/</link><pubDate>Tue, 06 Sep 2022 00:52:28 +0800</pubDate><guid>https://blog.ecut.online/research/code-audit/news-server/</guid><description>代码地址
-https://trailofbits.github.io/ctf/vulnerabilities/source_workshop/news_server.c
 https://trailofbits.github.io/ctf/vulnerabilities/source_workshop/news_install.sh
+https://trailofbits.github.io/ctf/vulnerabilities/source_workshop/news_server.c
+https://trailofbits.github.io/ctf/vulnerabilities/source.html
 编译：gcc -m32 -g -o news_server news_server.c
 目标：找出10个bug和漏洞
 news_server默认工作在根目录，没有通过chdir切换工作目录（不知道算不算bug）
