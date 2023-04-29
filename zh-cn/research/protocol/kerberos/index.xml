@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Kerberos 协议 on 可可的博客</title><link>https://www.ch35tnut.site/zh-cn/research/protocol/kerberos/</link><description>Recent content in Kerberos 协议 on 可可的博客</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Wed, 05 Jan 2022 16:28:43 +0800</lastBuildDate><atom:link href="https://www.ch35tnut.site/zh-cn/research/protocol/kerberos/index.xml" rel="self" type="application/rss+xml"/><item><title>认证原理</title><link>https://www.ch35tnut.site/zh-cn/research/protocol/kerberos/authentication-principle.zh.cn/</link><pubDate>Wed, 05 Jan 2022 16:29:37 +0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/research/protocol/kerberos/authentication-principle.zh.cn/</guid><description>认证原理 一、Kerberos概念 Kerberos是计算机网络授权协议，用于在非安全网络中，对个人通信过程中用安全的手段进行身份认证。其中客户端和服务端能够相互认证，识别对方身份。Kerberos是第三方认证，依赖于第三方服务器对彼此进行身份验证，Kerberos服务器本身成为KDC。 由三部分组成：
+Kerberos知道用户和集群内服务以及各自的密码数据库 AS验证用户身份，验证通过就会返回给Client端一个TGT Client通过TGT向TGS获取ST 服务验证ST有效性，如果有效则Client可以访问服务 二、Kerberos名词解释 AS（Authentication Server）认证服务器 KDC（Key Distribution Center）密钥分发中心 TGT（Ticket Granting Ticket）票据授权票据，给票据授权的票据 TGS（Ticket Granting Service）票据授权服务 SS（Service Server）服务提供服务器 ST（Server Ticket）服务端票据 一般KDC同时包含AS和TGS
+三、Kerberos验证过程 Client登录，用户输入用户名和密码，会用单向函数根据密码生成客户端密钥（Client Secret Key）
+Client向AS发送A消息请求TGT
+A消息内容 用户名 请求服务名称，这里是TGS 网络地址 请求TGT的生命周期 该消息不会加密，也不会发送密码或者密码生成的密钥 AS检查用户名是否存在AS用户名数据库内，并使用数据库中用户密码生成的NTLM哈希解密客户端消息
+如果数据库内有该用户名则随机生成TGS会话密钥（TGS Session Key），同时给Client端发送两条消息
+B消息内容用客户端密钥加密 TGS名称 时间戳 生命周期 TGS会话密钥（TGS Session Key） C消息内容（TGT）用TGS密钥（TGS Secret Key）加密 用户名 TGS名称 时间戳 用户网络地址 生命周期 TGS会话密钥（TGS Session Key） Client用通过密码生成的客户端密钥解密B消息，如果密码正确则可以得到TGS会话密钥（TGS Session Key），将C消息（TGT）存储在本地凭据缓存内。
+Client向TGS请求ST，期间需要向TGS发送两条消息明文
+D消息内容 想要请求的服务ID即SS 生命周期 TGT E消息内容使用TGS会话密钥（TGS Session Key）加密即身份验证器 用户名 时间戳 TGS验证Client请求服务是否存在，存在则进入下一步。</description></item></channel></rss>

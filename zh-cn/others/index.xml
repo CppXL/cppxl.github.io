@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>其他 on 可可的博客</title><link>https://www.ch35tnut.site/zh-cn/others/</link><description>Recent content in 其他 on 可可的博客</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Tue, 09 Nov 2021 22:18:45 +0800</lastBuildDate><atom:link href="https://www.ch35tnut.site/zh-cn/others/index.xml" rel="self" type="application/rss+xml"/><item><title>给hugo-theme-learn增加timeline功能</title><link>https://www.ch35tnut.site/zh-cn/others/add-timeline-shortcode/</link><pubDate>Mon, 05 Sep 2022 18:12:58 +0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/others/add-timeline-shortcode/</guid><description>前言 现在使用hugo-theme-learn主题，但这个主题没有提供时间线功能，为了给首页增加时间线功能，花了两天研究了一下怎么添加时间线功能。
+为了方便增加时间线的事件，采用自定义shortcode的方式增加时间线，代码大部分参考引用链接里面的，魔改了一下以适应自己的主题，增加了过去多少天的显示。
+代码实现 在layout/shortcodes新增文件：event.html和timeline.html，内容分别如下
+event.html {{$duration := &amp;#34;&amp;#34;}} {{$to := now }} {{ if ne (.Get &amp;#34;to&amp;#34;) &amp;#34;&amp;#34;}} {{$to = time (.Get &amp;#34;to&amp;#34;) }} {{end}} {{$enabledTime := ne (.Get &amp;#34;from&amp;#34;) &amp;#34;&amp;#34;}} {{if $enabledTime }} {{$from := time (.Get &amp;#34;from&amp;#34;) }} {{ $diff := $to.Sub $from }} {{ $days := div $diff.Hours 24 | math.Round }} {{$tmonths:=mul ($to.Sub $from).Hours 0.00136986301 }} {{$months := mod $tmonths 12 }} {{$years := math.Floor (div $tmonths 12)}} {{$yearStr := &amp;#34;years&amp;#34;}} {{if lt $years 2 }} {{$yearStr = &amp;#34;year&amp;#34;}} {{end}} {{$monthStr := &amp;#34;months&amp;#34;}} {{if lt $months 2 }} {{$monthStr = &amp;#34;month&amp;#34;}} {{end}} {{$daysStr := &amp;#34;days&amp;#34;}} {{ $idays :=int $days }} {{$duration = &amp;#34;&amp;#34;}} {{if gt $years 0 }} {{$duration = printf &amp;#34;%s %.</description></item><item><title>在Windows server 2019上重置密码</title><link>https://www.ch35tnut.site/zh-cn/others/how-to-reset-password-administrator-on-windows-server-2019/</link><pubDate>Wed, 17 Nov 2021 14:40:40 +0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/others/how-to-reset-password-administrator-on-windows-server-2019/</guid><description>重置windows server 2019的administrator密码 之前在Vmware上的Windows server 2019的Administrator密码忘记了，使用网上的方法时找不到用PE启动系统的办法，无奈只能使用其他办法。写此文记录一下。
+设置CD/DVD 首先在虚拟机-设置的硬件选项卡下面的CD/DVD设置为使用ISO映像文件并找到windows server 2019镜像位置，如下图
+之后选择虚拟机-电源-开机时打开固件启动虚拟机，虚拟机就会进入BIOS，在BIOS里选择CD/DVD启动，即会进入下图。
+参考链接
+https://www.osradar.com/how-to-reset-password-administrator-on-windows-server-2019/</description></item><item><title>基于Vmware的小型域网络搭建</title><link>https://www.ch35tnut.site/zh-cn/others/vmware-based-implementation-of-small-domain-network-construction/</link><pubDate>Wed, 08 Sep 2021 21:14:32 +0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/others/vmware-based-implementation-of-small-domain-network-construction/</guid><description>基于Vmware的小型域网络搭建 摘要 在渗透的日常学习过程中经常需要一个内网环境，本篇文章介绍如何使用Vmware和MikroTik搭建简易的二层内网环境。
+网络结构 整个网络分为结构分为三层，第一层模拟外网环境，第二层为DMZ区域，该区域通过边界路由器的端口映射，将第二层网络主机的一些端口映射到边界路由器上对外提供服务，第三层模拟办公网，该层网络为域网络，同时可以控制第二层网络的主机。
+整个网络拓扑图如下：
+IP设置：
+第一层网络为（外网）：192.168.59.0/24
+第二层网络为（DMZ区域）：192.168.72.0/24
+第三层网络为（办公网）：172.16.2.0/24
+路由器IP地址：
+边界路由器：192.168.59.141 | 192.168.72.2
+内网路由器：192.168.72.254 | 172.16.2.254
+网络搭建 网络设置 首先使用VMware的虚拟网络编辑器增加两个网络VMnet2、VMnet3，都勾选仅主机模式，同时取消下面两个勾，如下图：
+VMnet3同理，同时在DHCP设置处设置相应的IP地址和掩码。其中外层网络为nat模式，VMnet2为DMZ区域网络，VMnet3为办公网络
+虚拟机搭建 整个网络在最少情况下一共需要六台虚拟机，分为两台ROS，四台网络中的主机。
+ROS从hxxps://mikrotik.com/download下载stable版本的ova格式的镜像，之后导入到VMware中。一共需要导入两次，分别命名为ROS，ROS-1。除了下载镜像之外还需要下载winbox方便对路由器进行设置。
+网络中主机分布：
+DMZ：Ubuntu 2004、windows7
+办公网：Windows server2019、windows7
+创建上述虚拟机，并将DMZ区域的主机的网卡设置为VMnet2，办公网的主机设置为VMnet3.
+将边界路由器ROS网卡设置为net模式和VMnet2模式，内网路由器设置为VMnet2和VMnet3模式。
+IP地址及路由器设置 经历上面的步骤之后，基本的网络拓扑已经搭建完成，接下来需要对网络内的主机和路由器进行设置使得网络中的主机能够相互ping通。
+首先设置两个网络中的主机IP地址
+DMZ：
+Windows7：192.168.72.4/24 网关192.168.72.2 DNS114.114.114.114
+Ubuntu ：192.168.72.3/24 网关192.168.72.2 DNS114.
+114.114.114
+办公网：
+Windows server 2019：172.16.2.4/24 网关172.16. 2.254 DNS127.0.0.1
+windows7：172.16.2.3/24 网关172.16.2.254 DNS172.16.2.4
+至此，两个网络的主机应该可以ping通同一个网络的主机。接下来设置两个ROS的IP地址。
+打开winbox，点击Neighbors按钮，会自动嗅探网络内的存活的路由器，如下图所示。
+上图为边界路由器的IP地址，如果分配了IP地址则可以在浏览器通过IP地址浏览路由器的web界面，在如果没有分配IP地址则通过wibbox使用MAC地址登录
+进入之后，在左侧选项卡会列出路由器拥有的所有网卡接口，点击之后进入到接口详情界面，在里面会列出该接口的一些基本信息，可以通过网卡的MAC分辨该网卡对应在vmware中的网卡，将两个网卡名称分别设置为ether1-wan和ether2-lan，之后在ip-&amp;gt;addresses选项卡中将ether-lan设置为下图。ether1-wan不用设置，因为该网卡网络类型为nat会自动dhcp分配
+之后在IP-&amp;gt;Firewall-&amp;gt;NAT中新建规则，chain：srcnat，out.interface:ether2-lan,action:masquerade
+该规则将使得路由器两边的网络联通。
+参考
+https://www.huaweicloud.com/articles/401014315f14d0fb8d5e3f5489693621.html http://www.roszj.com/1692.html http://www.irouteros.com/?p=583</description></item></channel></rss>
