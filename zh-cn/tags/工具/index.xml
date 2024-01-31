@@ -1,10 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>工具 on chestnut's blog</title><link>https://www.ch35tnut.site/zh-cn/tags/%E5%B7%A5%E5%85%B7/</link><description>Recent content in 工具 on chestnut's blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Fri, 19 Jan 2024 11:09:16 +0800</lastBuildDate><atom:link href="https://www.ch35tnut.site/zh-cn/tags/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml"/><item><title>【工具】Citrix NetScaler 更新监控</title><link>https://www.ch35tnut.site/zh-cn/misc/tools/citrix-update-monitor/</link><pubDate>Fri, 19 Jan 2024 11:02:29 +0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/misc/tools/citrix-update-monitor/</guid><description>Citrix Netscaler 有的时候会使用更大的版本覆盖小一点的版本，导致一些小版本没办法在网站下载更新。
-https://www.citrix.com/downloads/citrix-adc/
-由于小版本被覆盖，导致补丁对比的时候，能下载的相邻的两个版本的Citrix NetScaler之间修改更多，对分析漏洞造成干扰。
-花了一天时间，用go写了个监控bot，支持tg bot和蓝信webhook。
-在写这个工具的时候，Github copilot chat给了很多帮助，无脑tab。
-Telegram 示例：
-蓝信示例：
-title: New - Citrix ADC VPX Release 13.1 Desc:New downloads are available for NetScaler Link: https://www.citrix.com/downloads/citrix-adc/virtual-appliances/vpx-release-13-1.html Guid: https://www.citrix.com/downloads/citrix-adc/virtual-appliances/vpx-release-13-1.html#id581928535 Date: Tue, 16 Jan 2024 17:00:00 -0500 地址
-https://github.com/Chestnuts4/citrix-update-monitor
-Created at 2024-01-19T11:02:29+08:00</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>工具 on chestnut's blog</title><link>https://www.ch35tnut.site/zh-cn/tags/%E5%B7%A5%E5%85%B7/</link><description>Recent content in 工具 on chestnut's blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Fri, 19 Jan 2024 11:02:29 +0800</lastBuildDate><atom:link href="https://www.ch35tnut.site/zh-cn/tags/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml"/><item><title>【工具】Citrix NetScaler 更新监控</title><link>https://www.ch35tnut.site/zh-cn/misc/tools/citrix-update-monitor/</link><pubDate>Fri, 19 Jan 2024 11:02:29 +0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/misc/tools/citrix-update-monitor/</guid><description>&lt;p>Citrix Netscaler 有的时候会使用更大的版本覆盖小一点的版本，导致一些小版本没办法在网站下载更新。&lt;/p>
+&lt;p>
+&lt;a href="https://www.citrix.com/downloads/citrix-adc/" target="_blank">https://www.citrix.com/downloads/citrix-adc/&lt;/a>&lt;/p>
+&lt;p>由于小版本被覆盖，导致补丁对比的时候，能下载的相邻的两个版本的Citrix NetScaler之间修改更多，对分析漏洞造成干扰。&lt;/p>
+&lt;p>花了一天时间，用go写了个监控bot，支持tg bot和蓝信webhook。&lt;/p>
+&lt;p>在写这个工具的时候，Github copilot chat给了很多帮助，无脑tab。&lt;/p>
+&lt;p>Telegram 示例：&lt;/p>
+&lt;p>
+&lt;img alt="" src="https://www.ch35tnut.site/images/misc/tools/citrix-update-monitor.zh-cn.assets/1.png" />&lt;/p>
+&lt;p>蓝信示例：&lt;/p>
+&lt;pre tabindex="0">&lt;code>title: New - Citrix ADC VPX Release 13.1
+Desc:New downloads are available for NetScaler
+Link: https://www.citrix.com/downloads/citrix-adc/virtual-appliances/vpx-release-13-1.html
+Guid: https://www.citrix.com/downloads/citrix-adc/virtual-appliances/vpx-release-13-1.html#id581928535
+Date: Tue, 16 Jan 2024 17:00:00 -0500
+&lt;/code>&lt;/pre>&lt;p>地址&lt;/p>
+&lt;p>
+&lt;a href="https://github.com/Chestnuts4/citrix-update-monitor" target="_blank">https://github.com/Chestnuts4/citrix-update-monitor&lt;/a>&lt;/p>
+&lt;p>&lt;strong>Created at 2024-01-19T11:02:29+08:00&lt;/strong>&lt;/p></description></item></channel></rss>

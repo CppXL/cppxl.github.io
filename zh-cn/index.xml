@@ -1,9 +1,467 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>首页 on chestnut's blog</title><link>https://www.ch35tnut.site/zh-cn/</link><description>Recent content in 首页 on chestnut's blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 08 Sep 2021 21:17:33 +0800</lastBuildDate><atom:link href="https://www.ch35tnut.site/zh-cn/index.xml" rel="self" type="application/rss+xml"/><item><title>安全研究</title><link>https://www.ch35tnut.site/zh-cn/research/</link><pubDate>Wed, 08 Sep 2021 21:48:53 -0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/research/</guid><description>安全研究 记录安全研究相关文章
-代码审计 IOT Linux 协议 web相关 windows相关</description></item><item><title>漏洞分析</title><link>https://www.ch35tnut.site/zh-cn/vulnerability/</link><pubDate>Wed, 08 Sep 2021 21:49:43 +0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/vulnerability/</guid><description>漏洞分析 一些漏洞分析文章。
-序号 漏洞名 编号 类型 状态 52 ☐ 51 50 49 48 47 46 45 44 43 42 41 40 39 38 37 GitLab 账户接管漏洞 CVE-2023-7028 账户接管 ✓ 36 Shiro 550 远程代码执行漏洞 CVE-2016-4437 代码执行 ✓ 35 Wordpress Backup Migration plugin RCE CVE-2023-6553 代码执行 ✓ 34 AFP 远程代码执行漏洞 CVE-2022-23121 代码执行 ✓ 33 windows NTLM 权限提升漏洞 CVE-2023-21746 权限提升 ✗ 32 Apache Struts 远程代码执行漏洞 CVE-2023-50164 代码执行 ✓ 31 Apache Struts OGNL 远程代码执行漏洞 CVE-2020-17530 代码执行 ✓ 30 Linux polkit 权限提升漏洞 CVE-2021-4034 权限提升 ✓ 29 Windows 云文件迷你过滤驱动权限提升漏洞 CVE-2023-36036 权限提升 ✓ 28 wordpad 信息泄露漏洞 CVE-2023-36563 信息泄露 ✓ 27 squid 拒绝服务漏洞 QVD-2023-30699 拒绝服务 ✓ 26 Citrix Gateway 信息泄露漏洞 CVE-2023-4966 信息泄露 ✓ 25 http2 快速重置攻击 CVE-2023-44487 拒绝服务 ✓ 24 curl堆溢出漏洞 CVE-2023-38545 拒绝服务 ✓ 23 瑞友天翼 远程代码执行漏洞 QVD-2023-8621 代码执行 ✓ 22 libwebp 远程代码执行漏洞 CVE-2023-4863 代码执行 ✗ 21 jumpserver 任意密码重置漏洞 CVE-2023-42820 密码重置 ✓ 20 Winrar 代码执行漏洞 CVE-2023-38831 代码执行 ✓ 19 windows 错误报告服务代码执行漏洞 CVE-2023-36874 权限提升 ✓ 18 Windows ICS 权限提升漏洞 CVE-2023-38148 代码执行 ✓ 17 Cirtix Gateway RCE CVE-2023-3519 代码执行 ✓ 16 Openfire 身份认证绕过漏洞 CVE-2023-32315 身份认证绕过 ✓ 15 Smartbi RCE QVD-2023-5326 代码执行 ✓ 14 Windows CLFS 权限提升漏洞系列 windows CLFS 漏洞 权限提升 ✗ 13 gitlab 目录穿越漏洞 CVE-2023-2825 信息泄露 ✓ 12 zero logon分析 CVE-2020-1472 权限提升 ✓ 11 windows http.</description></item><item><title>生活随笔</title><link>https://www.ch35tnut.site/zh-cn/dailylife/</link><pubDate>Mon, 05 Sep 2022 12:14:06 +0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/dailylife/</guid><description>生活随笔 记录一些随笔文章。
-2023年终总结和2024展望 一些吐槽</description></item><item><title>杂项</title><link>https://www.ch35tnut.site/zh-cn/misc/</link><pubDate>Mon, 19 Sep 2022 00:39:53 +0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/misc/</guid><description>杂项 隧道 编码 工具</description></item><item><title>其他</title><link>https://www.ch35tnut.site/zh-cn/others/</link><pubDate>Tue, 09 Nov 2021 22:18:45 +0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/others/</guid><description>其他 timeline shortcode实现 虚拟机重置管理员密码 基于Vmware的小型域网络搭建</description></item><item><title>关于我</title><link>https://www.ch35tnut.site/zh-cn/about/</link><pubDate>Mon, 05 Sep 2022 03:27:33 +0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/about/</guid><description>关于我 21年毕业，目前在某安全厂商工作，主要研究二进制，做一些应急响应方面的东西，业余也会看看web侧的一些简单漏洞，这个博客记录了我分析的一些漏洞和一些安全研究的文章。
-从小时候在电视上看到黑客在网络上上天入地无所不能，如今已入安全行业，希望能够长久保持对网络安全的好奇心，不会被消磨自己的好奇心，能够给世界留下一点属于自己的东西。
-GitHub地址 Chestnuts4
-希望可以跟教主说的那样坚持下去
-希望可以持之以恒做安全研究。
-黑客精神：Open, Share, Free</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>首页 on chestnut's blog</title><link>https://www.ch35tnut.site/zh-cn/</link><description>Recent content in 首页 on chestnut's blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 08 Sep 2021 21:17:33 +0800</lastBuildDate><atom:link href="https://www.ch35tnut.site/zh-cn/index.xml" rel="self" type="application/rss+xml"/><item><title>安全研究</title><link>https://www.ch35tnut.site/zh-cn/research/</link><pubDate>Wed, 08 Sep 2021 21:48:53 -0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/research/</guid><description>&lt;h3 id="安全研究">安全研究&lt;/h3>
+&lt;p>记录安全研究相关文章&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;a href="https://www.ch35tnut.site/zh-cn/research/code-audit/">代码审计&lt;/a>&lt;/li>
+&lt;li>
+&lt;a href="https://www.ch35tnut.site/zh-cn/research/iot/">IOT&lt;/a>&lt;/li>
+&lt;li>
+&lt;a href="https://www.ch35tnut.site/zh-cn/research/linux/">Linux&lt;/a>&lt;/li>
+&lt;li>
+&lt;a href="https://www.ch35tnut.site/zh-cn/research/protocol/">协议&lt;/a>&lt;/li>
+&lt;li>
+&lt;a href="https://www.ch35tnut.site/zh-cn/research/web/">web相关&lt;/a>&lt;/li>
+&lt;li>
+&lt;a href="https://www.ch35tnut.site/zh-cn/research/windows/">windows相关&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>漏洞分析</title><link>https://www.ch35tnut.site/zh-cn/vulnerability/</link><pubDate>Wed, 08 Sep 2021 21:49:43 +0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/vulnerability/</guid><description>&lt;h3 id="漏洞分析">漏洞分析&lt;/h3>
+&lt;p>一些漏洞分析文章。&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align:center">序号&lt;/th>
+&lt;th style="text-align:center">漏洞名&lt;/th>
+&lt;th style="text-align:center">编号&lt;/th>
+&lt;th style="text-align:center">类型&lt;/th>
+&lt;th style="text-align:center">状态&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align:center">52&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">☐&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">51&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">50&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">49&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">48&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">47&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">46&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">45&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">44&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">43&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">42&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">41&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">40&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">39&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">38&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">37&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="https://www.ch35tnut.site/zh-cn/vulnerability/cve-2023-7028-gitlab-account-takeover/">GitLab 账户接管漏洞&lt;/a>&lt;/td>
+&lt;td style="text-align:center">CVE-2023-7028&lt;/td>
+&lt;td style="text-align:center">账户接管&lt;/td>
+&lt;td style="text-align:center">✓&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">36&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="https://www.ch35tnut.site/zh-cn/vulnerability/cve-2016-4437-shiro-550-rce/">Shiro 550 远程代码执行漏洞&lt;/a>&lt;/td>
+&lt;td style="text-align:center">CVE-2016-4437&lt;/td>
+&lt;td style="text-align:center">代码执行&lt;/td>
+&lt;td style="text-align:center">✓&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">35&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="https://www.ch35tnut.site/zh-cn/vulnerability/cve-2023-6553-wordpress-backup-migration-plugin-rce/">Wordpress Backup Migration plugin RCE&lt;/a>&lt;/td>
+&lt;td style="text-align:center">CVE-2023-6553&lt;/td>
+&lt;td style="text-align:center">代码执行&lt;/td>
+&lt;td style="text-align:center">✓&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">34&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="https://www.ch35tnut.site/zh-cn/vulnerability/cve-2022-23121-afp-rce/">AFP 远程代码执行漏洞&lt;/a>&lt;/td>
+&lt;td style="text-align:center">CVE-2022-23121&lt;/td>
+&lt;td style="text-align:center">代码执行&lt;/td>
+&lt;td style="text-align:center">✓&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">33&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="https://www.ch35tnut.site/zh-cn/vulnerability/cve-2023-21746-windows-ntlm-privilege-escalation/">windows NTLM 权限提升漏洞&lt;/a>&lt;/td>
+&lt;td style="text-align:center">CVE-2023-21746&lt;/td>
+&lt;td style="text-align:center">权限提升&lt;/td>
+&lt;td style="text-align:center">✗&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">32&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="https://www.ch35tnut.site/zh-cn/vulnerability/cve-2023-50164-apache-struts-rce/">Apache Struts 远程代码执行漏洞&lt;/a>&lt;/td>
+&lt;td style="text-align:center">CVE-2023-50164&lt;/td>
+&lt;td style="text-align:center">代码执行&lt;/td>
+&lt;td style="text-align:center">✓&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">31&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="https://www.ch35tnut.site/zh-cn/vulnerability/cve-2020-17530-apache-struts-ognl-rce/">Apache Struts OGNL 远程代码执行漏洞&lt;/a>&lt;/td>
+&lt;td style="text-align:center">CVE-2020-17530&lt;/td>
+&lt;td style="text-align:center">代码执行&lt;/td>
+&lt;td style="text-align:center">✓&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">30&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="https://www.ch35tnut.site/zh-cn/vulnerability/cve-2021-4034-polkit-eop/">Linux polkit 权限提升漏洞&lt;/a>&lt;/td>
+&lt;td style="text-align:center">CVE-2021-4034&lt;/td>
+&lt;td style="text-align:center">权限提升&lt;/td>
+&lt;td style="text-align:center">✓&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">29&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="https://www.ch35tnut.site/zh-cn/vulnerability/cve-2023-36036-windows-cloud-files-mini-filter-driver-eop/">Windows 云文件迷你过滤驱动权限提升漏洞&lt;/a>&lt;/td>
+&lt;td style="text-align:center">CVE-2023-36036&lt;/td>
+&lt;td style="text-align:center">权限提升&lt;/td>
+&lt;td style="text-align:center">✓&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">28&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="https://www.ch35tnut.site/zh-cn/vulnerability/cve-2023-36563-wordpad-info-disclosure/">wordpad 信息泄露漏洞&lt;/a>&lt;/td>
+&lt;td style="text-align:center">CVE-2023-36563&lt;/td>
+&lt;td style="text-align:center">信息泄露&lt;/td>
+&lt;td style="text-align:center">✓&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">27&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="https://www.ch35tnut.site/zh-cn/vulnerability/squid-dos/">squid 拒绝服务漏洞&lt;/a>&lt;/td>
+&lt;td style="text-align:center">QVD-2023-30699&lt;/td>
+&lt;td style="text-align:center">拒绝服务&lt;/td>
+&lt;td style="text-align:center">✓&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">26&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="https://www.ch35tnut.site/zh-cn/vulnerability/cve-2023-4966-citrix-gateway-info-disclosure/">Citrix Gateway 信息泄露漏洞&lt;/a>&lt;/td>
+&lt;td style="text-align:center">CVE-2023-4966&lt;/td>
+&lt;td style="text-align:center">信息泄露&lt;/td>
+&lt;td style="text-align:center">✓&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">25&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="https://www.ch35tnut.site/zh-cn/vulnerability/cve-2023-44487-http2-rapid-reset-ddos-attack/">http2 快速重置攻击&lt;/a>&lt;/td>
+&lt;td style="text-align:center">CVE-2023-44487&lt;/td>
+&lt;td style="text-align:center">拒绝服务&lt;/td>
+&lt;td style="text-align:center">✓&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">24&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="https://www.ch35tnut.site/zh-cn/vulnerability/cve-2023-38545-curl-heap-overflow/">curl堆溢出漏洞&lt;/a>&lt;/td>
+&lt;td style="text-align:center">CVE-2023-38545&lt;/td>
+&lt;td style="text-align:center">拒绝服务&lt;/td>
+&lt;td style="text-align:center">✓&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">23&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="https://www.ch35tnut.site/zh-cn/vulnerability/%E7%91%9E%E5%8F%8B%E5%A4%A9%E7%BF%BC-rce/">瑞友天翼 远程代码执行漏洞&lt;/a>&lt;/td>
+&lt;td style="text-align:center">QVD-2023-8621&lt;/td>
+&lt;td style="text-align:center">代码执行&lt;/td>
+&lt;td style="text-align:center">✓&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">22&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="https://www.ch35tnut.site/zh-cn/vulnerability/cve-2023-4863-libwebp-rce/">libwebp 远程代码执行漏洞&lt;/a>&lt;/td>
+&lt;td style="text-align:center">CVE-2023-4863&lt;/td>
+&lt;td style="text-align:center">代码执行&lt;/td>
+&lt;td style="text-align:center">✗&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">21&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="https://www.ch35tnut.site/zh-cn/vulnerability/cve-2023-42820-jumpserver-pwd-reset-vuln/">jumpserver 任意密码重置漏洞&lt;/a>&lt;/td>
+&lt;td style="text-align:center">CVE-2023-42820&lt;/td>
+&lt;td style="text-align:center">密码重置&lt;/td>
+&lt;td style="text-align:center">✓&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">20&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="./CVE-2023-38831-winrar-code-exec">Winrar 代码执行漏洞&lt;/a>&lt;/td>
+&lt;td style="text-align:center">CVE-2023-38831&lt;/td>
+&lt;td style="text-align:center">代码执行&lt;/td>
+&lt;td style="text-align:center">✓&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">19&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="https://www.ch35tnut.site/zh-cn/vulnerability/cve-2023-36874-windows-error-reporting-service-eop/">windows 错误报告服务代码执行漏洞&lt;/a>&lt;/td>
+&lt;td style="text-align:center">CVE-2023-36874&lt;/td>
+&lt;td style="text-align:center">权限提升&lt;/td>
+&lt;td style="text-align:center">✓&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">18&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="https://www.ch35tnut.site/zh-cn/vulnerability/cve-2023-38148-windows-ics-rce/">Windows ICS 权限提升漏洞&lt;/a>&lt;/td>
+&lt;td style="text-align:center">CVE-2023-38148&lt;/td>
+&lt;td style="text-align:center">代码执行&lt;/td>
+&lt;td style="text-align:center">✓&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">17&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="https://www.ch35tnut.site/zh-cn/vulnerability/cve-2023-3519-cirtix-gateway-rce/">Cirtix Gateway RCE&lt;/a>&lt;/td>
+&lt;td style="text-align:center">CVE-2023-3519&lt;/td>
+&lt;td style="text-align:center">代码执行&lt;/td>
+&lt;td style="text-align:center">✓&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">16&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="https://www.ch35tnut.site/zh-cn/vulnerability/cve-2023-32315-openfire-auth-bypass/">Openfire 身份认证绕过漏洞&lt;/a>&lt;/td>
+&lt;td style="text-align:center">CVE-2023-32315&lt;/td>
+&lt;td style="text-align:center">身份认证绕过&lt;/td>
+&lt;td style="text-align:center">✓&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">15&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="https://www.ch35tnut.site/zh-cn/vulnerability/smartbi-rce/">Smartbi RCE&lt;/a>&lt;/td>
+&lt;td style="text-align:center">QVD-2023-5326&lt;/td>
+&lt;td style="text-align:center">代码执行&lt;/td>
+&lt;td style="text-align:center">✓&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">14&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="https://www.ch35tnut.site/zh-cn/vulnerability/windows-clfs-eop/">Windows CLFS 权限提升漏洞系列&lt;/a>&lt;/td>
+&lt;td style="text-align:center">windows CLFS 漏洞&lt;/td>
+&lt;td style="text-align:center">权限提升&lt;/td>
+&lt;td style="text-align:center">✗&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">13&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="https://www.ch35tnut.site/zh-cn/vulnerability/cve-2023-2825-gitlab-path-traversal/">gitlab 目录穿越漏洞&lt;/a>&lt;/td>
+&lt;td style="text-align:center">CVE-2023-2825&lt;/td>
+&lt;td style="text-align:center">信息泄露&lt;/td>
+&lt;td style="text-align:center">✓&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">12&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="https://www.ch35tnut.site/zh-cn/vulnerability/zero-logon/">zero logon分析&lt;/a>&lt;/td>
+&lt;td style="text-align:center">CVE-2020-1472&lt;/td>
+&lt;td style="text-align:center">权限提升&lt;/td>
+&lt;td style="text-align:center">✓&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">11&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="https://www.ch35tnut.site/zh-cn/vulnerability/cve-2023-23410-windows-http-sys-eop/">windows http.sys 权限提升漏洞&lt;/a>&lt;/td>
+&lt;td style="text-align:center">CVE-2023-23410&lt;/td>
+&lt;td style="text-align:center">权限提升&lt;/td>
+&lt;td style="text-align:center">✓&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">10&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="./CVE-2022-24990-TerraMaster-TOS-RCE">TerraMaster TOS代码执行漏洞&lt;/a>&lt;/td>
+&lt;td style="text-align:center">CVE-2022-24990&lt;/td>
+&lt;td style="text-align:center">代码执行&lt;/td>
+&lt;td style="text-align:center">✗&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">9&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="https://www.ch35tnut.site/zh-cn/vulnerability/cve-2022-4223-pgadmin-rce/">PgAdmin 代码执行漏洞&lt;/a>&lt;/td>
+&lt;td style="text-align:center">CVE-2022-4223&lt;/td>
+&lt;td style="text-align:center">代码执行&lt;/td>
+&lt;td style="text-align:center">✓&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">8&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="https://www.ch35tnut.site/zh-cn/vulnerability/cve-2021-3156-sudo-eop/">sudo权限提升漏洞&lt;/a>&lt;/td>
+&lt;td style="text-align:center">CVE-2021-3156&lt;/td>
+&lt;td style="text-align:center">权限提升&lt;/td>
+&lt;td style="text-align:center">✗&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">7&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="https://www.ch35tnut.site/zh-cn/vulnerability/cve-2023-28432-minio-information-disclosure/">Minio信息泄露漏洞&lt;/a>&lt;/td>
+&lt;td style="text-align:center">CVE-2023-28432&lt;/td>
+&lt;td style="text-align:center">信息泄露&lt;/td>
+&lt;td style="text-align:center">✓&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">6&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="https://www.ch35tnut.site/zh-cn/vulnerability/strapi-rce/">Strapi 代码执行漏洞链&lt;/a>&lt;/td>
+&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align:center">代码执行&lt;/td>
+&lt;td style="text-align:center">✓&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">5&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="https://www.ch35tnut.site/zh-cn/vulnerability/cve-2023-23397-outlook-eop/">Outlook 权限提升漏洞&lt;/a>&lt;/td>
+&lt;td style="text-align:center">CVE-2023-23397&lt;/td>
+&lt;td style="text-align:center">权限提升&lt;/td>
+&lt;td style="text-align:center">✓&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">4&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="./owassrf-and-tabshell">OWASSRF 和 TabShell分析&lt;/a>&lt;/td>
+&lt;td style="text-align:center">CVE-2022-41080 CVE-2022-41076&lt;/td>
+&lt;td style="text-align:center">代码执行&lt;/td>
+&lt;td style="text-align:center">✗&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">3&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="https://www.ch35tnut.site/zh-cn/vulnerability/proxy-not-shell/">proxy not shell 漏洞链&lt;/a>&lt;/td>
+&lt;td style="text-align:center">CVE-2022-41040 CVE-2022-41082&lt;/td>
+&lt;td style="text-align:center">代码执行&lt;/td>
+&lt;td style="text-align:center">✗&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">2&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="./proxy-shell">proxy shell 漏洞链&lt;/a>&lt;/td>
+&lt;td style="text-align:center">CVE-2021-34473 CVE-2021-34523 CVE-2021-31207&lt;/td>
+&lt;td style="text-align:center">代码执行&lt;/td>
+&lt;td style="text-align:center">✗&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">1&lt;/td>
+&lt;td style="text-align:center">
+&lt;a href="https://www.ch35tnut.site/zh-cn/vulnerability/cve-2021-40449-win32k-eop/">win32k 权限提升漏洞&lt;/a>&lt;/td>
+&lt;td style="text-align:center">CVE-2021-40449&lt;/td>
+&lt;td style="text-align:center">权限提升&lt;/td>
+&lt;td style="text-align:center">✓&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item><item><title>生活随笔</title><link>https://www.ch35tnut.site/zh-cn/dailylife/</link><pubDate>Mon, 05 Sep 2022 12:14:06 +0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/dailylife/</guid><description>&lt;h3 id="生活随笔">生活随笔&lt;/h3>
+&lt;p>记录一些随笔文章。&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;a href="https://www.ch35tnut.site/zh-cn/dailylife/2023-review-and-2024-outlook/">2023年终总结和2024展望&lt;/a>&lt;/li>
+&lt;li>
+&lt;a href="https://www.ch35tnut.site/zh-cn/dailylife/%E5%90%90%E6%A7%BD/">一些吐槽&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>杂项</title><link>https://www.ch35tnut.site/zh-cn/misc/</link><pubDate>Mon, 19 Sep 2022 00:39:53 +0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/misc/</guid><description>&lt;h3 id="杂项">杂项&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;a href="https://www.ch35tnut.site/zh-cn/misc/tunnel/">隧道&lt;/a>&lt;/li>
+&lt;li>
+&lt;a href="https://www.ch35tnut.site/zh-cn/misc/encoding/">编码&lt;/a>&lt;/li>
+&lt;li>
+&lt;a href="https://www.ch35tnut.site/zh-cn/misc/tools/">工具&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>其他</title><link>https://www.ch35tnut.site/zh-cn/others/</link><pubDate>Tue, 09 Nov 2021 22:18:45 +0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/others/</guid><description>&lt;h3 id="其他">其他&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;a href="https://www.ch35tnut.site/zh-cn/others/add-timeline-shortcode/">timeline shortcode实现&lt;/a>&lt;/li>
+&lt;li>
+&lt;a href="https://www.ch35tnut.site/zh-cn/others/how-to-reset-password-administrator-on-windows-server-2019/">虚拟机重置管理员密码&lt;/a>&lt;/li>
+&lt;li>
+&lt;a href="https://www.ch35tnut.site/zh-cn/others/vmware-based-implementation-of-small-domain-network-construction/">基于Vmware的小型域网络搭建&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>关于我</title><link>https://www.ch35tnut.site/zh-cn/about/</link><pubDate>Mon, 05 Sep 2022 03:27:33 +0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/about/</guid><description>&lt;h3 id="关于我">关于我&lt;/h3>
+&lt;p> 21年毕业，目前在某安全厂商工作，主要研究二进制，做一些应急响应方面的东西，业余也会看看web侧的一些简单漏洞，这个博客记录了我分析的一些漏洞和一些安全研究的文章。&lt;/p>
+&lt;p> 从小时候在电视上看到黑客在网络上上天入地无所不能，如今已入安全行业，希望能够长久保持对网络安全的好奇心，不会被消磨自己的好奇心，能够给世界留下一点属于自己的东西。&lt;/p>
+&lt;p>GitHub地址
+&lt;a href="https://github.com/Chestnuts4" target="_blank">Chestnuts4&lt;/a>&lt;/p>
+&lt;p>希望可以跟教主说的那样坚持下去&lt;/p>
+&lt;p>
+&lt;img alt="" src="https://www.ch35tnut.site/images/about.zh-cn.assets/4.jpg" />&lt;/p>
+&lt;p>希望可以持之以恒做安全研究。&lt;/p>
+&lt;p>
+&lt;img alt="" src="https://www.ch35tnut.site/images/about.zh-cn.assets/1.jpg" />
+&lt;img alt="" src="https://www.ch35tnut.site/images/about.zh-cn.assets/2.jpg" />
+&lt;img alt="" src="https://www.ch35tnut.site/images/about.zh-cn.assets/3.jpg" />&lt;/p>
+&lt;p>&lt;em>&lt;strong>黑客精神：Open, Share, Free&lt;/strong>&lt;/em>&lt;/p></description></item></channel></rss>

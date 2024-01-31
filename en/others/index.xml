@@ -1,8 +1,281 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>其他 on chestnut's blog</title><link>https://www.ch35tnut.site/en/others/</link><description>Recent content in 其他 on chestnut's blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 04 May 2023 20:49:48 +0800</lastBuildDate><atom:link href="https://www.ch35tnut.site/en/others/index.xml" rel="self" type="application/rss+xml"/><item><title>给hugo-theme-learn增加timeline功能</title><link>https://www.ch35tnut.site/en/others/add-timeline-shortcode/</link><pubDate>Mon, 05 Sep 2022 18:12:58 +0800</pubDate><guid>https://www.ch35tnut.site/en/others/add-timeline-shortcode/</guid><description>前言 现在使用hugo-theme-learn主题，但这个主题没有提供时间线功能，为了给首页增加时间线功能，花了两天研究了一下怎么添加时间线功能。
-为了方便增加时间线的事件，采用自定义shortcode的方式增加时间线，代码大部分参考引用链接里面的，魔改了一下以适应自己的主题，增加了过去多少天的显示。
-代码实现 在layout/shortcodes新增文件：event.html和timeline.html，内容分别如下
-event.html {{$duration := &amp;#34;&amp;#34;}} {{$to := now }} {{ if ne (.Get &amp;#34;to&amp;#34;) &amp;#34;&amp;#34;}} {{$to = time (.Get &amp;#34;to&amp;#34;) }} {{end}} {{$enabledTime := ne (.Get &amp;#34;from&amp;#34;) &amp;#34;&amp;#34;}} {{if $enabledTime }} {{$from := time (.Get &amp;#34;from&amp;#34;) }} {{ $diff := $to.Sub $from }} {{ $days := div $diff.Hours 24 | math.Round }} {{$tmonths:=mul ($to.Sub $from).Hours 0.00136986301 }} {{$months := mod $tmonths 12 }} {{$years := math.Floor (div $tmonths 12)}} {{$yearStr := &amp;#34;years&amp;#34;}} {{if lt $years 2 }} {{$yearStr = &amp;#34;year&amp;#34;}} {{end}} {{$monthStr := &amp;#34;months&amp;#34;}} {{if lt $months 2 }} {{$monthStr = &amp;#34;month&amp;#34;}} {{end}} {{$daysStr := &amp;#34;days&amp;#34;}} {{ $idays :=int $days }} {{$duration = &amp;#34;&amp;#34;}} {{if gt $years 0 }} {{$duration = printf &amp;#34;%s %.</description></item><item><title>在Windows server 2019上重置密码</title><link>https://www.ch35tnut.site/en/others/how-to-reset-password-administrator-on-windows-server-2019/</link><pubDate>Wed, 17 Nov 2021 14:40:40 +0800</pubDate><guid>https://www.ch35tnut.site/en/others/how-to-reset-password-administrator-on-windows-server-2019/</guid><description>重置windows server 2019的administrator密码 之前在Vmware上的Windows server 2019的Administrator密码忘记了，使用网上的方法时找不到用PE启动系统的办法，无奈只能使用其他办法。写此文记录一下。
-设置CD/DVD 首先在虚拟机-设置的硬件选项卡下面的CD/DVD设置为使用ISO映像文件并找到windows server 2019镜像位置，如下图
-之后选择虚拟机-电源-开机时打开固件启动虚拟机，虚拟机就会进入BIOS，在BIOS里选择CD/DVD启动，即会进入下图。
-参考链接
-https://www.osradar.com/how-to-reset-password-administrator-on-windows-server-2019/</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>其他 on chestnut's blog</title><link>https://www.ch35tnut.site/en/others/</link><description>Recent content in 其他 on chestnut's blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 09 Nov 2021 22:18:45 +0800</lastBuildDate><atom:link href="https://www.ch35tnut.site/en/others/index.xml" rel="self" type="application/rss+xml"/><item><title>给hugo-theme-learn增加timeline功能</title><link>https://www.ch35tnut.site/en/others/add-timeline-shortcode/</link><pubDate>Mon, 05 Sep 2022 18:12:58 +0800</pubDate><guid>https://www.ch35tnut.site/en/others/add-timeline-shortcode/</guid><description>&lt;h3 id="前言">前言&lt;/h3>
+&lt;p>现在使用hugo-theme-learn主题，但这个主题没有提供时间线功能，为了给首页增加时间线功能，花了两天研究了一下怎么添加时间线功能。&lt;/p>
+&lt;p>为了方便增加时间线的事件，采用自定义shortcode的方式增加时间线，代码大部分参考引用链接里面的，魔改了一下以适应自己的主题，增加了过去多少天的显示。&lt;/p>
+&lt;h3 id="代码实现">代码实现&lt;/h3>
+&lt;p>在&lt;code>layout/shortcodes&lt;/code>新增文件：&lt;code>event.html&lt;/code>和&lt;code>timeline.html&lt;/code>，内容分别如下&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-html" data-lang="html">&lt;span style="display:flex;">&lt;span>event.html
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{$duration := &amp;#34;&amp;#34;}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{$to := now }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{ if ne (.Get &amp;#34;to&amp;#34;) &amp;#34;&amp;#34;}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{$to = time (.Get &amp;#34;to&amp;#34;) }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{end}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{$enabledTime := ne (.Get &amp;#34;from&amp;#34;) &amp;#34;&amp;#34;}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{if $enabledTime }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{$from := time (.Get &amp;#34;from&amp;#34;) }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{ $diff := $to.Sub $from }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{ $days := div $diff.Hours 24 | math.Round }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{$tmonths:=mul ($to.Sub $from).Hours 0.00136986301 }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{$months := mod $tmonths 12 }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{$years := math.Floor (div $tmonths 12)}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{$yearStr := &amp;#34;years&amp;#34;}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{if lt $years 2 }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{$yearStr = &amp;#34;year&amp;#34;}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{end}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{$monthStr := &amp;#34;months&amp;#34;}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{if lt $months 2 }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{$monthStr = &amp;#34;month&amp;#34;}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{end}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{$daysStr := &amp;#34;days&amp;#34;}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{ $idays :=int $days }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{$duration = &amp;#34;&amp;#34;}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{if gt $years 0 }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{$duration = printf &amp;#34;%s %.0f %s&amp;#34; $duration $years $yearStr}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{$idays = sub $idays (mul 365 $years)}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{end}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{if gt $months 0 }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{$duration = printf &amp;#34;%s %d %s&amp;#34; $duration $months $monthStr}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{$idays = sub $idays (mul 30 $months)}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{end}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{$idays = int $idays}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{if gt $idays 0}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{if lt $idays 2}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{$daysStr = &amp;#34;day&amp;#34;}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{end}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{$duration = printf &amp;#34;%s %d %s&amp;#34; $duration $idays $daysStr}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{end}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{end}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{ $from := .Get &amp;#34;from&amp;#34; | time }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{ $to := now }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{ $diff := $to.Sub $from }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{ $ago := div $diff.Hours 24 | math.Round }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{ $measure := cond (eq 1 $ago) &amp;#34;day&amp;#34; &amp;#34;days&amp;#34; }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{ $seed := &amp;#34;foo&amp;#34; }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{ $random := delimit (shuffle (split (md5 $seed) &amp;#34;&amp;#34; )) &amp;#34;&amp;#34; }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;&lt;span style="color:#f92672">div&lt;/span> &lt;span style="color:#a6e22e">class&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;container&amp;#34;&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;&lt;span style="color:#f92672">div&lt;/span> &lt;span style="color:#a6e22e">class&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;content&amp;#34;&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;&lt;span style="color:#f92672">div&lt;/span> &lt;span style="color:#a6e22e">class&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;title&amp;#34;&lt;/span>&amp;gt;{{.Get &amp;#34;title&amp;#34;}}&amp;lt;/&lt;span style="color:#f92672">div&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {{if $enabledTime }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;&lt;span style="color:#f92672">div&lt;/span> &lt;span style="color:#a6e22e">class&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;moment&amp;#34;&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">{{&lt;/span> &lt;span style="color:#a6e22e">if&lt;/span> &lt;span style="color:#a6e22e">eq&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">.&lt;/span>&lt;span style="color:#a6e22e">Ordinal&lt;/span> &lt;span style="color:#a6e22e">0&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">}}&lt;/span> &lt;span style="color:#a6e22e">id&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;moment&amp;#34;&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">{{&lt;/span> &lt;span style="color:#a6e22e">end&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">}}&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">{{&lt;/span> &lt;span style="color:#a6e22e">if&lt;/span> &lt;span style="color:#a6e22e">ne&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">.&lt;/span>&lt;span style="color:#a6e22e">Ordinal&lt;/span> &lt;span style="color:#a6e22e">0&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">}}&lt;/span>&lt;span style="color:#a6e22e">id&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;moment-{{ substr $random 0 16}}&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">{{&lt;/span>&lt;span style="color:#a6e22e">end&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">}}&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {{ if ne .Ordinal 0 }} {{$duration}} {{ end }} | {{ $ago }} {{ $measure}} ago
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;/&lt;span style="color:#f92672">div&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {{ end }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;&lt;span style="color:#f92672">div&lt;/span> &lt;span style="color:#a6e22e">class&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;body&amp;#34;&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {{.Inner}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;/&lt;span style="color:#f92672">div&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;/&lt;span style="color:#f92672">div&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;&lt;span style="color:#f92672">div&lt;/span> &lt;span style="color:#a6e22e">class&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;date&amp;#34;&lt;/span>&amp;gt;{{$to.Year}}&amp;lt;/&lt;span style="color:#f92672">div&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;/&lt;span style="color:#f92672">div&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{ if and (eq (.Ordinal) 0) $enabledTime }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;&lt;span style="color:#f92672">script&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">function&lt;/span> &lt;span style="color:#a6e22e">non0plural&lt;/span>(&lt;span style="color:#a6e22e">number&lt;/span>, &lt;span style="color:#a6e22e">name&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (&lt;span style="color:#a6e22e">number&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (&lt;span style="color:#a6e22e">number&lt;/span> &lt;span style="color:#f92672">&amp;gt;&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">number&lt;/span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#34; &amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#a6e22e">name&lt;/span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#34;s&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">number&lt;/span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#34; &amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#a6e22e">name&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">function&lt;/span> &lt;span style="color:#a6e22e">refresh&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">start&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">dayjs&lt;/span>({{.&lt;span style="color:#a6e22e">Get&lt;/span> &lt;span style="color:#e6db74">&amp;#34;from&amp;#34;&lt;/span>}})
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">now&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">dayjs&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">total_days&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">now&lt;/span>.&lt;span style="color:#a6e22e">diff&lt;/span>(&lt;span style="color:#a6e22e">start&lt;/span>,&lt;span style="color:#e6db74">&amp;#34;d&amp;#34;&lt;/span>,&lt;span style="color:#66d9ef">true&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">total_months&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">now&lt;/span>.&lt;span style="color:#a6e22e">diff&lt;/span>(&lt;span style="color:#a6e22e">start&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;M&amp;#34;&lt;/span>, &lt;span style="color:#66d9ef">true&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">months&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">total_months&lt;/span> &lt;span style="color:#f92672">%&lt;/span> &lt;span style="color:#ae81ff">12&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">years&lt;/span> &lt;span style="color:#f92672">=&lt;/span> Math.&lt;span style="color:#a6e22e">floor&lt;/span>((&lt;span style="color:#a6e22e">total_months&lt;/span>) &lt;span style="color:#f92672">/&lt;/span> &lt;span style="color:#ae81ff">12&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// for (var i = 0, els = document.querySelectorAll(`[id^=&amp;#34;moment&amp;#34;]`); i &amp;lt; els.length; i++) {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">// els[i].innerHTML = non0plural(years, &amp;#34;year&amp;#34;) + &amp;#34; &amp;#34; + non0plural(months.toFixed(8), &amp;#34;month&amp;#34;)
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">// }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">// 如果月份大于1则
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#66d9ef">if&lt;/span>(&lt;span style="color:#a6e22e">years&lt;/span>&lt;span style="color:#f92672">&amp;gt;=&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>){
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">total_days&lt;/span>&lt;span style="color:#f92672">-=&lt;/span>&lt;span style="color:#ae81ff">365&lt;/span>&lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">years&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span>(&lt;span style="color:#a6e22e">months&lt;/span>&lt;span style="color:#f92672">&amp;gt;=&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>){
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">total_days&lt;/span>&lt;span style="color:#f92672">-=&lt;/span>&lt;span style="color:#ae81ff">30&lt;/span>&lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">months&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">el&lt;/span> &lt;span style="color:#f92672">=&lt;/span> document.&lt;span style="color:#a6e22e">querySelector&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;#moment&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">el&lt;/span>.&lt;span style="color:#a6e22e">innerHTML&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">years&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#f92672">?&lt;/span> &lt;span style="color:#a6e22e">non0plural&lt;/span>(&lt;span style="color:#a6e22e">years&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;year&amp;#34;&lt;/span>)&lt;span style="color:#f92672">:&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#34; &amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#a6e22e">months&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#f92672">?&lt;/span> &lt;span style="color:#a6e22e">non0plural&lt;/span>(&lt;span style="color:#a6e22e">months&lt;/span>.&lt;span style="color:#a6e22e">toFixed&lt;/span>(&lt;span style="color:#ae81ff">4&lt;/span>), &lt;span style="color:#e6db74">&amp;#34;month&amp;#34;&lt;/span>)&lt;span style="color:#f92672">:&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#a6e22e">total_days&lt;/span>&lt;span style="color:#f92672">&amp;gt;=&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#f92672">?&lt;/span>&lt;span style="color:#a6e22e">non0plural&lt;/span>(&lt;span style="color:#a6e22e">total_days&lt;/span>.&lt;span style="color:#a6e22e">toFixed&lt;/span>(&lt;span style="color:#ae81ff">2&lt;/span>),&lt;span style="color:#e6db74">&amp;#34;day&amp;#34;&lt;/span>)&lt;span style="color:#f92672">:&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">el&lt;/span>.&lt;span style="color:#a6e22e">innerHTML&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">el&lt;/span>.&lt;span style="color:#a6e22e">innerHTML&lt;/span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#34; ago&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> window.&lt;span style="color:#a6e22e">setInterval&lt;/span>(&lt;span style="color:#a6e22e">refresh&lt;/span>, &lt;span style="color:#ae81ff">100&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;/&lt;span style="color:#f92672">script&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{ end }}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-html" data-lang="html">&lt;span style="display:flex;">&lt;span>timeline.html
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;&lt;span style="color:#f92672">style&lt;/span> &lt;span style="color:#a6e22e">type&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;text/css&amp;#34;&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .&lt;span style="color:#a6e22e">timeline&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">position&lt;/span>: &lt;span style="color:#66d9ef">relative&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">margin&lt;/span>: &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#66d9ef">auto&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">/* The actual timeline (the vertical ruler) */&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .&lt;span style="color:#a6e22e">timeline&lt;/span>::&lt;span style="color:#a6e22e">after&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">content&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">position&lt;/span>: &lt;span style="color:#66d9ef">absolute&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">width&lt;/span>: &lt;span style="color:#ae81ff">6&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">background-color&lt;/span>: &lt;span style="color:#ae81ff">#444&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">top&lt;/span>: &lt;span style="color:#ae81ff">0&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">bottom&lt;/span>: &lt;span style="color:#ae81ff">0&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">left&lt;/span>: &lt;span style="color:#ae81ff">10&lt;/span>&lt;span style="color:#66d9ef">%&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">margin-left&lt;/span>: &lt;span style="color:#ae81ff">-3&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">/* Container around content */&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .&lt;span style="color:#a6e22e">timeline&lt;/span> .&lt;span style="color:#a6e22e">container&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">padding&lt;/span>: &lt;span style="color:#ae81ff">10&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span> &lt;span style="color:#ae81ff">10&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span> &lt;span style="color:#ae81ff">10&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span> &lt;span style="color:#ae81ff">40&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">margin-top&lt;/span>: &lt;span style="color:#ae81ff">10&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">position&lt;/span>: &lt;span style="color:#66d9ef">relative&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">/* background-color: gray; */&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">width&lt;/span>: &lt;span style="color:#ae81ff">90&lt;/span>&lt;span style="color:#66d9ef">%&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">left&lt;/span>: &lt;span style="color:#ae81ff">10&lt;/span>&lt;span style="color:#66d9ef">%&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">/* The circles on the timeline */&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .&lt;span style="color:#a6e22e">timeline&lt;/span> .&lt;span style="color:#a6e22e">container&lt;/span>::&lt;span style="color:#a6e22e">after&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">content&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">position&lt;/span>: &lt;span style="color:#66d9ef">absolute&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">width&lt;/span>: &lt;span style="color:#ae81ff">25&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">height&lt;/span>: &lt;span style="color:#ae81ff">25&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">left&lt;/span>: &lt;span style="color:#ae81ff">-12&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">background-color&lt;/span>: rgb(&lt;span style="color:#ae81ff">106&lt;/span>, &lt;span style="color:#ae81ff">215&lt;/span>, &lt;span style="color:#ae81ff">229&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">border&lt;/span>: &lt;span style="color:#ae81ff">4&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span> &lt;span style="color:#66d9ef">solid&lt;/span> &lt;span style="color:#ae81ff">#444&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">top&lt;/span>: &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">border-radius&lt;/span>: &lt;span style="color:#ae81ff">50&lt;/span>&lt;span style="color:#66d9ef">%&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">z-index&lt;/span>: &lt;span style="color:#ae81ff">1&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">/* date display */&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .&lt;span style="color:#a6e22e">timeline&lt;/span> .&lt;span style="color:#a6e22e">container&lt;/span> .&lt;span style="color:#a6e22e">date&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">position&lt;/span>: &lt;span style="color:#66d9ef">absolute&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">top&lt;/span>: &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">z-index&lt;/span>: &lt;span style="color:#ae81ff">1&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">left&lt;/span>: &lt;span style="color:#ae81ff">-15&lt;/span>&lt;span style="color:#66d9ef">%&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">font-size&lt;/span>: &lt;span style="color:#66d9ef">large&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">/* Add arrows to the right container (pointing left) */&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .&lt;span style="color:#a6e22e">timeline&lt;/span> .&lt;span style="color:#a6e22e">container&lt;/span>::&lt;span style="color:#a6e22e">before&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">content&lt;/span>: &lt;span style="color:#e6db74">&amp;#34; &amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">height&lt;/span>: &lt;span style="color:#ae81ff">0&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">position&lt;/span>: &lt;span style="color:#66d9ef">absolute&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">top&lt;/span>: &lt;span style="color:#ae81ff">30&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">width&lt;/span>: &lt;span style="color:#ae81ff">0&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">z-index&lt;/span>: &lt;span style="color:#ae81ff">1&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">left&lt;/span>: &lt;span style="color:#ae81ff">26&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">border&lt;/span>: &lt;span style="color:#66d9ef">medium&lt;/span> &lt;span style="color:#66d9ef">solid&lt;/span> &lt;span style="color:#ae81ff">#6ad7e5&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">border-width&lt;/span>: &lt;span style="color:#ae81ff">13&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span> &lt;span style="color:#ae81ff">13&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span> &lt;span style="color:#ae81ff">13&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">border-color&lt;/span>: &lt;span style="color:#ae81ff">#6ad7e5&lt;/span> &lt;span style="color:#ae81ff">#6ad7e5&lt;/span> &lt;span style="color:#66d9ef">transparent&lt;/span> &lt;span style="color:#66d9ef">transparent&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">/* The actual content */&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .&lt;span style="color:#a6e22e">timeline&lt;/span> .&lt;span style="color:#a6e22e">content&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">box-shadow&lt;/span>: &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#ae81ff">3&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span> &lt;span style="color:#ae81ff">3&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span> &lt;span style="color:#ae81ff">#6ad7e5&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">background-color&lt;/span>: &lt;span style="color:#66d9ef">white&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">position&lt;/span>: &lt;span style="color:#66d9ef">relative&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">border-radius&lt;/span>: &lt;span style="color:#ae81ff">6&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">transition&lt;/span>: &lt;span style="color:#66d9ef">box-shadow&lt;/span> &lt;span style="color:#ae81ff">0.3&lt;/span>&lt;span style="color:#66d9ef">s&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">/* small shadow change on hover*/&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .&lt;span style="color:#a6e22e">timeline&lt;/span> .&lt;span style="color:#a6e22e">content&lt;/span>:&lt;span style="color:#a6e22e">hover&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">box-shadow&lt;/span>: &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#ae81ff">3&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span> &lt;span style="color:#ae81ff">#6ad7e5&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">/* card title format */&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .&lt;span style="color:#a6e22e">timeline&lt;/span> .&lt;span style="color:#a6e22e">content&lt;/span> .&lt;span style="color:#a6e22e">title&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">padding&lt;/span>: &lt;span style="color:#ae81ff">5&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span> &lt;span style="color:#ae81ff">30&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">font-weight&lt;/span>: &lt;span style="color:#66d9ef">bold&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">display&lt;/span>: &lt;span style="color:#66d9ef">inline-block&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">/* time moment format*/&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .&lt;span style="color:#a6e22e">timeline&lt;/span> .&lt;span style="color:#a6e22e">content&lt;/span> .&lt;span style="color:#a6e22e">moment&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">color&lt;/span>: &lt;span style="color:#ae81ff">#c41a16&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">text-align&lt;/span>: &lt;span style="color:#66d9ef">right&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">position&lt;/span>: &lt;span style="color:#66d9ef">absolute&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">top&lt;/span>: &lt;span style="color:#ae81ff">0&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">right&lt;/span>: &lt;span style="color:#ae81ff">0&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">padding&lt;/span>: &lt;span style="color:#ae81ff">5&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">/* body size */&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .&lt;span style="color:#a6e22e">timeline&lt;/span> .&lt;span style="color:#a6e22e">content&lt;/span> .&lt;span style="color:#a6e22e">body&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">padding&lt;/span>: &lt;span style="color:#ae81ff">5&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span> &lt;span style="color:#ae81ff">30&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">word-wrap&lt;/span>: &lt;span style="color:#66d9ef">break-word&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">/* height: 73px; */&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">/* max-height: 120px; */&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">text-overflow&lt;/span>: &lt;span style="color:#66d9ef">ellipsis&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">overflow&lt;/span>: &lt;span style="color:#66d9ef">hidden&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">/* responsive for small devices*/&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> @&lt;span style="color:#66d9ef">media&lt;/span> &lt;span style="color:#f92672">screen&lt;/span> &lt;span style="color:#f92672">and&lt;/span> &lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#f92672">max-width&lt;/span>&lt;span style="color:#f92672">:&lt;/span> &lt;span style="color:#f92672">600px&lt;/span>&lt;span style="color:#f92672">)&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .&lt;span style="color:#a6e22e">timeline&lt;/span> .&lt;span style="color:#a6e22e">container&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">padding&lt;/span>: &lt;span style="color:#ae81ff">10&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span> &lt;span style="color:#ae81ff">10&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span> &lt;span style="color:#ae81ff">40&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">left&lt;/span>: &lt;span style="color:#ae81ff">5&lt;/span>&lt;span style="color:#66d9ef">%&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">width&lt;/span>: &lt;span style="color:#ae81ff">95&lt;/span>&lt;span style="color:#66d9ef">%&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .&lt;span style="color:#a6e22e">timeline&lt;/span> .&lt;span style="color:#a6e22e">container&lt;/span> .&lt;span style="color:#a6e22e">date&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">font-size&lt;/span>: &lt;span style="color:#66d9ef">small&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">transform&lt;/span>: rotate(&lt;span style="color:#ae81ff">-90&lt;/span>&lt;span style="color:#66d9ef">deg&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">left&lt;/span>: &lt;span style="color:#ae81ff">-5&lt;/span>&lt;span style="color:#66d9ef">%&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">top&lt;/span>: &lt;span style="color:#ae81ff">30&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .&lt;span style="color:#a6e22e">timeline&lt;/span> .&lt;span style="color:#a6e22e">container&lt;/span>::&lt;span style="color:#a6e22e">after&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">left&lt;/span>: &lt;span style="color:#ae81ff">3&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .&lt;span style="color:#a6e22e">timeline&lt;/span> .&lt;span style="color:#a6e22e">content&lt;/span> .&lt;span style="color:#a6e22e">body&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">padding&lt;/span>: &lt;span style="color:#ae81ff">5&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span> &lt;span style="color:#ae81ff">5&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .&lt;span style="color:#a6e22e">timeline&lt;/span> .&lt;span style="color:#a6e22e">content&lt;/span> .&lt;span style="color:#a6e22e">moment&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">position&lt;/span>: &lt;span style="color:#66d9ef">relative&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;/&lt;span style="color:#f92672">style&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;&lt;span style="color:#f92672">div&lt;/span> &lt;span style="color:#a6e22e">class&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;timeline&amp;#34;&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {{ .Inner }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;/&lt;span style="color:#f92672">div&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>由于event.html里面引用了&lt;code>dayjs&lt;/code>，这个js不在当前主题内，可以在config.toml新增&lt;code>custom_js = [&amp;quot;js/dayjs.min.js&amp;quot;]&lt;/code>，然后把dayjs.min.js放在&lt;code>theme\hugo-theme-learn\static\js&lt;/code>目录内，即可解决导入&lt;code>dayjs&lt;/code>的问题。&lt;/p>
+&lt;p>此时可以在需要添加时间线的地方使用&lt;code>timeline&lt;/code>的shortcode添加，以下是我博客首页的时间线代码：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>{{&amp;lt; timeline &amp;gt;}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {{% event title=&amp;#34;09-03至09-04&amp;#34; from=&amp;#34;2022-09-03&amp;#34; to=&amp;#34;2022-09-04&amp;#34; %}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>这两天，给hugo主题增加了timeline的shortcode，见[增加timeline功能](others/add-timeline-shortcode)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {{% /event %}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {{% event title=&amp;#34;08-29至09-02&amp;#34; from=&amp;#34;2022-08-29&amp;#34; to=&amp;#34;2022-09-02&amp;#34; %}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>周内审计了代码
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {{% /event %}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{&amp;lt; /timeline &amp;gt;}}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>除了这个还顺便给博客新增了基于Github issue的评论功能，参考
+&lt;a href="https://utteranc.es/" target="_blank">utteranc&lt;/a>。&lt;/p>
+&lt;p>&lt;strong>参考&lt;/strong>&lt;/p>
+&lt;blockquote>
+&lt;p>
+&lt;a href="https://metalblueberry.github.io/post/howto/2021-02-28_hugo_timeline_shortcode/" target="_blank">https://metalblueberry.github.io/post/howto/2021-02-28_hugo_timeline_shortcode/&lt;/a>&lt;/p>
+&lt;/blockquote></description></item><item><title>在Windows server 2019上重置密码</title><link>https://www.ch35tnut.site/en/others/how-to-reset-password-administrator-on-windows-server-2019/</link><pubDate>Wed, 17 Nov 2021 14:40:40 +0800</pubDate><guid>https://www.ch35tnut.site/en/others/how-to-reset-password-administrator-on-windows-server-2019/</guid><description>&lt;h2 id="重置windows-server-2019的administrator密码">重置windows server 2019的administrator密码&lt;/h2>
+&lt;p>之前在Vmware上的Windows server 2019的Administrator密码忘记了，使用网上的方法时找不到用PE启动系统的办法，无奈只能使用其他办法。写此文记录一下。&lt;/p>
+&lt;h3 id="设置cddvd">设置CD/DVD&lt;/h3>
+&lt;p>首先在虚拟机-设置的硬件选项卡下面的CD/DVD设置为使用ISO映像文件并找到windows server 2019镜像位置，如下图&lt;/p>
+&lt;p>
+&lt;img alt="image-20211117145213632" src="https://www.ch35tnut.site/images/others/how-to-reset-password-administrator-on-windows-server-2019.assets/image-20211117145213632.png" />&lt;/p>
+&lt;p>之后选择虚拟机-电源-开机时打开固件启动虚拟机，虚拟机就会进入BIOS，在BIOS里选择CD/DVD启动，即会进入下图。&lt;/p>
+&lt;p>
+&lt;img src="https://www.osradar.com/wp-content/uploads/2019/10/pass-1024x768.jpeg" alt="Windows Server 2019 Installation screen" path="others/" if="others/how-to-reset-password-administrator-on-windows-server-2019.en.md"/>&lt;/p>
+&lt;p>参考链接&lt;/p>
+&lt;blockquote>
+&lt;p>
+&lt;a href="https://www.osradar.com/how-to-reset-password-administrator-on-windows-server-2019/" target="_blank">https://www.osradar.com/how-to-reset-password-administrator-on-windows-server-2019/&lt;/a>&lt;/p>
+&lt;/blockquote></description></item></channel></rss>

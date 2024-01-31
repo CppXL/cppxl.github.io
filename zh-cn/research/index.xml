@@ -1,1 +1,45 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>安全研究 on chestnut's blog</title><link>https://www.ch35tnut.site/zh-cn/research/</link><description>Recent content in 安全研究 on chestnut's blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate/><atom:link href="https://www.ch35tnut.site/zh-cn/research/index.xml" rel="self" type="application/rss+xml"/></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>安全研究 on chestnut's blog</title><link>https://www.ch35tnut.site/zh-cn/research/</link><description>Recent content in 安全研究 on chestnut's blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 08 Sep 2021 21:48:53 -0800</lastBuildDate><atom:link href="https://www.ch35tnut.site/zh-cn/research/index.xml" rel="self" type="application/rss+xml"/><item><title>Iot</title><link>https://www.ch35tnut.site/zh-cn/research/iot/</link><pubDate>Mon, 08 Jan 2024 18:13:27 +0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/research/iot/</guid><description>&lt;h3 id="iot">IOT&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;a href="./mirai-botnet.zh-cn.md">mirai 代码研究&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Linux</title><link>https://www.ch35tnut.site/zh-cn/research/linux/</link><pubDate>Sun, 07 May 2023 01:52:06 +0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/research/linux/</guid><description>&lt;h3 id="linux-相关研究">Linux 相关研究&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;a href="./elf.zh-cn.md">ELF结构&lt;/a>&lt;/li>
+&lt;li>
+&lt;a href="https://www.ch35tnut.site/zh-cn/research/linux/suid/">SUID&lt;/a>&lt;/li>
+&lt;li>
+&lt;a href="https://www.ch35tnut.site/zh-cn/research/linux/malware/">恶意软件&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Windows</title><link>https://www.ch35tnut.site/zh-cn/research/windows/</link><pubDate>Sun, 30 Apr 2023 00:20:47 +0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/research/windows/</guid><description>&lt;h3 id="windows-相关研究">windows 相关研究&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;a href="https://www.ch35tnut.site/zh-cn/research/windows/dll-inject/">dll注入&lt;/a>&lt;/li>
+&lt;li>
+&lt;a href="https://www.ch35tnut.site/zh-cn/research/windows/pe/">PE结构&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>协议</title><link>https://www.ch35tnut.site/zh-cn/research/protocol/</link><pubDate>Sun, 30 Apr 2023 00:14:14 +0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/research/protocol/</guid><description>&lt;h3 id="协议">协议&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;a href="https://www.ch35tnut.site/zh-cn/research/protocol/kerberos/">kerberos&lt;/a>&lt;/li>
+&lt;li>
+&lt;a href="https://www.ch35tnut.site/zh-cn/research/protocol/ntlm/">NTLM&lt;/a>&lt;/li>
+&lt;li>
+&lt;a href="./http2.zh-cn.md">HTTP/2&lt;/a>&lt;/li>
+&lt;li>
+&lt;a href="https://www.ch35tnut.site/zh-cn/research/protocol/netlogon/">netlogon&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Web</title><link>https://www.ch35tnut.site/zh-cn/research/web/</link><pubDate>Mon, 19 Sep 2022 00:38:30 +0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/research/web/</guid><description>&lt;h1 id="web">Web&lt;/h1>
+&lt;h3 id="web-1">web&lt;/h3>
+&lt;p>Web安全研究相关&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;a href="https://www.ch35tnut.site/zh-cn/research/web/php-filter-rce/">PHP Filter RCE 分析&lt;/a>&lt;/li>
+&lt;li>
+&lt;a href="https://www.ch35tnut.site/zh-cn/research/web/java-deserialization/">JAVA反序列化研究&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>代码审计</title><link>https://www.ch35tnut.site/zh-cn/research/code-audit/</link><pubDate>Mon, 05 Sep 2022 18:36:05 +0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/research/code-audit/</guid><description>&lt;h3 id="代码审计">代码审计&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;a href="https://www.ch35tnut.site/zh-cn/research/code-audit/codeql/">CodeQL相关&lt;/a>&lt;/li>
+&lt;li>
+&lt;a href="https://www.ch35tnut.site/zh-cn/research/code-audit/news-server/">news server审计&lt;/a>&lt;/li>
+&lt;li>
+&lt;a href="https://www.ch35tnut.site/zh-cn/research/code-audit/wireshark-185/">wireshark 1.85 审计&lt;/a>&lt;/li>
+&lt;/ul></description></item></channel></rss>

