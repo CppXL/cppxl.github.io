@@ -1,678 +1,2430 @@
-<!doctype html><html lang=zh-cn class="js csstransforms3d">
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=generator content="Hugo 0.89.4">
-<meta name=description content="记录一些学习和生活日常">
-<meta name=author content="darkmoon">
-<link rel=icon href=/images/favicon.png type=image/png>
-<title>Suid - chestnut's blog</title>
-<link href=/css/nucleus.css?1706695571 rel=stylesheet>
-<link href=/css/fontawesome-all.min.css?1706695571 rel=stylesheet>
-<link href=/css/hybrid.css?1706695571 rel=stylesheet>
-<link href=/css/featherlight.min.css?1706695571 rel=stylesheet>
-<link href=/css/perfect-scrollbar.min.css?1706695571 rel=stylesheet>
-<link href=/css/auto-complete.css?1706695571 rel=stylesheet>
-<link href=/css/atom-one-dark-reasonable.css?1706695571 rel=stylesheet>
-<link href=/css/theme.css?1706695571 rel=stylesheet>
-<link href=/css/tabs.css?1706695571 rel=stylesheet>
-<link href=/css/hugo-theme.css?1706695571 rel=stylesheet>
-<link href=/css/theme-blue.css?1706695571 rel=stylesheet>
-<script src=/js/dayjs.min.js?1706695571></script>
-<script src=/js/jquery-3.3.1.min.js?1706695571></script>
+<!DOCTYPE html>
+<html lang="zh-cn" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.122.0">
+    <meta name="description" content="记录一些学习和生活日常">
+<meta name="author" content="darkmoon">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>Suid - chestnut&#39;s blog</title>
+
+    
+    <link href="/css/nucleus.css?1706695851" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1706695851" rel="stylesheet">
+    <link href="/css/hybrid.css?1706695851" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1706695851" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1706695851" rel="stylesheet">
+    <link href="/css/auto-complete.css?1706695851" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1706695851" rel="stylesheet">
+    <link href="/css/theme.css?1706695851" rel="stylesheet">
+    <link href="/css/tabs.css?1706695851" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1706695851" rel="stylesheet">
+    
+    <link href="/css/theme-blue.css?1706695851" rel="stylesheet">
+    
+    
+    <script src="/js/dayjs.min.js?1706695851"></script>
+
+    <script src="/js/jquery-3.3.1.min.js?1706695851"></script>
+    
+    
+    
+      
+      
+
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-F5TRJPEVXY"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-F5TRJPEVXY')</script>
-<style>:root #header+#content>#left>#rlblock_left{display:none!important}</style>
-</head>
-<body data-url=/zh-cn/research/linux/suid/>
-<nav id=sidebar class=showVisitedLinks>
-<div id=header-wrapper>
-<div id=header>
-<a id=logo href=/zh-cn><svg id="grav-logo" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 285.1 69.9"><g><path d="M35 0c9.6.0 17.9 3.4 24.7 10.3C66.5 17.1 70 25.3 70 35s-3.4 17.9-10.3 24.7C52.9 66.5 44.7 70 35 70c-9.7.0-17.9-3.4-24.7-10.3C3.4 52.8.0 44.6.0 34.9.0 25.3 3.4 17 10.3 10.2 17.1 3.4 25.3.0 35 0zM22.3 63.7c.3-7.4.3-14.7.0-22.1-2.1-.4-4-.4-5.9.0-.2.8-.2 2.5-.1 4.9.1 2.3.0 3.9-.3 4.8-1.7-.6-2.7-2.1-3.1-4.6-.1-.7-.1-3.3-.1-8 0-14.5-.1-23-.3-25.6-3.6 4.1-5.6 7-5.9 8.5v10.9c0 4.5.1 8.1.2 10.9.0.4.0 1.3-.1 2.8-.1 1.2.0 2.1.1 2.6.1.6 1.1 2.1 2.8 4.7C13.2 58.7 17.5 62.2 22.3 63.7zm22.3 1.7c.3-5 .2-12.9-.1-23.6-2.1-.3-4.1-.3-5.9.0-.2 2-.2 5.1-.1 9.5.1 4.3.0 7.5-.1 9.5-2.9.4-5 .3-6.2-.1-.2-5.6-.2-15.2-.1-28.7.1-12.4.0-21.8-.3-28.3-2.4.1-4.3.6-5.7 1.3-.1 7.7-.2 17.7-.1 30.1.0 16.5.0 26.6.0 30.3 2.3 1.1 5.4 1.7 9.4 1.7C38.9 66.9 42.1 66.4 44.6 65.4zM48.1 64.1c9.7-4.6 15.7-12 18-22.2-1.8-.2-3.8-.3-6.1-.3-1.6 3.9-2.6 6.3-3.2 7.2-1.1 1.7-2 2.5-2.7 2.5C54 46 54 39.1 54 30.5c0-11.5.0-18.4.0-20.9-1.4-1.4-3.3-2.5-5.7-3.4C48.1 6.3 48 6.4 48 6.7c0 3.5.0 13.1.0 28.8C47.9 47.2 48 56.8 48.1 64.1z"/></g><g><path d="M116.6 51.3h-29c-.5.0-.9-.1-1.3-.2-.4-.2-.7-.4-1-.7-.3-.3-.5-.6-.7-1s-.2-.8-.2-1.3V16.3h6.3V45h25.8v6.3z"/><path d="M154.8 51.3h-22.9c-.9.0-1.8-.2-2.9-.5-1-.3-2-.8-2.9-1.5s-1.6-1.6-2.2-2.8c-.6-1.1-.9-2.5-.9-4.2V19.5c0-.4.1-.9.2-1.2.2-.4.4-.7.7-1s.6-.5 1-.7.8-.2 1.3-.2h28.6v6.3h-25.4v19.8c0 .8.2 1.5.7 1.9s1.1.7 1.9.7h22.9v6.2zM151.9 37h-20v-6.4h20V37z"/><path d="M197.3 51.3H191v-8.6h-22.3v8.6h-6.3V33.8c0-2.6.4-4.9 1.3-7.1s2.1-4 3.7-5.5 3.4-2.8 5.5-3.6c2.1-.9 4.5-1.3 7-1.3h14.3c.4.0.9.1 1.2.2.4.2.7.4 1 .7s.5.6.7 1 .2.8.2 1.2V51.3zM168.7 36.4H191V22.6h-11.2c-.2.0-.6.0-1.2.1s-1.4.2-2.2.4c-.8.2-1.7.6-2.6 1-.9.5-1.8 1.1-2.5 2-.8.8-1.4 1.9-1.9 3.1-.5 1.2-.7 2.8-.7 4.5v2.7z"/><path d="M241.7 28.1c0 1.4-.2 2.7-.5 3.9-.4 1.1-.8 2.1-1.5 3-.6.9-1.3 1.6-2.1 2.2-.8.6-1.6 1.1-2.5 1.5s-1.8.7-2.6.9c-.9.2-1.7.3-2.5.3l13.3 11.5h-9.8l-13.2-11.5h-4.6v-6.3H230c.8-.1 1.5-.2 2.2-.5s1.2-.6 1.7-1.1.9-1 1.1-1.6c.3-.6.4-1.4.4-2.2v-4c0-.4.0-.6-.1-.8s-.2-.3-.3-.4c-.1-.1-.3-.1-.4-.2-.2.0-.3.0-.4.0h-20.9v28.7H207v-32c0-.4.1-.9.2-1.2.2-.4.4-.7.7-1 .3-.3.6-.5 1-.7s.8-.2 1.3-.2H234c1.4.0 2.6.3 3.6.8s1.8 1.2 2.4 1.9c.6.8 1 1.6 1.3 2.5s.4 1.7.4 2.5v4z"/><path d="M285.1 48.6c0 .5-.1.9-.3 1.3s-.4.7-.7 1-.6.5-1 .7-.8.2-1.2.2-.8-.1-1.2-.2-.8-.4-1.1-.7l-23.2-24.2v24.7h-6.3V19c0-.7.2-1.2.5-1.8.4-.5.8-.9 1.4-1.2.6-.2 1.2-.3 1.9-.2s1.2.4 1.6.9l23.2 24.2V16.3h6.3V48.6z"/></g></svg>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-F5TRJPEVXY');
+</script>
+
+
+    
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/zh-cn/research/linux/suid/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href='/zh-cn'>
+
+<svg id="grav-logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	width="100%" height="100%"  viewBox="0 0 285.1 69.9" xml:space="preserve">
+<g>
+	<path d="M35,0c9.6,0,17.9,3.4,24.7,10.3c6.8,6.8,10.3,15,10.3,24.7c0,9.7-3.4,17.9-10.3,24.7c-6.8,6.8-15,10.3-24.7,10.3
+		c-9.7,0-17.9-3.4-24.7-10.3C3.4,52.8,0,44.6,0,34.9c0-9.6,3.4-17.9,10.3-24.7C17.1,3.4,25.3,0,35,0z M22.3,63.7
+		c0.3-7.4,0.3-14.7,0-22.1c-2.1-0.4-4-0.4-5.9,0c-0.2,0.8-0.2,2.5-0.1,4.9c0.1,2.3,0,3.9-0.3,4.8c-1.7-0.6-2.7-2.1-3.1-4.6
+		c-0.1-0.7-0.1-3.3-0.1-8c0-14.5-0.1-23-0.3-25.6c-3.6,4.1-5.6,7-5.9,8.5v10.9c0,4.5,0.1,8.1,0.2,10.9c0,0.4,0,1.3-0.1,2.8
+		c-0.1,1.2,0,2.1,0.1,2.6c0.1,0.6,1.1,2.1,2.8,4.7C13.2,58.7,17.5,62.2,22.3,63.7z M44.6,65.4c0.3-5,0.2-12.9-0.1-23.6
+		c-2.1-0.3-4.1-0.3-5.9,0c-0.2,2-0.2,5.1-0.1,9.5c0.1,4.3,0,7.5-0.1,9.5c-2.9,0.4-5,0.3-6.2-0.1c-0.2-5.6-0.2-15.2-0.1-28.7
+		c0.1-12.4,0-21.8-0.3-28.3c-2.4,0.1-4.3,0.6-5.7,1.3c-0.1,7.7-0.2,17.7-0.1,30.1c0,16.5,0,26.6,0,30.3c2.3,1.1,5.4,1.7,9.4,1.7
+		C38.9,66.9,42.1,66.4,44.6,65.4z M48.1,64.1c9.7-4.6,15.7-12,18-22.2c-1.8-0.2-3.8-0.3-6.1-0.3c-1.6,3.9-2.6,6.3-3.2,7.2
+		c-1.1,1.7-2,2.5-2.7,2.5C54,46,54,39.1,54,30.5c0-11.5,0-18.4,0-20.9c-1.4-1.4-3.3-2.5-5.7-3.4C48.1,6.3,48,6.4,48,6.7
+		c0,3.5,0,13.1,0,28.8C47.9,47.2,48,56.8,48.1,64.1z"/>
+</g>
+<g>
+	<path d="M116.6,51.3h-29c-0.5,0-0.9-0.1-1.3-0.2c-0.4-0.2-0.7-0.4-1-0.7c-0.3-0.3-0.5-0.6-0.7-1c-0.2-0.4-0.2-0.8-0.2-1.3V16.3h6.3
+		V45h25.8V51.3z"/>
+	<path d="M154.8,51.3h-22.9c-0.9,0-1.8-0.2-2.9-0.5c-1-0.3-2-0.8-2.9-1.5c-0.9-0.7-1.6-1.6-2.2-2.8c-0.6-1.1-0.9-2.5-0.9-4.2V19.5
+		c0-0.4,0.1-0.9,0.2-1.2c0.2-0.4,0.4-0.7,0.7-1c0.3-0.3,0.6-0.5,1-0.7c0.4-0.2,0.8-0.2,1.3-0.2h28.6v6.3h-25.4v19.8
+		c0,0.8,0.2,1.5,0.7,1.9s1.1,0.7,1.9,0.7h22.9V51.3z M151.9,37h-20v-6.4h20V37z"/>
+	<path d="M197.3,51.3H191v-8.6h-22.3v8.6h-6.3V33.8c0-2.6,0.4-4.9,1.3-7.1s2.1-4,3.7-5.5c1.6-1.5,3.4-2.8,5.5-3.6
+		c2.1-0.9,4.5-1.3,7-1.3h14.3c0.4,0,0.9,0.1,1.2,0.2c0.4,0.2,0.7,0.4,1,0.7s0.5,0.6,0.7,1c0.2,0.4,0.2,0.8,0.2,1.2V51.3z
+		 M168.7,36.4H191V22.6h-11.2c-0.2,0-0.6,0-1.2,0.1c-0.6,0.1-1.4,0.2-2.2,0.4c-0.8,0.2-1.7,0.6-2.6,1c-0.9,0.5-1.8,1.1-2.5,2
+		c-0.8,0.8-1.4,1.9-1.9,3.1c-0.5,1.2-0.7,2.8-0.7,4.5V36.4z"/>
+	<path d="M241.7,28.1c0,1.4-0.2,2.7-0.5,3.9c-0.4,1.1-0.8,2.1-1.5,3c-0.6,0.9-1.3,1.6-2.1,2.2c-0.8,0.6-1.6,1.1-2.5,1.5
+		c-0.9,0.4-1.8,0.7-2.6,0.9c-0.9,0.2-1.7,0.3-2.5,0.3l13.3,11.5h-9.8l-13.2-11.5h-4.6v-6.3H230c0.8-0.1,1.5-0.2,2.2-0.5
+		c0.7-0.3,1.2-0.6,1.7-1.1c0.5-0.5,0.9-1,1.1-1.6c0.3-0.6,0.4-1.4,0.4-2.2v-4c0-0.4,0-0.6-0.1-0.8c-0.1-0.2-0.2-0.3-0.3-0.4
+		c-0.1-0.1-0.3-0.1-0.4-0.2c-0.2,0-0.3,0-0.4,0h-20.9v28.7h-6.3V19.5c0-0.4,0.1-0.9,0.2-1.2c0.2-0.4,0.4-0.7,0.7-1
+		c0.3-0.3,0.6-0.5,1-0.7c0.4-0.2,0.8-0.2,1.3-0.2H234c1.4,0,2.6,0.3,3.6,0.8s1.8,1.2,2.4,1.9c0.6,0.8,1,1.6,1.3,2.5
+		c0.3,0.9,0.4,1.7,0.4,2.5V28.1z"/>
+	<path d="M285.1,48.6c0,0.5-0.1,0.9-0.3,1.3c-0.2,0.4-0.4,0.7-0.7,1c-0.3,0.3-0.6,0.5-1,0.7c-0.4,0.2-0.8,0.2-1.2,0.2
+		c-0.4,0-0.8-0.1-1.2-0.2c-0.4-0.1-0.8-0.4-1.1-0.7l-23.2-24.2v24.7h-6.3V19c0-0.7,0.2-1.2,0.5-1.8c0.4-0.5,0.8-0.9,1.4-1.2
+		c0.6-0.2,1.2-0.3,1.9-0.2s1.2,0.4,1.6,0.9l23.2,24.2V16.3h6.3V48.6z"/>
+</g>
+</svg>
+
 </a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="搜索...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
-<div class=searchbox>
-<label for=search-by><i class="fas fa-search"></i></label>
-<input data-search-input id=search-by type=search placeholder=搜索...>
-<span data-search-clear><i class="fas fa-times"></i></span>
-</div>
-<script type=text/javascript src=/js/lunr.min.js?1706695571></script>
-<script type=text/javascript src=/js/auto-complete.js?1706695571></script>
-<script type=text/javascript>var baseurl="https://www.ch35tnut.site/zh-cn"</script>
-<script type=text/javascript src=/js/search.js?1706695571></script>
-</div>
-<section id=homelinks>
-<ul>
-<li>
-<a class=padding href=/zh-cn><i class="fas fa-home"></i> 首页</a>
-</li>
-</ul>
-</section>
-<div class=highlightable>
-<ul class=topics>
-<li data-nav-id=/zh-cn/research/ title=安全研究 class="dd-item
-parent">
-<a href=/zh-cn/research/>
-<b>X. </b>安全研究
-<i class="fas fa-check read-icon"></i>
-</a>
-<ul>
-<li data-nav-id=/zh-cn/research/iot/ title=Iot class=dd-item>
-<a href=/zh-cn/research/iot/>
-<b>X. </b>Iot
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/research/linux/ title=Linux class="dd-item
-parent">
-<a href=/zh-cn/research/linux/>
-<b>X. </b>Linux
-<i class="fas fa-check read-icon"></i>
-</a>
-<ul>
-<li data-nav-id=/zh-cn/research/linux/malware/ title=Malware class=dd-item>
-<a href=/zh-cn/research/linux/malware/>
-<b>X. </b>Malware
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/research/linux/suid/ title=Suid class="dd-item active">
-<a href=/zh-cn/research/linux/suid/>
-Suid
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/zh-cn/research/windows/ title=Windows class=dd-item>
-<a href=/zh-cn/research/windows/>
-<b>X. </b>Windows
-<i class="fas fa-check read-icon"></i>
-</a>
-<ul>
-<li data-nav-id=/zh-cn/research/windows/dll-inject/ title=Dll注入 class=dd-item>
-<a href=/zh-cn/research/windows/dll-inject/>
-<b>X. </b>Dll注入
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/research/windows/pe/ title=Pe class=dd-item>
-<a href=/zh-cn/research/windows/pe/>
-<b>X. </b>Pe
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/zh-cn/research/protocol/ title=协议 class=dd-item>
-<a href=/zh-cn/research/protocol/>
-<b>X. </b>协议
-<i class="fas fa-check read-icon"></i>
-</a>
-<ul>
-<li data-nav-id=/zh-cn/research/protocol/ntlm/ title="NTLM 协议" class=dd-item>
-<a href=/zh-cn/research/protocol/ntlm/>
-<b>X. </b>NTLM 协议
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/research/protocol/kerberos/ title="Kerberos 协议" class=dd-item>
-<a href=/zh-cn/research/protocol/kerberos/>
-<b>X. </b>Kerberos 协议
-<i class="fas fa-check read-icon"></i>
-</a>
-<ul>
-<li data-nav-id=/zh-cn/research/protocol/kerberos/kerberos-in-windows/ title=Windows中的kerberos协议 class=dd-item>
-<a href=/zh-cn/research/protocol/kerberos/kerberos-in-windows/>
-<b>X. </b>Windows中的kerberos协议
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/research/protocol/kerberos/authentication-principle.zh.cn/ title=认证原理 class=dd-item>
-<a href=/zh-cn/research/protocol/kerberos/authentication-principle.zh.cn/>
-认证原理
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/zh-cn/research/protocol/netlogon/ title=Netlogon class=dd-item>
-<a href=/zh-cn/research/protocol/netlogon/>
-Netlogon
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/zh-cn/research/web/ title=Web class=dd-item>
-<a href=/zh-cn/research/web/>
-<b>X. </b>Web
-<i class="fas fa-check read-icon"></i>
-</a>
-<ul>
-<li data-nav-id=/zh-cn/research/web/java-deserialization/ title="Java Deserialization" class=dd-item>
-<a href=/zh-cn/research/web/java-deserialization/>
-<b>X. </b>Java Deserialization
-<i class="fas fa-check read-icon"></i>
-</a>
-<ul>
-<li data-nav-id=/zh-cn/research/web/java-deserialization/commonsbeanutils1-chain/ title="CommonsBeanutils1 Chain" class=dd-item>
-<a href=/zh-cn/research/web/java-deserialization/commonsbeanutils1-chain/>
-CommonsBeanutils1 Chain
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/research/web/java-deserialization/urldns/ title="JAVA URL DNS 研究" class=dd-item>
-<a href=/zh-cn/research/web/java-deserialization/urldns/>
-JAVA URL DNS 研究
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/zh-cn/research/web/php-filter-rce/ title="PHP Filter RCE 分析" class=dd-item>
-<a href=/zh-cn/research/web/php-filter-rce/>
-PHP Filter RCE 分析
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/zh-cn/research/code-audit/ title=代码审计 class=dd-item>
-<a href=/zh-cn/research/code-audit/>
-<b>X. </b>代码审计
-<i class="fas fa-check read-icon"></i>
-</a>
-<ul>
-<li data-nav-id=/zh-cn/research/code-audit/codeql/ title=Codeql class=dd-item>
-<a href=/zh-cn/research/code-audit/codeql/>
-<b>X. </b>Codeql
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/research/code-audit/wireshark-185/ title="Wireshark 1.8.5代码审计" class=dd-item>
-<a href=/zh-cn/research/code-audit/wireshark-185/>
-Wireshark 1.8.5代码审计
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/research/code-audit/news-server/ title="News Server审计" class=dd-item>
-<a href=/zh-cn/research/code-audit/news-server/>
-News Server审计
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li data-nav-id=/zh-cn/vulnerability/ title=漏洞分析 class=dd-item>
-<a href=/zh-cn/vulnerability/>
-<b>X. </b>漏洞分析
-<i class="fas fa-check read-icon"></i>
-</a>
-<ul>
-<li data-nav-id=/zh-cn/vulnerability/windows-clfs-eop/ title="Windows CLFS EoP" class=dd-item>
-<a href=/zh-cn/vulnerability/windows-clfs-eop/>
-<b>X. </b>Windows CLFS EoP
-<i class="fas fa-check read-icon"></i>
-</a>
-<ul>
-<li data-nav-id=/zh-cn/vulnerability/windows-clfs-eop/cve-2023-28252/ title=CVE-2023-28252 class=dd-item>
-<a href=/zh-cn/vulnerability/windows-clfs-eop/cve-2023-28252/>
-CVE-2023-28252
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/vulnerability/windows-clfs-eop/cve-2022-37969/ title=CVE-2022-37969 class=dd-item>
-<a href=/zh-cn/vulnerability/windows-clfs-eop/cve-2022-37969/>
-CVE-2022-37969
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/zh-cn/vulnerability/cve-2023-7028-gitlab-account-takeover/ title="CVE-2023-7028 GitLab Account Takeover" class=dd-item>
-<a href=/zh-cn/vulnerability/cve-2023-7028-gitlab-account-takeover/>
-CVE-2023-7028 GitLab Account Takeover
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/vulnerability/cve-2016-4437-shiro-550-rce/ title="CVE-2016-4437 Shiro 550 RCE 分析" class=dd-item>
-<a href=/zh-cn/vulnerability/cve-2016-4437-shiro-550-rce/>
-CVE-2016-4437 Shiro 550 RCE 分析
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/vulnerability/cve-2023-6553-wordpress-backup-migration-plugin-rce/ title="CVE 2023 6553 Wordpress Backup Migration Plugin RCE" class=dd-item>
-<a href=/zh-cn/vulnerability/cve-2023-6553-wordpress-backup-migration-plugin-rce/>
-CVE 2023 6553 Wordpress Backup Migration Plugin RCE
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/vulnerability/cve-2023-50164-apache-struts-rce/ title="CVE-2023-50164 Apache Struts RCE分析" class=dd-item>
-<a href=/zh-cn/vulnerability/cve-2023-50164-apache-struts-rce/>
-CVE-2023-50164 Apache Struts RCE分析
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/vulnerability/cve-2023-21746-windows-ntlm-privilege-escalation/ title="CVE-2023-21746 Windows NTLM Privilege Escalation" class=dd-item>
-<a href=/zh-cn/vulnerability/cve-2023-21746-windows-ntlm-privilege-escalation/>
-CVE-2023-21746 Windows NTLM Privilege Escalation
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/vulnerability/cve-2020-17530-apache-struts-ognl-rce/ title="CVE-2020-17530 Apache Struts OGNL RCE分析" class=dd-item>
-<a href=/zh-cn/vulnerability/cve-2020-17530-apache-struts-ognl-rce/>
-CVE-2020-17530 Apache Struts OGNL RCE分析
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/vulnerability/cve-2021-4034-polkit-eop/ title="CVE-2021-4034 Polkit 权限提升漏洞分析" class=dd-item>
-<a href=/zh-cn/vulnerability/cve-2021-4034-polkit-eop/>
-CVE-2021-4034 Polkit 权限提升漏洞分析
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/vulnerability/cve-2023-36036-windows-cloud-files-mini-filter-driver-eop/ title="CVE-2023-36036 Windows Cloud Files Mini Filter Driver 权限提升漏洞分析" class=dd-item>
-<a href=/zh-cn/vulnerability/cve-2023-36036-windows-cloud-files-mini-filter-driver-eop/>
-CVE-2023-36036 Windows Cloud Files Mini Filter Driver 权限提升漏洞分析
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/vulnerability/cve-2022-23121-afp-rce/ title="CVE-2022-23121 AFP RCE 分析" class=dd-item>
-<a href=/zh-cn/vulnerability/cve-2022-23121-afp-rce/>
-CVE-2022-23121 AFP RCE 分析
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/vulnerability/cve-2023-36563-wordpad-info-disclosure/ title="CVE-2023-36563 Wordpad Info Disclosure 分析" class=dd-item>
-<a href=/zh-cn/vulnerability/cve-2023-36563-wordpad-info-disclosure/>
-CVE-2023-36563 Wordpad Info Disclosure 分析
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/vulnerability/squid-dos/ title="Squid 拒绝服务漏洞分析" class=dd-item>
-<a href=/zh-cn/vulnerability/squid-dos/>
-Squid 拒绝服务漏洞分析
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/vulnerability/cve-2023-4966-citrix-gateway-info-disclosure/ title="CVE-2023-4966 Citrix Gateway 信息泄露漏洞分析" class=dd-item>
-<a href=/zh-cn/vulnerability/cve-2023-4966-citrix-gateway-info-disclosure/>
-CVE-2023-4966 Citrix Gateway 信息泄露漏洞分析
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/vulnerability/cve-2023-44487-http2-rapid-reset-ddos-attack/ title="CVE-2023-44487 Http2 Rapid Reset DDOS Attack 分析" class=dd-item>
-<a href=/zh-cn/vulnerability/cve-2023-44487-http2-rapid-reset-ddos-attack/>
-CVE-2023-44487 Http2 Rapid Reset DDOS Attack 分析
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/vulnerability/cve-2023-38545-curl-heap-overflow/ title="CVE-2023-38545 Curl 堆溢出漏洞分析" class=dd-item>
-<a href=/zh-cn/vulnerability/cve-2023-38545-curl-heap-overflow/>
-CVE-2023-38545 Curl 堆溢出漏洞分析
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/vulnerability/cve-2023-4863-libwebp-rce/ title="CVE-2023-4863 Libwebp Rce 分析" class=dd-item>
-<a href=/zh-cn/vulnerability/cve-2023-4863-libwebp-rce/>
-CVE-2023-4863 Libwebp Rce 分析
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/vulnerability/cve-2023-42820-jumpserver-pwd-reset-vuln/ title="CVE-2023-42820 Jumpserver 任意用户密码重置漏洞分析" class=dd-item>
-<a href=/zh-cn/vulnerability/cve-2023-42820-jumpserver-pwd-reset-vuln/>
-CVE-2023-42820 Jumpserver 任意用户密码重置漏洞分析
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/vulnerability/%E7%91%9E%E5%8F%8B%E5%A4%A9%E7%BF%BC-rce/ title="瑞友天翼 Rce分析" class=dd-item>
-<a href=/zh-cn/vulnerability/%E7%91%9E%E5%8F%8B%E5%A4%A9%E7%BF%BC-rce/>
-瑞友天翼 Rce分析
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/vulnerability/cve-2023-36874-windows-error-reporting-service-eop/ title="CVE-2023-36874 Windows Error Reporting Service 权限提升漏洞分析" class=dd-item>
-<a href=/zh-cn/vulnerability/cve-2023-36874-windows-error-reporting-service-eop/>
-CVE-2023-36874 Windows Error Reporting Service 权限提升漏洞分析
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/vulnerability/cve-2023-38148-windows-ics-rce/ title="CVE-2023-38148 Windows Ics Rce分析" class=dd-item>
-<a href=/zh-cn/vulnerability/cve-2023-38148-windows-ics-rce/>
-CVE-2023-38148 Windows Ics Rce分析
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/vulnerability/cve-2023-3519-cirtix-gateway-rce/ title="CVE-2023-3519 Cirtix Gateway RCE分析" class=dd-item>
-<a href=/zh-cn/vulnerability/cve-2023-3519-cirtix-gateway-rce/>
-CVE-2023-3519 Cirtix Gateway RCE分析
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/vulnerability/cve-2023-32315-openfire-auth-bypass/ title="CVE-2023-32315 Openfire 身份认证绕过漏洞分析" class=dd-item>
-<a href=/zh-cn/vulnerability/cve-2023-32315-openfire-auth-bypass/>
-CVE-2023-32315 Openfire 身份认证绕过漏洞分析
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/vulnerability/smartbi-rce/ title="Smartbi RCE 分析" class=dd-item>
-<a href=/zh-cn/vulnerability/smartbi-rce/>
-Smartbi RCE 分析
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/vulnerability/cve-2023-2825-gitlab-path-traversal/ title="CVE-2023-2825 Gitlab 路径穿越漏洞分析" class=dd-item>
-<a href=/zh-cn/vulnerability/cve-2023-2825-gitlab-path-traversal/>
-CVE-2023-2825 Gitlab 路径穿越漏洞分析
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/vulnerability/zero-logon/ title="Zero Logon 分析" class=dd-item>
-<a href=/zh-cn/vulnerability/zero-logon/>
-Zero Logon 分析
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/vulnerability/cve-2022-4223-pgadmin-rce/ title="CVE-2022-4223 PgAdmin RCE 分析" class=dd-item>
-<a href=/zh-cn/vulnerability/cve-2022-4223-pgadmin-rce/>
-CVE-2022-4223 PgAdmin RCE 分析
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/vulnerability/strapi-rce/ title="Strapi RCE 漏洞链分析" class=dd-item>
-<a href=/zh-cn/vulnerability/strapi-rce/>
-Strapi RCE 漏洞链分析
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/vulnerability/cve-2023-23410-windows-http-sys-eop/ title="CVE-2023-23410 Windows HTTP.sys 权限提升漏洞分析" class=dd-item>
-<a href=/zh-cn/vulnerability/cve-2023-23410-windows-http-sys-eop/>
-CVE-2023-23410 Windows HTTP.sys 权限提升漏洞分析
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/vulnerability/cve-2021-3156-sudo-eop/ title="CVE-2021-3156 Sudo 权限提升漏洞分析" class=dd-item>
-<a href=/zh-cn/vulnerability/cve-2021-3156-sudo-eop/>
-CVE-2021-3156 Sudo 权限提升漏洞分析
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/vulnerability/cve-2023-28432-minio-information-disclosure/ title="CVE-2023-28432 MinIO 信息泄露漏洞分析" class=dd-item>
-<a href=/zh-cn/vulnerability/cve-2023-28432-minio-information-disclosure/>
-CVE-2023-28432 MinIO 信息泄露漏洞分析
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/vulnerability/cve-2023-23397-outlook-eop/ title="CVE-2023-23397 Outlook 权限提升漏洞分析" class=dd-item>
-<a href=/zh-cn/vulnerability/cve-2023-23397-outlook-eop/>
-CVE-2023-23397 Outlook 权限提升漏洞分析
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/vulnerability/proxy-not-shell/ title="Proxy Not Shell 利用链分析" class=dd-item>
-<a href=/zh-cn/vulnerability/proxy-not-shell/>
-Proxy Not Shell 利用链分析
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/vulnerability/cve-2021-40449-win32k-eop/ title="CVE-2021-40449 Win32k 权限提升漏洞分析" class=dd-item>
-<a href=/zh-cn/vulnerability/cve-2021-40449-win32k-eop/>
-CVE-2021-40449 Win32k 权限提升漏洞分析
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/zh-cn/dailylife/ title=生活随笔 class=dd-item>
-<a href=/zh-cn/dailylife/>
-<b>X. </b>生活随笔
-<i class="fas fa-check read-icon"></i>
-</a>
-<ul>
-<li data-nav-id=/zh-cn/dailylife/movies/ title=Movies class=dd-item>
-<a href=/zh-cn/dailylife/movies/>
-<b>X. </b>Movies
-<i class="fas fa-check read-icon"></i>
-</a>
-<ul>
-<li data-nav-id=/zh-cn/dailylife/movies/2024-%E6%BD%9C%E8%A1%8C/ title="2024 潜行" class=dd-item>
-<a href=/zh-cn/dailylife/movies/2024-%E6%BD%9C%E8%A1%8C/>
-2024 潜行
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/zh-cn/dailylife/%E5%90%90%E6%A7%BD/ title=吐槽 class=dd-item>
-<a href=/zh-cn/dailylife/%E5%90%90%E6%A7%BD/>
-吐槽
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/dailylife/2023-review-and-2024-outlook/ title=2023年总结和2024年展望 class=dd-item>
-<a href=/zh-cn/dailylife/2023-review-and-2024-outlook/>
-2023年总结和2024年展望
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/zh-cn/misc/ title=杂项 class=dd-item>
-<a href=/zh-cn/misc/>
-<b>X. </b>杂项
-<i class="fas fa-check read-icon"></i>
-</a>
-<ul>
-<li data-nav-id=/zh-cn/misc/tools/ title=Tools class=dd-item>
-<a href=/zh-cn/misc/tools/>
-<b>X. </b>Tools
-<i class="fas fa-check read-icon"></i>
-</a>
-<ul>
-<li data-nav-id=/zh-cn/misc/tools/citrix-update-monitor/ title="【工具】Citrix NetScaler 更新监控" class=dd-item>
-<a href=/zh-cn/misc/tools/citrix-update-monitor/>
-【工具】Citrix NetScaler 更新监控
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/zh-cn/misc/encoding/ title=Encoding class=dd-item>
-<a href=/zh-cn/misc/encoding/>
-<b>X. </b>Encoding
-<i class="fas fa-check read-icon"></i>
-</a>
-<ul>
-<li data-nav-id=/zh-cn/misc/encoding/utf-7/ title="Utf 7" class=dd-item>
-<a href=/zh-cn/misc/encoding/utf-7/>
-Utf 7
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/misc/encoding/unicode/ title=Unicode class=dd-item>
-<a href=/zh-cn/misc/encoding/unicode/>
-Unicode
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/zh-cn/misc/tunnel/ title=隧道 class=dd-item>
-<a href=/zh-cn/misc/tunnel/>
-<b>X. </b>隧道
-<i class="fas fa-check read-icon"></i>
-</a>
-<ul>
-<li data-nav-id=/zh-cn/misc/tunnel/application-layer/ title=应用层隧道 class=dd-item>
-<a href=/zh-cn/misc/tunnel/application-layer/>
-<b>X. </b>应用层隧道
-<i class="fas fa-check read-icon"></i>
-</a>
-<ul>
-<li data-nav-id=/zh-cn/misc/tunnel/application-layer/ssh-tunnel/ title=SSH隧道 class=dd-item>
-<a href=/zh-cn/misc/tunnel/application-layer/ssh-tunnel/>
-SSH隧道
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/zh-cn/misc/tunnel/transport-layer/ title=传输层隧道 class=dd-item>
-<a href=/zh-cn/misc/tunnel/transport-layer/>
-<b>X. </b>传输层隧道
-<i class="fas fa-check read-icon"></i>
-</a>
-<ul>
-<li data-nav-id=/zh-cn/misc/tunnel/transport-layer/socks/ title=Socks隧道 class=dd-item>
-<a href=/zh-cn/misc/tunnel/transport-layer/socks/>
-<b>X. </b>Socks隧道
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/zh-cn/misc/tunnel/network-layer/ title=网络层隧道 class=dd-item>
-<a href=/zh-cn/misc/tunnel/network-layer/>
-<b>X. </b>网络层隧道
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li data-nav-id=/zh-cn/others/ title=其他 class=dd-item>
-<a href=/zh-cn/others/>
-<b>X. </b>其他
-<i class="fas fa-check read-icon"></i>
-</a>
-<ul>
-<li data-nav-id=/zh-cn/others/add-timeline-shortcode/ title=给hugo-theme-learn增加timeline功能 class=dd-item>
-<a href=/zh-cn/others/add-timeline-shortcode/>
-给hugo-theme-learn增加timeline功能
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/others/how-to-reset-password-administrator-on-windows-server-2019/ title="在Windows server 2019上重置密码" class=dd-item>
-<a href=/zh-cn/others/how-to-reset-password-administrator-on-windows-server-2019/>
-在Windows server 2019上重置密码
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-<li data-nav-id=/zh-cn/others/vmware-based-implementation-of-small-domain-network-construction/ title=基于Vmware的小型域网络搭建 class=dd-item>
-<a href=/zh-cn/others/vmware-based-implementation-of-small-domain-network-construction/>
-基于Vmware的小型域网络搭建
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
-</ul>
-</li>
-</ul>
-<section id=shortcuts>
-<h3>更多</h3>
-<ul>
-<li>
-<a class=padding href=https://www.ch35tnut.site/zh-cn/about><i class="fas fa-person-booth"></i> 关于</a>
-</li>
-<li>
-<a class=padding href=https://github.com/Chestnut4/><i class="fab fa-github"></i> Github 链接</a>
-</li>
-<li>
-<a class=padding href=https://www.ch35tnut.site/zh-cn/tags><i class="fas fa-tags"></i> 标签</a>
-</li>
-<li>
-<a class=padding href=https://www.ch35tnut.site/zh-cn/index.xml><i class="fas fa-fw fa-link"></i> RSS</a>
-</li>
-</ul>
-</section>
-<section id=prefooter>
-<hr>
-<ul>
-<li>
-<a class=padding>
-<i class="fas fa-language fa-fw"></i>
-<div class=select-style>
-<select id=select-language onchange="location=this.value"><option id=zh-cn value=https://www.ch35tnut.site/zh-cn/research/linux/suid/ selected>简体中文</option></select><svg id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="255" height="255" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255"><g><g id="arrow-drop-down"><polygon points="0,63.75 127.5,191.25 255,63.75"/></g></g></svg>
-</div>
-</a>
-</li>
-<li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> 清理历史记录</a></li>
-</ul>
-</section>
-<section id=footer>
-<center>
+
+<script type="text/javascript" src="/js/lunr.min.js?1706695851"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1706695851"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/www.ch35tnut.site\/zh-cn";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1706695851"></script>
+
+    
+  </div>
+  
+    <section id="homelinks">
+      <ul>
+        <li>
+            <a class="padding" href='/zh-cn'><i class='fas fa-home'></i> 首页</a>
+        </li>
+      </ul>
+    </section>
+  
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/zh-cn/research/" title="安全研究" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/zh-cn/research/">
+          <b>X. </b>安全研究
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/zh-cn/research/iot/" title="Iot" class="dd-item
+        
+        
+        
+        ">
+      <a href="/zh-cn/research/iot/">
+          <b>X. </b>Iot
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/zh-cn/research/linux/" title="Linux" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/zh-cn/research/linux/">
+          <b>X. </b>Linux
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/zh-cn/research/linux/malware/" title="Malware" class="dd-item
+        
+        
+        
+        ">
+      <a href="/zh-cn/research/linux/malware/">
+          <b>X. </b>Malware
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/research/linux/suid/" title="Suid" class="dd-item active">
+        <a href="/zh-cn/research/linux/suid/">
+        Suid
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/zh-cn/research/windows/" title="Windows" class="dd-item
+        
+        
+        
+        ">
+      <a href="/zh-cn/research/windows/">
+          <b>X. </b>Windows
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/zh-cn/research/windows/dll-inject/" title="Dll注入" class="dd-item
+        
+        
+        
+        ">
+      <a href="/zh-cn/research/windows/dll-inject/">
+          <b>X. </b>Dll注入
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/zh-cn/research/windows/pe/" title="Pe" class="dd-item
+        
+        
+        
+        ">
+      <a href="/zh-cn/research/windows/pe/">
+          <b>X. </b>Pe
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/zh-cn/research/protocol/" title="协议" class="dd-item
+        
+        
+        
+        ">
+      <a href="/zh-cn/research/protocol/">
+          <b>X. </b>协议
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/zh-cn/research/protocol/ntlm/" title="NTLM 协议" class="dd-item
+        
+        
+        
+        ">
+      <a href="/zh-cn/research/protocol/ntlm/">
+          <b>X. </b>NTLM 协议
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/zh-cn/research/protocol/kerberos/" title="Kerberos 协议" class="dd-item
+        
+        
+        
+        ">
+      <a href="/zh-cn/research/protocol/kerberos/">
+          <b>X. </b>Kerberos 协议
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/zh-cn/research/protocol/kerberos/kerberos-in-windows/" title="Windows中的kerberos协议" class="dd-item
+        
+        
+        
+        ">
+      <a href="/zh-cn/research/protocol/kerberos/kerberos-in-windows/">
+          <b>X. </b>Windows中的kerberos协议
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/research/protocol/kerberos/authentication-principle.zh.cn/" title="认证原理" class="dd-item ">
+        <a href="/zh-cn/research/protocol/kerberos/authentication-principle.zh.cn/">
+        认证原理
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/research/protocol/netlogon/" title="Netlogon" class="dd-item ">
+        <a href="/zh-cn/research/protocol/netlogon/">
+        Netlogon
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/zh-cn/research/web/" title="Web" class="dd-item
+        
+        
+        
+        ">
+      <a href="/zh-cn/research/web/">
+          <b>X. </b>Web
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/zh-cn/research/web/java-deserialization/" title="Java Deserialization" class="dd-item
+        
+        
+        
+        ">
+      <a href="/zh-cn/research/web/java-deserialization/">
+          <b>X. </b>Java Deserialization
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/research/web/java-deserialization/commonsbeanutils1-chain/" title="CommonsBeanutils1 Chain" class="dd-item ">
+        <a href="/zh-cn/research/web/java-deserialization/commonsbeanutils1-chain/">
+        CommonsBeanutils1 Chain
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/research/web/java-deserialization/urldns/" title="JAVA URL DNS 研究" class="dd-item ">
+        <a href="/zh-cn/research/web/java-deserialization/urldns/">
+        JAVA URL DNS 研究
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/research/web/php-filter-rce/" title="PHP Filter RCE 分析" class="dd-item ">
+        <a href="/zh-cn/research/web/php-filter-rce/">
+        PHP Filter RCE 分析
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/zh-cn/research/code-audit/" title="代码审计" class="dd-item
+        
+        
+        
+        ">
+      <a href="/zh-cn/research/code-audit/">
+          <b>X. </b>代码审计
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/zh-cn/research/code-audit/codeql/" title="Codeql" class="dd-item
+        
+        
+        
+        ">
+      <a href="/zh-cn/research/code-audit/codeql/">
+          <b>X. </b>Codeql
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/research/code-audit/wireshark-185/" title="Wireshark 1.8.5代码审计" class="dd-item ">
+        <a href="/zh-cn/research/code-audit/wireshark-185/">
+        Wireshark 1.8.5代码审计
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/research/code-audit/news-server/" title="News Server审计" class="dd-item ">
+        <a href="/zh-cn/research/code-audit/news-server/">
+        News Server审计
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/zh-cn/vulnerability/" title="漏洞分析" class="dd-item
+        
+        
+        
+        ">
+      <a href="/zh-cn/vulnerability/">
+          <b>X. </b>漏洞分析
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/zh-cn/vulnerability/windows-clfs-eop/" title="Windows CLFS EoP" class="dd-item
+        
+        
+        
+        ">
+      <a href="/zh-cn/vulnerability/windows-clfs-eop/">
+          <b>X. </b>Windows CLFS EoP
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/vulnerability/windows-clfs-eop/cve-2023-28252/" title="CVE-2023-28252" class="dd-item ">
+        <a href="/zh-cn/vulnerability/windows-clfs-eop/cve-2023-28252/">
+        CVE-2023-28252
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/vulnerability/windows-clfs-eop/cve-2022-37969/" title="CVE-2022-37969" class="dd-item ">
+        <a href="/zh-cn/vulnerability/windows-clfs-eop/cve-2022-37969/">
+        CVE-2022-37969
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/vulnerability/cve-2023-7028-gitlab-account-takeover/" title="CVE-2023-7028 GitLab Account Takeover" class="dd-item ">
+        <a href="/zh-cn/vulnerability/cve-2023-7028-gitlab-account-takeover/">
+        CVE-2023-7028 GitLab Account Takeover
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/vulnerability/cve-2016-4437-shiro-550-rce/" title="CVE-2016-4437 Shiro 550 RCE 分析" class="dd-item ">
+        <a href="/zh-cn/vulnerability/cve-2016-4437-shiro-550-rce/">
+        CVE-2016-4437 Shiro 550 RCE 分析
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/vulnerability/cve-2023-6553-wordpress-backup-migration-plugin-rce/" title="CVE 2023 6553 Wordpress Backup Migration Plugin RCE" class="dd-item ">
+        <a href="/zh-cn/vulnerability/cve-2023-6553-wordpress-backup-migration-plugin-rce/">
+        CVE 2023 6553 Wordpress Backup Migration Plugin RCE
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/vulnerability/cve-2023-50164-apache-struts-rce/" title="CVE-2023-50164 Apache Struts RCE分析" class="dd-item ">
+        <a href="/zh-cn/vulnerability/cve-2023-50164-apache-struts-rce/">
+        CVE-2023-50164 Apache Struts RCE分析
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/vulnerability/cve-2023-21746-windows-ntlm-privilege-escalation/" title="CVE-2023-21746 Windows NTLM Privilege Escalation" class="dd-item ">
+        <a href="/zh-cn/vulnerability/cve-2023-21746-windows-ntlm-privilege-escalation/">
+        CVE-2023-21746 Windows NTLM Privilege Escalation
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/vulnerability/cve-2020-17530-apache-struts-ognl-rce/" title="CVE-2020-17530 Apache Struts OGNL RCE分析" class="dd-item ">
+        <a href="/zh-cn/vulnerability/cve-2020-17530-apache-struts-ognl-rce/">
+        CVE-2020-17530 Apache Struts OGNL RCE分析
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/vulnerability/cve-2021-4034-polkit-eop/" title="CVE-2021-4034 Polkit 权限提升漏洞分析" class="dd-item ">
+        <a href="/zh-cn/vulnerability/cve-2021-4034-polkit-eop/">
+        CVE-2021-4034 Polkit 权限提升漏洞分析
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/vulnerability/cve-2023-36036-windows-cloud-files-mini-filter-driver-eop/" title="CVE-2023-36036 Windows Cloud Files Mini Filter Driver 权限提升漏洞分析" class="dd-item ">
+        <a href="/zh-cn/vulnerability/cve-2023-36036-windows-cloud-files-mini-filter-driver-eop/">
+        CVE-2023-36036 Windows Cloud Files Mini Filter Driver 权限提升漏洞分析
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/vulnerability/cve-2022-23121-afp-rce/" title="CVE-2022-23121 AFP RCE 分析" class="dd-item ">
+        <a href="/zh-cn/vulnerability/cve-2022-23121-afp-rce/">
+        CVE-2022-23121 AFP RCE 分析
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/vulnerability/cve-2023-36563-wordpad-info-disclosure/" title="CVE-2023-36563 Wordpad Info Disclosure 分析" class="dd-item ">
+        <a href="/zh-cn/vulnerability/cve-2023-36563-wordpad-info-disclosure/">
+        CVE-2023-36563 Wordpad Info Disclosure 分析
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/vulnerability/squid-dos/" title="Squid 拒绝服务漏洞分析" class="dd-item ">
+        <a href="/zh-cn/vulnerability/squid-dos/">
+        Squid 拒绝服务漏洞分析
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/vulnerability/cve-2023-4966-citrix-gateway-info-disclosure/" title="CVE-2023-4966 Citrix Gateway 信息泄露漏洞分析" class="dd-item ">
+        <a href="/zh-cn/vulnerability/cve-2023-4966-citrix-gateway-info-disclosure/">
+        CVE-2023-4966 Citrix Gateway 信息泄露漏洞分析
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/vulnerability/cve-2023-44487-http2-rapid-reset-ddos-attack/" title="CVE-2023-44487 Http2 Rapid Reset DDOS Attack 分析" class="dd-item ">
+        <a href="/zh-cn/vulnerability/cve-2023-44487-http2-rapid-reset-ddos-attack/">
+        CVE-2023-44487 Http2 Rapid Reset DDOS Attack 分析
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/vulnerability/cve-2023-38545-curl-heap-overflow/" title="CVE-2023-38545 Curl 堆溢出漏洞分析" class="dd-item ">
+        <a href="/zh-cn/vulnerability/cve-2023-38545-curl-heap-overflow/">
+        CVE-2023-38545 Curl 堆溢出漏洞分析
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/vulnerability/cve-2023-4863-libwebp-rce/" title="CVE-2023-4863 Libwebp Rce 分析" class="dd-item ">
+        <a href="/zh-cn/vulnerability/cve-2023-4863-libwebp-rce/">
+        CVE-2023-4863 Libwebp Rce 分析
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/vulnerability/cve-2023-42820-jumpserver-pwd-reset-vuln/" title="CVE-2023-42820 Jumpserver 任意用户密码重置漏洞分析" class="dd-item ">
+        <a href="/zh-cn/vulnerability/cve-2023-42820-jumpserver-pwd-reset-vuln/">
+        CVE-2023-42820 Jumpserver 任意用户密码重置漏洞分析
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/vulnerability/%E7%91%9E%E5%8F%8B%E5%A4%A9%E7%BF%BC-rce/" title="瑞友天翼 Rce分析" class="dd-item ">
+        <a href="/zh-cn/vulnerability/%E7%91%9E%E5%8F%8B%E5%A4%A9%E7%BF%BC-rce/">
+        瑞友天翼 Rce分析
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/vulnerability/cve-2023-36874-windows-error-reporting-service-eop/" title="CVE-2023-36874 Windows Error Reporting Service 权限提升漏洞分析" class="dd-item ">
+        <a href="/zh-cn/vulnerability/cve-2023-36874-windows-error-reporting-service-eop/">
+        CVE-2023-36874 Windows Error Reporting Service 权限提升漏洞分析
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/vulnerability/cve-2023-38148-windows-ics-rce/" title="CVE-2023-38148 Windows Ics Rce分析" class="dd-item ">
+        <a href="/zh-cn/vulnerability/cve-2023-38148-windows-ics-rce/">
+        CVE-2023-38148 Windows Ics Rce分析
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/vulnerability/cve-2023-3519-cirtix-gateway-rce/" title="CVE-2023-3519 Cirtix Gateway RCE分析" class="dd-item ">
+        <a href="/zh-cn/vulnerability/cve-2023-3519-cirtix-gateway-rce/">
+        CVE-2023-3519 Cirtix Gateway RCE分析
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/vulnerability/cve-2023-32315-openfire-auth-bypass/" title="CVE-2023-32315 Openfire 身份认证绕过漏洞分析" class="dd-item ">
+        <a href="/zh-cn/vulnerability/cve-2023-32315-openfire-auth-bypass/">
+        CVE-2023-32315 Openfire 身份认证绕过漏洞分析
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/vulnerability/smartbi-rce/" title="Smartbi RCE 分析" class="dd-item ">
+        <a href="/zh-cn/vulnerability/smartbi-rce/">
+        Smartbi RCE 分析
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/vulnerability/cve-2023-2825-gitlab-path-traversal/" title="CVE-2023-2825 Gitlab 路径穿越漏洞分析" class="dd-item ">
+        <a href="/zh-cn/vulnerability/cve-2023-2825-gitlab-path-traversal/">
+        CVE-2023-2825 Gitlab 路径穿越漏洞分析
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/vulnerability/zero-logon/" title="Zero Logon 分析" class="dd-item ">
+        <a href="/zh-cn/vulnerability/zero-logon/">
+        Zero Logon 分析
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/vulnerability/cve-2022-4223-pgadmin-rce/" title="CVE-2022-4223 PgAdmin RCE 分析" class="dd-item ">
+        <a href="/zh-cn/vulnerability/cve-2022-4223-pgadmin-rce/">
+        CVE-2022-4223 PgAdmin RCE 分析
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/vulnerability/strapi-rce/" title="Strapi RCE 漏洞链分析" class="dd-item ">
+        <a href="/zh-cn/vulnerability/strapi-rce/">
+        Strapi RCE 漏洞链分析
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/vulnerability/cve-2023-23410-windows-http-sys-eop/" title="CVE-2023-23410 Windows HTTP.sys 权限提升漏洞分析" class="dd-item ">
+        <a href="/zh-cn/vulnerability/cve-2023-23410-windows-http-sys-eop/">
+        CVE-2023-23410 Windows HTTP.sys 权限提升漏洞分析
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/vulnerability/cve-2021-3156-sudo-eop/" title="CVE-2021-3156 Sudo 权限提升漏洞分析" class="dd-item ">
+        <a href="/zh-cn/vulnerability/cve-2021-3156-sudo-eop/">
+        CVE-2021-3156 Sudo 权限提升漏洞分析
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/vulnerability/cve-2023-28432-minio-information-disclosure/" title="CVE-2023-28432 MinIO 信息泄露漏洞分析" class="dd-item ">
+        <a href="/zh-cn/vulnerability/cve-2023-28432-minio-information-disclosure/">
+        CVE-2023-28432 MinIO 信息泄露漏洞分析
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/vulnerability/cve-2023-23397-outlook-eop/" title="CVE-2023-23397 Outlook 权限提升漏洞分析" class="dd-item ">
+        <a href="/zh-cn/vulnerability/cve-2023-23397-outlook-eop/">
+        CVE-2023-23397 Outlook 权限提升漏洞分析
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/vulnerability/proxy-not-shell/" title="Proxy Not Shell 利用链分析" class="dd-item ">
+        <a href="/zh-cn/vulnerability/proxy-not-shell/">
+        Proxy Not Shell 利用链分析
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/vulnerability/cve-2021-40449-win32k-eop/" title="CVE-2021-40449 Win32k 权限提升漏洞分析" class="dd-item ">
+        <a href="/zh-cn/vulnerability/cve-2021-40449-win32k-eop/">
+        CVE-2021-40449 Win32k 权限提升漏洞分析
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/zh-cn/dailylife/" title="生活随笔" class="dd-item
+        
+        
+        
+        ">
+      <a href="/zh-cn/dailylife/">
+          <b>X. </b>生活随笔
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/zh-cn/dailylife/movies/" title="Movies" class="dd-item
+        
+        
+        
+        ">
+      <a href="/zh-cn/dailylife/movies/">
+          <b>X. </b>Movies
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/dailylife/movies/2024-%E6%BD%9C%E8%A1%8C/" title="2024 潜行" class="dd-item ">
+        <a href="/zh-cn/dailylife/movies/2024-%E6%BD%9C%E8%A1%8C/">
+        2024 潜行
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/dailylife/%E5%90%90%E6%A7%BD/" title="吐槽" class="dd-item ">
+        <a href="/zh-cn/dailylife/%E5%90%90%E6%A7%BD/">
+        吐槽
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/dailylife/2023-review-and-2024-outlook/" title="2023年总结和2024年展望" class="dd-item ">
+        <a href="/zh-cn/dailylife/2023-review-and-2024-outlook/">
+        2023年总结和2024年展望
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/zh-cn/misc/" title="杂项" class="dd-item
+        
+        
+        
+        ">
+      <a href="/zh-cn/misc/">
+          <b>X. </b>杂项
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/zh-cn/misc/tools/" title="Tools" class="dd-item
+        
+        
+        
+        ">
+      <a href="/zh-cn/misc/tools/">
+          <b>X. </b>Tools
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/misc/tools/citrix-update-monitor/" title="【工具】Citrix NetScaler 更新监控" class="dd-item ">
+        <a href="/zh-cn/misc/tools/citrix-update-monitor/">
+        【工具】Citrix NetScaler 更新监控
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/zh-cn/misc/encoding/" title="Encoding" class="dd-item
+        
+        
+        
+        ">
+      <a href="/zh-cn/misc/encoding/">
+          <b>X. </b>Encoding
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/misc/encoding/utf-7/" title="Utf 7" class="dd-item ">
+        <a href="/zh-cn/misc/encoding/utf-7/">
+        Utf 7
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/misc/encoding/unicode/" title="Unicode" class="dd-item ">
+        <a href="/zh-cn/misc/encoding/unicode/">
+        Unicode
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/zh-cn/misc/tunnel/" title="隧道" class="dd-item
+        
+        
+        
+        ">
+      <a href="/zh-cn/misc/tunnel/">
+          <b>X. </b>隧道
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/zh-cn/misc/tunnel/application-layer/" title="应用层隧道" class="dd-item
+        
+        
+        
+        ">
+      <a href="/zh-cn/misc/tunnel/application-layer/">
+          <b>X. </b>应用层隧道
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/misc/tunnel/application-layer/ssh-tunnel/" title="SSH隧道" class="dd-item ">
+        <a href="/zh-cn/misc/tunnel/application-layer/ssh-tunnel/">
+        SSH隧道
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/zh-cn/misc/tunnel/transport-layer/" title="传输层隧道" class="dd-item
+        
+        
+        
+        ">
+      <a href="/zh-cn/misc/tunnel/transport-layer/">
+          <b>X. </b>传输层隧道
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/zh-cn/misc/tunnel/transport-layer/socks/" title="Socks隧道" class="dd-item
+        
+        
+        
+        ">
+      <a href="/zh-cn/misc/tunnel/transport-layer/socks/">
+          <b>X. </b>Socks隧道
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/zh-cn/misc/tunnel/network-layer/" title="网络层隧道" class="dd-item
+        
+        
+        
+        ">
+      <a href="/zh-cn/misc/tunnel/network-layer/">
+          <b>X. </b>网络层隧道
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/zh-cn/others/" title="其他" class="dd-item
+        
+        
+        
+        ">
+      <a href="/zh-cn/others/">
+          <b>X. </b>其他
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/others/add-timeline-shortcode/" title="给hugo-theme-learn增加timeline功能" class="dd-item ">
+        <a href="/zh-cn/others/add-timeline-shortcode/">
+        给hugo-theme-learn增加timeline功能
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/others/how-to-reset-password-administrator-on-windows-server-2019/" title="在Windows server 2019上重置密码" class="dd-item ">
+        <a href="/zh-cn/others/how-to-reset-password-administrator-on-windows-server-2019/">
+        在Windows server 2019上重置密码
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/zh-cn/others/vmware-based-implementation-of-small-domain-network-construction/" title="基于Vmware的小型域网络搭建" class="dd-item ">
+        <a href="/zh-cn/others/vmware-based-implementation-of-small-domain-network-construction/">
+        基于Vmware的小型域网络搭建
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+        
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>更多</h3>
+        <ul>
+          
+              <li>
+                  <a class="padding" href="https://www.ch35tnut.site/zh-cn/about"><i class='fas fa-person-booth'></i> 关于</a>
+              </li>
+          
+              <li>
+                  <a class="padding" href="https://github.com/Chestnut4/"><i class='fab fa-github'></i> Github 链接</a>
+              </li>
+          
+              <li>
+                  <a class="padding" href="https://www.ch35tnut.site/zh-cn/tags"><i class='fas fa-tags'></i> 标签</a>
+              </li>
+          
+              <li>
+                  <a class="padding" href="https://www.ch35tnut.site/zh-cn/index.xml"><i class='fas fa-fw fa-link'></i> RSS</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="zh-cn" value="https://www.ch35tnut.site/zh-cn/research/linux/suid/" selected>简体中文</option>
+                    
+                  
+              
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> 清理历史记录</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <center>
+    
+    
+
+    
+    
+
+    
+    
+
+    
 </center>
-<script async defer src=https://buttons.github.io/buttons.js></script>
-</section>
-</div>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
 </nav>
-<section id=body>
-<div id=overlay></div>
-<div class="padding highlightable">
-<div>
-<div id=top-bar>
-<div id=breadcrumbs itemscope itemtype=http://data-vocabulary.org/Breadcrumb>
-<span id=sidebar-toggle-span>
-<a href=# id=sidebar-toggle data-sidebar-toggle>
-<i class="fas fa-bars"></i>
-</a>
-</span>
-<span id=toc-menu><i class="fas fa-list-alt"></i></span>
-<span class=links>
-<a href=/zh-cn/>首页</a> > <a href=/zh-cn/research/>安全研究</a> > <a href=/zh-cn/research/linux/>Linux</a> > Suid
-</span>
-</div>
-<div class=progress>
-<div class=wrapper>
-<nav id=TableOfContents>
-<ul>
-<li>
-<ul>
-<li><a href=#简介>简介</a></li>
-<li><a href=#shell中的suid细节>shell中的SUID细节</a></li>
-</ul>
-</li>
-</ul>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/zh-cn/'>首页</a> > <a href='/zh-cn/research/'>安全研究</a> > <a href='/zh-cn/research/linux/'>Linux</a> > Suid
+          
+        
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#简介">简介</a></li>
+        <li><a href="#shell中的suid细节">shell中的SUID细节</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
+    </div>
 </div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+<div class="tags">
+
+  <a class="tag-link" href="/zh-cn/tags/%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6">安全研究</a>
+
+  <a class="tag-link" href="/zh-cn/tags/linux">linux</a>
+
 </div>
+
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Suid
+            </h1>
+          
+
+        
+
+<div class="progress">
+    <div class="wrapper">
+
+    </div>
 </div>
-</div>
-<div id=head-tags>
-<div class=tags>
-<a class=tag-link href=/zh-cn/tags/%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6>安全研究</a>
-<a class=tag-link href=/zh-cn/tags/linux>linux</a>
-</div>
-</div>
-<div id=body-inner>
-<h1>
-Suid
-</h1>
-<div class=progress>
-<div class=wrapper>
-</div>
-</div>
-<nav id=TableOfContents>
-<ul>
-<li>
-<ul>
-<li><a href=#简介>简介</a></li>
-<li><a href=#shell中的suid细节>shell中的SUID细节</a></li>
-</ul>
-</li>
-</ul>
+
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#简介">简介</a></li>
+        <li><a href="#shell中的suid细节">shell中的SUID细节</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
-<h3 id=简介>简介</h3>
+<h3 id="简介">简介</h3>
 <p>SUID全称<strong>S</strong>et owner <strong>U</strong>ser <strong>ID</strong> up on execution，是Linux给可执行文件的一个属性，设置了s位的程序在运行时其<strong>Effective UID</strong>将会设置为这个程序的所有者。比如，<code>/bin/ping</code>这个程序的所有者是0（root），它设置了s位，那么普通用户在运行ping时其<strong>Effective UID</strong>就是0，等同于拥有了root权限。</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>➜  c ls -ldb <span style=color:#66d9ef>$(</span>which pkexec<span style=color:#66d9ef>)</span>
--rwsr-xr-x <span style=color:#ae81ff>1</span> root root <span style=color:#ae81ff>30872</span> 2023年 2月13日 /usr/bin/pkexec
-</code></pre></div><p>SUID文件的出现是为了解决一些操作只能由root权限进行，但普通权限用户也需要能通过某种方式进行调用，比如passwd，/etc/shadow只有root可写，但用户自己显然需要可以修改密码，所以passwd被设置为SUID程序，使得普通用户能通过passwd临时获取到修改shadow文件的能力。</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>-rw-r----- <span style=color:#ae81ff>1</span> root shadow <span style=color:#ae81ff>1411</span> 2023年 5月10日 /etc/shadow
--rwsr-xr-x <span style=color:#ae81ff>1</span> root root <span style=color:#ae81ff>68248</span> 2022年11月11日 /usr/bin/passwd
-</code></pre></div><p>Linux中每个用户都有独一无二的ID，称为UserID。
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>➜  c ls -ldb <span style="color:#66d9ef">$(</span>which pkexec<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>-rwsr-xr-x <span style="color:#ae81ff">1</span> root root <span style="color:#ae81ff">30872</span> 2023年 2月13日 /usr/bin/pkexec
+</span></span></code></pre></div><p>SUID文件的出现是为了解决一些操作只能由root权限进行，但普通权限用户也需要能通过某种方式进行调用，比如passwd，/etc/shadow只有root可写，但用户自己显然需要可以修改密码，所以passwd被设置为SUID程序，使得普通用户能通过passwd临时获取到修改shadow文件的能力。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>-rw-r----- <span style="color:#ae81ff">1</span> root shadow <span style="color:#ae81ff">1411</span> 2023年 5月10日 /etc/shadow
+</span></span><span style="display:flex;"><span>-rwsr-xr-x <span style="color:#ae81ff">1</span> root root <span style="color:#ae81ff">68248</span> 2022年11月11日 /usr/bin/passwd
+</span></span></code></pre></div><p>Linux中每个用户都有独一无二的ID，称为UserID。
 为进程定义了三个ID：</p>
 <ul>
 <li>Real UserID</li>
@@ -683,174 +2435,1559 @@ Suid
 <li>Real UserID：对于一个进程，这个ID是启动这个进程的用户的用户ID，这个ID定义了这个进程有权访问那些文件。</li>
 <li>Effective UserID：通常这个ID和Real UserID相同，但有时会不一样，来允许非特权用户访问只能由特权用户访问的文件。
 当非特权的用户运行此文件时，euid是文件所属的用户id，ruid才是当前用户的id
-<pre tabindex=0><code>-rwsr-xr-x 1 root root 68248 2022年11月11日 /usr/bin/passwd
+<pre tabindex="0"><code>-rwsr-xr-x 1 root root 68248 2022年11月11日 /usr/bin/passwd
 ┌──(chestnut㉿chestnut)-[/root/code/c]
 └─$ passwd
 为 chestnut 更改 STRESS 密码。
 ➜  c ps -eo pid,euid,ruid | grep 1692693
 1692693     0  1000
-</code></pre>``</li>
+</code></pre></li>
 <li>Saved UserID，当进程以提升权限运行时，需要做一些非特权的操作，可以通过临时切换到非特权账户来实现。
 在执行低权限工作时，将Effective UID 更改为某个较低的权限值，并将 euid 保存到Saved userID（suid），以便在任务完成时用于切换回特权帐户。</li>
 </ol>
 <blockquote>
 <p>
-<a href=https://www.geeksforgeeks.org/real-effective-and-saved-userid-in-linux/ target=_blank>https://www.geeksforgeeks.org/real-effective-and-saved-userid-in-linux/</a></p>
+<a href="https://www.geeksforgeeks.org/real-effective-and-saved-userid-in-linux/" target="_blank">https://www.geeksforgeeks.org/real-effective-and-saved-userid-in-linux/</a></p>
 </blockquote>
 <p>查找SUID程序</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>find / -perm -4000 -type f -exec ls -ldb <span style=color:#f92672>{}</span> <span style=color:#ae81ff>\;</span>
--perm -4000 查找权限为4000
--type f 只查找普通文件,过滤掉目录等其他类型
--<span style=color:#f92672>[</span>/root/code/c/suid.c
-/root/code/c/CMakeLists.txt<span style=color:#f92672>](</span>vscode-remote://ssh-remote%2B192.168.59.211/root/code/c/suid.c<span style=color:#f92672>)</span>exec ls -ldb <span style=color:#f92672>{}</span> ; 对找到的文件执行ls -ldb命令,显示文件详细信息。 <span style=color:#f92672>{}</span>表示find找到的文件名,会逐个代入。 ;表示-exec选项命令结束。
-; 的作用就是隔离 find 命令行和 -exec 指定的命令,避免解析错误。
-
--rwsr-xr-x <span style=color:#ae81ff>1</span> root root <span style=color:#ae81ff>30872</span> 2023年 2月13日 /usr/bin/pkexec
--rwsr-xr-x <span style=color:#ae81ff>1</span> root root <span style=color:#ae81ff>14888</span> 2023年 1月 3日 /usr/bin/vmware-user-suid-wrapper
--rwsr-xr-- <span style=color:#ae81ff>1</span> root kismet <span style=color:#ae81ff>146216</span> 2022年12月27日 /usr/bin/kismet_cap_nxp_kw41z
--rwsr-xr-- <span style=color:#ae81ff>1</span> root kismet <span style=color:#ae81ff>142120</span> 2022年12月27日 /usr/bin/kismet_cap_nrf_51822
--rwsr-xr-x <span style=color:#ae81ff>1</span> root root <span style=color:#ae81ff>59704</span> 2023年 2月13日 /usr/bin/mount
--rwsr-xr-- <span style=color:#ae81ff>1</span> root kismet <span style=color:#ae81ff>216392</span> 2022年12月27日 /usr/bin/kismet_cap_linux_wifi
--rwsr-xr-- <span style=color:#ae81ff>1</span> root kismet <span style=color:#ae81ff>142120</span> 2022年12月27日 /usr/bin/kismet_cap_ubertooth_one
--rwsr-xr-- <span style=color:#ae81ff>1</span> root kismet <span style=color:#ae81ff>146216</span> 2022年12月27日 /usr/bin/kismet_cap_rz_killerbee
--rwsr-xr-x <span style=color:#ae81ff>1</span> root root <span style=color:#ae81ff>68248</span> 2022年11月11日 /usr/bin/passwd
--rwsr-xr-- <span style=color:#ae81ff>1</span> root kismet <span style=color:#ae81ff>146216</span> 2022年12月27日 /usr/bin/kismet_cap_nrf_mousejack
--rwsr-xr-- <span style=color:#ae81ff>1</span> root kismet <span style=color:#ae81ff>142120</span> 2022年12月27日 /usr/bin/kismet_cap_nrf_52840
--rwsr-xr-x <span style=color:#ae81ff>1</span> root root <span style=color:#ae81ff>88496</span> 2022年11月11日 /usr/bin/gpasswd
--rwsr-xr-x <span style=color:#ae81ff>1</span> root root <span style=color:#ae81ff>35128</span> 2023年 2月13日 /usr/bin/umount
--rwsr-xr-- <span style=color:#ae81ff>1</span> root kismet <span style=color:#ae81ff>154408</span> 2022年12月27日 /usr/bin/kismet_cap_linux_bluetooth
--rwsr-xr-- <span style=color:#ae81ff>1</span> root kismet <span style=color:#ae81ff>146216</span> 2022年12月27日 /usr/bin/kismet_cap_ti_cc_2531
-</code></pre></div><h3 id=shell中的suid细节>shell中的SUID细节</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>find / -perm -4000 -type f -exec ls -ldb <span style="color:#f92672">{}</span> <span style="color:#ae81ff">\;</span>
+</span></span><span style="display:flex;"><span>-perm -4000 查找权限为4000
+</span></span><span style="display:flex;"><span>-type f 只查找普通文件,过滤掉目录等其他类型
+</span></span><span style="display:flex;"><span>-<span style="color:#f92672">[</span>/root/code/c/suid.c
+</span></span><span style="display:flex;"><span>/root/code/c/CMakeLists.txt<span style="color:#f92672">](</span>vscode-remote://ssh-remote%2B192.168.59.211/root/code/c/suid.c<span style="color:#f92672">)</span>exec ls -ldb <span style="color:#f92672">{}</span> ; 对找到的文件执行ls -ldb命令,显示文件详细信息。 <span style="color:#f92672">{}</span>表示find找到的文件名,会逐个代入。 ;表示-exec选项命令结束。
+</span></span><span style="display:flex;"><span>; 的作用就是隔离 find 命令行和 -exec 指定的命令,避免解析错误。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>-rwsr-xr-x <span style="color:#ae81ff">1</span> root root <span style="color:#ae81ff">30872</span> 2023年 2月13日 /usr/bin/pkexec
+</span></span><span style="display:flex;"><span>-rwsr-xr-x <span style="color:#ae81ff">1</span> root root <span style="color:#ae81ff">14888</span> 2023年 1月 3日 /usr/bin/vmware-user-suid-wrapper
+</span></span><span style="display:flex;"><span>-rwsr-xr-- <span style="color:#ae81ff">1</span> root kismet <span style="color:#ae81ff">146216</span> 2022年12月27日 /usr/bin/kismet_cap_nxp_kw41z
+</span></span><span style="display:flex;"><span>-rwsr-xr-- <span style="color:#ae81ff">1</span> root kismet <span style="color:#ae81ff">142120</span> 2022年12月27日 /usr/bin/kismet_cap_nrf_51822
+</span></span><span style="display:flex;"><span>-rwsr-xr-x <span style="color:#ae81ff">1</span> root root <span style="color:#ae81ff">59704</span> 2023年 2月13日 /usr/bin/mount
+</span></span><span style="display:flex;"><span>-rwsr-xr-- <span style="color:#ae81ff">1</span> root kismet <span style="color:#ae81ff">216392</span> 2022年12月27日 /usr/bin/kismet_cap_linux_wifi
+</span></span><span style="display:flex;"><span>-rwsr-xr-- <span style="color:#ae81ff">1</span> root kismet <span style="color:#ae81ff">142120</span> 2022年12月27日 /usr/bin/kismet_cap_ubertooth_one
+</span></span><span style="display:flex;"><span>-rwsr-xr-- <span style="color:#ae81ff">1</span> root kismet <span style="color:#ae81ff">146216</span> 2022年12月27日 /usr/bin/kismet_cap_rz_killerbee
+</span></span><span style="display:flex;"><span>-rwsr-xr-x <span style="color:#ae81ff">1</span> root root <span style="color:#ae81ff">68248</span> 2022年11月11日 /usr/bin/passwd
+</span></span><span style="display:flex;"><span>-rwsr-xr-- <span style="color:#ae81ff">1</span> root kismet <span style="color:#ae81ff">146216</span> 2022年12月27日 /usr/bin/kismet_cap_nrf_mousejack
+</span></span><span style="display:flex;"><span>-rwsr-xr-- <span style="color:#ae81ff">1</span> root kismet <span style="color:#ae81ff">142120</span> 2022年12月27日 /usr/bin/kismet_cap_nrf_52840
+</span></span><span style="display:flex;"><span>-rwsr-xr-x <span style="color:#ae81ff">1</span> root root <span style="color:#ae81ff">88496</span> 2022年11月11日 /usr/bin/gpasswd
+</span></span><span style="display:flex;"><span>-rwsr-xr-x <span style="color:#ae81ff">1</span> root root <span style="color:#ae81ff">35128</span> 2023年 2月13日 /usr/bin/umount
+</span></span><span style="display:flex;"><span>-rwsr-xr-- <span style="color:#ae81ff">1</span> root kismet <span style="color:#ae81ff">154408</span> 2022年12月27日 /usr/bin/kismet_cap_linux_bluetooth
+</span></span><span style="display:flex;"><span>-rwsr-xr-- <span style="color:#ae81ff">1</span> root kismet <span style="color:#ae81ff">146216</span> 2022年12月27日 /usr/bin/kismet_cap_ti_cc_2531
+</span></span></code></pre></div><h3 id="shell中的suid细节">shell中的SUID细节</h3>
 <p>在
-<a href=https://www.leavesongs.com/PENETRATION/linux-suid-privilege-escalation.html target=_blank>https://www.leavesongs.com/PENETRATION/linux-suid-privilege-escalation.html</a>中提到Ubuntu对dash进行了patch。
+<a href="https://www.leavesongs.com/PENETRATION/linux-suid-privilege-escalation.html" target="_blank">https://www.leavesongs.com/PENETRATION/linux-suid-privilege-escalation.html</a>中提到Ubuntu对dash进行了patch。
 找到patch地址为
-<a href=https://launchpadlibrarian.net/240241543/dash_0.5.8-2.1ubuntu2.diff.gz target=_blank>https://launchpadlibrarian.net/240241543/dash_0.5.8-2.1ubuntu2.diff.gz</a>，代码如下，当on=1时会略过权限检查，当on不为1时，会通过geteuid和getegid获取当前进程的effective user ID和effective group ID，并与通过getuid和getgid获取的real user ID和real group ID进行比较。
+<a href="https://launchpadlibrarian.net/240241543/dash_0.5.8-2.1ubuntu2.diff.gz" target="_blank">https://launchpadlibrarian.net/240241543/dash_0.5.8-2.1ubuntu2.diff.gz</a>，代码如下，当on=1时会略过权限检查，当on不为1时，会通过geteuid和getegid获取当前进程的effective user ID和effective group ID，并与通过getuid和getgid获取的real user ID和real group ID进行比较。
 如果当前进程对应的可执行文件为SUID文件且当前运行这个文件的用户不是文件属主时，会重新通过setuid和setgid将当前进程的权限设置为real ID，即运行这个可执行文件的用户的权限。
 当文件不是SUID文件时rid和eid相等，不会进入if内，或者文件是SUID文件并且运行这个文件的用户是文件属主rid和eid也会相等，不会进入if内。</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c data-lang=c><span style=color:#f92672>+</span>diff <span style=color:#f92672>-</span>Naurp dash<span style=color:#f92672>-</span><span style=color:#ae81ff>0.5.7</span>.ori<span style=color:#f92672>/</span>src<span style=color:#f92672>/</span>main.c dash<span style=color:#f92672>-</span><span style=color:#ae81ff>0.5.7</span><span style=color:#f92672>/</span>src<span style=color:#f92672>/</span>main.c
-<span style=color:#f92672>+---</span> dash<span style=color:#f92672>-</span><span style=color:#ae81ff>0.5.7</span>.ori<span style=color:#f92672>/</span>src<span style=color:#f92672>/</span>main.c	<span style=color:#ae81ff>2015</span><span style=color:#f92672>-</span><span style=color:#ae81ff>06</span><span style=color:#f92672>-</span><span style=color:#ae81ff>03</span> <span style=color:#ae81ff>10</span><span style=color:#f92672>:</span><span style=color:#ae81ff>45</span><span style=color:#f92672>:</span><span style=color:#ae81ff>22.766472281</span> <span style=color:#f92672>-</span><span style=color:#ae81ff>0400</span>
-<span style=color:#f92672>++++</span> dash<span style=color:#f92672>-</span><span style=color:#ae81ff>0.5.7</span><span style=color:#f92672>/</span>src<span style=color:#f92672>/</span>main.c	<span style=color:#ae81ff>2015</span><span style=color:#f92672>-</span><span style=color:#ae81ff>06</span><span style=color:#f92672>-</span><span style=color:#ae81ff>03</span> <span style=color:#ae81ff>10</span><span style=color:#f92672>:</span><span style=color:#ae81ff>58</span><span style=color:#f92672>:</span><span style=color:#ae81ff>56.484258181</span> <span style=color:#f92672>-</span><span style=color:#ae81ff>0400</span>
-<span style=color:#f92672>+</span><span style=color:#960050;background-color:#1e0010>@@</span> <span style=color:#f92672>-</span><span style=color:#ae81ff>97</span>,<span style=color:#ae81ff>11</span> <span style=color:#f92672>+</span><span style=color:#ae81ff>97</span>,<span style=color:#ae81ff>16</span> <span style=color:#960050;background-color:#1e0010>@@</span> main(<span style=color:#66d9ef>int</span> argc, <span style=color:#66d9ef>char</span> <span style=color:#f92672>**</span>argv)
-<span style=color:#f92672>+</span> 	<span style=color:#66d9ef>struct</span> jmploc jmploc;
-<span style=color:#f92672>+</span> 	<span style=color:#66d9ef>struct</span> stackmark smark;
-<span style=color:#f92672>+</span> 	<span style=color:#66d9ef>int</span> login;
-<span style=color:#f92672>++</span>	uid_t uid;
-<span style=color:#f92672>++</span>	gid_t gid;
-<span style=color:#f92672>+</span>
-<span style=color:#f92672>+</span> <span style=color:#960050;background-color:#1e0010>#</span>ifdef __GLIBC__
-<span style=color:#f92672>+</span> 	dash_errno <span style=color:#f92672>=</span> __errno_location();
-<span style=color:#f92672>+</span> <span style=color:#960050;background-color:#1e0010>#</span>endif
-<span style=color:#f92672>+</span>
-<span style=color:#f92672>++</span>	uid <span style=color:#f92672>=</span> getuid();
-<span style=color:#f92672>++</span>	gid <span style=color:#f92672>=</span> getgid();
-
-
-<span style=color:#f92672>+</span>diff <span style=color:#f92672>-</span>Naurp dash<span style=color:#f92672>-</span><span style=color:#ae81ff>0.5.7</span>.ori<span style=color:#f92672>/</span>src<span style=color:#f92672>/</span>priv.c dash<span style=color:#f92672>-</span><span style=color:#ae81ff>0.5.7</span><span style=color:#f92672>/</span>src<span style=color:#f92672>/</span>priv.c
-<span style=color:#f92672>+---</span> dash<span style=color:#f92672>-</span><span style=color:#ae81ff>0.5.7</span>.ori<span style=color:#f92672>/</span>src<span style=color:#f92672>/</span>priv.c	<span style=color:#ae81ff>1969</span><span style=color:#f92672>-</span><span style=color:#ae81ff>12</span><span style=color:#f92672>-</span><span style=color:#ae81ff>31</span> <span style=color:#ae81ff>19</span><span style=color:#f92672>:</span><span style=color:#ae81ff>00</span><span style=color:#f92672>:</span><span style=color:#ae81ff>00.000000000</span> <span style=color:#f92672>-</span><span style=color:#ae81ff>0500</span>
-<span style=color:#f92672>++++</span> dash<span style=color:#f92672>-</span><span style=color:#ae81ff>0.5.7</span><span style=color:#f92672>/</span>src<span style=color:#f92672>/</span>priv.c	<span style=color:#ae81ff>2015</span><span style=color:#f92672>-</span><span style=color:#ae81ff>06</span><span style=color:#f92672>-</span><span style=color:#ae81ff>03</span> <span style=color:#ae81ff>11</span><span style=color:#f92672>:</span><span style=color:#ae81ff>00</span><span style=color:#f92672>:</span><span style=color:#ae81ff>31.097386153</span> <span style=color:#f92672>-</span><span style=color:#ae81ff>0400</span>
-<span style=color:#f92672>+</span><span style=color:#960050;background-color:#1e0010>@@</span> <span style=color:#f92672>-</span><span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span> <span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>27</span> <span style=color:#960050;background-color:#1e0010>@@</span>
-<span style=color:#f92672>++</span><span style=color:#960050;background-color:#1e0010>#</span>include <span style=color:#f92672>&lt;</span>unistd.h<span style=color:#f92672>&gt;</span>
-<span style=color:#f92672>++</span>
-<span style=color:#f92672>++</span><span style=color:#960050;background-color:#1e0010>#</span>include <span style=color:#e6db74>&#34;priv.h&#34;</span>
-<span style=color:#f92672>++</span><span style=color:#960050;background-color:#1e0010>#</span>include <span style=color:#e6db74>&#34;var.h&#34;</span>
-<span style=color:#f92672>++</span>
-<span style=color:#f92672>++</span>uid_t uid;
-<span style=color:#f92672>++</span>gid_t gid;
-<span style=color:#f92672>++</span>
-<span style=color:#f92672>++</span><span style=color:#66d9ef>void</span> setprivileged(<span style=color:#66d9ef>int</span> on)
-<span style=color:#f92672>++</span>{
-<span style=color:#f92672>++</span>	<span style=color:#66d9ef>static</span> <span style=color:#66d9ef>int</span> is_privileged <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
-<span style=color:#f92672>++</span>	<span style=color:#66d9ef>if</span> (is_privileged <span style=color:#f92672>==</span> on)
-<span style=color:#f92672>++</span>		<span style=color:#66d9ef>return</span>;
-<span style=color:#f92672>++</span>
-<span style=color:#f92672>++</span>	is_privileged <span style=color:#f92672>=</span> on;
-<span style=color:#f92672>++</span>
-<span style=color:#f92672>++</span>	<span style=color:#75715e>/*
-</span><span style=color:#75715e>++	 * To limit bogus system(3) or popen(3) calls in setuid binaries, require
-</span><span style=color:#75715e>++	 * -p flag to work in this situation.
-</span><span style=color:#75715e>++	 */</span>
-<span style=color:#f92672>++</span>	<span style=color:#66d9ef>if</span> (<span style=color:#f92672>!</span>on <span style=color:#f92672>&amp;&amp;</span> (uid <span style=color:#f92672>!=</span> geteuid() <span style=color:#f92672>||</span> gid <span style=color:#f92672>!=</span> getegid())) {
-<span style=color:#f92672>++</span>		setuid(uid);
-<span style=color:#f92672>++</span>		setgid(gid);
-<span style=color:#f92672>++</span>		<span style=color:#75715e>/* PS1 might need to be changed accordingly. */</span>
-<span style=color:#f92672>++</span>		choose_ps1();
-<span style=color:#f92672>++</span>	}
-<span style=color:#f92672>++</span>}
-</code></pre></div><p>那么为什么要这样实现呢？为什么如果需要继承默认的effective user ID和effective group ID需要显式的使用-p参数呢？
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#f92672">+</span>diff <span style="color:#f92672">-</span>Naurp dash<span style="color:#f92672">-</span><span style="color:#ae81ff">0.5.7</span>.ori<span style="color:#f92672">/</span>src<span style="color:#f92672">/</span>main.c dash<span style="color:#f92672">-</span><span style="color:#ae81ff">0.5.7</span><span style="color:#f92672">/</span>src<span style="color:#f92672">/</span>main.c
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+---</span> dash<span style="color:#f92672">-</span><span style="color:#ae81ff">0.5.7</span>.ori<span style="color:#f92672">/</span>src<span style="color:#f92672">/</span>main.c	<span style="color:#ae81ff">2015</span><span style="color:#f92672">-</span><span style="color:#ae81ff">06</span><span style="color:#f92672">-</span><span style="color:#ae81ff">03</span> <span style="color:#ae81ff">10</span><span style="color:#f92672">:</span><span style="color:#ae81ff">45</span><span style="color:#f92672">:</span><span style="color:#ae81ff">22.766472281</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0400</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">++++</span> dash<span style="color:#f92672">-</span><span style="color:#ae81ff">0.5.7</span><span style="color:#f92672">/</span>src<span style="color:#f92672">/</span>main.c	<span style="color:#ae81ff">2015</span><span style="color:#f92672">-</span><span style="color:#ae81ff">06</span><span style="color:#f92672">-</span><span style="color:#ae81ff">03</span> <span style="color:#ae81ff">10</span><span style="color:#f92672">:</span><span style="color:#ae81ff">58</span><span style="color:#f92672">:</span><span style="color:#ae81ff">56.484258181</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0400</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#960050;background-color:#1e0010">@@</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">97</span>,<span style="color:#ae81ff">11</span> <span style="color:#f92672">+</span><span style="color:#ae81ff">97</span>,<span style="color:#ae81ff">16</span> <span style="color:#960050;background-color:#1e0010">@@</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span> 	<span style="color:#66d9ef">struct</span> jmploc jmploc;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span> 	<span style="color:#66d9ef">struct</span> stackmark smark;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span> 	<span style="color:#66d9ef">int</span> login;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">++</span>	<span style="color:#66d9ef">uid_t</span> uid;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">++</span>	<span style="color:#66d9ef">gid_t</span> gid;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span> <span style="color:#960050;background-color:#1e0010">#</span>ifdef __GLIBC__
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span> 	dash_errno <span style="color:#f92672">=</span> <span style="color:#a6e22e">__errno_location</span>();
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span> <span style="color:#960050;background-color:#1e0010">#</span>endif
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">++</span>	uid <span style="color:#f92672">=</span> <span style="color:#a6e22e">getuid</span>();
+</span></span><span style="display:flex;"><span><span style="color:#f92672">++</span>	gid <span style="color:#f92672">=</span> <span style="color:#a6e22e">getgid</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span>diff <span style="color:#f92672">-</span>Naurp dash<span style="color:#f92672">-</span><span style="color:#ae81ff">0.5.7</span>.ori<span style="color:#f92672">/</span>src<span style="color:#f92672">/</span>priv.c dash<span style="color:#f92672">-</span><span style="color:#ae81ff">0.5.7</span><span style="color:#f92672">/</span>src<span style="color:#f92672">/</span>priv.c
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+---</span> dash<span style="color:#f92672">-</span><span style="color:#ae81ff">0.5.7</span>.ori<span style="color:#f92672">/</span>src<span style="color:#f92672">/</span>priv.c	<span style="color:#ae81ff">1969</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span> <span style="color:#ae81ff">19</span><span style="color:#f92672">:</span><span style="color:#ae81ff">00</span><span style="color:#f92672">:</span><span style="color:#ae81ff">00.000000000</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0500</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">++++</span> dash<span style="color:#f92672">-</span><span style="color:#ae81ff">0.5.7</span><span style="color:#f92672">/</span>src<span style="color:#f92672">/</span>priv.c	<span style="color:#ae81ff">2015</span><span style="color:#f92672">-</span><span style="color:#ae81ff">06</span><span style="color:#f92672">-</span><span style="color:#ae81ff">03</span> <span style="color:#ae81ff">11</span><span style="color:#f92672">:</span><span style="color:#ae81ff">00</span><span style="color:#f92672">:</span><span style="color:#ae81ff">31.097386153</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0400</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#960050;background-color:#1e0010">@@</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span> <span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">27</span> <span style="color:#960050;background-color:#1e0010">@@</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">++</span><span style="color:#960050;background-color:#1e0010">#</span>include <span style="color:#f92672">&lt;</span>unistd.h<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">++</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">++</span><span style="color:#960050;background-color:#1e0010">#</span>include <span style="color:#e6db74">&#34;priv.h&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">++</span><span style="color:#960050;background-color:#1e0010">#</span>include <span style="color:#e6db74">&#34;var.h&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">++</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">++</span><span style="color:#66d9ef">uid_t</span> uid;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">++</span><span style="color:#66d9ef">gid_t</span> gid;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">++</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">++</span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setprivileged</span>(<span style="color:#66d9ef">int</span> on)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">++</span>{
+</span></span><span style="display:flex;"><span><span style="color:#f92672">++</span>	<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> is_privileged <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">++</span>	<span style="color:#66d9ef">if</span> (is_privileged <span style="color:#f92672">==</span> on)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">++</span>		<span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">++</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">++</span>	is_privileged <span style="color:#f92672">=</span> on;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">++</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">++</span>	<span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">++	 * To limit bogus system(3) or popen(3) calls in setuid binaries, require
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">++	 * -p flag to work in this situation.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">++	 */</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">++</span>	<span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>on <span style="color:#f92672">&amp;&amp;</span> (uid <span style="color:#f92672">!=</span> <span style="color:#a6e22e">geteuid</span>() <span style="color:#f92672">||</span> gid <span style="color:#f92672">!=</span> <span style="color:#a6e22e">getegid</span>())) {
+</span></span><span style="display:flex;"><span><span style="color:#f92672">++</span>		<span style="color:#a6e22e">setuid</span>(uid);
+</span></span><span style="display:flex;"><span><span style="color:#f92672">++</span>		<span style="color:#a6e22e">setgid</span>(gid);
+</span></span><span style="display:flex;"><span><span style="color:#f92672">++</span>		<span style="color:#75715e">/* PS1 might need to be changed accordingly. */</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">++</span>		<span style="color:#a6e22e">choose_ps1</span>();
+</span></span><span style="display:flex;"><span><span style="color:#f92672">++</span>	}
+</span></span><span style="display:flex;"><span><span style="color:#f92672">++</span>}
+</span></span></code></pre></div><p>那么为什么要这样实现呢？为什么如果需要继承默认的effective user ID和effective group ID需要显式的使用-p参数呢？
 假设我们有如下suid程序，并且该程序由www-data用户启动：</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c data-lang=c><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;stdlib.h&gt;</span><span style=color:#75715e>
-</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;stdio.h&gt;</span><span style=color:#75715e>
-</span><span style=color:#75715e></span>
-<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(<span style=color:#66d9ef>int</span> argc, <span style=color:#66d9ef>char</span> <span style=color:#f92672>*</span>argv[]) {
-  printf(<span style=color:#e6db74>&#34;%s</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, argv[<span style=color:#ae81ff>1</span>]);
-  <span style=color:#66d9ef>return</span> system(argv[<span style=color:#ae81ff>1</span>]);
-}
-</code></pre></div><p>其中通过system函数执行用户传入的命令，system实现可以
-<a href=https://codebrowser.dev/glibc/glibc/sysdeps/posix/system.c.html target=_blank>在这找到</a>，可以看到实际执行的是<code>/bin/sh -c command</code>，加入攻击者传入恶意命令，尝试通过该程序以root权限执行命令，最终以<code>/bin/sh -c command</code>的形式执行命令。</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c data-lang=c><span style=color:#75715e>#define	SHELL_PATH	&#34;/bin/sh&#34;	</span><span style=color:#75715e>/* Path of the shell.  */</span><span style=color:#75715e>
-</span><span style=color:#75715e>#define	SHELL_NAME	&#34;sh&#34;		</span><span style=color:#75715e>/* Name to give it.  */</span><span style=color:#75715e>
-</span><span style=color:#75715e></span>do_system (<span style=color:#66d9ef>const</span> <span style=color:#66d9ef>char</span> <span style=color:#f92672>*</span>line)
-{
-  <span style=color:#66d9ef>int</span> status <span style=color:#f92672>=</span> <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>;
-  <span style=color:#66d9ef>int</span> ret;
-  pid_t pid;
-  <span style=color:#66d9ef>struct</span> sigaction sa;
-<span style=color:#75715e>#ifndef _LIBC_REENTRANT
-</span><span style=color:#75715e></span>  <span style=color:#66d9ef>struct</span> sigaction intr, quit;
-<span style=color:#75715e>#endif
-</span><span style=color:#75715e></span> .....
-  __posix_spawnattr_init (<span style=color:#f92672>&amp;</span>spawn_attr);
-  __posix_spawnattr_setsigmask (<span style=color:#f92672>&amp;</span>spawn_attr, <span style=color:#f92672>&amp;</span>omask);
-  __posix_spawnattr_setsigdefault (<span style=color:#f92672>&amp;</span>spawn_attr, <span style=color:#f92672>&amp;</span>reset);
-  __posix_spawnattr_setflags (<span style=color:#f92672>&amp;</span>spawn_attr,
-			      POSIX_SPAWN_SETSIGDEF <span style=color:#f92672>|</span> POSIX_SPAWN_SETSIGMASK);
-  ret <span style=color:#f92672>=</span> __posix_spawn (<span style=color:#f92672>&amp;</span>pid, SHELL_PATH, <span style=color:#ae81ff>0</span>, <span style=color:#f92672>&amp;</span>spawn_attr,
-		       (<span style=color:#66d9ef>char</span> <span style=color:#f92672>*</span><span style=color:#66d9ef>const</span>[]){ (<span style=color:#66d9ef>char</span> <span style=color:#f92672>*</span>) SHELL_NAME,
-					(<span style=color:#66d9ef>char</span> <span style=color:#f92672>*</span>) <span style=color:#e6db74>&#34;-c&#34;</span>,
-					(<span style=color:#66d9ef>char</span> <span style=color:#f92672>*</span>) line, NULL },
-		       __environ);
-</code></pre></div><p>如果没有前面说的措施，那么攻击者可以成功以root权限执行恶意命令，但通过上面的措施，则会出现如下：因为进程的rid为www-data，eid为root，而通过system函数执行命令不能显式设置-p参数，导致在执行命令时，不能通过if判断，命令的权限会被降为www-data权限，从而一定程度上缓解了攻击。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>argv[]) {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;%s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, argv[<span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">system</span>(argv[<span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>其中通过system函数执行用户传入的命令，system实现可以
+<a href="https://codebrowser.dev/glibc/glibc/sysdeps/posix/system.c.html" target="_blank">在这找到</a>，可以看到实际执行的是<code>/bin/sh -c command</code>，加入攻击者传入恶意命令，尝试通过该程序以root权限执行命令，最终以<code>/bin/sh -c command</code>的形式执行命令。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#define	SHELL_PATH	&#34;/bin/sh&#34;	</span><span style="color:#75715e">/* Path of the shell.  */</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define	SHELL_NAME	&#34;sh&#34;		</span><span style="color:#75715e">/* Name to give it.  */</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">do_system</span> (<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>line)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> status <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> ret;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">pid_t</span> pid;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">struct</span> sigaction sa;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#ifndef _LIBC_REENTRANT
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">struct</span> sigaction intr, quit;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#endif
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> .....
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">__posix_spawnattr_init</span> (<span style="color:#f92672">&amp;</span>spawn_attr);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">__posix_spawnattr_setsigmask</span> (<span style="color:#f92672">&amp;</span>spawn_attr, <span style="color:#f92672">&amp;</span>omask);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">__posix_spawnattr_setsigdefault</span> (<span style="color:#f92672">&amp;</span>spawn_attr, <span style="color:#f92672">&amp;</span>reset);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">__posix_spawnattr_setflags</span> (<span style="color:#f92672">&amp;</span>spawn_attr,
+</span></span><span style="display:flex;"><span>			      POSIX_SPAWN_SETSIGDEF <span style="color:#f92672">|</span> POSIX_SPAWN_SETSIGMASK);
+</span></span><span style="display:flex;"><span>  ret <span style="color:#f92672">=</span> <span style="color:#a6e22e">__posix_spawn</span> (<span style="color:#f92672">&amp;</span>pid, SHELL_PATH, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">&amp;</span>spawn_attr,
+</span></span><span style="display:flex;"><span>		       (<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">const</span>[]){ (<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>) SHELL_NAME,
+</span></span><span style="display:flex;"><span>					(<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>) <span style="color:#e6db74">&#34;-c&#34;</span>,
+</span></span><span style="display:flex;"><span>					(<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>) line, NULL },
+</span></span><span style="display:flex;"><span>		       __environ);
+</span></span></code></pre></div><p>如果没有前面说的措施，那么攻击者可以成功以root权限执行恶意命令，但通过上面的措施，则会出现如下：因为进程的rid为www-data，eid为root，而通过system函数执行命令不能显式设置-p参数，导致在执行命令时，不能通过if判断，命令的权限会被降为www-data权限，从而一定程度上缓解了攻击。</p>
 <p>参考资料</p>
 <blockquote>
 <p>
-<a href=https://www.leavesongs.com/PENETRATION/linux-suid-privilege-escalation.html target=_blank>https://www.leavesongs.com/PENETRATION/linux-suid-privilege-escalation.html</a></p>
+<a href="https://www.leavesongs.com/PENETRATION/linux-suid-privilege-escalation.html" target="_blank">https://www.leavesongs.com/PENETRATION/linux-suid-privilege-escalation.html</a></p>
 </blockquote>
 <p><strong>Created at 2023-12-08T10:30:07+08:00</strong></p>
-<div class=last_mod>
-创建于:Friday, December 8,2023
+
+
+
+<div class="last_mod">
+	创建于:Friday, December 8,2023
 </div>
-<div class=last_mod>
-最后修改于: Friday, December 8,2023
+
+<div class="last_mod">
+	最后修改于: Friday, December 8,2023
 </div>
-<div class=article-container></div>
-<script src=https://utteranc.es/client.js repo=CppXL/blog_comment issue-term=pathname theme=github-light crossorigin=anonymous async></script>
+<div class="article-container"></div>
+<script src="https://utteranc.es/client.js"
+        repo="CppXL/blog_comment"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
 </div>
-<div id=comments>
+
+<div id="comments">
+
 </div>
-<footer class=footline>
+<footer class="footline">
+	
 </footer>
-</div>
-</div>
-<div id=navigation>
-<a class="nav nav-prev" href=/zh-cn/research/linux/malware/ title=Malware> <i class="fa fa-chevron-left"></i></a>
-<a class="nav nav-next" href=/zh-cn/research/windows/ title=Windows style=margin-right:0><i class="fa fa-chevron-right"></i></a>
-</div>
-</section>
-<div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
-<div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div>
-</div>
-<script src=/js/clipboard.min.js?1706695571></script>
-<script src=/js/perfect-scrollbar.min.js?1706695571></script>
-<script src=/js/perfect-scrollbar.jquery.min.js?1706695571></script>
-<script src=/js/jquery.sticky.js?1706695571></script>
-<script src=/js/featherlight.min.js?1706695571></script>
-<script src=/js/highlight.pack.js?1706695571></script>
-<script>hljs.initHighlightingOnLoad()</script>
-<script src=/js/modernizr.custom-3.6.0.js?1706695571></script>
-<script src=/js/learn.js?1706695571></script>
-<script src=/js/hugo-learn.js?1706695571></script>
-<script src=/mermaid/mermaid.js?1706695571></script>
-<script>mermaid.initialize({startOnLoad:!0})</script>
-<script>(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-105947713-1','auto'),ga('send','pageview')</script>
-</body>
+        
+        </div>
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/zh-cn/research/linux/malware/" title="Malware"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/zh-cn/research/windows/" title="Windows" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1706695851"></script>
+    <script src="/js/perfect-scrollbar.min.js?1706695851"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1706695851"></script>
+    <script src="/js/jquery.sticky.js?1706695851"></script>
+    <script src="/js/featherlight.min.js?1706695851"></script>
+    <script src="/js/highlight.pack.js?1706695851"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1706695851"></script>
+    <script src="/js/learn.js?1706695851"></script>
+    <script src="/js/hugo-learn.js?1706695851"></script>
+    
+        
+            <script src="/mermaid/mermaid.js?1706695851"></script>
+        
+        <script>
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-105947713-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
 </html>
+
+
+

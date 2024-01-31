@@ -1,1 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Iot on chestnut's blog</title><link>https://www.ch35tnut.site/zh-cn/research/iot/</link><description>Recent content in Iot on chestnut's blog</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Mon, 08 Jan 2024 18:13:27 +0800</lastBuildDate><atom:link href="https://www.ch35tnut.site/zh-cn/research/iot/index.xml" rel="self" type="application/rss+xml"/></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0"
+    xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Iot on chestnut&#39;s blog</title>
+        <link>https://www.ch35tnut.site/zh-cn/research/iot/</link>
+        <description>Recent content in Iot on chestnut&#39;s blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <lastBuildDate>Mon, 08 Jan 2024 18:13:27 +0800</lastBuildDate>
+    
+        <atom:link href="https://www.ch35tnut.site/zh-cn/research/iot/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+  </channel>
+</rss>
