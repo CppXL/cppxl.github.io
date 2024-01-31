@@ -1,85 +1,954 @@
-<!doctype html><html lang=zh-cn class="js csstransforms3d"><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.122.0"><meta name=description content="记录一些学习和生活日常"><meta name=author content="darkmoon"><link rel=icon href=/images/favicon.png type=image/png><title>首页 - chestnut's blog</title>
-<link href=/css/nucleus.css?1706695145 rel=stylesheet><link href=/css/fontawesome-all.min.css?1706695145 rel=stylesheet><link href=/css/hybrid.css?1706695145 rel=stylesheet><link href=/css/featherlight.min.css?1706695145 rel=stylesheet><link href=/css/perfect-scrollbar.min.css?1706695145 rel=stylesheet><link href=/css/auto-complete.css?1706695145 rel=stylesheet><link href=/css/atom-one-dark-reasonable.css?1706695145 rel=stylesheet><link href=/css/theme.css?1706695145 rel=stylesheet><link href=/css/tabs.css?1706695145 rel=stylesheet><link href=/css/hugo-theme.css?1706695145 rel=stylesheet><link href=/css/theme-blue.css?1706695145 rel=stylesheet><script src=/js/dayjs.min.js?1706695145></script><script src=/js/jquery-3.3.1.min.js?1706695145></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-F5TRJPEVXY"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-F5TRJPEVXY")</script><style>:root #header+#content>#left>#rlblock_left{display:none!important}</style></head><body data-url=/zh-cn/><nav id=sidebar class=showVisitedLinks><div id=header-wrapper><div id=header><a id=logo href=/zh-cn><svg id="grav-logo" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 285.1 69.9"><g><path d="M35 0c9.6.0 17.9 3.4 24.7 10.3C66.5 17.1 70 25.3 70 35s-3.4 17.9-10.3 24.7C52.9 66.5 44.7 70 35 70c-9.7.0-17.9-3.4-24.7-10.3C3.4 52.8.0 44.6.0 34.9.0 25.3 3.4 17 10.3 10.2 17.1 3.4 25.3.0 35 0zM22.3 63.7c.3-7.4.3-14.7.0-22.1-2.1-.4-4-.4-5.9.0-.2.8-.2 2.5-.1 4.9.1 2.3.0 3.9-.3 4.8-1.7-.6-2.7-2.1-3.1-4.6-.1-.7-.1-3.3-.1-8 0-14.5-.1-23-.3-25.6-3.6 4.1-5.6 7-5.9 8.5v10.9c0 4.5.1 8.1.2 10.9.0.4.0 1.3-.1 2.8-.1 1.2.0 2.1.1 2.6.1.6 1.1 2.1 2.8 4.7C13.2 58.7 17.5 62.2 22.3 63.7zm22.3 1.7c.3-5 .2-12.9-.1-23.6-2.1-.3-4.1-.3-5.9.0-.2 2-.2 5.1-.1 9.5.1 4.3.0 7.5-.1 9.5-2.9.4-5 .3-6.2-.1-.2-5.6-.2-15.2-.1-28.7.1-12.4.0-21.8-.3-28.3-2.4.1-4.3.6-5.7 1.3-.1 7.7-.2 17.7-.1 30.1.0 16.5.0 26.6.0 30.3 2.3 1.1 5.4 1.7 9.4 1.7C38.9 66.9 42.1 66.4 44.6 65.4zM48.1 64.1c9.7-4.6 15.7-12 18-22.2-1.8-.2-3.8-.3-6.1-.3-1.6 3.9-2.6 6.3-3.2 7.2-1.1 1.7-2 2.5-2.7 2.5C54 46 54 39.1 54 30.5c0-11.5.0-18.4.0-20.9-1.4-1.4-3.3-2.5-5.7-3.4C48.1 6.3 48 6.4 48 6.7c0 3.5.0 13.1.0 28.8C47.9 47.2 48 56.8 48.1 64.1z"/></g><g><path d="M116.6 51.3h-29c-.5.0-.9-.1-1.3-.2-.4-.2-.7-.4-1-.7-.3-.3-.5-.6-.7-1s-.2-.8-.2-1.3V16.3h6.3V45h25.8v6.3z"/><path d="M154.8 51.3h-22.9c-.9.0-1.8-.2-2.9-.5-1-.3-2-.8-2.9-1.5s-1.6-1.6-2.2-2.8c-.6-1.1-.9-2.5-.9-4.2V19.5c0-.4.1-.9.2-1.2.2-.4.4-.7.7-1s.6-.5 1-.7.8-.2 1.3-.2h28.6v6.3h-25.4v19.8c0 .8.2 1.5.7 1.9s1.1.7 1.9.7h22.9v6.2zM151.9 37h-20v-6.4h20V37z"/><path d="M197.3 51.3H191v-8.6h-22.3v8.6h-6.3V33.8c0-2.6.4-4.9 1.3-7.1s2.1-4 3.7-5.5 3.4-2.8 5.5-3.6c2.1-.9 4.5-1.3 7-1.3h14.3c.4.0.9.1 1.2.2.4.2.7.4 1 .7s.5.6.7 1 .2.8.2 1.2V51.3zM168.7 36.4H191V22.6h-11.2c-.2.0-.6.0-1.2.1s-1.4.2-2.2.4c-.8.2-1.7.6-2.6 1-.9.5-1.8 1.1-2.5 2-.8.8-1.4 1.9-1.9 3.1-.5 1.2-.7 2.8-.7 4.5v2.7z"/><path d="M241.7 28.1c0 1.4-.2 2.7-.5 3.9-.4 1.1-.8 2.1-1.5 3-.6.9-1.3 1.6-2.1 2.2-.8.6-1.6 1.1-2.5 1.5s-1.8.7-2.6.9c-.9.2-1.7.3-2.5.3l13.3 11.5h-9.8l-13.2-11.5h-4.6v-6.3H230c.8-.1 1.5-.2 2.2-.5s1.2-.6 1.7-1.1.9-1 1.1-1.6c.3-.6.4-1.4.4-2.2v-4c0-.4.0-.6-.1-.8s-.2-.3-.3-.4c-.1-.1-.3-.1-.4-.2-.2.0-.3.0-.4.0h-20.9v28.7H207v-32c0-.4.1-.9.2-1.2.2-.4.4-.7.7-1 .3-.3.6-.5 1-.7s.8-.2 1.3-.2H234c1.4.0 2.6.3 3.6.8s1.8 1.2 2.4 1.9c.6.8 1 1.6 1.3 2.5s.4 1.7.4 2.5v4z"/><path d="M285.1 48.6c0 .5-.1.9-.3 1.3s-.4.7-.7 1-.6.5-1 .7-.8.2-1.2.2-.8-.1-1.2-.2-.8-.4-1.1-.7l-23.2-24.2v24.7h-6.3V19c0-.7.2-1.2.5-1.8.4-.5.8-.9 1.4-1.2.6-.2 1.2-.3 1.9-.2s1.2.4 1.6.9l23.2 24.2V16.3h6.3V48.6z"/></g></svg></a></div><div class=searchbox><label for=search-by><i class="fas fa-search"></i></label>
+<!doctype html><html lang=zh-cn class="js csstransforms3d">
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=generator content="Hugo 0.89.4">
+<meta name=description content="记录一些学习和生活日常">
+<meta name=author content="darkmoon">
+<link rel=icon href=/images/favicon.png type=image/png>
+<title>首页 - chestnut's blog</title>
+<link href=/css/nucleus.css?1706695571 rel=stylesheet>
+<link href=/css/fontawesome-all.min.css?1706695571 rel=stylesheet>
+<link href=/css/hybrid.css?1706695571 rel=stylesheet>
+<link href=/css/featherlight.min.css?1706695571 rel=stylesheet>
+<link href=/css/perfect-scrollbar.min.css?1706695571 rel=stylesheet>
+<link href=/css/auto-complete.css?1706695571 rel=stylesheet>
+<link href=/css/atom-one-dark-reasonable.css?1706695571 rel=stylesheet>
+<link href=/css/theme.css?1706695571 rel=stylesheet>
+<link href=/css/tabs.css?1706695571 rel=stylesheet>
+<link href=/css/hugo-theme.css?1706695571 rel=stylesheet>
+<link href=/css/theme-blue.css?1706695571 rel=stylesheet>
+<script src=/js/dayjs.min.js?1706695571></script>
+<script src=/js/jquery-3.3.1.min.js?1706695571></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F5TRJPEVXY"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-F5TRJPEVXY')</script>
+<style>:root #header+#content>#left>#rlblock_left{display:none!important}</style>
+</head>
+<body data-url=/zh-cn/>
+<nav id=sidebar class=showVisitedLinks>
+<div id=header-wrapper>
+<div id=header>
+<a id=logo href=/zh-cn><svg id="grav-logo" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 285.1 69.9"><g><path d="M35 0c9.6.0 17.9 3.4 24.7 10.3C66.5 17.1 70 25.3 70 35s-3.4 17.9-10.3 24.7C52.9 66.5 44.7 70 35 70c-9.7.0-17.9-3.4-24.7-10.3C3.4 52.8.0 44.6.0 34.9.0 25.3 3.4 17 10.3 10.2 17.1 3.4 25.3.0 35 0zM22.3 63.7c.3-7.4.3-14.7.0-22.1-2.1-.4-4-.4-5.9.0-.2.8-.2 2.5-.1 4.9.1 2.3.0 3.9-.3 4.8-1.7-.6-2.7-2.1-3.1-4.6-.1-.7-.1-3.3-.1-8 0-14.5-.1-23-.3-25.6-3.6 4.1-5.6 7-5.9 8.5v10.9c0 4.5.1 8.1.2 10.9.0.4.0 1.3-.1 2.8-.1 1.2.0 2.1.1 2.6.1.6 1.1 2.1 2.8 4.7C13.2 58.7 17.5 62.2 22.3 63.7zm22.3 1.7c.3-5 .2-12.9-.1-23.6-2.1-.3-4.1-.3-5.9.0-.2 2-.2 5.1-.1 9.5.1 4.3.0 7.5-.1 9.5-2.9.4-5 .3-6.2-.1-.2-5.6-.2-15.2-.1-28.7.1-12.4.0-21.8-.3-28.3-2.4.1-4.3.6-5.7 1.3-.1 7.7-.2 17.7-.1 30.1.0 16.5.0 26.6.0 30.3 2.3 1.1 5.4 1.7 9.4 1.7C38.9 66.9 42.1 66.4 44.6 65.4zM48.1 64.1c9.7-4.6 15.7-12 18-22.2-1.8-.2-3.8-.3-6.1-.3-1.6 3.9-2.6 6.3-3.2 7.2-1.1 1.7-2 2.5-2.7 2.5C54 46 54 39.1 54 30.5c0-11.5.0-18.4.0-20.9-1.4-1.4-3.3-2.5-5.7-3.4C48.1 6.3 48 6.4 48 6.7c0 3.5.0 13.1.0 28.8C47.9 47.2 48 56.8 48.1 64.1z"/></g><g><path d="M116.6 51.3h-29c-.5.0-.9-.1-1.3-.2-.4-.2-.7-.4-1-.7-.3-.3-.5-.6-.7-1s-.2-.8-.2-1.3V16.3h6.3V45h25.8v6.3z"/><path d="M154.8 51.3h-22.9c-.9.0-1.8-.2-2.9-.5-1-.3-2-.8-2.9-1.5s-1.6-1.6-2.2-2.8c-.6-1.1-.9-2.5-.9-4.2V19.5c0-.4.1-.9.2-1.2.2-.4.4-.7.7-1s.6-.5 1-.7.8-.2 1.3-.2h28.6v6.3h-25.4v19.8c0 .8.2 1.5.7 1.9s1.1.7 1.9.7h22.9v6.2zM151.9 37h-20v-6.4h20V37z"/><path d="M197.3 51.3H191v-8.6h-22.3v8.6h-6.3V33.8c0-2.6.4-4.9 1.3-7.1s2.1-4 3.7-5.5 3.4-2.8 5.5-3.6c2.1-.9 4.5-1.3 7-1.3h14.3c.4.0.9.1 1.2.2.4.2.7.4 1 .7s.5.6.7 1 .2.8.2 1.2V51.3zM168.7 36.4H191V22.6h-11.2c-.2.0-.6.0-1.2.1s-1.4.2-2.2.4c-.8.2-1.7.6-2.6 1-.9.5-1.8 1.1-2.5 2-.8.8-1.4 1.9-1.9 3.1-.5 1.2-.7 2.8-.7 4.5v2.7z"/><path d="M241.7 28.1c0 1.4-.2 2.7-.5 3.9-.4 1.1-.8 2.1-1.5 3-.6.9-1.3 1.6-2.1 2.2-.8.6-1.6 1.1-2.5 1.5s-1.8.7-2.6.9c-.9.2-1.7.3-2.5.3l13.3 11.5h-9.8l-13.2-11.5h-4.6v-6.3H230c.8-.1 1.5-.2 2.2-.5s1.2-.6 1.7-1.1.9-1 1.1-1.6c.3-.6.4-1.4.4-2.2v-4c0-.4.0-.6-.1-.8s-.2-.3-.3-.4c-.1-.1-.3-.1-.4-.2-.2.0-.3.0-.4.0h-20.9v28.7H207v-32c0-.4.1-.9.2-1.2.2-.4.4-.7.7-1 .3-.3.6-.5 1-.7s.8-.2 1.3-.2H234c1.4.0 2.6.3 3.6.8s1.8 1.2 2.4 1.9c.6.8 1 1.6 1.3 2.5s.4 1.7.4 2.5v4z"/><path d="M285.1 48.6c0 .5-.1.9-.3 1.3s-.4.7-.7 1-.6.5-1 .7-.8.2-1.2.2-.8-.1-1.2-.2-.8-.4-1.1-.7l-23.2-24.2v24.7h-6.3V19c0-.7.2-1.2.5-1.8.4-.5.8-.9 1.4-1.2.6-.2 1.2-.3 1.9-.2s1.2.4 1.6.9l23.2 24.2V16.3h6.3V48.6z"/></g></svg>
+</a>
+</div>
+<div class=searchbox>
+<label for=search-by><i class="fas fa-search"></i></label>
 <input data-search-input id=search-by type=search placeholder=搜索...>
-<span data-search-clear><i class="fas fa-times"></i></span></div><script type=text/javascript src=/js/lunr.min.js?1706695145></script><script type=text/javascript src=/js/auto-complete.js?1706695145></script><script type=text/javascript>var baseurl="https://www.ch35tnut.site/zh-cn"</script><script type=text/javascript src=/js/search.js?1706695145></script></div><section id=homelinks><ul><li><a class=padding href=/zh-cn><i class='fas fa-home'></i> 首页</a></li></ul></section><div class=highlightable><ul class=topics><li data-nav-id=/zh-cn/research/ title=安全研究 class=dd-item><a href=/zh-cn/research/><b>X. </b>安全研究
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/research/iot/ title=Iot class=dd-item><a href=/zh-cn/research/iot/><b>X. </b>Iot
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/research/linux/ title=Linux class=dd-item><a href=/zh-cn/research/linux/><b>X. </b>Linux
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/research/linux/malware/ title=Malware class=dd-item><a href=/zh-cn/research/linux/malware/><b>X. </b>Malware
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/research/linux/suid/ title=Suid class=dd-item><a href=/zh-cn/research/linux/suid/>Suid
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/research/windows/ title=Windows class=dd-item><a href=/zh-cn/research/windows/><b>X. </b>Windows
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/research/windows/dll-inject/ title=Dll注入 class=dd-item><a href=/zh-cn/research/windows/dll-inject/><b>X. </b>Dll注入
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/research/windows/pe/ title=Pe class=dd-item><a href=/zh-cn/research/windows/pe/><b>X. </b>Pe
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/research/protocol/ title=协议 class=dd-item><a href=/zh-cn/research/protocol/><b>X. </b>协议
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/research/protocol/ntlm/ title="NTLM 协议" class=dd-item><a href=/zh-cn/research/protocol/ntlm/><b>X. </b>NTLM 协议
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/research/protocol/kerberos/ title="Kerberos 协议" class=dd-item><a href=/zh-cn/research/protocol/kerberos/><b>X. </b>Kerberos 协议
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/research/protocol/kerberos/kerberos-in-windows/ title=Windows中的kerberos协议 class=dd-item><a href=/zh-cn/research/protocol/kerberos/kerberos-in-windows/><b>X. </b>Windows中的kerberos协议
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/research/protocol/kerberos/authentication-principle.zh.cn/ title=认证原理 class=dd-item><a href=/zh-cn/research/protocol/kerberos/authentication-principle.zh.cn/>认证原理
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/research/protocol/netlogon/ title=Netlogon class=dd-item><a href=/zh-cn/research/protocol/netlogon/>Netlogon
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/research/web/ title=Web class=dd-item><a href=/zh-cn/research/web/><b>X. </b>Web
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/research/web/java-deserialization/ title="Java Deserialization" class=dd-item><a href=/zh-cn/research/web/java-deserialization/><b>X. </b>Java Deserialization
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/research/web/java-deserialization/commonsbeanutils1-chain/ title="CommonsBeanutils1 Chain" class=dd-item><a href=/zh-cn/research/web/java-deserialization/commonsbeanutils1-chain/>CommonsBeanutils1 Chain
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/research/web/java-deserialization/urldns/ title="JAVA URL DNS 研究" class=dd-item><a href=/zh-cn/research/web/java-deserialization/urldns/>JAVA URL DNS 研究
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/research/web/php-filter-rce/ title="PHP Filter RCE 分析" class=dd-item><a href=/zh-cn/research/web/php-filter-rce/>PHP Filter RCE 分析
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/research/code-audit/ title=代码审计 class=dd-item><a href=/zh-cn/research/code-audit/><b>X. </b>代码审计
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/research/code-audit/codeql/ title=Codeql class=dd-item><a href=/zh-cn/research/code-audit/codeql/><b>X. </b>Codeql
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/research/code-audit/wireshark-185/ title="Wireshark 1.8.5代码审计" class=dd-item><a href=/zh-cn/research/code-audit/wireshark-185/>Wireshark 1.8.5代码审计
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/research/code-audit/news-server/ title="News Server审计" class=dd-item><a href=/zh-cn/research/code-audit/news-server/>News Server审计
-<i class="fas fa-check read-icon"></i></a></li></ul></li></ul></li><li data-nav-id=/zh-cn/vulnerability/ title=漏洞分析 class=dd-item><a href=/zh-cn/vulnerability/><b>X. </b>漏洞分析
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/vulnerability/windows-clfs-eop/ title="Windows CLFS EoP" class=dd-item><a href=/zh-cn/vulnerability/windows-clfs-eop/><b>X. </b>Windows CLFS EoP
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/vulnerability/windows-clfs-eop/cve-2023-28252/ title=CVE-2023-28252 class=dd-item><a href=/zh-cn/vulnerability/windows-clfs-eop/cve-2023-28252/>CVE-2023-28252
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/windows-clfs-eop/cve-2022-37969/ title=CVE-2022-37969 class=dd-item><a href=/zh-cn/vulnerability/windows-clfs-eop/cve-2022-37969/>CVE-2022-37969
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-7028-gitlab-account-takeover/ title="CVE-2023-7028 GitLab Account Takeover" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-7028-gitlab-account-takeover/>CVE-2023-7028 GitLab Account Takeover
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2016-4437-shiro-550-rce/ title="CVE-2016-4437 Shiro 550 RCE 分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2016-4437-shiro-550-rce/>CVE-2016-4437 Shiro 550 RCE 分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-6553-wordpress-backup-migration-plugin-rce/ title="CVE 2023 6553 Wordpress Backup Migration Plugin RCE" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-6553-wordpress-backup-migration-plugin-rce/>CVE 2023 6553 Wordpress Backup Migration Plugin RCE
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-50164-apache-struts-rce/ title="CVE-2023-50164 Apache Struts RCE分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-50164-apache-struts-rce/>CVE-2023-50164 Apache Struts RCE分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-21746-windows-ntlm-privilege-escalation/ title="CVE-2023-21746 Windows NTLM Privilege Escalation" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-21746-windows-ntlm-privilege-escalation/>CVE-2023-21746 Windows NTLM Privilege Escalation
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2020-17530-apache-struts-ognl-rce/ title="CVE-2020-17530 Apache Struts OGNL RCE分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2020-17530-apache-struts-ognl-rce/>CVE-2020-17530 Apache Struts OGNL RCE分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2021-4034-polkit-eop/ title="CVE-2021-4034 Polkit 权限提升漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2021-4034-polkit-eop/>CVE-2021-4034 Polkit 权限提升漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-36036-windows-cloud-files-mini-filter-driver-eop/ title="CVE-2023-36036 Windows Cloud Files Mini Filter Driver 权限提升漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-36036-windows-cloud-files-mini-filter-driver-eop/>CVE-2023-36036 Windows Cloud Files Mini Filter Driver 权限提升漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2022-23121-afp-rce/ title="CVE-2022-23121 AFP RCE 分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2022-23121-afp-rce/>CVE-2022-23121 AFP RCE 分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-36563-wordpad-info-disclosure/ title="CVE-2023-36563 Wordpad Info Disclosure 分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-36563-wordpad-info-disclosure/>CVE-2023-36563 Wordpad Info Disclosure 分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/squid-dos/ title="Squid 拒绝服务漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/squid-dos/>Squid 拒绝服务漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-4966-citrix-gateway-info-disclosure/ title="CVE-2023-4966 Citrix Gateway 信息泄露漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-4966-citrix-gateway-info-disclosure/>CVE-2023-4966 Citrix Gateway 信息泄露漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-44487-http2-rapid-reset-ddos-attack/ title="CVE-2023-44487 Http2 Rapid Reset DDOS Attack 分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-44487-http2-rapid-reset-ddos-attack/>CVE-2023-44487 Http2 Rapid Reset DDOS Attack 分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-38545-curl-heap-overflow/ title="CVE-2023-38545 Curl 堆溢出漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-38545-curl-heap-overflow/>CVE-2023-38545 Curl 堆溢出漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-4863-libwebp-rce/ title="CVE-2023-4863 Libwebp Rce 分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-4863-libwebp-rce/>CVE-2023-4863 Libwebp Rce 分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-42820-jumpserver-pwd-reset-vuln/ title="CVE-2023-42820 Jumpserver 任意用户密码重置漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-42820-jumpserver-pwd-reset-vuln/>CVE-2023-42820 Jumpserver 任意用户密码重置漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/%E7%91%9E%E5%8F%8B%E5%A4%A9%E7%BF%BC-rce/ title="瑞友天翼 Rce分析" class=dd-item><a href=/zh-cn/vulnerability/%E7%91%9E%E5%8F%8B%E5%A4%A9%E7%BF%BC-rce/>瑞友天翼 Rce分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-36874-windows-error-reporting-service-eop/ title="CVE-2023-36874 Windows Error Reporting Service 权限提升漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-36874-windows-error-reporting-service-eop/>CVE-2023-36874 Windows Error Reporting Service 权限提升漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-38148-windows-ics-rce/ title="CVE-2023-38148 Windows Ics Rce分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-38148-windows-ics-rce/>CVE-2023-38148 Windows Ics Rce分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-3519-cirtix-gateway-rce/ title="CVE-2023-3519 Cirtix Gateway RCE分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-3519-cirtix-gateway-rce/>CVE-2023-3519 Cirtix Gateway RCE分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-32315-openfire-auth-bypass/ title="CVE-2023-32315 Openfire 身份认证绕过漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-32315-openfire-auth-bypass/>CVE-2023-32315 Openfire 身份认证绕过漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/smartbi-rce/ title="Smartbi RCE 分析" class=dd-item><a href=/zh-cn/vulnerability/smartbi-rce/>Smartbi RCE 分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-2825-gitlab-path-traversal/ title="CVE-2023-2825 Gitlab 路径穿越漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-2825-gitlab-path-traversal/>CVE-2023-2825 Gitlab 路径穿越漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/zero-logon/ title="Zero Logon 分析" class=dd-item><a href=/zh-cn/vulnerability/zero-logon/>Zero Logon 分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2022-4223-pgadmin-rce/ title="CVE-2022-4223 PgAdmin RCE 分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2022-4223-pgadmin-rce/>CVE-2022-4223 PgAdmin RCE 分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/strapi-rce/ title="Strapi RCE 漏洞链分析" class=dd-item><a href=/zh-cn/vulnerability/strapi-rce/>Strapi RCE 漏洞链分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-23410-windows-http-sys-eop/ title="CVE-2023-23410 Windows HTTP.sys 权限提升漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-23410-windows-http-sys-eop/>CVE-2023-23410 Windows HTTP.sys 权限提升漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2021-3156-sudo-eop/ title="CVE-2021-3156 Sudo 权限提升漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2021-3156-sudo-eop/>CVE-2021-3156 Sudo 权限提升漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-28432-minio-information-disclosure/ title="CVE-2023-28432 MinIO 信息泄露漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-28432-minio-information-disclosure/>CVE-2023-28432 MinIO 信息泄露漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2023-23397-outlook-eop/ title="CVE-2023-23397 Outlook 权限提升漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2023-23397-outlook-eop/>CVE-2023-23397 Outlook 权限提升漏洞分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/proxy-not-shell/ title="Proxy Not Shell 利用链分析" class=dd-item><a href=/zh-cn/vulnerability/proxy-not-shell/>Proxy Not Shell 利用链分析
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/vulnerability/cve-2021-40449-win32k-eop/ title="CVE-2021-40449 Win32k 权限提升漏洞分析" class=dd-item><a href=/zh-cn/vulnerability/cve-2021-40449-win32k-eop/>CVE-2021-40449 Win32k 权限提升漏洞分析
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/dailylife/ title=生活随笔 class=dd-item><a href=/zh-cn/dailylife/><b>X. </b>生活随笔
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/dailylife/movies/ title=Movies class=dd-item><a href=/zh-cn/dailylife/movies/><b>X. </b>Movies
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/dailylife/movies/2024-%E6%BD%9C%E8%A1%8C/ title="2024 潜行" class=dd-item><a href=/zh-cn/dailylife/movies/2024-%E6%BD%9C%E8%A1%8C/>2024 潜行
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/dailylife/%E5%90%90%E6%A7%BD/ title=吐槽 class=dd-item><a href=/zh-cn/dailylife/%E5%90%90%E6%A7%BD/>吐槽
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/dailylife/2023-review-and-2024-outlook/ title=2023年总结和2024年展望 class=dd-item><a href=/zh-cn/dailylife/2023-review-and-2024-outlook/>2023年总结和2024年展望
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/misc/ title=杂项 class=dd-item><a href=/zh-cn/misc/><b>X. </b>杂项
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/misc/tools/ title=Tools class=dd-item><a href=/zh-cn/misc/tools/><b>X. </b>Tools
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/misc/tools/citrix-update-monitor/ title="【工具】Citrix NetScaler 更新监控" class=dd-item><a href=/zh-cn/misc/tools/citrix-update-monitor/>【工具】Citrix NetScaler 更新监控
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/misc/encoding/ title=Encoding class=dd-item><a href=/zh-cn/misc/encoding/><b>X. </b>Encoding
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/misc/encoding/utf-7/ title="Utf 7" class=dd-item><a href=/zh-cn/misc/encoding/utf-7/>Utf 7
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/misc/encoding/unicode/ title=Unicode class=dd-item><a href=/zh-cn/misc/encoding/unicode/>Unicode
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/misc/tunnel/ title=隧道 class=dd-item><a href=/zh-cn/misc/tunnel/><b>X. </b>隧道
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/misc/tunnel/application-layer/ title=应用层隧道 class=dd-item><a href=/zh-cn/misc/tunnel/application-layer/><b>X. </b>应用层隧道
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/misc/tunnel/application-layer/ssh-tunnel/ title=SSH隧道 class=dd-item><a href=/zh-cn/misc/tunnel/application-layer/ssh-tunnel/>SSH隧道
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/misc/tunnel/transport-layer/ title=传输层隧道 class=dd-item><a href=/zh-cn/misc/tunnel/transport-layer/><b>X. </b>传输层隧道
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/misc/tunnel/transport-layer/socks/ title=Socks隧道 class=dd-item><a href=/zh-cn/misc/tunnel/transport-layer/socks/><b>X. </b>Socks隧道
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/zh-cn/misc/tunnel/network-layer/ title=网络层隧道 class=dd-item><a href=/zh-cn/misc/tunnel/network-layer/><b>X. </b>网络层隧道
-<i class="fas fa-check read-icon"></i></a></li></ul></li></ul></li><li data-nav-id=/zh-cn/others/ title=其他 class=dd-item><a href=/zh-cn/others/><b>X. </b>其他
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/zh-cn/others/add-timeline-shortcode/ title=给hugo-theme-learn增加timeline功能 class=dd-item><a href=/zh-cn/others/add-timeline-shortcode/>给hugo-theme-learn增加timeline功能
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/others/how-to-reset-password-administrator-on-windows-server-2019/ title="在Windows server 2019上重置密码" class=dd-item><a href=/zh-cn/others/how-to-reset-password-administrator-on-windows-server-2019/>在Windows server 2019上重置密码
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/zh-cn/others/vmware-based-implementation-of-small-domain-network-construction/ title=基于Vmware的小型域网络搭建 class=dd-item><a href=/zh-cn/others/vmware-based-implementation-of-small-domain-network-construction/>基于Vmware的小型域网络搭建
-<i class="fas fa-check read-icon"></i></a></li></ul></li></ul><section id=shortcuts><h3>更多</h3><ul><li><a class=padding href=https://www.ch35tnut.site/zh-cn/about><i class='fas fa-person-booth'></i> 关于</a></li><li><a class=padding href=https://github.com/Chestnut4/><i class='fab fa-github'></i> Github 链接</a></li><li><a class=padding href=https://www.ch35tnut.site/zh-cn/tags><i class='fas fa-tags'></i> 标签</a></li><li><a class=padding href=https://www.ch35tnut.site/zh-cn/index.xml><i class='fas fa-fw fa-link'></i> RSS</a></li></ul></section><section id=prefooter><hr><ul><li><a class=padding><i class="fas fa-language fa-fw"></i><div class=select-style><select id=select-language onchange="location=this.value"><option id=zh-cn value=https://www.ch35tnut.site/zh-cn/ selected>简体中文</option><option id=en value=https://www.ch35tnut.site/en/>English</option></select><svg id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="255" height="255" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255"><g><g id="arrow-drop-down"><polygon points="0,63.75 127.5,191.25 255,63.75"/></g></g></svg></div></a></li><li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> 清理历史记录</a></li></ul></section><section id=footer><center></center><script async defer src=https://buttons.github.io/buttons.js></script></section></div></nav><section id=body><div id=overlay></div><div class="padding highlightable"><div id=head-tags></div><div id=chapter><div id=body-inner><span id=sidebar-toggle-span><a href=# id=sidebar-toggle data-sidebar-toggle><i class="fas fa-bars"></i> navigation</a></span><h3 id=学习记录>学习记录</h3><p>记录一些平时学习和生活的日常。</p><ul><li><a href=/zh-cn/dailylife/>日常生活</a></li><li><a href=/zh-cn/research/>安全研究</a></li><li><a href=/zh-cn/vulnerability/>漏洞分析</a></li><li><a href=/zh-cn/misc/>杂项</a></li><li><a href=/zh-cn/others/>其他</a></li></ul><hr><p>时间线</p><style type=text/css>.timeline{position:relative;margin:0 auto}.timeline::after{content:"";position:absolute;width:6px;background-color:#444;top:0;bottom:0;left:10%;margin-left:-3px}.timeline .container{padding:10px 10px 10px 40px;margin-top:10px;position:relative;width:90%;left:10%}.timeline .container::after{content:"";position:absolute;width:25px;height:25px;left:-12px;background-color:#6ad7e5;border:4px solid #444;top:0;border-radius:50%;z-index:1}.timeline .container .date{position:absolute;top:0;z-index:1;left:-15%;font-size:large}.timeline .container::before{content:" ";height:0;position:absolute;top:30px;width:0;z-index:1;left:26px;border:solid #6ad7e5;border-width:13px 13px 13px 0;border-color:#6ad7e5 #6ad7e5 transparent transparent}.timeline .content{box-shadow:0 0 3px 3px #6ad7e5;background-color:#fff;position:relative;border-radius:6px;transition:box-shadow .3s}.timeline .content:hover{box-shadow:0 0 3px 4px #6ad7e5}.timeline .content .title{padding:5px 30px;font-weight:700;display:inline-block}.timeline .content .moment{color:#c41a16;text-align:right;position:absolute;top:0;right:0;padding:5px}.timeline .content .body{padding:5px 30px;word-wrap:break-word;text-overflow:ellipsis;overflow:hidden}@media screen and (max-width:600px){.timeline .container{padding:10px 10px 0 40px;left:5%;width:95%}.timeline .container .date{font-size:small;transform:rotate(-90deg);left:-5%;top:30px}.timeline .container::after{left:3px}.timeline .content .body{padding:5px}.timeline .content .moment{position:relative}}</style><div class=timeline><div class=container><div class=content><div class=title>01-12至01-13</div><div class=moment id=moment>| 19 days ago</div><div class=body><p>GitLab 账户接管漏洞分析</p><ul><li><a href=/zh-cn/vulnerability/cve-2023-7028-gitlab-account-takeover/>CVE-2023-7028 GitLab Account Takeover 分析</a></li></ul></div></div><div class=date>2024</div></div><script>function non0plural(e,t){return e==0?"":e>1?e+" "+t+"s":e+" "+t}function refresh(){start=dayjs("2024-01-12"),now=dayjs(),total_days=now.diff(start,"d",!0),total_months=now.diff(start,"M",!0),months=total_months%12,years=Math.floor(total_months/12),years>=1&&(total_days-=365*years),months>=1&&(total_days-=30*months),el=document.querySelector("#moment"),el.innerHTML=years>1?non0plural(years,"year"):" "+months>1?non0plural(months.toFixed(4),"month"):""+total_days>=1?non0plural(total_days.toFixed(2),"day"):"",el.innerHTML=el.innerHTML+" ago"}window.setInterval(refresh,100)</script><div class=container><div class=content><div class=title>01-05至01-08</div><div class=moment id=moment-a8ed2ac4bc45c4b8>3 days | 26 days ago</div><div class=body><p>研究了一下JAVA的URL DNS原理。</p><ul><li><a href=/zh-cn/research/web/java-deserialization/urldns/>JAVA URL DNS研究</a></li></ul></div></div><div class=date>2024</div></div><div class=container><div class=content><div class=title>12-29至12-29</div><div class=moment id=moment-5c416ecf8c4cecba>| 33 days ago</div><div class=body><p>填坑</p><ul><li><a href=/zh-cn/vulnerability/windows-clfs-eop/cve-2022-37969/>windows CLFS 权限提升漏洞 CVE-2022-37969</a></li><li><a href=/zh-cn/vulnerability/windows-clfs-eop/cve-2023-28252/>windows CLFS 权限提升漏洞 CVE-2023-28252</a></li><li><a href=/zh-cn/vulnerability/cve-2023-6553-wordpress-backup-migration-plugin-rce/>Wordpress Backup Migration plugin RCE</a></li></ul></div></div><div class=date>2023</div></div><div class=container><div class=content><div class=title>12-05至12-06</div><div class=moment id=moment-a845bdffe4245f8e>1 day | 57 days ago</div><div class=body><p>分析了CVE-2021-4034 polkit 权限提升漏洞，填坑。</p><ul><li><a href=/zh-cn/vulnerability/cve-2021-4034-polkit-eop/>polkit 权限提升漏洞</a></li></ul></div></div><div class=date>2023</div></div><div class=container><div class=content><div class=title>11-30至12-01</div><div class=moment id=moment-d8ff2cdf46ecbcca>1 day | 62 days ago</div><div class=body><p>分析了CVE-2023-17530 Apache Struts OGNL 远程代码执行漏洞</p><ul><li><a href=/zh-cn/vulnerability/cve-2020-17530-apache-struts-ognl-rce/>Apache Struts OGNL 远程代码执行漏洞</a></li></ul></div></div><div class=date>2023</div></div><div class=container><div class=content><div class=title>11-20至11-25</div><div class=moment id=moment-cf8cc842b5d4d4af>5 days | 72 days ago</div><div class=body><p>分析了在野利用的 CVE-2023-36036 Windows Cloud Files Mini Filter Driver 权限提升漏洞</p><ul><li><a href=/zh-cn/vulnerability/cve-2023-36036-windows-cloud-files-mini-filter-driver-eop/>Windows Cloud Files Mini Filter Driver 权限提升漏洞</a></li></ul></div></div><div class=date>2023</div></div><div class=container><div class=content><div class=title>10-31至11-01</div><div class=moment id=moment-cac4ce45bdc8641a>1 day | 92 days ago</div><div class=body><p>分析了在野利用的wordpad 信息泄露漏洞</p><ul><li><a href=/zh-cn/vulnerability/cve-2023-36563-wordpad-info-disclosure/>wordpad 信息泄露漏洞</a></li></ul></div></div><div class=date>2023</div></div><div class=container><div class=content><div class=title>10-19至10-25</div><div class=moment id=moment-cb4fad485cc45abf>6 days | 104 days ago</div><div class=body><p>分析了两个漏洞</p><ul><li><a href=/zh-cn/vulnerability/cve-2023-4966-citrix-gateway-info-disclosure/>Citrix 信息泄露漏洞</a></li><li><a href=/zh-cn/vulnerability/squid-dos/>squid 拒绝服务漏洞</a></li></ul></div></div><div class=date>2023</div></div><div class=container><div class=content><div class=title>10-14至10-15</div><div class=moment id=moment-4f8d158c4ccb6dde>1 day | 109 days ago</div><div class=body><p>复现分析了curl 堆溢出漏洞</p><ul><li><a href=/zh-cn/vulnerability/cve-2023-38545-curl-heap-overflow/>curl堆溢出漏洞</a></li></ul></div></div><div class=date>2023</div></div><div class=container><div class=content><div class=title>10-12至10-13</div><div class=moment id=moment-c5accd45c8c8fdb4>1 day | 111 days ago</div><div class=body><p>复现分析了http2 快速重置攻击</p><ul><li><a href=/zh-cn/vulnerability/cve-2023-44487-http2-rapid-reset-ddos-attack/>http rapid reset ddos attack</a></li></ul></div></div><div class=date>2023</div></div><div class=container><div class=content><div class=title>09-19至09-19</div><div class=moment id=moment-f2c54f4a6c4debc1>| 134 days ago</div><div class=body><p>把之前写的文章整理到了博客</p><ul><li><a href=/zh-cn/vulnerability/cve-2023-36874-windows-error-reporting-service-eop/>windows 错误报告服务权限提升漏洞</a></li><li><a href=./vulnerability/CVE-2023-38831-winrar-code-exec.zh-cn.md>winrar 代码执行漏洞</a></li></ul></div></div><div class=date>2023</div></div><div class=container><div class=content><div class=title>09-14至09-18</div><div class=moment id=moment-cd42e1bbc58d5c44>4 days | 139 days ago</div><div class=body><p>分析了以下9月补丁日的CVE-2023-38148, 分析文章：</p><ul><li><a href=/zh-cn/vulnerability/cve-2023-38148-windows-ics-rce/>windows ics rce</a></li></ul></div></div><div class=date>2023</div></div><div class=container><div class=content><div class=title>07-24至07-27</div><div class=moment id=moment-2cd148cc655aceeb>3 days | 191 days ago</div><div class=body><p>前几天搭建Citrix ADC环境，实在是太难搭了，最后还是选择从公网找了个环境打了一下payload，diff了以下补丁，写了一个分析，可惜不能本地调试，看起来写exp应该挺简单的。分析见</p><ul><li><a href=/zh-cn/vulnerability/cve-2023-3519-cirtix-gateway-rce/>citrix adc rce</a></li></ul><p><em>更新：搭建了调试环境，调试了一下，更新在原链接</em></p></div></div><div class=date>2023</div></div><div class=container><div class=content><div class=title>09-13至09-16</div><div class=moment id=moment-db4eafdceabd2c4c>3 days | 505 days ago</div><div class=body><p>这周再写一个基于rust的loader，写了一半发现加载的dll太多了，再想办法用动态加载的方式加载dll，感觉用rust做有点难。</p><p>用rust的内联汇编获取到了kernel32.dll和ntdll.dll的基址，还要继续完善。</p></div></div><div class=date>2022</div></div><div class=container><div class=content><div class=title>09-10至09-12</div><div class=moment id=moment-2f1bcdbcadd8c4ed>2 days | 508 days ago</div><div class=body><p>中秋节，在家摸了几天🐟，啥都没干</p></div></div><div class=date>2022</div></div><div class=container><div class=content><div class=title>09-05至09-09</div><div class=moment id=moment-df5cccc84db2584a>4 days | 513 days ago</div><div class=body><p>这周编译了wireshark 1.8.5，通过diff1.8.5和1.8.6的源码找出1.8.5里面的漏洞，见</p><ul><li><a href=/zh-cn/research/code-audit/wireshark-185/>wireshark 1.8.5代码审计</a></li><li></li></ul></div></div><div class=date>2022</div></div><div class=container><div class=content><div class=title>09-03至09-04</div><div class=moment id=moment-ac5cc8cc144cfacb>1 day | 515 days ago</div><div class=body><p>这两天，给hugo主题增加了timeline的shortcode，见</p><ul><li><a href=/zh-cn/others/add-timeline-shortcode/>增加timeline功能</a></li></ul></div></div><div class=date>2022</div></div><div class=container><div class=content><div class=title>08-29至09-02</div><div class=moment id=moment-b48ee41c24cdb5ac>4 days | 520 days ago</div><div class=body><p>周内看了一个几百行的代码，见
-<a href=/zh-cn/research/code-audit/news-server/>news_server审计</a></p></div></div><div class=date>2022</div></div></div><hr><p><em><strong>黑客精神：Open, Share, Free</strong></em></p></div></div></div><div id=navigation><a class="nav nav-next" href=/zh-cn/research/ title=安全研究 style=margin-right:0><i class="fa fa-chevron-right"></i></a></div></section><div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px><div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=/js/clipboard.min.js?1706695145></script><script src=/js/perfect-scrollbar.min.js?1706695145></script><script src=/js/perfect-scrollbar.jquery.min.js?1706695145></script><script src=/js/jquery.sticky.js?1706695145></script><script src=/js/featherlight.min.js?1706695145></script><script src=/js/highlight.pack.js?1706695145></script><script>hljs.initHighlightingOnLoad()</script><script src=/js/modernizr.custom-3.6.0.js?1706695145></script><script src=/js/learn.js?1706695145></script><script src=/js/hugo-learn.js?1706695145></script><script src=/mermaid/mermaid.js?1706695145></script><script>mermaid.initialize({startOnLoad:!0})</script><script>(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,i=t.createElement(n),a=t.getElementsByTagName(n)[0],i.async=1,i.src=s,a.parentNode.insertBefore(i,a)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-105947713-1","auto"),ga("send","pageview")</script></body></html>
+<span data-search-clear><i class="fas fa-times"></i></span>
+</div>
+<script type=text/javascript src=/js/lunr.min.js?1706695571></script>
+<script type=text/javascript src=/js/auto-complete.js?1706695571></script>
+<script type=text/javascript>var baseurl="https://www.ch35tnut.site/zh-cn"</script>
+<script type=text/javascript src=/js/search.js?1706695571></script>
+</div>
+<section id=homelinks>
+<ul>
+<li>
+<a class=padding href=/zh-cn><i class="fas fa-home"></i> 首页</a>
+</li>
+</ul>
+</section>
+<div class=highlightable>
+<ul class=topics>
+<li data-nav-id=/zh-cn/research/ title=安全研究 class=dd-item>
+<a href=/zh-cn/research/>
+<b>X. </b>安全研究
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/research/iot/ title=Iot class=dd-item>
+<a href=/zh-cn/research/iot/>
+<b>X. </b>Iot
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/research/linux/ title=Linux class=dd-item>
+<a href=/zh-cn/research/linux/>
+<b>X. </b>Linux
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/research/linux/malware/ title=Malware class=dd-item>
+<a href=/zh-cn/research/linux/malware/>
+<b>X. </b>Malware
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/research/linux/suid/ title=Suid class=dd-item>
+<a href=/zh-cn/research/linux/suid/>
+Suid
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/research/windows/ title=Windows class=dd-item>
+<a href=/zh-cn/research/windows/>
+<b>X. </b>Windows
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/research/windows/dll-inject/ title=Dll注入 class=dd-item>
+<a href=/zh-cn/research/windows/dll-inject/>
+<b>X. </b>Dll注入
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/research/windows/pe/ title=Pe class=dd-item>
+<a href=/zh-cn/research/windows/pe/>
+<b>X. </b>Pe
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/research/protocol/ title=协议 class=dd-item>
+<a href=/zh-cn/research/protocol/>
+<b>X. </b>协议
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/research/protocol/ntlm/ title="NTLM 协议" class=dd-item>
+<a href=/zh-cn/research/protocol/ntlm/>
+<b>X. </b>NTLM 协议
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/research/protocol/kerberos/ title="Kerberos 协议" class=dd-item>
+<a href=/zh-cn/research/protocol/kerberos/>
+<b>X. </b>Kerberos 协议
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/research/protocol/kerberos/kerberos-in-windows/ title=Windows中的kerberos协议 class=dd-item>
+<a href=/zh-cn/research/protocol/kerberos/kerberos-in-windows/>
+<b>X. </b>Windows中的kerberos协议
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/research/protocol/kerberos/authentication-principle.zh.cn/ title=认证原理 class=dd-item>
+<a href=/zh-cn/research/protocol/kerberos/authentication-principle.zh.cn/>
+认证原理
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/research/protocol/netlogon/ title=Netlogon class=dd-item>
+<a href=/zh-cn/research/protocol/netlogon/>
+Netlogon
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/research/web/ title=Web class=dd-item>
+<a href=/zh-cn/research/web/>
+<b>X. </b>Web
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/research/web/java-deserialization/ title="Java Deserialization" class=dd-item>
+<a href=/zh-cn/research/web/java-deserialization/>
+<b>X. </b>Java Deserialization
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/research/web/java-deserialization/commonsbeanutils1-chain/ title="CommonsBeanutils1 Chain" class=dd-item>
+<a href=/zh-cn/research/web/java-deserialization/commonsbeanutils1-chain/>
+CommonsBeanutils1 Chain
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/research/web/java-deserialization/urldns/ title="JAVA URL DNS 研究" class=dd-item>
+<a href=/zh-cn/research/web/java-deserialization/urldns/>
+JAVA URL DNS 研究
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/research/web/php-filter-rce/ title="PHP Filter RCE 分析" class=dd-item>
+<a href=/zh-cn/research/web/php-filter-rce/>
+PHP Filter RCE 分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/research/code-audit/ title=代码审计 class=dd-item>
+<a href=/zh-cn/research/code-audit/>
+<b>X. </b>代码审计
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/research/code-audit/codeql/ title=Codeql class=dd-item>
+<a href=/zh-cn/research/code-audit/codeql/>
+<b>X. </b>Codeql
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/research/code-audit/wireshark-185/ title="Wireshark 1.8.5代码审计" class=dd-item>
+<a href=/zh-cn/research/code-audit/wireshark-185/>
+Wireshark 1.8.5代码审计
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/research/code-audit/news-server/ title="News Server审计" class=dd-item>
+<a href=/zh-cn/research/code-audit/news-server/>
+News Server审计
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/ title=漏洞分析 class=dd-item>
+<a href=/zh-cn/vulnerability/>
+<b>X. </b>漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/vulnerability/windows-clfs-eop/ title="Windows CLFS EoP" class=dd-item>
+<a href=/zh-cn/vulnerability/windows-clfs-eop/>
+<b>X. </b>Windows CLFS EoP
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/vulnerability/windows-clfs-eop/cve-2023-28252/ title=CVE-2023-28252 class=dd-item>
+<a href=/zh-cn/vulnerability/windows-clfs-eop/cve-2023-28252/>
+CVE-2023-28252
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/windows-clfs-eop/cve-2022-37969/ title=CVE-2022-37969 class=dd-item>
+<a href=/zh-cn/vulnerability/windows-clfs-eop/cve-2022-37969/>
+CVE-2022-37969
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-7028-gitlab-account-takeover/ title="CVE-2023-7028 GitLab Account Takeover" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-7028-gitlab-account-takeover/>
+CVE-2023-7028 GitLab Account Takeover
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2016-4437-shiro-550-rce/ title="CVE-2016-4437 Shiro 550 RCE 分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2016-4437-shiro-550-rce/>
+CVE-2016-4437 Shiro 550 RCE 分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-6553-wordpress-backup-migration-plugin-rce/ title="CVE 2023 6553 Wordpress Backup Migration Plugin RCE" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-6553-wordpress-backup-migration-plugin-rce/>
+CVE 2023 6553 Wordpress Backup Migration Plugin RCE
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-50164-apache-struts-rce/ title="CVE-2023-50164 Apache Struts RCE分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-50164-apache-struts-rce/>
+CVE-2023-50164 Apache Struts RCE分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-21746-windows-ntlm-privilege-escalation/ title="CVE-2023-21746 Windows NTLM Privilege Escalation" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-21746-windows-ntlm-privilege-escalation/>
+CVE-2023-21746 Windows NTLM Privilege Escalation
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2020-17530-apache-struts-ognl-rce/ title="CVE-2020-17530 Apache Struts OGNL RCE分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2020-17530-apache-struts-ognl-rce/>
+CVE-2020-17530 Apache Struts OGNL RCE分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2021-4034-polkit-eop/ title="CVE-2021-4034 Polkit 权限提升漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2021-4034-polkit-eop/>
+CVE-2021-4034 Polkit 权限提升漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-36036-windows-cloud-files-mini-filter-driver-eop/ title="CVE-2023-36036 Windows Cloud Files Mini Filter Driver 权限提升漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-36036-windows-cloud-files-mini-filter-driver-eop/>
+CVE-2023-36036 Windows Cloud Files Mini Filter Driver 权限提升漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2022-23121-afp-rce/ title="CVE-2022-23121 AFP RCE 分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2022-23121-afp-rce/>
+CVE-2022-23121 AFP RCE 分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-36563-wordpad-info-disclosure/ title="CVE-2023-36563 Wordpad Info Disclosure 分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-36563-wordpad-info-disclosure/>
+CVE-2023-36563 Wordpad Info Disclosure 分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/squid-dos/ title="Squid 拒绝服务漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/squid-dos/>
+Squid 拒绝服务漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-4966-citrix-gateway-info-disclosure/ title="CVE-2023-4966 Citrix Gateway 信息泄露漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-4966-citrix-gateway-info-disclosure/>
+CVE-2023-4966 Citrix Gateway 信息泄露漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-44487-http2-rapid-reset-ddos-attack/ title="CVE-2023-44487 Http2 Rapid Reset DDOS Attack 分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-44487-http2-rapid-reset-ddos-attack/>
+CVE-2023-44487 Http2 Rapid Reset DDOS Attack 分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-38545-curl-heap-overflow/ title="CVE-2023-38545 Curl 堆溢出漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-38545-curl-heap-overflow/>
+CVE-2023-38545 Curl 堆溢出漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-4863-libwebp-rce/ title="CVE-2023-4863 Libwebp Rce 分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-4863-libwebp-rce/>
+CVE-2023-4863 Libwebp Rce 分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-42820-jumpserver-pwd-reset-vuln/ title="CVE-2023-42820 Jumpserver 任意用户密码重置漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-42820-jumpserver-pwd-reset-vuln/>
+CVE-2023-42820 Jumpserver 任意用户密码重置漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/%E7%91%9E%E5%8F%8B%E5%A4%A9%E7%BF%BC-rce/ title="瑞友天翼 Rce分析" class=dd-item>
+<a href=/zh-cn/vulnerability/%E7%91%9E%E5%8F%8B%E5%A4%A9%E7%BF%BC-rce/>
+瑞友天翼 Rce分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-36874-windows-error-reporting-service-eop/ title="CVE-2023-36874 Windows Error Reporting Service 权限提升漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-36874-windows-error-reporting-service-eop/>
+CVE-2023-36874 Windows Error Reporting Service 权限提升漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-38148-windows-ics-rce/ title="CVE-2023-38148 Windows Ics Rce分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-38148-windows-ics-rce/>
+CVE-2023-38148 Windows Ics Rce分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-3519-cirtix-gateway-rce/ title="CVE-2023-3519 Cirtix Gateway RCE分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-3519-cirtix-gateway-rce/>
+CVE-2023-3519 Cirtix Gateway RCE分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-32315-openfire-auth-bypass/ title="CVE-2023-32315 Openfire 身份认证绕过漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-32315-openfire-auth-bypass/>
+CVE-2023-32315 Openfire 身份认证绕过漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/smartbi-rce/ title="Smartbi RCE 分析" class=dd-item>
+<a href=/zh-cn/vulnerability/smartbi-rce/>
+Smartbi RCE 分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-2825-gitlab-path-traversal/ title="CVE-2023-2825 Gitlab 路径穿越漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-2825-gitlab-path-traversal/>
+CVE-2023-2825 Gitlab 路径穿越漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/zero-logon/ title="Zero Logon 分析" class=dd-item>
+<a href=/zh-cn/vulnerability/zero-logon/>
+Zero Logon 分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2022-4223-pgadmin-rce/ title="CVE-2022-4223 PgAdmin RCE 分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2022-4223-pgadmin-rce/>
+CVE-2022-4223 PgAdmin RCE 分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/strapi-rce/ title="Strapi RCE 漏洞链分析" class=dd-item>
+<a href=/zh-cn/vulnerability/strapi-rce/>
+Strapi RCE 漏洞链分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-23410-windows-http-sys-eop/ title="CVE-2023-23410 Windows HTTP.sys 权限提升漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-23410-windows-http-sys-eop/>
+CVE-2023-23410 Windows HTTP.sys 权限提升漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2021-3156-sudo-eop/ title="CVE-2021-3156 Sudo 权限提升漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2021-3156-sudo-eop/>
+CVE-2021-3156 Sudo 权限提升漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-28432-minio-information-disclosure/ title="CVE-2023-28432 MinIO 信息泄露漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-28432-minio-information-disclosure/>
+CVE-2023-28432 MinIO 信息泄露漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2023-23397-outlook-eop/ title="CVE-2023-23397 Outlook 权限提升漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2023-23397-outlook-eop/>
+CVE-2023-23397 Outlook 权限提升漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/proxy-not-shell/ title="Proxy Not Shell 利用链分析" class=dd-item>
+<a href=/zh-cn/vulnerability/proxy-not-shell/>
+Proxy Not Shell 利用链分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/vulnerability/cve-2021-40449-win32k-eop/ title="CVE-2021-40449 Win32k 权限提升漏洞分析" class=dd-item>
+<a href=/zh-cn/vulnerability/cve-2021-40449-win32k-eop/>
+CVE-2021-40449 Win32k 权限提升漏洞分析
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/dailylife/ title=生活随笔 class=dd-item>
+<a href=/zh-cn/dailylife/>
+<b>X. </b>生活随笔
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/dailylife/movies/ title=Movies class=dd-item>
+<a href=/zh-cn/dailylife/movies/>
+<b>X. </b>Movies
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/dailylife/movies/2024-%E6%BD%9C%E8%A1%8C/ title="2024 潜行" class=dd-item>
+<a href=/zh-cn/dailylife/movies/2024-%E6%BD%9C%E8%A1%8C/>
+2024 潜行
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/dailylife/%E5%90%90%E6%A7%BD/ title=吐槽 class=dd-item>
+<a href=/zh-cn/dailylife/%E5%90%90%E6%A7%BD/>
+吐槽
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/dailylife/2023-review-and-2024-outlook/ title=2023年总结和2024年展望 class=dd-item>
+<a href=/zh-cn/dailylife/2023-review-and-2024-outlook/>
+2023年总结和2024年展望
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/misc/ title=杂项 class=dd-item>
+<a href=/zh-cn/misc/>
+<b>X. </b>杂项
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/misc/tools/ title=Tools class=dd-item>
+<a href=/zh-cn/misc/tools/>
+<b>X. </b>Tools
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/misc/tools/citrix-update-monitor/ title="【工具】Citrix NetScaler 更新监控" class=dd-item>
+<a href=/zh-cn/misc/tools/citrix-update-monitor/>
+【工具】Citrix NetScaler 更新监控
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/misc/encoding/ title=Encoding class=dd-item>
+<a href=/zh-cn/misc/encoding/>
+<b>X. </b>Encoding
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/misc/encoding/utf-7/ title="Utf 7" class=dd-item>
+<a href=/zh-cn/misc/encoding/utf-7/>
+Utf 7
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/misc/encoding/unicode/ title=Unicode class=dd-item>
+<a href=/zh-cn/misc/encoding/unicode/>
+Unicode
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/misc/tunnel/ title=隧道 class=dd-item>
+<a href=/zh-cn/misc/tunnel/>
+<b>X. </b>隧道
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/misc/tunnel/application-layer/ title=应用层隧道 class=dd-item>
+<a href=/zh-cn/misc/tunnel/application-layer/>
+<b>X. </b>应用层隧道
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/misc/tunnel/application-layer/ssh-tunnel/ title=SSH隧道 class=dd-item>
+<a href=/zh-cn/misc/tunnel/application-layer/ssh-tunnel/>
+SSH隧道
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/misc/tunnel/transport-layer/ title=传输层隧道 class=dd-item>
+<a href=/zh-cn/misc/tunnel/transport-layer/>
+<b>X. </b>传输层隧道
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/misc/tunnel/transport-layer/socks/ title=Socks隧道 class=dd-item>
+<a href=/zh-cn/misc/tunnel/transport-layer/socks/>
+<b>X. </b>Socks隧道
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/misc/tunnel/network-layer/ title=网络层隧道 class=dd-item>
+<a href=/zh-cn/misc/tunnel/network-layer/>
+<b>X. </b>网络层隧道
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li data-nav-id=/zh-cn/others/ title=其他 class=dd-item>
+<a href=/zh-cn/others/>
+<b>X. </b>其他
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/zh-cn/others/add-timeline-shortcode/ title=给hugo-theme-learn增加timeline功能 class=dd-item>
+<a href=/zh-cn/others/add-timeline-shortcode/>
+给hugo-theme-learn增加timeline功能
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/others/how-to-reset-password-administrator-on-windows-server-2019/ title="在Windows server 2019上重置密码" class=dd-item>
+<a href=/zh-cn/others/how-to-reset-password-administrator-on-windows-server-2019/>
+在Windows server 2019上重置密码
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/zh-cn/others/vmware-based-implementation-of-small-domain-network-construction/ title=基于Vmware的小型域网络搭建 class=dd-item>
+<a href=/zh-cn/others/vmware-based-implementation-of-small-domain-network-construction/>
+基于Vmware的小型域网络搭建
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+</ul>
+<section id=shortcuts>
+<h3>更多</h3>
+<ul>
+<li>
+<a class=padding href=https://www.ch35tnut.site/zh-cn/about><i class="fas fa-person-booth"></i> 关于</a>
+</li>
+<li>
+<a class=padding href=https://github.com/Chestnut4/><i class="fab fa-github"></i> Github 链接</a>
+</li>
+<li>
+<a class=padding href=https://www.ch35tnut.site/zh-cn/tags><i class="fas fa-tags"></i> 标签</a>
+</li>
+<li>
+<a class=padding href=https://www.ch35tnut.site/zh-cn/index.xml><i class="fas fa-fw fa-link"></i> RSS</a>
+</li>
+</ul>
+</section>
+<section id=prefooter>
+<hr>
+<ul>
+<li>
+<a class=padding>
+<i class="fas fa-language fa-fw"></i>
+<div class=select-style>
+<select id=select-language onchange="location=this.value"><option id=zh-cn value=https://www.ch35tnut.site/zh-cn/ selected>简体中文</option><option id=en value=https://www.ch35tnut.site/en/>English</option></select><svg id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="255" height="255" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255"><g><g id="arrow-drop-down"><polygon points="0,63.75 127.5,191.25 255,63.75"/></g></g></svg>
+</div>
+</a>
+</li>
+<li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> 清理历史记录</a></li>
+</ul>
+</section>
+<section id=footer>
+<center>
+</center>
+<script async defer src=https://buttons.github.io/buttons.js></script>
+</section>
+</div>
+</nav>
+<section id=body>
+<div id=overlay></div>
+<div class="padding highlightable">
+<div id=head-tags>
+</div>
+<div id=chapter>
+<div id=body-inner>
+<span id=sidebar-toggle-span>
+<a href=# id=sidebar-toggle data-sidebar-toggle><i class="fas fa-bars"></i> navigation</a>
+</span>
+<h3 id=学习记录>学习记录</h3>
+<p>记录一些平时学习和生活的日常。</p>
+<ul>
+<li>
+<a href=/zh-cn/dailylife/>日常生活</a></li>
+<li>
+<a href=/zh-cn/research/>安全研究</a></li>
+<li>
+<a href=/zh-cn/vulnerability/>漏洞分析</a></li>
+<li>
+<a href=/zh-cn/misc/>杂项</a></li>
+<li>
+<a href=/zh-cn/others/>其他</a></li>
+</ul>
+<hr>
+<p>时间线</p>
+<style type=text/css>.timeline{position:relative;margin:0 auto}.timeline::after{content:"";position:absolute;width:6px;background-color:#444;top:0;bottom:0;left:10%;margin-left:-3px}.timeline .container{padding:10px 10px 10px 40px;margin-top:10px;position:relative;width:90%;left:10%}.timeline .container::after{content:"";position:absolute;width:25px;height:25px;left:-12px;background-color:#6ad7e5;border:4px solid #444;top:0;border-radius:50%;z-index:1}.timeline .container .date{position:absolute;top:0;z-index:1;left:-15%;font-size:large}.timeline .container::before{content:" ";height:0;position:absolute;top:30px;width:0;z-index:1;left:26px;border:solid #6ad7e5;border-width:13px 13px 13px 0;border-color:#6ad7e5 #6ad7e5 transparent transparent}.timeline .content{box-shadow:0 0 3px 3px #6ad7e5;background-color:#fff;position:relative;border-radius:6px;transition:box-shadow .3s}.timeline .content:hover{box-shadow:0 0 3px 4px #6ad7e5}.timeline .content .title{padding:5px 30px;font-weight:700;display:inline-block}.timeline .content .moment{color:#c41a16;text-align:right;position:absolute;top:0;right:0;padding:5px}.timeline .content .body{padding:5px 30px;word-wrap:break-word;text-overflow:ellipsis;overflow:hidden}@media screen and (max-width:600px){.timeline .container{padding:10px 10px 0 40px;left:5%;width:95%}.timeline .container .date{font-size:small;transform:rotate(-90deg);left:-5%;top:30px}.timeline .container::after{left:3px}.timeline .content .body{padding:5px}.timeline .content .moment{position:relative}}</style>
+<div class=timeline>
+<div class=container>
+<div class=content>
+<div class=title>01-12至01-13</div>
+<div class=moment id=moment>
+| 19 days ago
+</div>
+<div class=body>
+<p>GitLab 账户接管漏洞分析</p>
+<ul>
+<li>
+<a href=/zh-cn/vulnerability/cve-2023-7028-gitlab-account-takeover/>CVE-2023-7028 GitLab Account Takeover 分析</a></li>
+</ul>
+</div>
+</div>
+<div class=date>2024</div>
+</div>
+<script>function non0plural(a,b){return a==0?"":a>1?a+" "+b+"s":a+" "+b}function refresh(){start=dayjs("2024-01-12"),now=dayjs(),total_days=now.diff(start,"d",!0),total_months=now.diff(start,"M",!0),months=total_months%12,years=Math.floor(total_months/12),years>=1&&(total_days-=365*years),months>=1&&(total_days-=30*months),el=document.querySelector("#moment"),el.innerHTML=years>1?non0plural(years,"year"):" "+months>1?non0plural(months.toFixed(4),"month"):""+total_days>=1?non0plural(total_days.toFixed(2),"day"):"",el.innerHTML=el.innerHTML+" ago"}window.setInterval(refresh,100)</script>
+<div class=container>
+<div class=content>
+<div class=title>01-05至01-08</div>
+<div class=moment id=moment-cf4ef5da15c8dbcd>
+3 days | 26 days ago
+</div>
+<div class=body>
+<p>研究了一下JAVA的URL DNS原理。</p>
+<ul>
+<li>
+<a href=/zh-cn/research/web/java-deserialization/urldns/>JAVA URL DNS研究</a></li>
+</ul>
+</div>
+</div>
+<div class=date>2024</div>
+</div>
+<div class=container>
+<div class=content>
+<div class=title>12-29至12-29</div>
+<div class=moment id=moment-adc2fdf458ccb16b>
+| 33 days ago
+</div>
+<div class=body>
+<p>填坑</p>
+<ul>
+<li>
+<a href=/zh-cn/vulnerability/windows-clfs-eop/cve-2022-37969/>windows CLFS 权限提升漏洞 CVE-2022-37969</a></li>
+<li>
+<a href=/zh-cn/vulnerability/windows-clfs-eop/cve-2023-28252/>windows CLFS 权限提升漏洞 CVE-2023-28252</a></li>
+<li>
+<a href=/zh-cn/vulnerability/cve-2023-6553-wordpress-backup-migration-plugin-rce/>Wordpress Backup Migration plugin RCE</a></li>
+</ul>
+</div>
+</div>
+<div class=date>2023</div>
+</div>
+<div class=container>
+<div class=content>
+<div class=title>12-05至12-06</div>
+<div class=moment id=moment-1885aa4c46ccd2b4>
+1 day | 57 days ago
+</div>
+<div class=body>
+<p>分析了CVE-2021-4034 polkit 权限提升漏洞，填坑。</p>
+<ul>
+<li>
+<a href=/zh-cn/vulnerability/cve-2021-4034-polkit-eop/>polkit 权限提升漏洞</a></li>
+</ul>
+</div>
+</div>
+<div class=date>2023</div>
+</div>
+<div class=container>
+<div class=content>
+<div class=title>11-30至12-01</div>
+<div class=moment id=moment-bc1c6fca884ec8da>
+1 day | 62 days ago
+</div>
+<div class=body>
+<p>分析了CVE-2023-17530 Apache Struts OGNL 远程代码执行漏洞</p>
+<ul>
+<li>
+<a href=/zh-cn/vulnerability/cve-2020-17530-apache-struts-ognl-rce/>Apache Struts OGNL 远程代码执行漏洞</a></li>
+</ul>
+</div>
+</div>
+<div class=date>2023</div>
+</div>
+<div class=container>
+<div class=content>
+<div class=title>11-20至11-25</div>
+<div class=moment id=moment-f4ce4b4c8cda5d84>
+5 days | 72 days ago
+</div>
+<div class=body>
+<p>分析了在野利用的 CVE-2023-36036 Windows Cloud Files Mini Filter Driver 权限提升漏洞</p>
+<ul>
+<li>
+<a href=/zh-cn/vulnerability/cve-2023-36036-windows-cloud-files-mini-filter-driver-eop/>Windows Cloud Files Mini Filter Driver 权限提升漏洞</a></li>
+</ul>
+</div>
+</div>
+<div class=date>2023</div>
+</div>
+<div class=container>
+<div class=content>
+<div class=title>10-31至11-01</div>
+<div class=moment id=moment-ccec2cfa4f45fcdd>
+1 day | 92 days ago
+</div>
+<div class=body>
+<p>分析了在野利用的wordpad 信息泄露漏洞</p>
+<ul>
+<li>
+<a href=/zh-cn/vulnerability/cve-2023-36563-wordpad-info-disclosure/>wordpad 信息泄露漏洞</a></li>
+</ul>
+</div>
+</div>
+<div class=date>2023</div>
+</div>
+<div class=container>
+<div class=content>
+<div class=title>10-19至10-25</div>
+<div class=moment id=moment-adebc1c468cdcf42>
+6 days | 104 days ago
+</div>
+<div class=body>
+<p>分析了两个漏洞</p>
+<ul>
+<li>
+<a href=/zh-cn/vulnerability/cve-2023-4966-citrix-gateway-info-disclosure/>Citrix 信息泄露漏洞</a></li>
+<li>
+<a href=/zh-cn/vulnerability/squid-dos/>squid 拒绝服务漏洞</a></li>
+</ul>
+</div>
+</div>
+<div class=date>2023</div>
+</div>
+<div class=container>
+<div class=content>
+<div class=title>10-14至10-15</div>
+<div class=moment id=moment-fcdcd56d48cacdaf>
+1 day | 109 days ago
+</div>
+<div class=body>
+<p>复现分析了curl 堆溢出漏洞</p>
+<ul>
+<li>
+<a href=/zh-cn/vulnerability/cve-2023-38545-curl-heap-overflow/>curl堆溢出漏洞</a></li>
+</ul>
+</div>
+</div>
+<div class=date>2023</div>
+</div>
+<div class=container>
+<div class=content>
+<div class=title>10-12至10-13</div>
+<div class=moment id=moment-b8ac8d55444cad8d>
+1 day | 111 days ago
+</div>
+<div class=body>
+<p>复现分析了http2 快速重置攻击</p>
+<ul>
+<li>
+<a href=/zh-cn/vulnerability/cve-2023-44487-http2-rapid-reset-ddos-attack/>http rapid reset ddos attack</a></li>
+</ul>
+</div>
+</div>
+<div class=date>2023</div>
+</div>
+<div class=container>
+<div class=content>
+<div class=title>09-19至09-19</div>
+<div class=moment id=moment-de4fcc8be4fab6cc>
+| 134 days ago
+</div>
+<div class=body>
+<p>把之前写的文章整理到了博客</p>
+<ul>
+<li>
+<a href=/zh-cn/vulnerability/cve-2023-36874-windows-error-reporting-service-eop/>windows 错误报告服务权限提升漏洞</a></li>
+<li>
+<a href=./vulnerability/CVE-2023-38831-winrar-code-exec.zh-cn.md>winrar 代码执行漏洞</a></li>
+</ul>
+</div>
+</div>
+<div class=date>2023</div>
+</div>
+<div class=container>
+<div class=content>
+<div class=title>09-14至09-18</div>
+<div class=moment id=moment-c415c5fef8f4d4dd>
+4 days | 139 days ago
+</div>
+<div class=body>
+<p>分析了以下9月补丁日的CVE-2023-38148, 分析文章：</p>
+<ul>
+<li>
+<a href=/zh-cn/vulnerability/cve-2023-38148-windows-ics-rce/>windows ics rce</a></li>
+</ul>
+</div>
+</div>
+<div class=date>2023</div>
+</div>
+<div class=container>
+<div class=content>
+<div class=title>07-24至07-27</div>
+<div class=moment id=moment-c4f6d4c8ff25e48a>
+3 days | 191 days ago
+</div>
+<div class=body>
+<p>前几天搭建Citrix ADC环境，实在是太难搭了，最后还是选择从公网找了个环境打了一下payload，diff了以下补丁，写了一个分析，可惜不能本地调试，看起来写exp应该挺简单的。分析见</p>
+<ul>
+<li>
+<a href=/zh-cn/vulnerability/cve-2023-3519-cirtix-gateway-rce/>citrix adc rce</a></li>
+</ul>
+<p><em>更新：搭建了调试环境，调试了一下，更新在原链接</em></p>
+</div>
+</div>
+<div class=date>2023</div>
+</div>
+<div class=container>
+<div class=content>
+<div class=title>09-13至09-16</div>
+<div class=moment id=moment-ad5de2c8b4ecd44c>
+3 days | 505 days ago
+</div>
+<div class=body>
+<p>这周再写一个基于rust的loader，写了一半发现加载的dll太多了，再想办法用动态加载的方式加载dll，感觉用rust做有点难。</p>
+<p>用rust的内联汇编获取到了kernel32.dll和ntdll.dll的基址，还要继续完善。</p>
+</div>
+</div>
+<div class=date>2022</div>
+</div>
+<div class=container>
+<div class=content>
+<div class=title>09-10至09-12</div>
+<div class=moment id=moment-bc8c441ecccedfa8>
+2 days | 508 days ago
+</div>
+<div class=body>
+<p>中秋节，在家摸了几天🐟，啥都没干</p>
+</div>
+</div>
+<div class=date>2022</div>
+</div>
+<div class=container>
+<div class=content>
+<div class=title>09-05至09-09</div>
+<div class=moment id=moment-df454ccc8c528ea4>
+4 days | 513 days ago
+</div>
+<div class=body>
+<p>这周编译了wireshark 1.8.5，通过diff1.8.5和1.8.6的源码找出1.8.5里面的漏洞，见</p>
+<ul>
+<li>
+<a href=/zh-cn/research/code-audit/wireshark-185/>wireshark 1.8.5代码审计</a></li>
+<li></li>
+</ul>
+</div>
+</div>
+<div class=date>2022</div>
+</div>
+<div class=container>
+<div class=content>
+<div class=title>09-03至09-04</div>
+<div class=moment id=moment-8a52cc51ed48c46a>
+1 day | 515 days ago
+</div>
+<div class=body>
+<p>这两天，给hugo主题增加了timeline的shortcode，见</p>
+<ul>
+<li>
+<a href=/zh-cn/others/add-timeline-shortcode/>增加timeline功能</a></li>
+</ul>
+</div>
+</div>
+<div class=date>2022</div>
+</div>
+<div class=container>
+<div class=content>
+<div class=title>08-29至09-02</div>
+<div class=moment id=moment-f8e8d564ad45ccea>
+4 days | 520 days ago
+</div>
+<div class=body>
+<p>周内看了一个几百行的代码，见
+<a href=/zh-cn/research/code-audit/news-server/>news_server审计</a></p>
+</div>
+</div>
+<div class=date>2022</div>
+</div>
+</div>
+<hr>
+<p><em><strong>黑客精神：Open, Share, Free</strong></em></p>
+</div>
+</div>
+</div>
+<div id=navigation>
+<a class="nav nav-next" href=/zh-cn/research/ title=安全研究 style=margin-right:0><i class="fa fa-chevron-right"></i></a>
+</div>
+</section>
+<div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
+<div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div>
+</div>
+<script src=/js/clipboard.min.js?1706695571></script>
+<script src=/js/perfect-scrollbar.min.js?1706695571></script>
+<script src=/js/perfect-scrollbar.jquery.min.js?1706695571></script>
+<script src=/js/jquery.sticky.js?1706695571></script>
+<script src=/js/featherlight.min.js?1706695571></script>
+<script src=/js/highlight.pack.js?1706695571></script>
+<script>hljs.initHighlightingOnLoad()</script>
+<script src=/js/modernizr.custom-3.6.0.js?1706695571></script>
+<script src=/js/learn.js?1706695571></script>
+<script src=/js/hugo-learn.js?1706695571></script>
+<script src=/mermaid/mermaid.js?1706695571></script>
+<script>mermaid.initialize({startOnLoad:!0})</script>
+<script>(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-105947713-1','auto'),ga('send','pageview')</script>
+</body>
+</html>

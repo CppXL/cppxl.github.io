@@ -1,12 +1,42 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Web on chestnut's blog</title><link>https://www.ch35tnut.site/zh-cn/research/web/</link><description>Recent content in Web on chestnut's blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 19 Sep 2022 00:38:30 +0800</lastBuildDate><atom:link href="https://www.ch35tnut.site/zh-cn/research/web/index.xml" rel="self" type="application/rss+xml"/><item><title>Java Deserialization</title><link>https://www.ch35tnut.site/zh-cn/research/web/java-deserialization/</link><pubDate>Mon, 08 Jan 2024 16:54:25 +0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/research/web/java-deserialization/</guid><description><h3 id="java反序列化">java反序列化</h3><p>java 反序列化研究</p><ul><li><a href="/zh-cn/research/web/java-deserialization/urldns/">JAVA URL DNS 研究</a></li><li><a href="/zh-cn/research/web/java-deserialization/commonsbeanutils1-chain/">CommonsBeanutils1 链研究</a></li></ul></description></item><item><title>PHP Filter RCE 分析</title><link>https://www.ch35tnut.site/zh-cn/research/web/php-filter-rce/</link><pubDate>Fri, 29 Dec 2023 18:32:43 +0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/research/web/php-filter-rce/</guid><description><h3 id="php-filter是什么">PHP filter是什么</h3><p>PHP filter是PHP定义的一个伪协议，用于在数据流打开时进行筛选过滤，在数据读取或者写入的时候通过过滤器对数据进行处理。PHP filter 可以使用多个过滤器进行处理。</p><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#a6e22e">php</span><span style="color:#f92672">://</span><span style="color:#a6e22e">filter</span><span style="color:#f92672">/</span><span style="color:#a6e22e">过滤器</span><span style="color:#f92672">|</span><span style="color:#a6e22e">过滤器</span><span style="color:#f92672">/</span><span style="color:#a6e22e">resource</span><span style="color:#f92672">=</span><span style="color:#a6e22e">待过滤的数据流</span></span></span></code></pre></div><p>require_once和require的参数是一个文件路径，指明要包含的文件，而PHP filter 提供了接口，使得可以通过这个接口访问到指定的文件内容，require在包含文件时，只关心文件内容，而不关心文件内容来自于何处，所以可以给require 传PHP filter参数，</p><p>如果有如下代码</p><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span></span></span><span style="display:flex;"><span>$file<span style="color:#f92672">=</span> $_GET[<span style="color:#e6db74">'page'</span>];</span></span><span style="display:flex;"><span><span style="color:#66d9ef">require</span>($file);</span></span></code></pre></div><p>则可以通过如下请求泄露敏感信息</p><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl<span style="color:#e6db74">"http://localhost/test.php?page=php://filter/convert.base64-encode/resource=/etc/passwd"</span></span></span></code></pre></div><p>PHP的base64decode函数在处理base64编码的数据时，会自动规范化：去除字符串中不合法的字符并且忽略，而后尝试解码。
-但PHP filter的base64解码行为和<code>base64decode</code>行为略有不同，PHP filter的base64-decode不能处理随即插入的等号，此时可以使用UTF-7编码规避，UTF-7编码会把等号转化为其他的base64字符。</p><h4 id="通过编码前置字符">通过编码前置字符</h4><p>根据官网链接的<a href="https://www.synacktiv.com/en/publications/php-filters-chain-what-is-it-and-how-to-use-it" target="_blank">reference</a><a href="https://www.php.net/manual/en/filters.convert.php#filters.convert.iconv" target="_blank">根据文档</a>，如果开启了iconv支持，则可以通过伪协议<code>php://convert.iconv.*.*</code>调用iconv函数。</p><blockquote><p><code>convert.iconv.&lt;input-encoding>.&lt;output-encoding></code> or<code>convert.iconv.&lt;input-encoding>/&lt;output-encoding></code></p></blockquote><p>linux中可以使用iconv函数将字符串从一个编码转为另外一个编码，在PHP://filter中可以使用iconv过滤器调用到这个函数</p><pre tabindex="0"><code>php -r "echo file_get_contents(\"php://filter/convert.iconv.UTF8.CSISO2022KR|convert.base64-encode|convert.iconv.UTF8.UTF7/res
-ource=php://temp\");"
-GyQpQw+AD0APQ-#</code></pre><p>某些编码规定该编码会在数据之前预置一些字节，相当于签名，标识这段数据是该编码
-在<a href="https://www.rfc-editor.org/rfc/rfc2781#section-3.2" target="_blank">RFC 2781</a>中就说明该编码会预置0XFEFF</p><blockquote><p>The Unicode Standard and ISO 10646 define the character &ldquo;ZERO WIDTH
-NON-BREAKING SPACE&rdquo; (0xFEFF), which is also known informally as &ldquo;BYTE
-ORDER MARK&rdquo; (abbreviated &ldquo;BOM&rdquo;).This usage, suggested by Unicode
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Web on chestnut's blog</title><link>https://www.ch35tnut.site/zh-cn/research/web/</link><description>Recent content in Web on chestnut's blog</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Mon, 19 Sep 2022 00:38:30 +0800</lastBuildDate><atom:link href="https://www.ch35tnut.site/zh-cn/research/web/index.xml" rel="self" type="application/rss+xml"/><item><title>Java Deserialization</title><link>https://www.ch35tnut.site/zh-cn/research/web/java-deserialization/</link><pubDate>Mon, 08 Jan 2024 16:54:25 +0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/research/web/java-deserialization/</guid><description>&lt;h3 id="java反序列化">java反序列化&lt;/h3>
+&lt;p>java 反序列化研究&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;a href="https://www.ch35tnut.site/zh-cn/research/web/java-deserialization/urldns/">JAVA URL DNS 研究&lt;/a>&lt;/li>
+&lt;li>
+&lt;a href="https://www.ch35tnut.site/zh-cn/research/web/java-deserialization/commonsbeanutils1-chain/">CommonsBeanutils1 链研究&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>PHP Filter RCE 分析</title><link>https://www.ch35tnut.site/zh-cn/research/web/php-filter-rce/</link><pubDate>Fri, 29 Dec 2023 18:32:43 +0800</pubDate><guid>https://www.ch35tnut.site/zh-cn/research/web/php-filter-rce/</guid><description>&lt;h3 id="php-filter是什么">PHP filter是什么&lt;/h3>
+&lt;p>PHP filter是PHP定义的一个伪协议，用于在数据流打开时进行筛选过滤，在数据读取或者写入的时候通过过滤器对数据进行处理。PHP filter 可以使用多个过滤器进行处理。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-php" data-lang="php">&lt;span style="color:#a6e22e">php&lt;/span>&lt;span style="color:#f92672">://&lt;/span>&lt;span style="color:#a6e22e">filter&lt;/span>&lt;span style="color:#f92672">/&lt;/span>&lt;span style="color:#a6e22e">过滤器&lt;/span>&lt;span style="color:#f92672">|&lt;/span>&lt;span style="color:#a6e22e">过滤器&lt;/span>&lt;span style="color:#f92672">/&lt;/span>&lt;span style="color:#a6e22e">resource&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#a6e22e">待过滤的数据流&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>require_once和require的参数是一个文件路径，指明要包含的文件，而PHP filter 提供了接口，使得可以通过这个接口访问到指定的文件内容，require在包含文件时，只关心文件内容，而不关心文件内容来自于何处，所以可以给require 传PHP filter参数，&lt;/p>
+&lt;p>如果有如下代码&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-php" data-lang="php">&lt;span style="color:#f92672">&amp;lt;?&lt;/span>&lt;span style="color:#a6e22e">php&lt;/span>
+$file &lt;span style="color:#f92672">=&lt;/span> $_GET[&lt;span style="color:#e6db74">&amp;#39;page&amp;#39;&lt;/span>];
+&lt;span style="color:#66d9ef">require&lt;/span>($file);
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>则可以通过如下请求泄露敏感信息&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">curl &lt;span style="color:#e6db74">&amp;#34;http://localhost/test.php?page=php://filter/convert.base64-encode/resource=/etc/passwd&amp;#34;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>PHP的base64decode函数在处理base64编码的数据时，会自动规范化：去除字符串中不合法的字符并且忽略，而后尝试解码。
+但PHP filter的base64解码行为和&lt;code>base64decode&lt;/code>行为略有不同，PHP filter的base64-decode不能处理随即插入的等号，此时可以使用UTF-7编码规避，UTF-7编码会把等号转化为其他的base64字符。&lt;/p>
+&lt;h4 id="通过编码前置字符">通过编码前置字符&lt;/h4>
+&lt;p>根据官网链接的
+&lt;a href="https://www.synacktiv.com/en/publications/php-filters-chain-what-is-it-and-how-to-use-it" target="_blank">reference&lt;/a>
+&lt;a href="https://www.php.net/manual/en/filters.convert.php#filters.convert.iconv" target="_blank">根据文档&lt;/a>，如果开启了iconv支持，则可以通过伪协议&lt;code>php://convert.iconv.*.*&lt;/code>调用iconv函数。&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;code>convert.iconv.&amp;lt;input-encoding&amp;gt;.&amp;lt;output-encoding&amp;gt;&lt;/code> or &lt;code>convert.iconv.&amp;lt;input-encoding&amp;gt;/&amp;lt;output-encoding&amp;gt;&lt;/code>&lt;/p>
+&lt;/blockquote>
+&lt;p>linux中可以使用iconv函数将字符串从一个编码转为另外一个编码，在PHP://filter中可以使用iconv过滤器调用到这个函数&lt;/p>
+&lt;pre tabindex="0">&lt;code>php -r &amp;quot;echo file_get_contents(\&amp;quot;php://filter/convert.iconv.UTF8.CSISO2022KR|convert.base64-encode|convert.iconv.UTF8.UTF7/res
+ource=php://temp\&amp;quot;);&amp;quot;
+GyQpQw+AD0APQ-#
+&lt;/code>&lt;/pre>&lt;p>某些编码规定该编码会在数据之前预置一些字节，相当于签名，标识这段数据是该编码
+在
+&lt;a href="https://www.rfc-editor.org/rfc/rfc2781#section-3.2" target="_blank">RFC 2781&lt;/a>中就说明该编码会预置0XFEFF&lt;/p>
+&lt;blockquote>
+&lt;p>The Unicode Standard and ISO 10646 define the character &amp;ldquo;ZERO WIDTH
+NON-BREAKING SPACE&amp;rdquo; (0xFEFF), which is also known informally as &amp;ldquo;BYTE
+ORDER MARK&amp;rdquo; (abbreviated &amp;ldquo;BOM&amp;rdquo;).This usage, suggested by Unicode
 and ISO 10646 Annex F (informative), is to prepend a 0xFEFF character
-to a stream of Unicode characters as a &ldquo;signature&rdquo;; a receiver of such
+to a stream of Unicode characters as a &amp;ldquo;signature&amp;rdquo;; a receiver of such
 a serialized stream may then use the initial character both as a hint
 that the stream consists of Unicode characters and as a way to recognize
 the serialization order.
@@ -14,4 +44,357 @@ In serialized UTF-16 prepended with such a signature, the order is
 big-endian if the first two octets are 0xFE followed by 0xFF; if they
 are 0xFF followed by 0xFE, the order is little-endian. Note that
 0xFFFE is not a Unicode character, precisely to preserve the
-usefulness of 0xFEFF as a byte-order mark.</p></blockquote><p>下图给出了如何在字符串前面预置8</p><ul><li>首先将UTF-8格式的字符串start转化为UTF-16格式</li><li>UTF-16会在字符串前面预置0xFFFE</li><li>前面预置的0xFF在LATIN6表中对应于<code>ĸ</code></li><li>而后尝试将这个字符串以LATIN6格式转化为UTF-16格式</li><li>UTF-16会在字符串前面预置0xFFFE，<code>ĸ</code>在UNICODE表中对应于0x0138，而后逐个打印，0x38变成了8</li></ul><p><img alt="" src="/images/research/web/PHP-filter-RCE.zh-cn.assets/prepend_character8.png"/></p><p>LANTIN6表如下：</p><table><thead><tr><th/><th>x0</th><th>x1</th><th>x2</th><th>x3</th><th>x4</th><th>x5</th><th>x6</th><th>x7</th><th>x8</th><th>x9</th><th>xA</th><th>xB</th><th>xC</th><th>xD</th><th>xE</th><th>xF</th></tr></thead><tbody><tr><td>0x</td><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr><tr><td>1x</td><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr><tr><td>2x</td><td>SP</td><td>!</td><td>"</td><td>#</td><td>$</td><td>%</td><td>&amp;</td><td>'</td><td>(</td><td>)</td><td>*</td><td>+</td><td>,</td><td>-</td><td>.</td><td>/</td></tr><tr><td>3x</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>:</td><td>;</td><td>&lt;</td><td>=</td><td>></td><td>?</td></tr><tr><td>4x</td><td>@</td><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td><td>O</td></tr><tr><td>5x</td><td>P</td><td>Q</td><td>R</td><td>S</td><td>T</td><td>U</td><td>V</td><td>W</td><td>X</td><td>Y</td><td>Z</td><td>[</td><td>|]</td><td>^</td><td>_</td><td/></tr><tr><td>6x</td><td>`</td><td>a</td><td>b</td><td>c</td><td>d</td><td>e</td><td>f</td><td>g</td><td>h</td><td>i</td><td>j</td><td>k</td><td>l</td><td>m</td><td>n</td><td>o</td></tr><tr><td>7x</td><td>p</td><td>q</td><td>r</td><td>s</td><td>t</td><td>u</td><td>v</td><td>w</td><td>x</td><td>y</td><td>z</td><td>{</td><td>|</td><td>}</td><td>~</td><td/></tr><tr><td>8x</td><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr><tr><td>9x</td><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr><tr><td>Ax</td><td>NBSP</td><td>Ą</td><td>Ē</td><td>Ģ</td><td>Ī</td><td>Ĩ</td><td>Ķ</td><td>§</td><td>Ļ</td><td>Đ</td><td>Š</td><td>Ŧ</td><td>Ž</td><td>SHY</td><td>Ū</td><td>Ŋ</td></tr><tr><td>Bx</td><td>°</td><td>ą</td><td>ē</td><td>ģ</td><td>ī</td><td>ĩ</td><td>ķ</td><td>·</td><td>ļ</td><td>đ</td><td>š</td><td>ŧ</td><td>ž</td><td>―</td><td>ū</td><td>ŋ</td></tr><tr><td>Cx</td><td>Ā</td><td>Á</td><td>Â</td><td>Ã</td><td>Ä</td><td>Å</td><td>Æ</td><td>Į</td><td>Č</td><td>É</td><td>Ę</td><td>Ë</td><td>Ė</td><td>Í</td><td>Î</td><td>Ï</td></tr><tr><td>Dx</td><td>Ð</td><td>Ņ</td><td>Ō</td><td>Ó</td><td>Ô</td><td>Õ</td><td>Ö</td><td>Ũ</td><td>Ø</td><td>Ų</td><td>Ú</td><td>Û</td><td>Ü</td><td>Ý</td><td>Þ</td><td>ß</td></tr><tr><td>Ex</td><td>ā</td><td>á</td><td>â</td><td>ã</td><td>ä</td><td>å</td><td>æ</td><td>į</td><td>č</td><td>é</td><td>ę</td><td>ë</td><td>ė</td><td>í</td><td>î</td><td>ï</td></tr><tr><td>Fx</td><td>ð</td><td>ņ</td><td>ō</td><td>ó</td><td>ô</td><td>õ</td><td>ö</td><td>ũ</td><td>ø</td><td>ų</td><td>ú</td><td>û</td><td>ü</td><td>ý</td><td><strong>þ</strong></td><td><strong>ĸ</strong></td></tr></tbody></table><p>UNICODE如下：<img alt="" src="/images/research/web/PHP-filter-RCE.zh-cn.assets/1.png"/></p><p>通过将恶意代码转化为base64形式，而后通过编码预置字符，最后使用<code>convert.base64-decode</code>尝试解码预置的数据，就可以使得PHP filter最后解码出恶意代码。</p><p>当使用require时，且路径可控，就可以利用PHP filter执行任意代码。</p><p>参考链接</p><blockquote><p><a href="https://gynvael.coldwind.pl/?id=671" target="_blank">https://gynvael.coldwind.pl/?id=671</a><a href="https://gist.github.com/loknop/b27422d355ea1fd0d90d6dbc1e278d4d" target="_blank">https://gist.github.com/loknop/b27422d355ea1fd0d90d6dbc1e278d4d</a><a href="https://www.synacktiv.com/en/publications/php-filters-chain-what-is-it-and-how-to-use-it" target="_blank">https://www.synacktiv.com/en/publications/php-filters-chain-what-is-it-and-how-to-use-it</a></p></blockquote><p><strong>Created at 2023-12-29T18:32:43+08:00</strong></p></description></item></channel></rss>
+usefulness of 0xFEFF as a byte-order mark.&lt;/p>
+&lt;/blockquote>
+&lt;p>下图给出了如何在字符串前面预置8&lt;/p>
+&lt;ul>
+&lt;li>首先将UTF-8格式的字符串start转化为UTF-16格式&lt;/li>
+&lt;li>UTF-16会在字符串前面预置0xFFFE&lt;/li>
+&lt;li>前面预置的0xFF在LATIN6表中对应于&lt;code>ĸ&lt;/code>&lt;/li>
+&lt;li>而后尝试将这个字符串以LATIN6格式转化为UTF-16格式&lt;/li>
+&lt;li>UTF-16会在字符串前面预置0xFFFE，&lt;code>ĸ&lt;/code>在UNICODE表中对应于0x0138，而后逐个打印，0x38变成了8&lt;/li>
+&lt;/ul>
+&lt;p>
+&lt;img alt="" src="https://www.ch35tnut.site/images/research/web/PHP-filter-RCE.zh-cn.assets/prepend_character8.png" />&lt;/p>
+&lt;p>LANTIN6表如下：&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>&lt;/th>
+&lt;th>x0&lt;/th>
+&lt;th>x1&lt;/th>
+&lt;th>x2&lt;/th>
+&lt;th>x3&lt;/th>
+&lt;th>x4&lt;/th>
+&lt;th>x5&lt;/th>
+&lt;th>x6&lt;/th>
+&lt;th>x7&lt;/th>
+&lt;th>x8&lt;/th>
+&lt;th>x9&lt;/th>
+&lt;th>xA&lt;/th>
+&lt;th>xB&lt;/th>
+&lt;th>xC&lt;/th>
+&lt;th>xD&lt;/th>
+&lt;th>xE&lt;/th>
+&lt;th>xF&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>0x&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>1x&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>2x&lt;/td>
+&lt;td>SP&lt;/td>
+&lt;td>!&lt;/td>
+&lt;td>&amp;quot;&lt;/td>
+&lt;td>#&lt;/td>
+&lt;td>$&lt;/td>
+&lt;td>%&lt;/td>
+&lt;td>&amp;amp;&lt;/td>
+&lt;td>'&lt;/td>
+&lt;td>(&lt;/td>
+&lt;td>)&lt;/td>
+&lt;td>*&lt;/td>
+&lt;td>+&lt;/td>
+&lt;td>,&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>.&lt;/td>
+&lt;td>/&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>3x&lt;/td>
+&lt;td>0&lt;/td>
+&lt;td>1&lt;/td>
+&lt;td>2&lt;/td>
+&lt;td>3&lt;/td>
+&lt;td>4&lt;/td>
+&lt;td>5&lt;/td>
+&lt;td>6&lt;/td>
+&lt;td>7&lt;/td>
+&lt;td>8&lt;/td>
+&lt;td>9&lt;/td>
+&lt;td>:&lt;/td>
+&lt;td>;&lt;/td>
+&lt;td>&amp;lt;&lt;/td>
+&lt;td>=&lt;/td>
+&lt;td>&amp;gt;&lt;/td>
+&lt;td>?&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>4x&lt;/td>
+&lt;td>@&lt;/td>
+&lt;td>A&lt;/td>
+&lt;td>B&lt;/td>
+&lt;td>C&lt;/td>
+&lt;td>D&lt;/td>
+&lt;td>E&lt;/td>
+&lt;td>F&lt;/td>
+&lt;td>G&lt;/td>
+&lt;td>H&lt;/td>
+&lt;td>I&lt;/td>
+&lt;td>J&lt;/td>
+&lt;td>K&lt;/td>
+&lt;td>L&lt;/td>
+&lt;td>M&lt;/td>
+&lt;td>N&lt;/td>
+&lt;td>O&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>5x&lt;/td>
+&lt;td>P&lt;/td>
+&lt;td>Q&lt;/td>
+&lt;td>R&lt;/td>
+&lt;td>S&lt;/td>
+&lt;td>T&lt;/td>
+&lt;td>U&lt;/td>
+&lt;td>V&lt;/td>
+&lt;td>W&lt;/td>
+&lt;td>X&lt;/td>
+&lt;td>Y&lt;/td>
+&lt;td>Z&lt;/td>
+&lt;td>[&lt;/td>
+&lt;td>|]&lt;/td>
+&lt;td>^&lt;/td>
+&lt;td>_&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>6x&lt;/td>
+&lt;td>`&lt;/td>
+&lt;td>a&lt;/td>
+&lt;td>b&lt;/td>
+&lt;td>c&lt;/td>
+&lt;td>d&lt;/td>
+&lt;td>e&lt;/td>
+&lt;td>f&lt;/td>
+&lt;td>g&lt;/td>
+&lt;td>h&lt;/td>
+&lt;td>i&lt;/td>
+&lt;td>j&lt;/td>
+&lt;td>k&lt;/td>
+&lt;td>l&lt;/td>
+&lt;td>m&lt;/td>
+&lt;td>n&lt;/td>
+&lt;td>o&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>7x&lt;/td>
+&lt;td>p&lt;/td>
+&lt;td>q&lt;/td>
+&lt;td>r&lt;/td>
+&lt;td>s&lt;/td>
+&lt;td>t&lt;/td>
+&lt;td>u&lt;/td>
+&lt;td>v&lt;/td>
+&lt;td>w&lt;/td>
+&lt;td>x&lt;/td>
+&lt;td>y&lt;/td>
+&lt;td>z&lt;/td>
+&lt;td>{&lt;/td>
+&lt;td>|&lt;/td>
+&lt;td>}&lt;/td>
+&lt;td>~&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>8x&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>9x&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Ax&lt;/td>
+&lt;td>NBSP&lt;/td>
+&lt;td>Ą&lt;/td>
+&lt;td>Ē&lt;/td>
+&lt;td>Ģ&lt;/td>
+&lt;td>Ī&lt;/td>
+&lt;td>Ĩ&lt;/td>
+&lt;td>Ķ&lt;/td>
+&lt;td>§&lt;/td>
+&lt;td>Ļ&lt;/td>
+&lt;td>Đ&lt;/td>
+&lt;td>Š&lt;/td>
+&lt;td>Ŧ&lt;/td>
+&lt;td>Ž&lt;/td>
+&lt;td>SHY&lt;/td>
+&lt;td>Ū&lt;/td>
+&lt;td>Ŋ&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Bx&lt;/td>
+&lt;td>°&lt;/td>
+&lt;td>ą&lt;/td>
+&lt;td>ē&lt;/td>
+&lt;td>ģ&lt;/td>
+&lt;td>ī&lt;/td>
+&lt;td>ĩ&lt;/td>
+&lt;td>ķ&lt;/td>
+&lt;td>·&lt;/td>
+&lt;td>ļ&lt;/td>
+&lt;td>đ&lt;/td>
+&lt;td>š&lt;/td>
+&lt;td>ŧ&lt;/td>
+&lt;td>ž&lt;/td>
+&lt;td>―&lt;/td>
+&lt;td>ū&lt;/td>
+&lt;td>ŋ&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Cx&lt;/td>
+&lt;td>Ā&lt;/td>
+&lt;td>Á&lt;/td>
+&lt;td>Â&lt;/td>
+&lt;td>Ã&lt;/td>
+&lt;td>Ä&lt;/td>
+&lt;td>Å&lt;/td>
+&lt;td>Æ&lt;/td>
+&lt;td>Į&lt;/td>
+&lt;td>Č&lt;/td>
+&lt;td>É&lt;/td>
+&lt;td>Ę&lt;/td>
+&lt;td>Ë&lt;/td>
+&lt;td>Ė&lt;/td>
+&lt;td>Í&lt;/td>
+&lt;td>Î&lt;/td>
+&lt;td>Ï&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Dx&lt;/td>
+&lt;td>Ð&lt;/td>
+&lt;td>Ņ&lt;/td>
+&lt;td>Ō&lt;/td>
+&lt;td>Ó&lt;/td>
+&lt;td>Ô&lt;/td>
+&lt;td>Õ&lt;/td>
+&lt;td>Ö&lt;/td>
+&lt;td>Ũ&lt;/td>
+&lt;td>Ø&lt;/td>
+&lt;td>Ų&lt;/td>
+&lt;td>Ú&lt;/td>
+&lt;td>Û&lt;/td>
+&lt;td>Ü&lt;/td>
+&lt;td>Ý&lt;/td>
+&lt;td>Þ&lt;/td>
+&lt;td>ß&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Ex&lt;/td>
+&lt;td>ā&lt;/td>
+&lt;td>á&lt;/td>
+&lt;td>â&lt;/td>
+&lt;td>ã&lt;/td>
+&lt;td>ä&lt;/td>
+&lt;td>å&lt;/td>
+&lt;td>æ&lt;/td>
+&lt;td>į&lt;/td>
+&lt;td>č&lt;/td>
+&lt;td>é&lt;/td>
+&lt;td>ę&lt;/td>
+&lt;td>ë&lt;/td>
+&lt;td>ė&lt;/td>
+&lt;td>í&lt;/td>
+&lt;td>î&lt;/td>
+&lt;td>ï&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Fx&lt;/td>
+&lt;td>ð&lt;/td>
+&lt;td>ņ&lt;/td>
+&lt;td>ō&lt;/td>
+&lt;td>ó&lt;/td>
+&lt;td>ô&lt;/td>
+&lt;td>õ&lt;/td>
+&lt;td>ö&lt;/td>
+&lt;td>ũ&lt;/td>
+&lt;td>ø&lt;/td>
+&lt;td>ų&lt;/td>
+&lt;td>ú&lt;/td>
+&lt;td>û&lt;/td>
+&lt;td>ü&lt;/td>
+&lt;td>ý&lt;/td>
+&lt;td>&lt;strong>þ&lt;/strong>&lt;/td>
+&lt;td>&lt;strong>ĸ&lt;/strong>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>UNICODE如下：
+&lt;img alt="" src="https://www.ch35tnut.site/images/research/web/PHP-filter-RCE.zh-cn.assets/1.png" />&lt;/p>
+&lt;p>通过将恶意代码转化为base64形式，而后通过编码预置字符，最后使用&lt;code>convert.base64-decode&lt;/code>尝试解码预置的数据，就可以使得PHP filter最后解码出恶意代码。&lt;/p>
+&lt;p>当使用require时，且路径可控，就可以利用PHP filter执行任意代码。&lt;/p>
+&lt;p>参考链接&lt;/p>
+&lt;blockquote>
+&lt;p>
+&lt;a href="https://gynvael.coldwind.pl/?id=671" target="_blank">https://gynvael.coldwind.pl/?id=671&lt;/a>
+&lt;a href="https://gist.github.com/loknop/b27422d355ea1fd0d90d6dbc1e278d4d" target="_blank">https://gist.github.com/loknop/b27422d355ea1fd0d90d6dbc1e278d4d&lt;/a>
+&lt;a href="https://www.synacktiv.com/en/publications/php-filters-chain-what-is-it-and-how-to-use-it" target="_blank">https://www.synacktiv.com/en/publications/php-filters-chain-what-is-it-and-how-to-use-it&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;strong>Created at 2023-12-29T18:32:43+08:00&lt;/strong>&lt;/p></description></item></channel></rss>
