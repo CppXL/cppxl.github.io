@@ -3,21 +3,21 @@
     xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>其他 on chestnut&#39;s blog</title>
-        <link>https://www.ch35tnut.site/zh-cn/others/</link>
+        <link>https://www.ch35tnut.com/zh-cn/others/</link>
         <description>Recent content in 其他 on chestnut&#39;s blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <lastBuildDate>Tue, 09 Nov 2021 22:18:45 +0800</lastBuildDate>
     
-        <atom:link href="https://www.ch35tnut.site/zh-cn/others/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://www.ch35tnut.com/zh-cn/others/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
 <title>给hugo-theme-learn增加timeline功能</title>
-<link>https://www.ch35tnut.site/zh-cn/others/add-timeline-shortcode/</link>
+<link>https://www.ch35tnut.com/zh-cn/others/add-timeline-shortcode/</link>
 <pubDate>Mon, 05 Sep 2022 18:12:58 +0800</pubDate>
       
-      <guid>https://www.ch35tnut.site/zh-cn/others/add-timeline-shortcode/</guid>
+      <guid>https://www.ch35tnut.com/zh-cn/others/add-timeline-shortcode/</guid>
 <description>&lt;h3 id=&#34;前言&#34;&gt;前言&lt;/h3&gt;
 &lt;p&gt;现在使用hugo-theme-learn主题，但这个主题没有提供时间线功能，为了给首页增加时间线功能，花了两天研究了一下怎么添加时间线功能。&lt;/p&gt;
 &lt;p&gt;为了方便增加时间线的事件，采用自定义shortcode的方式增加时间线，代码大部分参考引用链接里面的，魔改了一下以适应自己的主题，增加了过去多少天的显示。&lt;/p&gt;
@@ -292,19 +292,19 @@
     
     <item>
 <title>在Windows server 2019上重置密码</title>
-<link>https://www.ch35tnut.site/zh-cn/others/how-to-reset-password-administrator-on-windows-server-2019/</link>
+<link>https://www.ch35tnut.com/zh-cn/others/how-to-reset-password-administrator-on-windows-server-2019/</link>
 <pubDate>Wed, 17 Nov 2021 14:40:40 +0800</pubDate>
       
-      <guid>https://www.ch35tnut.site/zh-cn/others/how-to-reset-password-administrator-on-windows-server-2019/</guid>
+      <guid>https://www.ch35tnut.com/zh-cn/others/how-to-reset-password-administrator-on-windows-server-2019/</guid>
 <description>&lt;h2 id=&#34;重置windows-server-2019的administrator密码&#34;&gt;重置windows server 2019的administrator密码&lt;/h2&gt;
 &lt;p&gt;之前在Vmware上的Windows server 2019的Administrator密码忘记了，使用网上的方法时找不到用PE启动系统的办法，无奈只能使用其他办法。写此文记录一下。&lt;/p&gt;
 &lt;h3 id=&#34;设置cddvd&#34;&gt;设置CD/DVD&lt;/h3&gt;
 &lt;p&gt;首先在虚拟机-设置的硬件选项卡下面的CD/DVD设置为使用ISO映像文件并找到windows server 2019镜像位置，如下图&lt;/p&gt;
 &lt;p&gt;
-&lt;img alt=&#34;image-20211117145213632&#34; src=&#34;https://www.ch35tnut.site/images/others/how-to-reset-password-administrator-on-windows-server-2019.assets/image-20211117145213632.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;image-20211117145213632&#34; src=&#34;https://www.ch35tnut.com/images/others/how-to-reset-password-administrator-on-windows-server-2019.assets/image-20211117145213632.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;之后选择虚拟机-电源-开机时打开固件启动虚拟机，虚拟机就会进入BIOS，在BIOS里选择CD/DVD启动，即会进入下图。&lt;/p&gt;
 &lt;p&gt;
-&lt;img src=&#34;https://www.osradar.com/wp-content/uploads/2019/10/pass-1024x768.jpeg&#34; alt=&#34;Windows Server 2019 Installation screen&#34; path=&#34;others/&#34; if=&#34;others/how-to-reset-password-administrator-on-windows-server-2019.zh-cn.md&#34;/&gt;&lt;/p&gt;
+&lt;img src=&#34;https://www.osradar.com/wp-content/uploads/2019/10/pass-1024x768.jpeg&#34; alt=&#34;Windows Server 2019 Installation screen&#34; path=&#34;others/&#34; if=&#34;how-to-reset-password-administrator-on-windows-server-2019.zh-cn&#34;/&gt;&lt;/p&gt;
 &lt;p&gt;参考链接&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;
@@ -316,10 +316,10 @@
     
     <item>
 <title>基于Vmware的小型域网络搭建</title>
-<link>https://www.ch35tnut.site/zh-cn/others/vmware-based-implementation-of-small-domain-network-construction/</link>
+<link>https://www.ch35tnut.com/zh-cn/others/vmware-based-implementation-of-small-domain-network-construction/</link>
 <pubDate>Wed, 08 Sep 2021 21:14:32 +0800</pubDate>
       
-      <guid>https://www.ch35tnut.site/zh-cn/others/vmware-based-implementation-of-small-domain-network-construction/</guid>
+      <guid>https://www.ch35tnut.com/zh-cn/others/vmware-based-implementation-of-small-domain-network-construction/</guid>
 <description>&lt;h2 id=&#34;基于vmware的小型域网络搭建&#34;&gt;基于Vmware的小型域网络搭建&lt;/h2&gt;
 &lt;h3 id=&#34;摘要&#34;&gt;摘要&lt;/h3&gt;
 &lt;p&gt;在渗透的日常学习过程中经常需要一个内网环境，本篇文章介绍如何使用Vmware和MikroTik搭建简易的二层内网环境。&lt;/p&gt;
@@ -327,7 +327,7 @@
 &lt;p&gt;整个网络分为结构分为三层，第一层模拟外网环境，第二层为DMZ区域，该区域通过边界路由器的端口映射，将第二层网络主机的一些端口映射到边界路由器上对外提供服务，第三层模拟办公网，该层网络为域网络，同时可以控制第二层网络的主机。&lt;/p&gt;
 &lt;p&gt;整个网络拓扑图如下：&lt;/p&gt;
 &lt;p&gt;
-&lt;img alt=&#34;拓扑图&#34; src=&#34;https://www.ch35tnut.site/images/others/vmware-based-implementation-of-small-domain-network-construction.zh-cn.assets/%E6%8B%93%E6%89%91%E5%9B%BE.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;拓扑图&#34; src=&#34;https://www.ch35tnut.com/images/others/vmware-based-implementation-of-small-domain-network-construction.zh-cn.assets/%E6%8B%93%E6%89%91%E5%9B%BE.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;IP设置：&lt;/p&gt;
 &lt;p&gt;第一层网络为（外网）：192.168.59.0/24&lt;/p&gt;
 &lt;p&gt;第二层网络为（DMZ区域）：192.168.72.0/24&lt;/p&gt;
@@ -339,7 +339,7 @@
 &lt;h4 id=&#34;网络设置&#34;&gt;网络设置&lt;/h4&gt;
 &lt;p&gt;首先使用VMware的虚拟网络编辑器增加两个网络VMnet2、VMnet3，都勾选仅主机模式，同时取消下面两个勾，如下图：&lt;/p&gt;
 &lt;p&gt;
-&lt;img alt=&#34;虚拟网络编辑器图&#34; src=&#34;https://www.ch35tnut.site/images/others/vmware-based-implementation-of-small-domain-network-construction.zh-cn.assets/vmnet2.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;虚拟网络编辑器图&#34; src=&#34;https://www.ch35tnut.com/images/others/vmware-based-implementation-of-small-domain-network-construction.zh-cn.assets/vmnet2.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;VMnet3同理，同时在DHCP设置处设置相应的IP地址和掩码。其中外层网络为nat模式，VMnet2为DMZ区域网络，VMnet3为办公网络&lt;/p&gt;
 &lt;h4 id=&#34;虚拟机搭建&#34;&gt;虚拟机搭建&lt;/h4&gt;
 &lt;p&gt;整个网络在最少情况下一共需要六台虚拟机，分为两台ROS，四台网络中的主机。&lt;/p&gt;
@@ -362,19 +362,19 @@
 &lt;p&gt;至此，两个网络的主机应该可以ping通同一个网络的主机。接下来设置两个ROS的IP地址。&lt;/p&gt;
 &lt;p&gt;打开winbox，点击Neighbors按钮，会自动嗅探网络内的存活的路由器，如下图所示。&lt;/p&gt;
 &lt;p&gt;
-&lt;img alt=&#34;winbox界面&#34; src=&#34;https://www.ch35tnut.site/images/others/vmware-based-implementation-of-small-domain-network-construction.zh-cn.assets/winbox.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;winbox界面&#34; src=&#34;https://www.ch35tnut.com/images/others/vmware-based-implementation-of-small-domain-network-construction.zh-cn.assets/winbox.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;上图为边界路由器的IP地址，如果分配了IP地址则可以在浏览器通过IP地址浏览路由器的web界面，在如果没有分配IP地址则通过wibbox使用MAC地址登录&lt;/p&gt;
 &lt;p&gt;
-&lt;img alt=&#34;&#34; src=&#34;https://www.ch35tnut.site/images/others/vmware-based-implementation-of-small-domain-network-construction.zh-cn.assets/winbox-mac.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/others/vmware-based-implementation-of-small-domain-network-construction.zh-cn.assets/winbox-mac.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;
-&lt;img alt=&#34;接口列表&#34; src=&#34;https://www.ch35tnut.site/images/others/vmware-based-implementation-of-small-domain-network-construction.zh-cn.assets/ros.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;接口列表&#34; src=&#34;https://www.ch35tnut.com/images/others/vmware-based-implementation-of-small-domain-network-construction.zh-cn.assets/ros.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;进入之后，在左侧选项卡会列出路由器拥有的所有网卡接口，点击之后进入到接口详情界面，在里面会列出该接口的一些基本信息，可以通过网卡的MAC分辨该网卡对应在vmware中的网卡，将两个网卡名称分别设置为ether1-wan和ether2-lan，之后在ip-&amp;gt;addresses选项卡中将ether-lan设置为下图。ether1-wan不用设置，因为该网卡网络类型为nat会自动dhcp分配&lt;/p&gt;
 &lt;p&gt;
-&lt;img alt=&#34;ether2-lanIP地址设置&#34; src=&#34;https://www.ch35tnut.site/images/others/vmware-based-implementation-of-small-domain-network-construction.zh-cn.assets/ether.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;ether2-lanIP地址设置&#34; src=&#34;https://www.ch35tnut.com/images/others/vmware-based-implementation-of-small-domain-network-construction.zh-cn.assets/ether.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;之后在IP-&amp;gt;Firewall-&amp;gt;NAT中新建规则，chain：srcnat，out.interface:ether2-lan,action:masquerade&lt;/p&gt;
 &lt;p&gt;该规则将使得路由器两边的网络联通。&lt;/p&gt;
 &lt;p&gt;
-&lt;img alt=&#34;NAT规则&#34; src=&#34;https://www.ch35tnut.site/images/others/vmware-based-implementation-of-small-domain-network-construction.zh-cn.assets/nat.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;NAT规则&#34; src=&#34;https://www.ch35tnut.com/images/others/vmware-based-implementation-of-small-domain-network-construction.zh-cn.assets/nat.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;参考&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;

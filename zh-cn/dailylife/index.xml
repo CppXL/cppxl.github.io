@@ -3,25 +3,25 @@
     xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>生活随笔 on chestnut&#39;s blog</title>
-        <link>https://www.ch35tnut.site/zh-cn/dailylife/</link>
+        <link>https://www.ch35tnut.com/zh-cn/dailylife/</link>
         <description>Recent content in 生活随笔 on chestnut&#39;s blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <lastBuildDate>Mon, 05 Sep 2022 12:14:06 +0800</lastBuildDate>
     
-        <atom:link href="https://www.ch35tnut.site/zh-cn/dailylife/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://www.ch35tnut.com/zh-cn/dailylife/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
 <title>Movies</title>
-<link>https://www.ch35tnut.site/zh-cn/dailylife/movies/</link>
+<link>https://www.ch35tnut.com/zh-cn/dailylife/movies/</link>
 <pubDate>Mon, 15 Jan 2024 19:34:52 +0800</pubDate>
       
-      <guid>https://www.ch35tnut.site/zh-cn/dailylife/movies/</guid>
+      <guid>https://www.ch35tnut.com/zh-cn/dailylife/movies/</guid>
 <description>&lt;h3 id=&#34;电影&#34;&gt;电影&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;a href=&#34;https://www.ch35tnut.site/zh-cn/dailylife/movies/2024-%E6%BD%9C%E8%A1%8C/&#34;&gt;潜行&lt;/a&gt;&lt;/li&gt;
+&lt;a href=&#34;https://www.ch35tnut.com/zh-cn/dailylife/movies/2024-%E6%BD%9C%E8%A1%8C/&#34;&gt;潜行&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
 
@@ -29,10 +29,10 @@
     
     <item>
 <title>吐槽</title>
-<link>https://www.ch35tnut.site/zh-cn/dailylife/%E5%90%90%E6%A7%BD/</link>
+<link>https://www.ch35tnut.com/zh-cn/dailylife/%E5%90%90%E6%A7%BD/</link>
 <pubDate>Mon, 22 Jan 2024 18:23:53 +0800</pubDate>
       
-      <guid>https://www.ch35tnut.site/zh-cn/dailylife/%E5%90%90%E6%A7%BD/</guid>
+      <guid>https://www.ch35tnut.com/zh-cn/dailylife/%E5%90%90%E6%A7%BD/</guid>
 <description>&lt;p&gt;&lt;strong&gt;Created at 2024-01-22T18:23:53+08:00&lt;/strong&gt;&lt;/p&gt;
 </description>
 
@@ -40,10 +40,10 @@
     
     <item>
 <title>2023年总结和2024年展望</title>
-<link>https://www.ch35tnut.site/zh-cn/dailylife/2023-review-and-2024-outlook/</link>
+<link>https://www.ch35tnut.com/zh-cn/dailylife/2023-review-and-2024-outlook/</link>
 <pubDate>Sun, 31 Dec 2023 18:54:35 +0800</pubDate>
       
-      <guid>https://www.ch35tnut.site/zh-cn/dailylife/2023-review-and-2024-outlook/</guid>
+      <guid>https://www.ch35tnut.com/zh-cn/dailylife/2023-review-and-2024-outlook/</guid>
 <description>&lt;h3 id=&#34;前言&#34;&gt;前言&lt;/h3&gt;
 &lt;p&gt;众所周知，时间在计算机内的表现形式只是一个时间戳，现实世界从2023-12-31 23:59到2024-01-01 00:00也只是在时间戳上增加了60000个毫秒。
 从生理角度讲，跨年身体上也并不会出现太大的变化，所以即使新年定下了目标，更有可能的是2023年是怎么样2024年还是怎么样。&lt;/p&gt;
@@ -51,7 +51,7 @@
 &lt;p&gt;这个文章比我想象中更难写，写了又删删了又写，到发布的时候距离2023.12.31已经过去了五天。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;
-&lt;img alt=&#34;&#34; src=&#34;https://www.ch35tnut.site/images/dailylife/2023-Review-and-2024-Outlook.zh-cn.assets/1.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/dailylife/2023-Review-and-2024-Outlook.zh-cn.assets/1.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;但我认为做个一个阶段性的总结可以在未来回顾过去的时候有一个参考坐标。就像初中那会流行的非主流/大头贴以及那些发在QQ空间的颜文字和火星文，现在看来也非常有意思，算是曾经度过一段非主流岁月的佐证。
 所以决定写下这个2023年的快照，等到2024.12.31的时候再回头看看2024年都做了什么。当然做一个整体回顾的话也不能避开那些做的不好的地方，虽然写下来感觉不太好意思，但还是决定试一试。​&lt;/p&gt;
 &lt;p&gt;至于新年目标，我觉得可以分为硬性和软性目标，硬性目标定一些能够量化的、优先级高的，软性目标定一些难以定量的、优先级低的。年度目标定调太高容易完不成，反而容易产生既然完不成那就直接放弃的心态。
@@ -74,7 +74,7 @@
 &lt;li&gt;然后技术部分，如下图，大概还有9篇遗留漏洞分析的没有整理到博客，其实之前都看完了来着，一直想整理但一直偷懒，然后可能得重新看了。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;
-&lt;img alt=&#34;&#34; src=&#34;https://www.ch35tnut.site/images/dailylife/2023-Review-and-2024-Outlook.zh-cn.assets/2.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/dailylife/2023-Review-and-2024-Outlook.zh-cn.assets/2.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;对于2023大概能回忆到这些，2023做的好和不好都已经过去了，沉迷于过去没有任何意义。对我来说2023年变化较大的一年，兔年是我第二个本命年，第一次意识到离30岁是如此接近，在我的感觉中好像距离大学毕业也没多久，回头一看也快三年了。作为一个血统纯正的南方人，其实在北方过的并不算习惯，以前我在南方生活的时候，春天天下雨，但北京春天的时候不下雨以至于有点不习惯。饮食方面，作为江西人只能偶尔吃一吃湘菜聊以慰籍了，虽然赣菜很好吃，但不得不承认在外面还是湘菜做的最合口味，但最痛苦的是我是易得口腔溃疡的体质，有一次连吃两顿湘菜过了两天就长了几个口腔溃疡，折磨了两个礼拜才好。&lt;/p&gt;
 &lt;p&gt;北京相比于南方最好的地方就是，冬天有暖气，呆在屋里一点都不冷，每年回家过年的时候，下雨加上0度的天气，让人躲在被窝里还是浑身冰冷。&lt;/p&gt;
 &lt;h3 id=&#34;2024展望&#34;&gt;2024展望&lt;/h3&gt;

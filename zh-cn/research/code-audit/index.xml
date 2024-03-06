@@ -3,21 +3,21 @@
     xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>代码审计 on chestnut&#39;s blog</title>
-        <link>https://www.ch35tnut.site/zh-cn/research/code-audit/</link>
+        <link>https://www.ch35tnut.com/zh-cn/research/code-audit/</link>
         <description>Recent content in 代码审计 on chestnut&#39;s blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <lastBuildDate>Mon, 05 Sep 2022 18:36:05 +0800</lastBuildDate>
     
-        <atom:link href="https://www.ch35tnut.site/zh-cn/research/code-audit/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://www.ch35tnut.com/zh-cn/research/code-audit/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
 <title>Codeql</title>
-<link>https://www.ch35tnut.site/zh-cn/research/code-audit/codeql/</link>
+<link>https://www.ch35tnut.com/zh-cn/research/code-audit/codeql/</link>
 <pubDate>Sun, 10 Dec 2023 00:17:23 +0800</pubDate>
       
-      <guid>https://www.ch35tnut.site/zh-cn/research/code-audit/codeql/</guid>
+      <guid>https://www.ch35tnut.com/zh-cn/research/code-audit/codeql/</guid>
 <description>&lt;h3 id=&#34;codeql-相关&#34;&gt;CODEQL 相关&lt;/h3&gt;
 &lt;h1 id=&#34;记录codeql-学习&#34;&gt;记录codeql 学习&lt;/h1&gt;
 &lt;p&gt;记录codeql 学习&lt;/p&gt;
@@ -27,10 +27,10 @@
     
     <item>
 <title>Wireshark 1.8.5代码审计</title>
-<link>https://www.ch35tnut.site/zh-cn/research/code-audit/wireshark-185/</link>
+<link>https://www.ch35tnut.com/zh-cn/research/code-audit/wireshark-185/</link>
 <pubDate>Thu, 08 Sep 2022 18:13:59 +0800</pubDate>
       
-      <guid>https://www.ch35tnut.site/zh-cn/research/code-audit/wireshark-185/</guid>
+      <guid>https://www.ch35tnut.com/zh-cn/research/code-audit/wireshark-185/</guid>
 <description>&lt;p&gt;通过爬取wireshark的漏洞公告页面，筛选1.8.6修复的漏洞可以得到如下结果：&lt;/p&gt;
 &lt;p&gt;1.8.6/1.8.7修复的漏洞&lt;/p&gt;
 &lt;ul&gt;
@@ -151,10 +151,10 @@
     
     <item>
 <title>News Server审计</title>
-<link>https://www.ch35tnut.site/zh-cn/research/code-audit/news-server/</link>
+<link>https://www.ch35tnut.com/zh-cn/research/code-audit/news-server/</link>
 <pubDate>Tue, 06 Sep 2022 00:52:28 +0800</pubDate>
       
-      <guid>https://www.ch35tnut.site/zh-cn/research/code-audit/news-server/</guid>
+      <guid>https://www.ch35tnut.com/zh-cn/research/code-audit/news-server/</guid>
 <description>&lt;p&gt;代码地址&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;

@@ -3,25 +3,25 @@
     xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>杂项 on chestnut&#39;s blog</title>
-        <link>https://www.ch35tnut.site/zh-cn/misc/</link>
+        <link>https://www.ch35tnut.com/zh-cn/misc/</link>
         <description>Recent content in 杂项 on chestnut&#39;s blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <lastBuildDate>Mon, 19 Sep 2022 00:39:53 +0800</lastBuildDate>
     
-        <atom:link href="https://www.ch35tnut.site/zh-cn/misc/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://www.ch35tnut.com/zh-cn/misc/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
 <title>Tools</title>
-<link>https://www.ch35tnut.site/zh-cn/misc/tools/</link>
+<link>https://www.ch35tnut.com/zh-cn/misc/tools/</link>
 <pubDate>Fri, 19 Jan 2024 11:02:05 +0800</pubDate>
       
-      <guid>https://www.ch35tnut.site/zh-cn/misc/tools/</guid>
+      <guid>https://www.ch35tnut.com/zh-cn/misc/tools/</guid>
 <description>&lt;h3 id=&#34;工具&#34;&gt;工具&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;a href=&#34;https://www.ch35tnut.site/zh-cn/misc/tools/citrix-update-monitor/&#34;&gt;【工具】Citrix NetScaler 更新监控&lt;/a&gt;&lt;/li&gt;
+&lt;a href=&#34;https://www.ch35tnut.com/zh-cn/misc/tools/citrix-update-monitor/&#34;&gt;【工具】Citrix NetScaler 更新监控&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
 
@@ -29,17 +29,17 @@
     
     <item>
 <title>Encoding</title>
-<link>https://www.ch35tnut.site/zh-cn/misc/encoding/</link>
+<link>https://www.ch35tnut.com/zh-cn/misc/encoding/</link>
 <pubDate>Sat, 30 Dec 2023 16:16:39 +0800</pubDate>
       
-      <guid>https://www.ch35tnut.site/zh-cn/misc/encoding/</guid>
+      <guid>https://www.ch35tnut.com/zh-cn/misc/encoding/</guid>
 <description>&lt;h3 id=&#34;编码&#34;&gt;编码&lt;/h3&gt;
 &lt;p&gt;编码相关的文章&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;a href=&#34;https://www.ch35tnut.site/zh-cn/misc/encoding/unicode/&#34;&gt;Unicode&lt;/a&gt;&lt;/li&gt;
+&lt;a href=&#34;https://www.ch35tnut.com/zh-cn/misc/encoding/unicode/&#34;&gt;Unicode&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;
-&lt;a href=&#34;https://www.ch35tnut.site/zh-cn/misc/encoding/utf-7/&#34;&gt;utf-7&lt;/a&gt;&lt;/li&gt;
+&lt;a href=&#34;https://www.ch35tnut.com/zh-cn/misc/encoding/utf-7/&#34;&gt;utf-7&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
 
@@ -47,19 +47,19 @@
     
     <item>
 <title>隧道</title>
-<link>https://www.ch35tnut.site/zh-cn/misc/tunnel/</link>
+<link>https://www.ch35tnut.com/zh-cn/misc/tunnel/</link>
 <pubDate>Mon, 13 Sep 2021 11:09:17 +0800</pubDate>
       
-      <guid>https://www.ch35tnut.site/zh-cn/misc/tunnel/</guid>
+      <guid>https://www.ch35tnut.com/zh-cn/misc/tunnel/</guid>
 <description>&lt;h3 id=&#34;隧道&#34;&gt;隧道&lt;/h3&gt;
 &lt;p&gt;隧道相关文章&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;a href=&#34;https://www.ch35tnut.site/zh-cn/misc/tunnel/application-layer/&#34;&gt;应用层隧道&lt;/a&gt;&lt;/li&gt;
+&lt;a href=&#34;https://www.ch35tnut.com/zh-cn/misc/tunnel/application-layer/&#34;&gt;应用层隧道&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;
-&lt;a href=&#34;https://www.ch35tnut.site/zh-cn/misc/tunnel/network-layer/&#34;&gt;网络层隧道&lt;/a&gt;&lt;/li&gt;
+&lt;a href=&#34;https://www.ch35tnut.com/zh-cn/misc/tunnel/network-layer/&#34;&gt;网络层隧道&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;
-&lt;a href=&#34;https://www.ch35tnut.site/zh-cn/misc/tunnel/transport-layer/&#34;&gt;传输层隧道&lt;/a&gt;&lt;/li&gt;
+&lt;a href=&#34;https://www.ch35tnut.com/zh-cn/misc/tunnel/transport-layer/&#34;&gt;传输层隧道&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
 

@@ -3,13 +3,13 @@
     xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Windows中的kerberos协议 on chestnut&#39;s blog</title>
-        <link>https://www.ch35tnut.site/zh-cn/research/protocol/kerberos/kerberos-in-windows/</link>
+        <link>https://www.ch35tnut.com/zh-cn/research/protocol/kerberos/kerberos-in-windows/</link>
         <description>Recent content in Windows中的kerberos协议 on chestnut&#39;s blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <lastBuildDate>Wed, 05 Jan 2022 16:32:54 +0800</lastBuildDate>
     
-        <atom:link href="https://www.ch35tnut.site/zh-cn/research/protocol/kerberos/kerberos-in-windows/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://www.ch35tnut.com/zh-cn/research/protocol/kerberos/kerberos-in-windows/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>

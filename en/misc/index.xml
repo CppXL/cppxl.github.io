@@ -3,13 +3,13 @@
     xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>杂项 on chestnut&#39;s blog</title>
-        <link>https://www.ch35tnut.site/en/misc/</link>
+        <link>https://www.ch35tnut.com/en/misc/</link>
         <description>Recent content in 杂项 on chestnut&#39;s blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <lastBuildDate>Mon, 19 Sep 2022 00:39:53 +0800</lastBuildDate>
     
-        <atom:link href="https://www.ch35tnut.site/en/misc/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://www.ch35tnut.com/en/misc/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>

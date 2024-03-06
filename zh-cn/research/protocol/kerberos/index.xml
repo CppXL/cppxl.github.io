@@ -3,21 +3,21 @@
     xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Kerberos 协议 on chestnut&#39;s blog</title>
-        <link>https://www.ch35tnut.site/zh-cn/research/protocol/kerberos/</link>
+        <link>https://www.ch35tnut.com/zh-cn/research/protocol/kerberos/</link>
         <description>Recent content in Kerberos 协议 on chestnut&#39;s blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <lastBuildDate>Wed, 05 Jan 2022 16:28:43 +0800</lastBuildDate>
     
-        <atom:link href="https://www.ch35tnut.site/zh-cn/research/protocol/kerberos/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://www.ch35tnut.com/zh-cn/research/protocol/kerberos/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
 <title>Windows中的kerberos协议</title>
-<link>https://www.ch35tnut.site/zh-cn/research/protocol/kerberos/kerberos-in-windows/</link>
+<link>https://www.ch35tnut.com/zh-cn/research/protocol/kerberos/kerberos-in-windows/</link>
 <pubDate>Wed, 05 Jan 2022 16:32:54 +0800</pubDate>
       
-      <guid>https://www.ch35tnut.site/zh-cn/research/protocol/kerberos/kerberos-in-windows/</guid>
+      <guid>https://www.ch35tnut.com/zh-cn/research/protocol/kerberos/kerberos-in-windows/</guid>
 <description>&lt;h3 id=&#34;windows中的kerberos协议&#34;&gt;Windows中的Kerberos协议&lt;/h3&gt;
 </description>
 
@@ -25,10 +25,10 @@
     
     <item>
 <title>认证原理</title>
-<link>https://www.ch35tnut.site/zh-cn/research/protocol/kerberos/authentication-principle.zh.cn/</link>
+<link>https://www.ch35tnut.com/zh-cn/research/protocol/kerberos/authentication-principle.zh.cn/</link>
 <pubDate>Wed, 05 Jan 2022 16:29:37 +0800</pubDate>
       
-      <guid>https://www.ch35tnut.site/zh-cn/research/protocol/kerberos/authentication-principle.zh.cn/</guid>
+      <guid>https://www.ch35tnut.com/zh-cn/research/protocol/kerberos/authentication-principle.zh.cn/</guid>
 <description>&lt;h1 id=&#34;认证原理&#34;&gt;认证原理&lt;/h1&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;一kerberos概念&#34;&gt;一、Kerberos概念&lt;/h3&gt;

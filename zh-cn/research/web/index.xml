@@ -3,28 +3,28 @@
     xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Web on chestnut&#39;s blog</title>
-        <link>https://www.ch35tnut.site/zh-cn/research/web/</link>
+        <link>https://www.ch35tnut.com/zh-cn/research/web/</link>
         <description>Recent content in Web on chestnut&#39;s blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <lastBuildDate>Mon, 19 Sep 2022 00:38:30 +0800</lastBuildDate>
     
-        <atom:link href="https://www.ch35tnut.site/zh-cn/research/web/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://www.ch35tnut.com/zh-cn/research/web/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
 <title>Java Deserialization</title>
-<link>https://www.ch35tnut.site/zh-cn/research/web/java-deserialization/</link>
+<link>https://www.ch35tnut.com/zh-cn/research/web/java-deserialization/</link>
 <pubDate>Mon, 08 Jan 2024 16:54:25 +0800</pubDate>
       
-      <guid>https://www.ch35tnut.site/zh-cn/research/web/java-deserialization/</guid>
+      <guid>https://www.ch35tnut.com/zh-cn/research/web/java-deserialization/</guid>
 <description>&lt;h3 id=&#34;java反序列化&#34;&gt;java反序列化&lt;/h3&gt;
 &lt;p&gt;java 反序列化研究&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;a href=&#34;https://www.ch35tnut.site/zh-cn/research/web/java-deserialization/urldns/&#34;&gt;JAVA URL DNS 研究&lt;/a&gt;&lt;/li&gt;
+&lt;a href=&#34;https://www.ch35tnut.com/zh-cn/research/web/java-deserialization/urldns/&#34;&gt;JAVA URL DNS 研究&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;
-&lt;a href=&#34;https://www.ch35tnut.site/zh-cn/research/web/java-deserialization/commonsbeanutils1-chain/&#34;&gt;CommonsBeanutils1 链研究&lt;/a&gt;&lt;/li&gt;
+&lt;a href=&#34;https://www.ch35tnut.com/zh-cn/research/web/java-deserialization/commonsbeanutils1-chain/&#34;&gt;CommonsBeanutils1 链研究&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
 
@@ -32,10 +32,10 @@
     
     <item>
 <title>PHP Filter RCE 分析</title>
-<link>https://www.ch35tnut.site/zh-cn/research/web/php-filter-rce/</link>
+<link>https://www.ch35tnut.com/zh-cn/research/web/php-filter-rce/</link>
 <pubDate>Fri, 29 Dec 2023 18:32:43 +0800</pubDate>
       
-      <guid>https://www.ch35tnut.site/zh-cn/research/web/php-filter-rce/</guid>
+      <guid>https://www.ch35tnut.com/zh-cn/research/web/php-filter-rce/</guid>
 <description>&lt;h3 id=&#34;php-filter是什么&#34;&gt;PHP filter是什么&lt;/h3&gt;
 &lt;p&gt;PHP filter是PHP定义的一个伪协议，用于在数据流打开时进行筛选过滤，在数据读取或者写入的时候通过过滤器对数据进行处理。PHP filter 可以使用多个过滤器进行处理。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;php&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;://&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;filter&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;过滤器&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;过滤器&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;resource&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;待过滤的数据流&lt;/span&gt;
@@ -87,7 +87,7 @@ usefulness of 0xFEFF as a byte-order mark.&lt;/p&gt;
 &lt;li&gt;UTF-16会在字符串前面预置0xFFFE，&lt;code&gt;ĸ&lt;/code&gt;在UNICODE表中对应于0x0138，而后逐个打印，0x38变成了8&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;
-&lt;img alt=&#34;&#34; src=&#34;https://www.ch35tnut.site/images/research/web/PHP-filter-RCE.zh-cn.assets/prepend_character8.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/research/web/PHP-filter-RCE.zh-cn.assets/prepend_character8.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;LANTIN6表如下：&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -420,7 +420,7 @@ usefulness of 0xFEFF as a byte-order mark.&lt;/p&gt;
 &lt;/table&gt;
 &lt;p&gt;UNICODE如下：
 
-&lt;img alt=&#34;&#34; src=&#34;https://www.ch35tnut.site/images/research/web/PHP-filter-RCE.zh-cn.assets/1.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/research/web/PHP-filter-RCE.zh-cn.assets/1.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;通过将恶意代码转化为base64形式，而后通过编码预置字符，最后使用&lt;code&gt;convert.base64-decode&lt;/code&gt;尝试解码预置的数据，就可以使得PHP filter最后解码出恶意代码。&lt;/p&gt;
 &lt;p&gt;当使用require时，且路径可控，就可以利用PHP filter执行任意代码。&lt;/p&gt;
 &lt;p&gt;参考链接&lt;/p&gt;

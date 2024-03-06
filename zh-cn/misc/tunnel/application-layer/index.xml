@@ -3,21 +3,21 @@
     xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>应用层隧道 on chestnut&#39;s blog</title>
-        <link>https://www.ch35tnut.site/zh-cn/misc/tunnel/application-layer/</link>
+        <link>https://www.ch35tnut.com/zh-cn/misc/tunnel/application-layer/</link>
         <description>Recent content in 应用层隧道 on chestnut&#39;s blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <lastBuildDate>Mon, 13 Sep 2021 11:04:52 +0800</lastBuildDate>
     
-        <atom:link href="https://www.ch35tnut.site/zh-cn/misc/tunnel/application-layer/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://www.ch35tnut.com/zh-cn/misc/tunnel/application-layer/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
 <title>SSH隧道</title>
-<link>https://www.ch35tnut.site/zh-cn/misc/tunnel/application-layer/ssh-tunnel/</link>
+<link>https://www.ch35tnut.com/zh-cn/misc/tunnel/application-layer/ssh-tunnel/</link>
 <pubDate>Mon, 13 Sep 2021 10:58:23 +0800</pubDate>
       
-      <guid>https://www.ch35tnut.site/zh-cn/misc/tunnel/application-layer/ssh-tunnel/</guid>
+      <guid>https://www.ch35tnut.com/zh-cn/misc/tunnel/application-layer/ssh-tunnel/</guid>
 <description>&lt;h2 id=&#34;ssh隧道&#34;&gt;SSH隧道&lt;/h2&gt;
 &lt;p&gt;SSH提供了三种转发模式：本地端口转发、远程端口转发以及动态端口转发，本文将介绍这三种转发模式的用法。&lt;/p&gt;
 &lt;h4 id=&#34;一些基本概念&#34;&gt;一些基本概念&lt;/h4&gt;
@@ -38,16 +38,16 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在SSH Client运行命令&lt;code&gt;ssh -CfNg -L 127.0.0.1:1313:127.0.0.1:1313 root@a.b.c.d&lt;/code&gt; ，将127.0.0.1:1313端口转发到SSH Server的127.0.0.1:1313端口上。此时SSH Client访问127.0.0.1:1313的结果跟访问在SSH Server端的127.0.0.1:1313结果一样。&lt;/p&gt;
 &lt;p&gt;在SSH Client上&lt;/p&gt;
 &lt;p&gt;
-&lt;img alt=&#34;image-20211119192913164&#34; src=&#34;https://www.ch35tnut.site/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119192913164.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;image-20211119192913164&#34; src=&#34;https://www.ch35tnut.com/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119192913164.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;此时在SSH Client上的ssh会监听127.0.0.1:1313这个端口，该端口的TCP数据通过ssh隧道传输到SSH server上。&lt;/p&gt;
 &lt;p&gt;
-&lt;img alt=&#34;image-20211119193054555&#34; src=&#34;https://www.ch35tnut.site/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119193054555.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;image-20211119193054555&#34; src=&#34;https://www.ch35tnut.com/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119193054555.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;在SSH Server上，先监听127.0.0.1:1313端口，本文监听使用&lt;code&gt;hugo&lt;/code&gt; 启动一个server。&lt;/p&gt;
 &lt;p&gt;
-&lt;img alt=&#34;image-20211119193325467&#34; src=&#34;https://www.ch35tnut.site/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119193325467.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;image-20211119193325467&#34; src=&#34;https://www.ch35tnut.com/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119193325467.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;在SSH Client上使用curl 127.0.0.1:1313命令时返回的内容即为SSH Server上127.0.0.1:1313的内容&lt;/p&gt;
 &lt;p&gt;
-&lt;img alt=&#34;image-20211119194300415&#34; src=&#34;https://www.ch35tnut.site/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119194300415.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;image-20211119194300415&#34; src=&#34;https://www.ch35tnut.com/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119194300415.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;同时本地端口转发命令中remote ip不止限制在127.0.0.1上，remote ip可以是任何一个SSH Server能够连接的host，实际上本地端口转发过程中，实际上是把SSH Server当作跳板机，连通SSH Client和SSH Server另外一端的主机，如下：&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;|SSH Client| &amp;lt;-------------&amp;gt;|SSH Server| &amp;lt;--------------&amp;gt;|SSH Client不能访问但是SSH Server能访问的主机|&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;本地端口转发一般应用场景为在渗透测试过程中控制了目标网络中带有SSH Server的一台机器，通过这台机器做为跳板机来访问内网其他主机上的服务。一定程度上规避防火墙的流量告警（因为ssh流量为加密流量）&lt;/p&gt;
@@ -59,12 +59,12 @@ SSH Server IP:a.b.c.d
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;本次我们将SSH Client的3389端口转发到SSH Server（公网服务器）上，使得另外一台机器能够通过SSH Server的端口连接到位于局域网的SSH Client的远程桌面。&lt;/p&gt;
 &lt;p&gt;在ssh client上运行命令&lt;/p&gt;
 &lt;p&gt;
-&lt;img alt=&#34;image-20211119201056241&#34; src=&#34;https://www.ch35tnut.site/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119201056241.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;image-20211119201056241&#34; src=&#34;https://www.ch35tnut.com/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119201056241.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;此时任何连接SSH Server:9898的请求都会被转发到SSH Client的58989端口上，该端口监听的服务为远程桌面服务。在另外一台电脑（不同于SSH Server和SSH Client）使用远程桌面连接SSH Server:9898&lt;/p&gt;
 &lt;p&gt;
-&lt;img alt=&#34;image-20211119201321046&#34; src=&#34;https://www.ch35tnut.site/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119201321046.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;image-20211119201321046&#34; src=&#34;https://www.ch35tnut.com/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119201321046.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;
-&lt;img alt=&#34;image-20211119201345710&#34; src=&#34;https://www.ch35tnut.site/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119201345710.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;image-20211119201345710&#34; src=&#34;https://www.ch35tnut.com/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119201345710.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;同本地端口转发一样，远程端口转发命令中的local ip可以是任何一个SSH Client能够连接的host，此时SSH Client被当作跳板机，连通SSH Client另外一端和SSH Server端的主机。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;|SSH Serve能够连通的主机| &amp;lt;--------------&amp;gt; |SSH Client| &amp;lt;--------------&amp;gt; |SSH Client能访问但是SSH Server不能访问的主机|&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;远程端口转发应用场景一般是将局域网的某些服务通过SSH隧道暴露在公网上，或者在渗透测试过程中，控制了内网的某台主机，通过远程端口转发，将该主机作为跳板机来访问内网其他服务，因为此时SSH是从内网连接到外网，在流量上没有那么可疑。&lt;/p&gt;
@@ -72,9 +72,9 @@ SSH Server IP:a.b.c.d
 &lt;p&gt;在本地端口转发和远程端口转发过程中，一次性只能转发一个端口，在某些场景下效率太低了，而动态端口转发没有指定目的端口，相对于前两种来说更灵活。实际上动态端口转发即为SSH实现的SOCKS协议。命令格式:&lt;code&gt;ssh -D port &amp;lt;username&amp;gt;@&amp;lt;SSH host&amp;gt;&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;在SSH Client执行命令即可在SSH Client和SSH Server之间建立socks5隧道，SSH Client可以连接该隧道来传输数据。&lt;/p&gt;
 &lt;p&gt;
-&lt;img alt=&#34;image-20211119205247779&#34; src=&#34;https://www.ch35tnut.site/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119205247779.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;image-20211119205247779&#34; src=&#34;https://www.ch35tnut.com/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119205247779.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;
-&lt;img alt=&#34;image-20211119205352295&#34; src=&#34;https://www.ch35tnut.site/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119205352295.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;image-20211119205352295&#34; src=&#34;https://www.ch35tnut.com/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119205352295.png&#34; /&gt;&lt;/p&gt;
 &lt;h3 id=&#34;组合利用&#34;&gt;组合利用&lt;/h3&gt;
 &lt;p&gt;在一些情况下可以通过组合上面三种转发来达到意想不到的效果。&lt;/p&gt;
 &lt;p&gt;例如，有两台位于互不相通的局域网主机，如果一台想要访问另外一台能够访问的服务时，可以以下面的方式达到目的&lt;/p&gt;

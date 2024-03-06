@@ -2,22 +2,22 @@
 <rss version="2.0"
     xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>linux on chestnut&#39;s blog</title>
-        <link>https://www.ch35tnut.site/zh-cn/tags/linux/</link>
-        <description>Recent content in linux on chestnut&#39;s blog</description>
+        <title>Linux on chestnut&#39;s blog</title>
+        <link>https://www.ch35tnut.com/zh-cn/tags/linux/</link>
+        <description>Recent content in Linux on chestnut&#39;s blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <lastBuildDate>Fri, 08 Dec 2023 10:30:07 +0800</lastBuildDate>
     
-        <atom:link href="https://www.ch35tnut.site/zh-cn/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://www.ch35tnut.com/zh-cn/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
 <title>Suid</title>
-<link>https://www.ch35tnut.site/zh-cn/research/linux/suid/</link>
+<link>https://www.ch35tnut.com/zh-cn/research/linux/suid/</link>
 <pubDate>Fri, 08 Dec 2023 10:30:07 +0800</pubDate>
       
-      <guid>https://www.ch35tnut.site/zh-cn/research/linux/suid/</guid>
+      <guid>https://www.ch35tnut.com/zh-cn/research/linux/suid/</guid>
 <description>&lt;h3 id=&#34;简介&#34;&gt;简介&lt;/h3&gt;
 &lt;p&gt;SUID全称&lt;strong&gt;S&lt;/strong&gt;et owner &lt;strong&gt;U&lt;/strong&gt;ser &lt;strong&gt;ID&lt;/strong&gt; up on execution，是Linux给可执行文件的一个属性，设置了s位的程序在运行时其&lt;strong&gt;Effective UID&lt;/strong&gt;将会设置为这个程序的所有者。比如，&lt;code&gt;/bin/ping&lt;/code&gt;这个程序的所有者是0（root），它设置了s位，那么普通用户在运行ping时其&lt;strong&gt;Effective UID&lt;/strong&gt;就是0，等同于拥有了root权限。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;➜  c ls -ldb &lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;which pkexec&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;

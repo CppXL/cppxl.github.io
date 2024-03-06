@@ -3,21 +3,21 @@
     xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>其他 on chestnut&#39;s blog</title>
-        <link>https://www.ch35tnut.site/en/others/</link>
+        <link>https://www.ch35tnut.com/en/others/</link>
         <description>Recent content in 其他 on chestnut&#39;s blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <lastBuildDate>Tue, 09 Nov 2021 22:18:45 +0800</lastBuildDate>
     
-        <atom:link href="https://www.ch35tnut.site/en/others/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://www.ch35tnut.com/en/others/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
 <title>给hugo-theme-learn增加timeline功能</title>
-<link>https://www.ch35tnut.site/en/others/add-timeline-shortcode/</link>
+<link>https://www.ch35tnut.com/en/others/add-timeline-shortcode/</link>
 <pubDate>Mon, 05 Sep 2022 18:12:58 +0800</pubDate>
       
-      <guid>https://www.ch35tnut.site/en/others/add-timeline-shortcode/</guid>
+      <guid>https://www.ch35tnut.com/en/others/add-timeline-shortcode/</guid>
 <description>&lt;h3 id=&#34;前言&#34;&gt;前言&lt;/h3&gt;
 &lt;p&gt;现在使用hugo-theme-learn主题，但这个主题没有提供时间线功能，为了给首页增加时间线功能，花了两天研究了一下怎么添加时间线功能。&lt;/p&gt;
 &lt;p&gt;为了方便增加时间线的事件，采用自定义shortcode的方式增加时间线，代码大部分参考引用链接里面的，魔改了一下以适应自己的主题，增加了过去多少天的显示。&lt;/p&gt;
@@ -292,19 +292,19 @@
     
     <item>
 <title>在Windows server 2019上重置密码</title>
-<link>https://www.ch35tnut.site/en/others/how-to-reset-password-administrator-on-windows-server-2019/</link>
+<link>https://www.ch35tnut.com/en/others/how-to-reset-password-administrator-on-windows-server-2019/</link>
 <pubDate>Wed, 17 Nov 2021 14:40:40 +0800</pubDate>
       
-      <guid>https://www.ch35tnut.site/en/others/how-to-reset-password-administrator-on-windows-server-2019/</guid>
+      <guid>https://www.ch35tnut.com/en/others/how-to-reset-password-administrator-on-windows-server-2019/</guid>
 <description>&lt;h2 id=&#34;重置windows-server-2019的administrator密码&#34;&gt;重置windows server 2019的administrator密码&lt;/h2&gt;
 &lt;p&gt;之前在Vmware上的Windows server 2019的Administrator密码忘记了，使用网上的方法时找不到用PE启动系统的办法，无奈只能使用其他办法。写此文记录一下。&lt;/p&gt;
 &lt;h3 id=&#34;设置cddvd&#34;&gt;设置CD/DVD&lt;/h3&gt;
 &lt;p&gt;首先在虚拟机-设置的硬件选项卡下面的CD/DVD设置为使用ISO映像文件并找到windows server 2019镜像位置，如下图&lt;/p&gt;
 &lt;p&gt;
-&lt;img alt=&#34;image-20211117145213632&#34; src=&#34;https://www.ch35tnut.site/images/others/how-to-reset-password-administrator-on-windows-server-2019.assets/image-20211117145213632.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;image-20211117145213632&#34; src=&#34;https://www.ch35tnut.com/images/others/how-to-reset-password-administrator-on-windows-server-2019.assets/image-20211117145213632.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;之后选择虚拟机-电源-开机时打开固件启动虚拟机，虚拟机就会进入BIOS，在BIOS里选择CD/DVD启动，即会进入下图。&lt;/p&gt;
 &lt;p&gt;
-&lt;img src=&#34;https://www.osradar.com/wp-content/uploads/2019/10/pass-1024x768.jpeg&#34; alt=&#34;Windows Server 2019 Installation screen&#34; path=&#34;others/&#34; if=&#34;others/how-to-reset-password-administrator-on-windows-server-2019.en.md&#34;/&gt;&lt;/p&gt;
+&lt;img src=&#34;https://www.osradar.com/wp-content/uploads/2019/10/pass-1024x768.jpeg&#34; alt=&#34;Windows Server 2019 Installation screen&#34; path=&#34;others/&#34; if=&#34;how-to-reset-password-administrator-on-windows-server-2019.en&#34;/&gt;&lt;/p&gt;
 &lt;p&gt;参考链接&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;

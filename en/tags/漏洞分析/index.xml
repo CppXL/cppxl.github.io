@@ -3,27 +3,27 @@
     xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>漏洞分析 on chestnut&#39;s blog</title>
-        <link>https://www.ch35tnut.site/en/tags/%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+        <link>https://www.ch35tnut.com/en/tags/%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
         <description>Recent content in 漏洞分析 on chestnut&#39;s blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <lastBuildDate>Tue, 09 Nov 2021 15:16:28 +0800</lastBuildDate>
     
-        <atom:link href="https://www.ch35tnut.site/en/tags/%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://www.ch35tnut.com/en/tags/%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
 <title>CVE-2021-40449 win32k 权限提升漏洞分析</title>
-<link>https://www.ch35tnut.site/en/vulnerability/cve-2021-40449-win32k-eop/</link>
+<link>https://www.ch35tnut.com/en/vulnerability/cve-2021-40449-win32k-eop/</link>
 <pubDate>Tue, 09 Nov 2021 15:16:28 +0800</pubDate>
       
-      <guid>https://www.ch35tnut.site/en/vulnerability/cve-2021-40449-win32k-eop/</guid>
+      <guid>https://www.ch35tnut.com/en/vulnerability/cve-2021-40449-win32k-eop/</guid>
 <description>&lt;h2 id=&#34;cve-2021-40449-win32k提权漏洞及poc分析&#34;&gt;CVE-2021-40449 Win32k提权漏洞及POC分析&lt;/h2&gt;
 &lt;h3 id=&#34;背景&#34;&gt;背景&lt;/h3&gt;
 &lt;p&gt;CVE-2021-40449是卡巴斯基实验室在2021年8月下旬到9月上旬在Windows服务器上捕获的恶意样本利用的提权漏洞，该漏洞存在于win32kfull.sys驱动内，利用该漏洞可以在windows中完成从users到system的权限提升。&lt;/p&gt;
 &lt;h4 id=&#34;基本概念&#34;&gt;基本概念&lt;/h4&gt;
 &lt;p&gt;
-&lt;img alt=&#34;aaa&#34; src=&#34;https://www.ch35tnut.site/images/vulnerability/CVE-2021-40449-analyse.assets/image-20211110112401943.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;aaa&#34; src=&#34;https://www.ch35tnut.com/images/vulnerability/CVE-2021-40449-analyse.assets/image-20211110112401943.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;内核对象&lt;/strong&gt;：内核对象即在内核空间存在的对象，只能由内核分配，内核访问。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;内核对象的引用计数&lt;/strong&gt;：在操作系统中，可能有多个进程访问同一个内核对象，如果没有进程需要使用该对象内核就应该释放该对象，所以为了准确的释放该对象就有了引用计数。当内核对象被创建时，引用计数被标记为1，调用CloseHandle()时内核对象的引用计数就-1，这可以类比Java GC的引用计数法：&lt;/p&gt;
 &lt;blockquote&gt;
@@ -81,7 +81,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;printf&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;bad method&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
-&lt;img alt=&#34;image-20211111123430653&#34; src=&#34;https://www.ch35tnut.site/images/vulnerability/CVE-2021-40449-analyse.assets/image-20211111123430653.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;image-20211111123430653&#34; src=&#34;https://www.ch35tnut.com/images/vulnerability/CVE-2021-40449-analyse.assets/image-20211111123430653.png&#34; /&gt;&lt;/p&gt;
 &lt;h4 id=&#34;漏洞形成分析&#34;&gt;漏洞形成分析&lt;/h4&gt;
 &lt;p&gt;该漏洞产生于&lt;strong&gt;win32kfull!GreResetDCInternal&lt;/strong&gt;函数中，该函数内会获取DC对象内的函数指针，并执行该函数指针指向的函数，但并未检查DC对象是否异常。所以如果可以在调用函数指针之前释放DC对象，并重新申请该对象的内存空间，通过构造内存布局，修改原DC对象的函数指针指向其他任意内核函数，就可以在win32kfull!GreResetDCInternal内实现&lt;strong&gt;任意内核函数调用&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;根据代码，我们可以算出DCO对象和DC对象的函数指针的关系：function pointer=* (* (DCO +0x30)+0xad0)，其中DCO +0x30即指向DC对象的指针&lt;/p&gt;
@@ -174,7 +174,7 @@
 &lt;p&gt;在第二次ResetDC调用完成后，原DC对象已被释放，此时可以重新申请原DC对象的内存空间并完成内存布局，将原DC对象的函数指针和函数指针的参数的位置设置为想要执行的内核函数的地址及参数。在执行完第一次回调之后，GreResetDCInternal 将调用原DC对象内的函数指针，即完成了任意内核函数调用，&lt;strong&gt;此时达到了use步骤&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;完整调用链如下图：&lt;/p&gt;
 &lt;p&gt;
-&lt;img alt=&#34;调用链&#34; src=&#34;https://www.ch35tnut.site/images/vulnerability/CVE-2021-40449-analyse.assets/%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;调用链&#34; src=&#34;https://www.ch35tnut.com/images/vulnerability/CVE-2021-40449-analyse.assets/%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;其中漏洞相关的类定义如下，参考https://github.com/ZoloZiak/WinNT4/blob/master/private/ntos/w32/ntgdi/gre/dcobj.hxx#L97&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;DCLEVEL&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
@@ -216,7 +216,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;typedef&lt;/span&gt; DCOBJ &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;PDCOBJ;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;类之间的关系可以简化为下图：&lt;/p&gt;
 &lt;p&gt;
-&lt;img alt=&#34;对象关系图&#34; src=&#34;https://www.ch35tnut.site/images/vulnerability/CVE-2021-40449-analyse.assets/%E5%AF%B9%E8%B1%A1%E5%85%B3%E7%B3%BB%E5%9B%BE.jpg&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;对象关系图&#34; src=&#34;https://www.ch35tnut.com/images/vulnerability/CVE-2021-40449-analyse.assets/%E5%AF%B9%E8%B1%A1%E5%85%B3%E7%B3%BB%E5%9B%BE.jpg&#34; /&gt;&lt;/p&gt;
 &lt;h3 id=&#34;调试&#34;&gt;调试&lt;/h3&gt;
 &lt;h4 id=&#34;free部分&#34;&gt;free部分&lt;/h4&gt;
 &lt;p&gt;在free部分需要把我们想要释放的内存空间释放，并让后面的use部分成功申请到这块内存空间。&lt;/p&gt;
@@ -236,13 +236,13 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;bp&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;win32kbase&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;PALMEMOBJ&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;bCreatePalette&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;调用win32kbase!PALMEMOBJ::bCreatePalette&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;运行POC，断点&lt;code&gt;bp win32kfull!NtGdiResetDC&lt;/code&gt;触发此时传入的句柄为&lt;code&gt;rcx=00000000092105f1&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;
-&lt;img alt=&#34;NtGdiResetDC&#34; src=&#34;https://www.ch35tnut.site/images/vulnerability/CVE-2021-40449-analyse.assets/image-20211110112401943.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;NtGdiResetDC&#34; src=&#34;https://www.ch35tnut.com/images/vulnerability/CVE-2021-40449-analyse.assets/image-20211110112401943.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;第一次调用&lt;code&gt;win32kfull!GreResetDCInternal&lt;/code&gt; 时传入各个参数为&lt;code&gt;rcx=00000000092105f1&lt;/code&gt; &lt;code&gt;rdx=0000000000000000&lt;/code&gt; &lt;code&gt;r8=ffffb101aadf2a44&lt;/code&gt; 即第一个句柄值为&lt;code&gt;00000000092105f1&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;
-&lt;img alt=&#34;image-20211110143416643&#34; src=&#34;https://www.ch35tnut.site/images/vulnerability/CVE-2021-40449-analyse.assets/image-20211110143416643.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;image-20211110143416643&#34; src=&#34;https://www.ch35tnut.com/images/vulnerability/CVE-2021-40449-analyse.assets/image-20211110143416643.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;第一次调用构造函数，利用DC对象创建DCO对象，此时rbx存放DCO对象的地址，&lt;/p&gt;
 &lt;p&gt;
-&lt;img alt=&#34;image-20211110151223865&#34; src=&#34;https://www.ch35tnut.site/images/vulnerability/CVE-2021-40449-analyse.assets/image-20211110151223865.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;image-20211110151223865&#34; src=&#34;https://www.ch35tnut.com/images/vulnerability/CVE-2021-40449-analyse.assets/image-20211110151223865.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;根据&lt;strong&gt;漏洞形成分析&lt;/strong&gt;的计算公式，可以很方便的得到DC对象内的函数指针指向的函数的地址为：&lt;code&gt;ffffd548a1f10c30&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; kd&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; dq rax
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ffffb101&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;`&lt;/span&gt;aadf29c0  ffffd50e&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;`&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;041f&lt;/span&gt;d010 &lt;span style=&#34;color:#ae81ff&#34;&gt;00000000&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;`&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;00000001&lt;/span&gt;
@@ -298,7 +298,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ffffd548&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;`&lt;/span&gt;a1f10c4e &lt;span style=&#34;color:#ae81ff&#34;&gt;488&lt;/span&gt;bf9          mov     rdi,rcx
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;之后通过hdcOpenDCW函数调用用户模式的回调函数，在回调函数中再次调用ResetDC函数，此时传入的HDC和第一次调用ResetDC的是同一个句柄。&lt;/p&gt;
 &lt;p&gt;
-&lt;img alt=&#34;image-20211110161002502&#34; src=&#34;https://www.ch35tnut.site/images/vulnerability/CVE-2021-40449-analyse.assets/image-20211110161002502.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;image-20211110161002502&#34; src=&#34;https://www.ch35tnut.com/images/vulnerability/CVE-2021-40449-analyse.assets/image-20211110161002502.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;第二次调用&lt;code&gt;win32kfull!GreResetDCInternal&lt;/code&gt; 时，传入同一个HDC句柄，即对应同一个DC对象。&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;0: kd&amp;gt; t
 win32kfull!GreResetDCInternal:
@@ -307,15 +307,15 @@ ffffd548`a1f03e58 488bc4          mov     rax,rsp
 rcx=00000000092105f1
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;第二次调用DCOBJ构造函数时，由于传入的是同一个HDC句柄，所以HDC句柄引用次数+1，同时两次调用构造函数构造的对象关联到同一个DC对象。&lt;/p&gt;
 &lt;p&gt;
-&lt;img alt=&#34;image-20211110162021866&#34; src=&#34;https://www.ch35tnut.site/images/vulnerability/CVE-2021-40449-analyse.assets/image-20211110162021866.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;image-20211110162021866&#34; src=&#34;https://www.ch35tnut.com/images/vulnerability/CVE-2021-40449-analyse.assets/image-20211110162021866.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;
-&lt;img alt=&#34;&#34; src=&#34;https://www.ch35tnut.site/images/vulnerability/CVE-2021-40449-analyse.assets/%E4%B8%A4%E4%B8%AA%E5%AF%B9%E8%B1%A1%E5%85%B3%E7%B3%BB%E5%9B%BE.jpg&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/vulnerability/CVE-2021-40449-analyse.assets/%E4%B8%A4%E4%B8%AA%E5%AF%B9%E8%B1%A1%E5%85%B3%E7%B3%BB%E5%9B%BE.jpg&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;之后第二次调用win32kfull!_imp_hdcOpenDCW函数，在该函数内执行政策回调函数，win32kfull!imp_hdcOpenDCW返回一个HDC句柄值为&lt;code&gt;0000000003210041&lt;/code&gt;，即创建了一个新的DC对象。之后通过新创建的DC对象创建DCO对象。&lt;/p&gt;
 &lt;p&gt;
-&lt;img alt=&#34;image-20211110163914337&#34; src=&#34;https://www.ch35tnut.site/images/vulnerability/CVE-2021-40449-analyse.assets/image-20211110163914337.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;image-20211110163914337&#34; src=&#34;https://www.ch35tnut.com/images/vulnerability/CVE-2021-40449-analyse.assets/image-20211110163914337.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;在win32kfull!GreResetDCInternal后半段会调用win32kfull!_imp_HmgSwapLockedHandleContents交换第一个HDC句柄和第二次调用win32kfull!imp_hdcOpenDCW创建的HDC句柄。&lt;/p&gt;
 &lt;p&gt;
-&lt;img alt=&#34;image-20211110164604391&#34; src=&#34;https://www.ch35tnut.site/images/vulnerability/CVE-2021-40449-analyse.assets/image-20211110164604391.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;image-20211110164604391&#34; src=&#34;https://www.ch35tnut.com/images/vulnerability/CVE-2021-40449-analyse.assets/image-20211110164604391.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;调用win32kfull!_imp_HmgSwapLockedHandleContents之后两个句柄对应的DC内容为已经发生了交换&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// 以下内容为旧DC对象，但是句柄为新句柄
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; kd&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; dq ffffd50e041fd010
@@ -327,7 +327,7 @@ rcx=00000000092105f1
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;......
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;之后调用win32kfull!_imp_bDeleteDCInternal传入HDC句柄，该函数会释放HDC句柄对应的DC对象，而此时传入该函数的HDC句柄为第二次调用hdcOpenDCW函数返回的句柄，但之前交换过新旧句柄，所以实际上释放的是旧HDC句柄对应的DC对象。&lt;/p&gt;
 &lt;p&gt;
-&lt;img alt=&#34;image-20211110164912079&#34; src=&#34;https://www.ch35tnut.site/images/vulnerability/CVE-2021-40449-analyse.assets/image-20211110164912079.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;image-20211110164912079&#34; src=&#34;https://www.ch35tnut.com/images/vulnerability/CVE-2021-40449-analyse.assets/image-20211110164912079.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;之前计算函数指针的时候，我们知道DCO +0x30是指向DC对象的指针，所以在调用win32kfull!_imp_bDeleteDCInternal函数之后，原DC对象的内存空间已经被释放，达成了use-after-free的第一步free。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;function pointer=* (* (DCO +0x30)+0xad0)，其中DCO +0x30即指向DC对象的指针&lt;/p&gt;
@@ -440,17 +440,17 @@ rcx=00000000092105f1
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; result;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
-&lt;img alt=&#34;image-20211111140552152&#34; src=&#34;https://www.ch35tnut.site/images/vulnerability/CVE-2021-40449-analyse.assets/image-20211111140552152.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;image-20211111140552152&#34; src=&#34;https://www.ch35tnut.com/images/vulnerability/CVE-2021-40449-analyse.assets/image-20211111140552152.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;同时在Poc代码分析里面分析了DC对象函数指针和堆头之间的位置关系，所以通过构造传入CreatePalette的LOGPALETTE结构可以刚刚好覆盖原DC对象内的函数指针以及该函数指针要调用的参数，内存分布具体见https://github.com/CppXL/cve-2021-40449-poc/blob/master/main.cpp 里面的注释。&lt;/p&gt;
 &lt;p&gt;
-&lt;img alt=&#34;image-20211112195951766&#34; src=&#34;https://www.ch35tnut.site/images/vulnerability/CVE-2021-40449-analyse.assets/image-20211112195951766.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;image-20211112195951766&#34; src=&#34;https://www.ch35tnut.com/images/vulnerability/CVE-2021-40449-analyse.assets/image-20211112195951766.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;通过函数指针调用RtlSetAllBits函数并传入RtklBitMap型指针，其中RtlBitMap的buffer指向POC进程自身的权限位，如下图：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;typedef&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt; _RTL_BITMAP {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ULONG  SizeOfBitMap;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ULONG &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;Buffer;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;} RTL_BITMAP, &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;PRTL_BITMAP;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
-&lt;img alt=&#34;image-20211112200708126&#34; src=&#34;https://www.ch35tnut.site/images/vulnerability/CVE-2021-40449-analyse.assets/image-20211112200708126.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;image-20211112200708126&#34; src=&#34;https://www.ch35tnut.com/images/vulnerability/CVE-2021-40449-analyse.assets/image-20211112200708126.png&#34; /&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; kd&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; dq ffff885e80063000&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0x750&lt;/span&gt;   						&lt;span style=&#34;color:#75715e&#34;&gt;// 此处为RtlBitMap地址
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;ffff885e&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;`&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;80063750&lt;/span&gt;  ffffb48d&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;`&lt;/span&gt;a3839010 ffffffff&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;`&lt;/span&gt;ffffffff
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ffff885e&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;`&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;80063760&lt;/span&gt;  ffffffff&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;`&lt;/span&gt;ffffffff ffffffff&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;`&lt;/span&gt;ffffffff
@@ -480,10 +480,10 @@ rcx=00000000092105f1
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ffffde8f&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;`&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1f&lt;/span&gt;b2ea40  ffffde8f&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;`&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1f1007f&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; ffffde8f&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;`&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1f&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;10080&lt;/span&gt;c
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;调用DC里面的函数指针之前，自身权限位为正常权限。&lt;/p&gt;
 &lt;p&gt;
-&lt;img alt=&#34;image-20211112202144360&#34; src=&#34;https://www.ch35tnut.site/images/vulnerability/CVE-2021-40449-analyse.assets/image-20211112202144360.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;image-20211112202144360&#34; src=&#34;https://www.ch35tnut.com/images/vulnerability/CVE-2021-40449-analyse.assets/image-20211112202144360.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;调用函数指针之后，可以看到权限位全部置为了1&lt;/p&gt;
 &lt;p&gt;
-&lt;img alt=&#34;image-20211112202350655&#34; src=&#34;https://www.ch35tnut.site/images/vulnerability/CVE-2021-40449-analyse.assets/image-20211112202350655.png&#34; /&gt;&lt;/p&gt;
+&lt;img alt=&#34;image-20211112202350655&#34; src=&#34;https://www.ch35tnut.com/images/vulnerability/CVE-2021-40449-analyse.assets/image-20211112202350655.png&#34; /&gt;&lt;/p&gt;
 &lt;h4 id=&#34;补丁分析&#34;&gt;补丁分析&lt;/h4&gt;
 &lt;p&gt;在&lt;strong&gt;漏洞利用分析&lt;/strong&gt;里面分析过漏洞形成原因是因为在调用GreResetDCInternal函数时，使用DC对象指针的时候没有检查DC对象是否异常。而利用该漏洞是通过在调用回调函数时调用ResetDC实现的。&lt;/p&gt;
 &lt;p&gt;我们再次回顾一下漏洞函数，在调用hdcOpenDCW也就是在调用回调函数之前会通过DCO的构造函数从DC构造DCO对象，在基本概念中知道，内核对象每被引用一次则对象引用计数器值会加一。调用构造函数时，DC对象引用加一，正常情况下此时DC对象引用次数要为1。如果在回调函数中再次调用ResetDC，则会第二次调用GreResetDCInternal，再次调用DCO的构造函数，DC对象引用再次加一，此时引用次数为2。&lt;/p&gt;

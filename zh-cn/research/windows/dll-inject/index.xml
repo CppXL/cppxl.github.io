@@ -3,13 +3,13 @@
     xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Dll注入 on chestnut&#39;s blog</title>
-        <link>https://www.ch35tnut.site/zh-cn/research/windows/dll-inject/</link>
+        <link>https://www.ch35tnut.com/zh-cn/research/windows/dll-inject/</link>
         <description>Recent content in Dll注入 on chestnut&#39;s blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <lastBuildDate>Wed, 08 Dec 2021 10:47:45 +0800</lastBuildDate>
     
-        <atom:link href="https://www.ch35tnut.site/zh-cn/research/windows/dll-inject/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://www.ch35tnut.com/zh-cn/research/windows/dll-inject/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>

@@ -3,12 +3,12 @@
     xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Categories on chestnut&#39;s blog</title>
-        <link>https://www.ch35tnut.site/en/categories/</link>
+        <link>https://www.ch35tnut.com/en/categories/</link>
         <description>Recent content in Categories on chestnut&#39;s blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
     
-        <atom:link href="https://www.ch35tnut.site/en/categories/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://www.ch35tnut.com/en/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>
