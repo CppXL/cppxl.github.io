@@ -157,10 +157,11 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td style=&#34;text-align:center&#34;&gt;38&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;
+&lt;a href=&#34;https://www.ch35tnut.com/zh-cn/vulnerability/cve-2023-46805_cve-2024-21887-ivanti-rce/&#34;&gt;ivanti connect secure RCE&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;CVE-2023-46805 CVE-2024-21887&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;代码执行&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;✓&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td style=&#34;text-align:center&#34;&gt;37&lt;/td&gt;
