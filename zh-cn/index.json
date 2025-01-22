@@ -4,7 +4,7 @@
 	"title": "Travel",
 	"tags": [],
 	"description": "",
-	"content": "旅游 日本 香港-澳门 "
+	"content": "旅游 记录旅游，好好赚钱，多去旅游\n日本 香港-澳门 "
 },
 {
 	"uri": "https://www.ch35tnut.com/zh-cn/research/apt/",
@@ -60,7 +60,7 @@
 	"title": "Movies",
 	"tags": [],
 	"description": "",
-	"content": "电影 潜行 "
+	"content": "电影 潜行 豆瓣top250 "
 },
 {
 	"uri": "https://www.ch35tnut.com/zh-cn/research/iot/",
@@ -228,7 +228,7 @@
 	"title": "首页",
 	"tags": [],
 	"description": "",
-	"content": "学习记录 记录一些平时学习和生活的日常。\n生活 安全研究 漏洞分析 杂项 其他 时间线\n07-02至07-03\r| 193 days ago\rCVE-2024-6387 OpenSSH RCE\nCVE-2024-6387 OpenSSH RCE 2024\r05-16至05-16\r| 240 days ago\rGHSL-2024-053 GitHub Actions 表达式注入漏洞\nGHSL-2024-053 GitHub Actions 表达式注入漏洞 2024\r05-06至05-06\r| 250 days ago\rmitmproxy 使用\nmitmproxy 自签名证书流量解密 2024\r04-01至04-18\r17 days | 285 days ago\rxz backdoor 脚本部分分析\nCVE-2024-3094 xz backdoor脚本部分分析 2024\r03-05至03-06\r1 day | 312 days ago\rivanti connect secure RCE 分析\nCVE-2023-46805\u0026amp;CVE-2024-21887 ivanti rce 分析 2024\r01-12至01-13\r1 day | 365 days ago\rGitLab 账户接管漏洞分析\nCVE-2023-7028 GitLab Account Takeover 分析 2024\r01-05至01-08\r3 days | 372 days ago\r研究了一下JAVA的URL DNS原理。\nJAVA URL DNS研究 2024\r12-29至12-29\r| 379 days ago\r填坑\nwindows CLFS 权限提升漏洞 CVE-2022-37969 windows CLFS 权限提升漏洞 CVE-2023-28252 Wordpress Backup Migration plugin RCE 2023\r12-05至12-06\r1 day | 403 days ago\r分析了CVE-2021-4034 polkit 权限提升漏洞，填坑。\npolkit 权限提升漏洞 2023\r11-30至12-01\r1 day | 408 days ago\r分析了CVE-2023-17530 Apache Struts OGNL 远程代码执行漏洞\nApache Struts OGNL 远程代码执行漏洞 2023\r11-20至11-25\r5 days | 418 days ago\r分析了在野利用的 CVE-2023-36036 Windows Cloud Files Mini Filter Driver 权限提升漏洞\nWindows Cloud Files Mini Filter Driver 权限提升漏洞 2023\r10-31至11-01\r1 day | 438 days ago\r分析了在野利用的wordpad 信息泄露漏洞\nwordpad 信息泄露漏洞 2023\r10-19至10-25\r6 days | 450 days ago\r分析了两个漏洞\nCitrix 信息泄露漏洞 squid 拒绝服务漏洞 2023\r10-14至10-15\r1 day | 455 days ago\r复现分析了curl 堆溢出漏洞\ncurl堆溢出漏洞 2023\r10-12至10-13\r1 day | 457 days ago\r复现分析了http2 快速重置攻击\nhttp rapid reset ddos attack 2023\r09-19至09-19\r| 480 days ago\r把之前写的文章整理到了博客\nwindows 错误报告服务权限提升漏洞 winrar 代码执行漏洞 2023\r09-14至09-18\r4 days | 485 days ago\r分析了以下9月补丁日的CVE-2023-38148, 分析文章：\nwindows ics rce 2023\r07-24至07-27\r3 days | 537 days ago\r前几天搭建Citrix ADC环境，实在是太难搭了，最后还是选择从公网找了个环境打了一下payload，diff了以下补丁，写了一个分析，可惜不能本地调试，看起来写exp应该挺简单的。分析见\ncitrix adc rce 更新：搭建了调试环境，调试了一下，更新在原链接 2023\r09-13至09-16\r3 days | 851 days ago\r这周再写一个基于rust的loader，写了一半发现加载的dll太多了，再想办法用动态加载的方式加载dll，感觉用rust做有点难。 用rust的内联汇编获取到了kernel32.dll和ntdll.dll的基址，还要继续完善。\n2022\r09-10至09-12\r2 days | 854 days ago\r中秋节，在家摸了几天🐟，啥都没干\n2022\r09-05至09-09\r4 days | 859 days ago\r这周编译了wireshark 1.8.5，通过diff1.8.5和1.8.6的源码找出1.8.5里面的漏洞，见\nwireshark 1.8.5代码审计 2022\r09-03至09-04\r1 day | 861 days ago\r这两天，给hugo主题增加了timeline的shortcode，见\n增加timeline功能 2022\r08-29至09-02\r4 days | 866 days ago\r周内看了一个几百行的代码，见\rnews_server审计\n2022\r黑客精神：Open, Share, Free\n"
+	"content": "学习记录 记录一些平时学习和生活的日常。\n生活 安全研究 漏洞分析 杂项 其他 时间线\n07-02至07-03\r| 204 days ago\rCVE-2024-6387 OpenSSH RCE\nCVE-2024-6387 OpenSSH RCE 2024\r05-16至05-16\r| 251 days ago\rGHSL-2024-053 GitHub Actions 表达式注入漏洞\nGHSL-2024-053 GitHub Actions 表达式注入漏洞 2024\r05-06至05-06\r| 261 days ago\rmitmproxy 使用\nmitmproxy 自签名证书流量解密 2024\r04-01至04-18\r17 days | 296 days ago\rxz backdoor 脚本部分分析\nCVE-2024-3094 xz backdoor脚本部分分析 2024\r03-05至03-06\r1 day | 323 days ago\rivanti connect secure RCE 分析\nCVE-2023-46805\u0026amp;CVE-2024-21887 ivanti rce 分析 2024\r01-12至01-13\r1 day | 376 days ago\rGitLab 账户接管漏洞分析\nCVE-2023-7028 GitLab Account Takeover 分析 2024\r01-05至01-08\r3 days | 383 days ago\r研究了一下JAVA的URL DNS原理。\nJAVA URL DNS研究 2024\r12-29至12-29\r| 390 days ago\r填坑\nwindows CLFS 权限提升漏洞 CVE-2022-37969 windows CLFS 权限提升漏洞 CVE-2023-28252 Wordpress Backup Migration plugin RCE 2023\r12-05至12-06\r1 day | 414 days ago\r分析了CVE-2021-4034 polkit 权限提升漏洞，填坑。\npolkit 权限提升漏洞 2023\r11-30至12-01\r1 day | 419 days ago\r分析了CVE-2023-17530 Apache Struts OGNL 远程代码执行漏洞\nApache Struts OGNL 远程代码执行漏洞 2023\r11-20至11-25\r5 days | 429 days ago\r分析了在野利用的 CVE-2023-36036 Windows Cloud Files Mini Filter Driver 权限提升漏洞\nWindows Cloud Files Mini Filter Driver 权限提升漏洞 2023\r10-31至11-01\r1 day | 449 days ago\r分析了在野利用的wordpad 信息泄露漏洞\nwordpad 信息泄露漏洞 2023\r10-19至10-25\r6 days | 461 days ago\r分析了两个漏洞\nCitrix 信息泄露漏洞 squid 拒绝服务漏洞 2023\r10-14至10-15\r1 day | 466 days ago\r复现分析了curl 堆溢出漏洞\ncurl堆溢出漏洞 2023\r10-12至10-13\r1 day | 468 days ago\r复现分析了http2 快速重置攻击\nhttp rapid reset ddos attack 2023\r09-19至09-19\r| 491 days ago\r把之前写的文章整理到了博客\nwindows 错误报告服务权限提升漏洞 winrar 代码执行漏洞 2023\r09-14至09-18\r4 days | 496 days ago\r分析了以下9月补丁日的CVE-2023-38148, 分析文章：\nwindows ics rce 2023\r07-24至07-27\r3 days | 548 days ago\r前几天搭建Citrix ADC环境，实在是太难搭了，最后还是选择从公网找了个环境打了一下payload，diff了以下补丁，写了一个分析，可惜不能本地调试，看起来写exp应该挺简单的。分析见\ncitrix adc rce 更新：搭建了调试环境，调试了一下，更新在原链接 2023\r09-13至09-16\r3 days | 862 days ago\r这周再写一个基于rust的loader，写了一半发现加载的dll太多了，再想办法用动态加载的方式加载dll，感觉用rust做有点难。 用rust的内联汇编获取到了kernel32.dll和ntdll.dll的基址，还要继续完善。\n2022\r09-10至09-12\r2 days | 865 days ago\r中秋节，在家摸了几天🐟，啥都没干\n2022\r09-05至09-09\r4 days | 870 days ago\r这周编译了wireshark 1.8.5，通过diff1.8.5和1.8.6的源码找出1.8.5里面的漏洞，见\nwireshark 1.8.5代码审计 2022\r09-03至09-04\r1 day | 872 days ago\r这两天，给hugo主题增加了timeline的shortcode，见\n增加timeline功能 2022\r08-29至09-02\r4 days | 877 days ago\r周内看了一个几百行的代码，见\rnews_server审计\n2022\r黑客精神：Open, Share, Free\n"
 },
 {
 	"uri": "https://www.ch35tnut.com/zh-cn/life/",
@@ -250,6 +250,20 @@
 	"tags": [],
 	"description": "",
 	"content": "其他 timeline shortcode实现 虚拟机重置管理员密码 基于Vmware的小型域网络搭建 漏洞漫谈 "
+},
+{
+	"uri": "https://www.ch35tnut.com/zh-cn/others/hundun/",
+	"title": "Hundun",
+	"tags": [],
+	"description": "",
+	"content": "世界是一个混沌。\n物理世界是一个混沌的世界，并没有计算机世界那样的有序，或者说可观测性。\n计算机世界是如此的“死板”，以至于CPU内每个移动的电子都可以找到对应的指令，每一行代码对应着一系列可预测的操作，以至于可以从机器指令倒推伪代码。假如你并不相信计算机的执行结果，大可以挂上调试器对其DEBUG，这倒是铁证如山的证据。\n除非从遥远的星系的某个年老或者不年老的星球在距离地球几光年之外射出的高能粒子刚好击中一个单元，使其位翻转，一变成零或者零变成一，否则一就是一零就是零，然而工程师已经通过制造ECC来规避这个问题。\n但物理世界不一样，物理世界充满着混沌，譬如你花一块钱买了一瓶矿泉水，你并不能知道其成本具体多少，老板的利润多少，供应链的各个节点利润多少，其细节被隐匿在层层看不懂的网络中，然而此时你并不能对物理世界进行DEBUG。\n也是因为混沌，所以人并不能看清做出一件事之后产生的后果和这件事之间的因果，世界上并没有人眼可见的因果线将每件事串联起来，所以常常出现好人吃亏而坏人得利，并且坏人逍遥法外的情况。\n或许世界上真的存在观测者对每个事件光锥进行观测，但很显然现阶段的人类还做不到。\n人们总希望从混沌中找出有序的部分，因此发明了数学、物理以及计算机等等学科，尝试对物理世界进行观测，毫无疑问人类做到了，至少是部分做到了。从使用望远镜看宇宙爆炸的瞬间，到使用电子显微镜查看原子结构，这都是无数人类先贤努力的结果。\n人长大的过程也是对物理世界进行观测的过程，长大的过程逐渐理解物理世界的规律，通过外部的熵增，造成自身的熵减，于是物理世界更加混沌，而人脑对物理世界的理解也更加深入。\n人生在世，要做的是在混沌的世界找到属于自己的精确的点。\n2025.01.22 杭州\n"
+},
+{
+	"uri": "https://www.ch35tnut.com/zh-cn/life/movies/douban-top250/",
+	"title": "Douban Top250",
+	"tags": [],
+	"description": "",
+	"content": "以下纪录豆瓣top 250电影进度，作为2025年的目标之一。\n肖申克的救赎 - 2025.1.14 有些鸟儿注定不会被关在牢笼里的，它们的每一片羽毛都闪耀着自由的光辉。\n霸王别姬 阿甘正传 "
 },
 {
 	"uri": "https://www.ch35tnut.com/zh-cn/tags/",
