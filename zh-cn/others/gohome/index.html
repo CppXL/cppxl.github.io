@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
 
-    <title>给hugo-theme-learn增加timeline功能 - chestnut&#39;s blog</title>
+    <title>Gohome - chestnut&#39;s blog</title>
 
     
     <link href="/css/nucleus.css?1737917610" rel="stylesheet">
@@ -54,7 +54,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/zh-cn/others/add-timeline-shortcode/">
+  <body class="" data-url="/zh-cn/others/gohome/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -2665,7 +2665,7 @@
  
   
     
-      <li data-nav-id="/zh-cn/others/gohome/" title="Gohome" class="dd-item ">
+      <li data-nav-id="/zh-cn/others/gohome/" title="Gohome" class="dd-item active">
         <a href="/zh-cn/others/gohome/">
         Gohome
         <i class="fas fa-check read-icon"></i>
@@ -2749,7 +2749,7 @@
  
   
     
-      <li data-nav-id="/zh-cn/others/add-timeline-shortcode/" title="给hugo-theme-learn增加timeline功能" class="dd-item active">
+      <li data-nav-id="/zh-cn/others/add-timeline-shortcode/" title="给hugo-theme-learn增加timeline功能" class="dd-item ">
         <a href="/zh-cn/others/add-timeline-shortcode/">
         给hugo-theme-learn增加timeline功能
         <i class="fas fa-check read-icon"></i>
@@ -2858,22 +2858,10 @@
                   
                     
                     
-                      <option id="zh-cn" value="https://www.ch35tnut.com/zh-cn/others/add-timeline-shortcode/" selected>简体中文</option>
+                      <option id="zh-cn" value="https://www.ch35tnut.com/zh-cn/others/gohome/" selected>简体中文</option>
                     
                   
               
-                  
-              
-          
-              
-              
-                  
-              
-                  
-                    
-                    
-                      <option id="en" value="https://www.ch35tnut.com/en/others/add-timeline-shortcode/">English</option>
-                    
                   
               
           
@@ -2951,7 +2939,7 @@
             
           
           
-            <a href='/zh-cn/'>首页</a> > <a href='/zh-cn/others/'>其他</a> > 给hugo-theme-learn增加timeline功能
+            <a href='/zh-cn/'>首页</a> > <a href='/zh-cn/others/'>其他</a> > Gohome
           
         
           
@@ -2964,16 +2952,7 @@
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#前言">前言</a></li>
-        <li><a href="#代码实现">代码实现</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
+<nav id="TableOfContents"></nav>
     </div>
 </div>
 
@@ -2989,7 +2968,7 @@
           
             <h1>
               
-              给hugo-theme-learn增加timeline功能
+              Gohome
             </h1>
           
 
@@ -3001,293 +2980,18 @@
     </div>
 </div>
 
-<nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#前言">前言</a></li>
-        <li><a href="#代码实现">代码实现</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-<h3 id="前言">前言</h3>
-<p>现在使用hugo-theme-learn主题，但这个主题没有提供时间线功能，为了给首页增加时间线功能，花了两天研究了一下怎么添加时间线功能。</p>
-<p>为了方便增加时间线的事件，采用自定义shortcode的方式增加时间线，代码大部分参考引用链接里面的，魔改了一下以适应自己的主题，增加了过去多少天的显示。</p>
-<h3 id="代码实现">代码实现</h3>
-<p>在<code>layout/shortcodes</code>新增文件：<code>event.html</code>和<code>timeline.html</code>，内容分别如下</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>event.html
-</span></span><span style="display:flex;"><span>{{$duration := &#34;&#34;}}
-</span></span><span style="display:flex;"><span>{{$to := now }}
-</span></span><span style="display:flex;"><span>{{ if ne (.Get &#34;to&#34;) &#34;&#34;}}
-</span></span><span style="display:flex;"><span>{{$to = time (.Get &#34;to&#34;) }}
-</span></span><span style="display:flex;"><span>{{end}}
-</span></span><span style="display:flex;"><span>{{$enabledTime := ne (.Get &#34;from&#34;) &#34;&#34;}}
-</span></span><span style="display:flex;"><span>{{if $enabledTime }}
-</span></span><span style="display:flex;"><span>{{$from := time (.Get &#34;from&#34;) }}
-</span></span><span style="display:flex;"><span>{{ $diff := $to.Sub $from }}
-</span></span><span style="display:flex;"><span>{{ $days := div $diff.Hours 24 | math.Round }}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>{{$tmonths:=mul ($to.Sub $from).Hours 0.00136986301 }}
-</span></span><span style="display:flex;"><span>{{$months := mod $tmonths 12 }}
-</span></span><span style="display:flex;"><span>{{$years := math.Floor (div $tmonths 12)}}
-</span></span><span style="display:flex;"><span>{{$yearStr := &#34;years&#34;}}
-</span></span><span style="display:flex;"><span>{{if lt $years 2 }}
-</span></span><span style="display:flex;"><span>{{$yearStr = &#34;year&#34;}}
-</span></span><span style="display:flex;"><span>{{end}}
-</span></span><span style="display:flex;"><span>{{$monthStr := &#34;months&#34;}}
-</span></span><span style="display:flex;"><span>{{if lt $months 2 }}
-</span></span><span style="display:flex;"><span>{{$monthStr = &#34;month&#34;}}
-</span></span><span style="display:flex;"><span>{{end}}
-</span></span><span style="display:flex;"><span>{{$daysStr := &#34;days&#34;}}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>{{ $idays :=int $days }}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>{{$duration = &#34;&#34;}}
-</span></span><span style="display:flex;"><span>{{if gt $years 0 }}
-</span></span><span style="display:flex;"><span>{{$duration = printf &#34;%s %.0f %s&#34; $duration $years $yearStr}}
-</span></span><span style="display:flex;"><span>{{$idays = sub $idays (mul 365 $years)}}
-</span></span><span style="display:flex;"><span>{{end}}
-</span></span><span style="display:flex;"><span>{{if gt $months 0 }}
-</span></span><span style="display:flex;"><span>{{$duration = printf &#34;%s %d %s&#34; $duration $months $monthStr}}
-</span></span><span style="display:flex;"><span>{{$idays = sub $idays (mul 30 $months)}}
-</span></span><span style="display:flex;"><span>{{end}}
-</span></span><span style="display:flex;"><span>{{$idays = int $idays}}
-</span></span><span style="display:flex;"><span>{{if gt $idays 0}}
-</span></span><span style="display:flex;"><span>{{if lt $idays 2}}
-</span></span><span style="display:flex;"><span>{{$daysStr = &#34;day&#34;}}
-</span></span><span style="display:flex;"><span>{{end}}
-</span></span><span style="display:flex;"><span>{{$duration = printf &#34;%s %d %s&#34; $duration $idays $daysStr}}
-</span></span><span style="display:flex;"><span>{{end}}
-</span></span><span style="display:flex;"><span>{{end}}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>{{ $from := .Get &#34;from&#34; | time }}
-</span></span><span style="display:flex;"><span>{{ $to := now }}
-</span></span><span style="display:flex;"><span>{{ $diff := $to.Sub $from }}
-</span></span><span style="display:flex;"><span>{{ $ago := div $diff.Hours 24 | math.Round }}
-</span></span><span style="display:flex;"><span>{{ $measure := cond (eq 1 $ago) &#34;day&#34; &#34;days&#34; }}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>{{ $seed := &#34;foo&#34; }}
-</span></span><span style="display:flex;"><span>{{ $random := delimit (shuffle (split (md5 $seed) &#34;&#34; )) &#34;&#34; }}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;container&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;content&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;title&#34;</span>&gt;{{.Get &#34;title&#34;}}&lt;/<span style="color:#f92672">div</span>&gt;
-</span></span><span style="display:flex;"><span>        {{if $enabledTime }}
-</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;moment&#34;</span> <span style="color:#960050;background-color:#1e0010">{{</span> <span style="color:#a6e22e">if</span> <span style="color:#a6e22e">eq</span> <span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">Ordinal</span> <span style="color:#a6e22e">0</span> <span style="color:#960050;background-color:#1e0010">}}</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;moment&#34;</span> <span style="color:#960050;background-color:#1e0010">{{</span> <span style="color:#a6e22e">end</span> <span style="color:#960050;background-color:#1e0010">}}</span> <span style="color:#960050;background-color:#1e0010">{{</span> <span style="color:#a6e22e">if</span> <span style="color:#a6e22e">ne</span> <span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">Ordinal</span> <span style="color:#a6e22e">0</span> <span style="color:#960050;background-color:#1e0010">}}</span><span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;moment-{{ substr $random 0 16}}&#34;</span><span style="color:#960050;background-color:#1e0010">{{</span><span style="color:#a6e22e">end</span><span style="color:#960050;background-color:#1e0010">}}</span>&gt;
-</span></span><span style="display:flex;"><span>            {{ if ne .Ordinal 0 }} {{$duration}} {{ end }} | {{ $ago }} {{ $measure}} ago
-</span></span><span style="display:flex;"><span>        &lt;/<span style="color:#f92672">div</span>&gt;
-</span></span><span style="display:flex;"><span>        {{ end }}
-</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;body&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            {{.Inner}}
-</span></span><span style="display:flex;"><span>        &lt;/<span style="color:#f92672">div</span>&gt;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">div</span>&gt;
-</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;date&#34;</span>&gt;{{$to.Year}}&lt;/<span style="color:#f92672">div</span>&gt;
-</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">div</span>&gt;
-</span></span><span style="display:flex;"><span>{{ if and (eq (.Ordinal) 0) $enabledTime }}
-</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">script</span>&gt;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">non0plural</span>(<span style="color:#a6e22e">number</span>, <span style="color:#a6e22e">name</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">number</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">number</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">number</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">name</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;s&#34;</span>
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">number</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">name</span>
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">refresh</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">start</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">dayjs</span>({{.<span style="color:#a6e22e">Get</span> <span style="color:#e6db74">&#34;from&#34;</span>}})
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">now</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">dayjs</span>()
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">total_days</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">now</span>.<span style="color:#a6e22e">diff</span>(<span style="color:#a6e22e">start</span>,<span style="color:#e6db74">&#34;d&#34;</span>,<span style="color:#66d9ef">true</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">total_months</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">now</span>.<span style="color:#a6e22e">diff</span>(<span style="color:#a6e22e">start</span>, <span style="color:#e6db74">&#34;M&#34;</span>, <span style="color:#66d9ef">true</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">months</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">total_months</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">12</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">years</span> <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">floor</span>((<span style="color:#a6e22e">total_months</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">12</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// for (var i = 0, els = document.querySelectorAll(`[id^=&#34;moment&#34;]`); i &lt; els.length; i++) {
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">//     els[i].innerHTML = non0plural(years, &#34;year&#34;) + &#34; &#34; + non0plural(months.toFixed(8), &#34;month&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// }
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// 如果月份大于1则
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">years</span><span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">1</span>){
-</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">total_days</span><span style="color:#f92672">-=</span><span style="color:#ae81ff">365</span><span style="color:#f92672">*</span><span style="color:#a6e22e">years</span>
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">months</span><span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">1</span>){
-</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">total_days</span><span style="color:#f92672">-=</span><span style="color:#ae81ff">30</span><span style="color:#f92672">*</span><span style="color:#a6e22e">months</span>
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">el</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">querySelector</span>(<span style="color:#e6db74">&#34;#moment&#34;</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">el</span>.<span style="color:#a6e22e">innerHTML</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">years</span><span style="color:#f92672">&gt;</span><span style="color:#ae81ff">1</span><span style="color:#f92672">?</span> <span style="color:#a6e22e">non0plural</span>(<span style="color:#a6e22e">years</span>, <span style="color:#e6db74">&#34;year&#34;</span>)<span style="color:#f92672">:</span><span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">months</span><span style="color:#f92672">&gt;</span><span style="color:#ae81ff">1</span><span style="color:#f92672">?</span> <span style="color:#a6e22e">non0plural</span>(<span style="color:#a6e22e">months</span>.<span style="color:#a6e22e">toFixed</span>(<span style="color:#ae81ff">4</span>), <span style="color:#e6db74">&#34;month&#34;</span>)<span style="color:#f92672">:</span><span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">total_days</span><span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">1</span><span style="color:#f92672">?</span><span style="color:#a6e22e">non0plural</span>(<span style="color:#a6e22e">total_days</span>.<span style="color:#a6e22e">toFixed</span>(<span style="color:#ae81ff">2</span>),<span style="color:#e6db74">&#34;day&#34;</span>)<span style="color:#f92672">:</span><span style="color:#e6db74">&#34;&#34;</span> 
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">el</span>.<span style="color:#a6e22e">innerHTML</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">el</span>.<span style="color:#a6e22e">innerHTML</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; ago&#34;</span>
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    window.<span style="color:#a6e22e">setInterval</span>(<span style="color:#a6e22e">refresh</span>, <span style="color:#ae81ff">100</span>);
-</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">script</span>&gt;
-</span></span><span style="display:flex;"><span>{{ end }}
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>timeline.html
-</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">style</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/css&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">timeline</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">position</span>: <span style="color:#66d9ef">relative</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">margin</span>: <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">auto</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* The actual timeline (the vertical ruler) */</span>
-</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">timeline</span>::<span style="color:#a6e22e">after</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">content</span>: <span style="color:#e6db74">&#34;&#34;</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">position</span>: <span style="color:#66d9ef">absolute</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">width</span>: <span style="color:#ae81ff">6</span><span style="color:#66d9ef">px</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">background-color</span>: <span style="color:#ae81ff">#444</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">top</span>: <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">bottom</span>: <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">left</span>: <span style="color:#ae81ff">10</span><span style="color:#66d9ef">%</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">margin-left</span>: <span style="color:#ae81ff">-3</span><span style="color:#66d9ef">px</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* Container around content */</span>
-</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">timeline</span> .<span style="color:#a6e22e">container</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">padding</span>: <span style="color:#ae81ff">10</span><span style="color:#66d9ef">px</span> <span style="color:#ae81ff">10</span><span style="color:#66d9ef">px</span> <span style="color:#ae81ff">10</span><span style="color:#66d9ef">px</span> <span style="color:#ae81ff">40</span><span style="color:#66d9ef">px</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">margin-top</span>: <span style="color:#ae81ff">10</span><span style="color:#66d9ef">px</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">position</span>: <span style="color:#66d9ef">relative</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/* background-color: gray; */</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">width</span>: <span style="color:#ae81ff">90</span><span style="color:#66d9ef">%</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">left</span>: <span style="color:#ae81ff">10</span><span style="color:#66d9ef">%</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* The circles on the timeline */</span>
-</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">timeline</span> .<span style="color:#a6e22e">container</span>::<span style="color:#a6e22e">after</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">content</span>: <span style="color:#e6db74">&#34;&#34;</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">position</span>: <span style="color:#66d9ef">absolute</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">width</span>: <span style="color:#ae81ff">25</span><span style="color:#66d9ef">px</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">height</span>: <span style="color:#ae81ff">25</span><span style="color:#66d9ef">px</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">left</span>: <span style="color:#ae81ff">-12</span><span style="color:#66d9ef">px</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">background-color</span>: rgb(<span style="color:#ae81ff">106</span>, <span style="color:#ae81ff">215</span>, <span style="color:#ae81ff">229</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">border</span>: <span style="color:#ae81ff">4</span><span style="color:#66d9ef">px</span> <span style="color:#66d9ef">solid</span> <span style="color:#ae81ff">#444</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">top</span>: <span style="color:#ae81ff">0</span><span style="color:#66d9ef">px</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">border-radius</span>: <span style="color:#ae81ff">50</span><span style="color:#66d9ef">%</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">z-index</span>: <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* date display */</span>
-</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">timeline</span> .<span style="color:#a6e22e">container</span> .<span style="color:#a6e22e">date</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">position</span>: <span style="color:#66d9ef">absolute</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">top</span>: <span style="color:#ae81ff">0</span><span style="color:#66d9ef">px</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">z-index</span>: <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">left</span>: <span style="color:#ae81ff">-15</span><span style="color:#66d9ef">%</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">font-size</span>: <span style="color:#66d9ef">large</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* Add arrows to the right container (pointing left) */</span>
-</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">timeline</span> .<span style="color:#a6e22e">container</span>::<span style="color:#a6e22e">before</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">content</span>: <span style="color:#e6db74">&#34; &#34;</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">height</span>: <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">position</span>: <span style="color:#66d9ef">absolute</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">top</span>: <span style="color:#ae81ff">30</span><span style="color:#66d9ef">px</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">width</span>: <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">z-index</span>: <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">left</span>: <span style="color:#ae81ff">26</span><span style="color:#66d9ef">px</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">border</span>: <span style="color:#66d9ef">medium</span> <span style="color:#66d9ef">solid</span> <span style="color:#ae81ff">#6ad7e5</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">border-width</span>: <span style="color:#ae81ff">13</span><span style="color:#66d9ef">px</span> <span style="color:#ae81ff">13</span><span style="color:#66d9ef">px</span> <span style="color:#ae81ff">13</span><span style="color:#66d9ef">px</span> <span style="color:#ae81ff">0</span><span style="color:#66d9ef">px</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">border-color</span>: <span style="color:#ae81ff">#6ad7e5</span> <span style="color:#ae81ff">#6ad7e5</span> <span style="color:#66d9ef">transparent</span> <span style="color:#66d9ef">transparent</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* The actual content */</span>
-</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">timeline</span> .<span style="color:#a6e22e">content</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">box-shadow</span>: <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">3</span><span style="color:#66d9ef">px</span> <span style="color:#ae81ff">3</span><span style="color:#66d9ef">px</span> <span style="color:#ae81ff">#6ad7e5</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">background-color</span>: <span style="color:#66d9ef">white</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">position</span>: <span style="color:#66d9ef">relative</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">border-radius</span>: <span style="color:#ae81ff">6</span><span style="color:#66d9ef">px</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">transition</span>: <span style="color:#66d9ef">box-shadow</span> <span style="color:#ae81ff">0.3</span><span style="color:#66d9ef">s</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* small shadow change on hover*/</span>
-</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">timeline</span> .<span style="color:#a6e22e">content</span>:<span style="color:#a6e22e">hover</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">box-shadow</span>: <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">3</span><span style="color:#66d9ef">px</span> <span style="color:#ae81ff">4</span><span style="color:#66d9ef">px</span> <span style="color:#ae81ff">#6ad7e5</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* card title format */</span>
-</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">timeline</span> .<span style="color:#a6e22e">content</span> .<span style="color:#a6e22e">title</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">padding</span>: <span style="color:#ae81ff">5</span><span style="color:#66d9ef">px</span> <span style="color:#ae81ff">30</span><span style="color:#66d9ef">px</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">font-weight</span>: <span style="color:#66d9ef">bold</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">display</span>: <span style="color:#66d9ef">inline-block</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* time moment format*/</span>
-</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">timeline</span> .<span style="color:#a6e22e">content</span> .<span style="color:#a6e22e">moment</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">color</span>: <span style="color:#ae81ff">#c41a16</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">text-align</span>: <span style="color:#66d9ef">right</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">position</span>: <span style="color:#66d9ef">absolute</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">top</span>: <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">right</span>: <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">padding</span>: <span style="color:#ae81ff">5</span><span style="color:#66d9ef">px</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* body size */</span>
-</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">timeline</span> .<span style="color:#a6e22e">content</span> .<span style="color:#a6e22e">body</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">padding</span>: <span style="color:#ae81ff">5</span><span style="color:#66d9ef">px</span> <span style="color:#ae81ff">30</span><span style="color:#66d9ef">px</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">word-wrap</span>: <span style="color:#66d9ef">break-word</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/* height: 73px; */</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/* max-height: 120px; */</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">text-overflow</span>: <span style="color:#66d9ef">ellipsis</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">overflow</span>: <span style="color:#66d9ef">hidden</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* responsive for small devices*/</span>
-</span></span><span style="display:flex;"><span>    @<span style="color:#66d9ef">media</span> <span style="color:#f92672">screen</span> <span style="color:#f92672">and</span> <span style="color:#f92672">(</span><span style="color:#f92672">max-width</span><span style="color:#f92672">:</span> <span style="color:#f92672">600px</span><span style="color:#f92672">)</span> {
-</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">timeline</span> .<span style="color:#a6e22e">container</span> {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">padding</span>: <span style="color:#ae81ff">10</span><span style="color:#66d9ef">px</span> <span style="color:#ae81ff">10</span><span style="color:#66d9ef">px</span> <span style="color:#ae81ff">0</span><span style="color:#66d9ef">px</span> <span style="color:#ae81ff">40</span><span style="color:#66d9ef">px</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">left</span>: <span style="color:#ae81ff">5</span><span style="color:#66d9ef">%</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">width</span>: <span style="color:#ae81ff">95</span><span style="color:#66d9ef">%</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">timeline</span> .<span style="color:#a6e22e">container</span> .<span style="color:#a6e22e">date</span> {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">font-size</span>: <span style="color:#66d9ef">small</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">transform</span>: rotate(<span style="color:#ae81ff">-90</span><span style="color:#66d9ef">deg</span>);
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">left</span>: <span style="color:#ae81ff">-5</span><span style="color:#66d9ef">%</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">top</span>: <span style="color:#ae81ff">30</span><span style="color:#66d9ef">px</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">timeline</span> .<span style="color:#a6e22e">container</span>::<span style="color:#a6e22e">after</span> {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">left</span>: <span style="color:#ae81ff">3</span><span style="color:#66d9ef">px</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">timeline</span> .<span style="color:#a6e22e">content</span> .<span style="color:#a6e22e">body</span> {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">padding</span>: <span style="color:#ae81ff">5</span><span style="color:#66d9ef">px</span> <span style="color:#ae81ff">5</span><span style="color:#66d9ef">px</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">timeline</span> .<span style="color:#a6e22e">content</span> .<span style="color:#a6e22e">moment</span> {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">position</span>: <span style="color:#66d9ef">relative</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">style</span>&gt;
-</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;timeline&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>    {{ .Inner }}
-</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">div</span>&gt;
-</span></span></code></pre></div><p>由于event.html里面引用了<code>dayjs</code>，这个js不在当前主题内，可以在config.toml新增<code>custom_js = [&quot;js/dayjs.min.js&quot;]</code>，然后把dayjs.min.js放在<code>theme\hugo-theme-learn\static\js</code>目录内，即可解决导入<code>dayjs</code>的问题。</p>
-<p>此时可以在需要添加时间线的地方使用<code>timeline</code>的shortcode添加，以下是我博客首页的时间线代码：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>{{&lt; timeline &gt;}}
-</span></span><span style="display:flex;"><span>    {{% event title=&#34;09-03至09-04&#34; from=&#34;2022-09-03&#34; to=&#34;2022-09-04&#34; %}}
-</span></span><span style="display:flex;"><span>这两天，给hugo主题增加了timeline的shortcode，见[增加timeline功能](others/add-timeline-shortcode)
-</span></span><span style="display:flex;"><span>    {{% /event %}}
-</span></span><span style="display:flex;"><span>    {{% event title=&#34;08-29至09-02&#34; from=&#34;2022-08-29&#34; to=&#34;2022-09-02&#34; %}}
-</span></span><span style="display:flex;"><span>周内审计了代码
-</span></span><span style="display:flex;"><span>    {{% /event %}}
-</span></span><span style="display:flex;"><span>{{&lt; /timeline &gt;}}
-</span></span></code></pre></div><p>除了这个还顺便给博客新增了基于Github issue的评论功能，参考
-<a href="https://utteranc.es/" target="_blank">utteranc</a>。</p>
-<p><strong>参考</strong></p>
-<blockquote>
-<p>
-<a href="https://metalblueberry.github.io/post/howto/2021-02-28_hugo_timeline_shortcode/" target="_blank">https://metalblueberry.github.io/post/howto/2021-02-28_hugo_timeline_shortcode/</a></p>
-</blockquote>
+<nav id="TableOfContents"></nav>
+<p>小区门口的沙县歇业了，我知道我也应该回去了。</p>
+<p>2025.1.27 杭州</p>
 
 
 
 <div class="last_mod">
-	创建于:Monday, September 5,2022
+	创建于:Monday, January 27,2025
 </div>
 
 <div class="last_mod">
-	最后修改于: Thursday, May 4,2023
+	最后修改于: Monday, January 27,2025
 </div>
 <div class="article-container"></div>
 <script src="https://utteranc.es/client.js"
@@ -4901,6 +4605,23 @@
             
                 
                     
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
                         
                         
                     
@@ -4967,26 +4688,6 @@
             
             
                 
-                    
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
                     
                 
                 
@@ -5027,10 +4728,10 @@
 	 
 	 
 		
-			<a class="nav nav-prev" href="/zh-cn/others/rambling-about-ulnerabilities/" title="漏洞漫谈"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/zh-cn/others/" title="其他"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/zh-cn/others/how-to-reset-password-administrator-on-windows-server-2019/" title="在Windows server 2019上重置密码" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/zh-cn/others/hundun/" title="Hundun" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
