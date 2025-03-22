@@ -18,7 +18,7 @@
 	"title": "index",
 	"tags": [],
 	"description": "",
-	"content": "学习记录 记录一些平时学习和生活的日常。\n09-13至09-16\r| 919 days ago\r这周再写一个基于rust的loader，写了一半发现加载的dll太多了，再想办法用动态加载的方式加载dll，感觉用rust做有点难。\n用rust的内联汇编获取到了kernel32.dll和ntdll.dll的基址，还要继续完善。\n2022\r09-10至09-12\r2 days | 922 days ago\r中秋节，在家摸了几天🐟，啥都没干\n2022\r09-05至09-09\r4 days | 927 days ago\r这周编译了wireshark 1.8.5，通过diff1.8.5和1.8.6的源码找出1.8.5里面的漏洞，见\rwireshark 1.8.5代码审计\n2022\r09-03至09-04\r1 day | 929 days ago\r这两天，给hugo主题增加了timeline的shortcode，见\r增加timeline功能\n2022\r08-29至09-02\r4 days | 934 days ago\r周内看了一个几百行的代码，见\rnews_server审计\n2022\r"
+	"content": "学习记录 记录一些平时学习和生活的日常。\n09-13至09-16\r| 922 days ago\r这周再写一个基于rust的loader，写了一半发现加载的dll太多了，再想办法用动态加载的方式加载dll，感觉用rust做有点难。\n用rust的内联汇编获取到了kernel32.dll和ntdll.dll的基址，还要继续完善。\n2022\r09-10至09-12\r2 days | 925 days ago\r中秋节，在家摸了几天🐟，啥都没干\n2022\r09-05至09-09\r4 days | 930 days ago\r这周编译了wireshark 1.8.5，通过diff1.8.5和1.8.6的源码找出1.8.5里面的漏洞，见\rwireshark 1.8.5代码审计\n2022\r09-03至09-04\r1 day | 932 days ago\r这两天，给hugo主题增加了timeline的shortcode，见\r增加timeline功能\n2022\r08-29至09-02\r4 days | 937 days ago\r周内看了一个几百行的代码，见\rnews_server审计\n2022\r"
 },
 {
 	"uri": "https://www.ch35tnut.com/en/life/",
