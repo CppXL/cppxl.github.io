@@ -138,10 +138,11 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td style=&#34;text-align:center&#34;&gt;41&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;
+&lt;a href=&#34;https://www.ch35tnut.com/zh-cn/vulnerability/cve-2025-29927-nextjs-auth-bypass/&#34;&gt;nextjs 身份认证绕过漏洞&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;CVE-2025-29927&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;身份认证绕过&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;✓&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td style=&#34;text-align:center&#34;&gt;40&lt;/td&gt;
