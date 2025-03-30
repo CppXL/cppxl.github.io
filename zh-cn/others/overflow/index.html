@@ -9,26 +9,26 @@
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
 
-    <title>隧道 - chestnut&#39;s blog</title>
+    <title>奇怪的溢出 - chestnut&#39;s blog</title>
 
     
-    <link href="/css/nucleus.css?1743348067" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1743348067" rel="stylesheet">
-    <link href="/css/hybrid.css?1743348067" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1743348067" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1743348067" rel="stylesheet">
-    <link href="/css/auto-complete.css?1743348067" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1743348067" rel="stylesheet">
-    <link href="/css/theme.css?1743348067" rel="stylesheet">
-    <link href="/css/tabs.css?1743348067" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1743348067" rel="stylesheet">
+    <link href="/css/nucleus.css?1743348066" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1743348066" rel="stylesheet">
+    <link href="/css/hybrid.css?1743348066" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1743348066" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1743348066" rel="stylesheet">
+    <link href="/css/auto-complete.css?1743348066" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1743348066" rel="stylesheet">
+    <link href="/css/theme.css?1743348066" rel="stylesheet">
+    <link href="/css/tabs.css?1743348066" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1743348066" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1743348067" rel="stylesheet">
+    <link href="/css/theme-blue.css?1743348066" rel="stylesheet">
     
     
-    <script src="/js/dayjs.min.js?1743348067"></script>
+    <script src="/js/dayjs.min.js?1743348066"></script>
 
-    <script src="/js/jquery-3.3.1.min.js?1743348067"></script>
+    <script src="/js/jquery-3.3.1.min.js?1743348066"></script>
     
     
     
@@ -54,7 +54,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/zh-cn/misc/tunnel/">
+  <body class="" data-url="/zh-cn/others/overflow/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -109,14 +109,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1743348067"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1743348067"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1743348066"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1743348066"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/www.ch35tnut.com\/zh-cn";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1743348067"></script>
+<script type="text/javascript" src="/js/search.js?1743348066"></script>
 
     
   </div>
@@ -2258,7 +2258,7 @@
   
     
     <li data-nav-id="/zh-cn/misc/" title="杂项" class="dd-item
-        parent
+        
         
         
         ">
@@ -2457,7 +2457,7 @@
     
     <li data-nav-id="/zh-cn/misc/tunnel/" title="隧道" class="dd-item
         
-        active
+        
         
         ">
       <a href="/zh-cn/misc/tunnel/">
@@ -2658,7 +2658,7 @@
   
     
     <li data-nav-id="/zh-cn/others/" title="其他" class="dd-item
-        
+        parent
         
         
         ">
@@ -2686,7 +2686,7 @@
  
   
     
-      <li data-nav-id="/zh-cn/others/overflow/" title="奇怪的溢出" class="dd-item ">
+      <li data-nav-id="/zh-cn/others/overflow/" title="奇怪的溢出" class="dd-item active">
         <a href="/zh-cn/others/overflow/">
         奇怪的溢出
         <i class="fas fa-check read-icon"></i>
@@ -2921,7 +2921,7 @@
                   
                     
                     
-                      <option id="zh-cn" value="https://www.ch35tnut.com/zh-cn/misc/tunnel/" selected>简体中文</option>
+                      <option id="zh-cn" value="https://www.ch35tnut.com/zh-cn/others/overflow/" selected>简体中文</option>
                     
                   
               
@@ -2986,6 +2986,8 @@
                         </a>
                     </span>
                   
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
                   <span class="links">
                  
                  
@@ -3000,7 +3002,7 @@
             
           
           
-            <a href='/zh-cn/'>首页</a> > <a href='/zh-cn/misc/'>杂项</a> > 隧道
+            <a href='/zh-cn/'>首页</a> > <a href='/zh-cn/others/'>其他</a> > 奇怪的溢出
           
         
           
@@ -3011,6 +3013,13 @@
                   </span>
                 </div>
                 
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents"></nav>
+    </div>
+</div>
+
+                
               </div>
             </div>
             
@@ -3018,36 +3027,63 @@
         
         </div>
         
-          <div id="chapter">
-        
         <div id="body-inner">
+          
+            <h1>
+              
+              奇怪的溢出
+            </h1>
           
 
         
 
+<div class="progress">
+    <div class="wrapper">
+
+    </div>
+</div>
+
+<nav id="TableOfContents"></nav>
+<p>考虑这样一段代码，是否存在溢出问题。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">func</span>(<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>input, <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> input2, <span style="color:#66d9ef">size_t</span> inputlen) <span style="color:#75715e">//初始化函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> buf[<span style="color:#ae81ff">256</span>] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>};
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;i<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">256</span>;i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    buf[i] <span style="color:#f92672">=</span> input[i<span style="color:#f92672">%</span>inputlen];
+</span></span><span style="display:flex;"><span>......
+</span></span><span style="display:flex;"><span>    j<span style="color:#f92672">=</span>(j<span style="color:#f92672">+</span>s[i]<span style="color:#f92672">+</span>buf[i])<span style="color:#f92672">%</span><span style="color:#ae81ff">256</span>;
+</span></span><span style="display:flex;"><span>    input2[j] <span style="color:#f92672">=</span> tmp;
+</span></span><span style="display:flex;"><span>}	
+</span></span></code></pre></div><p>如果不仔细看的话不会发现这里存在整数溢出，buf声明为有符号char数组，j声明为int，所以计算</p>
+<pre tabindex="0"><code>j=(j+s[i]+k[i])%256;
+</code></pre><p>的时候，<code>buf[i]</code>1会被拓展为int类型，当第一个字节的高位为1时，会被当作负数，有可能导致j被计算为负数，造成整数下溢问题，修改调用者的内存，在笔者环境中还有几率修改input2的指向，即使其被声明为<code>const char*</code>。</p>
+<p>以上代码来自于某个实现了算法的库。</p>
 
 
-	<h3 id="隧道">隧道</h3>
-<p>隧道相关文章</p>
-<ul>
-<li>
-<a href="/zh-cn/misc/tunnel/application-layer/">应用层隧道</a></li>
-<li>
-<a href="/zh-cn/misc/tunnel/network-layer/">网络层隧道</a></li>
-<li>
-<a href="/zh-cn/misc/tunnel/transport-layer/">传输层隧道</a></li>
-</ul>
 
+<div class="last_mod">
+	创建于:Sunday, March 30,2025
+</div>
 
+<div class="last_mod">
+	最后修改于: Sunday, March 30,2025
+</div>
+<div class="article-container"></div>
+<script src="https://utteranc.es/client.js"
+        repo="CppXL/blog_comment"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
 
+<div id="comments">
 
-
-<footer class=" footline" >
+</div>
+<footer class="footline">
 	
 </footer>
-
-        
-            </div> 
         
         </div>
         
@@ -4432,7 +4468,6 @@
             
                 
                     
-                    
                 
                 
 
@@ -4447,9 +4482,6 @@
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -4547,7 +4579,6 @@
             
                 
                     
-                    
                 
                 
 
@@ -4562,9 +4593,6 @@
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -4654,6 +4682,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -4666,6 +4695,7 @@
             
             
                 
+                    
                     
                 
                 
@@ -4682,6 +4712,9 @@
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -4818,10 +4851,10 @@
 	 
 	 
 		
-			<a class="nav nav-prev" href="/zh-cn/misc/encoding/unicode/" title="Unicode"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/zh-cn/others/" title="其他"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/zh-cn/misc/tunnel/application-layer/" title="应用层隧道" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/zh-cn/others/recover-weibo-deleted-img/" title="Recover Weibo Deleted Img" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -4831,19 +4864,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1743348067"></script>
-    <script src="/js/perfect-scrollbar.min.js?1743348067"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1743348067"></script>
-    <script src="/js/jquery.sticky.js?1743348067"></script>
-    <script src="/js/featherlight.min.js?1743348067"></script>
-    <script src="/js/highlight.pack.js?1743348067"></script>
+    <script src="/js/clipboard.min.js?1743348066"></script>
+    <script src="/js/perfect-scrollbar.min.js?1743348066"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1743348066"></script>
+    <script src="/js/jquery.sticky.js?1743348066"></script>
+    <script src="/js/featherlight.min.js?1743348066"></script>
+    <script src="/js/highlight.pack.js?1743348066"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1743348067"></script>
-    <script src="/js/learn.js?1743348067"></script>
-    <script src="/js/hugo-learn.js?1743348067"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1743348066"></script>
+    <script src="/js/learn.js?1743348066"></script>
+    <script src="/js/hugo-learn.js?1743348066"></script>
     
         
-            <script src="/mermaid/mermaid.js?1743348067"></script>
+            <script src="/mermaid/mermaid.js?1743348066"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
@@ -4861,3 +4894,6 @@
 </script>
   </body>
 </html>
+
+
+

@@ -13,6 +13,30 @@
     
     
     <item>
+<title>奇怪的溢出</title>
+<link>https://www.ch35tnut.com/zh-cn/others/overflow/</link>
+<pubDate>Sun, 30 Mar 2025 23:19:54 +0800</pubDate>
+      
+      <guid>https://www.ch35tnut.com/zh-cn/others/overflow/</guid>
+<description>&lt;p&gt;考虑这样一段代码，是否存在溢出问题。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;func&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;char&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;input, &lt;span style=&#34;color:#66d9ef&#34;&gt;char&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; input2, &lt;span style=&#34;color:#66d9ef&#34;&gt;size_t&lt;/span&gt; inputlen) &lt;span style=&#34;color:#75715e&#34;&gt;//初始化函数
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;char&lt;/span&gt; buf[&lt;span style=&#34;color:#ae81ff&#34;&gt;256&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;};
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; i&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;i&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;256&lt;/span&gt;;i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    buf[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; input[i&lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt;inputlen];
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;......
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    j&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(j&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;s[i]&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;buf[i])&lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;256&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    input2[j] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tmp;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}	
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果不仔细看的话不会发现这里存在整数溢出，buf声明为有符号char数组，j声明为int，所以计算&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;j=(j+s[i]+k[i])%256;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;的时候，&lt;code&gt;buf[i]&lt;/code&gt;1会被拓展为int类型，当第一个字节的高位为1时，会被当作负数，有可能导致j被计算为负数，造成整数下溢问题，修改调用者的内存，在笔者环境中还有几率修改input2的指向，即使其被声明为&lt;code&gt;const char*&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;以上代码来自于某个实现了算法的库。&lt;/p&gt;
+</description>
+
+</item>
+    
+    <item>
 <title>Recover Weibo Deleted Img</title>
 <link>https://www.ch35tnut.com/zh-cn/others/recover-weibo-deleted-img/</link>
 <pubDate>Wed, 19 Feb 2025 01:40:18 +0800</pubDate>
