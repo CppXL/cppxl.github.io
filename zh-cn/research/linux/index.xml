@@ -59,8 +59,7 @@
 &lt;/ol&gt;
 &lt;blockquote&gt;
 &lt;p&gt;
-&lt;a href=&#34;https://www.geeksforgeeks.org/real-effective-and-saved-userid-in-linux/&#34; target=&#34;_blank&#34;&gt;https://www.geeksforgeeks.org/real-effective-and-saved-userid-in-linux/&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;a href=&#34;https://www.geeksforgeeks.org/real-effective-and-saved-userid-in-linux/&#34; target=&#34;_blank&#34;&gt;https://www.geeksforgeeks.org/real-effective-and-saved-userid-in-linux/&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;查找SUID程序&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;find / -perm -4000 -type f -exec ls -ldb &lt;span style=&#34;color:#f92672&#34;&gt;{}&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;\;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;-perm -4000 查找权限为4000
@@ -177,8 +176,7 @@
 &lt;p&gt;参考资料&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;
-&lt;a href=&#34;https://www.leavesongs.com/PENETRATION/linux-suid-privilege-escalation.html&#34; target=&#34;_blank&#34;&gt;https://www.leavesongs.com/PENETRATION/linux-suid-privilege-escalation.html&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;a href=&#34;https://www.leavesongs.com/PENETRATION/linux-suid-privilege-escalation.html&#34; target=&#34;_blank&#34;&gt;https://www.leavesongs.com/PENETRATION/linux-suid-privilege-escalation.html&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Created at 2023-12-08T10:30:07+08:00&lt;/strong&gt;&lt;/p&gt;
 </description>
 

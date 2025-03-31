@@ -162,8 +162,7 @@
 &lt;p&gt;
 &lt;a href=&#34;https://trailofbits.github.io/ctf/vulnerabilities/source_workshop/news_server.c&#34; target=&#34;_blank&#34;&gt;https://trailofbits.github.io/ctf/vulnerabilities/source_workshop/news_server.c&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;
-&lt;a href=&#34;https://trailofbits.github.io/ctf/vulnerabilities/source.html&#34; target=&#34;_blank&#34;&gt;https://trailofbits.github.io/ctf/vulnerabilities/source.html&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;a href=&#34;https://trailofbits.github.io/ctf/vulnerabilities/source.html&#34; target=&#34;_blank&#34;&gt;https://trailofbits.github.io/ctf/vulnerabilities/source.html&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;编译：&lt;code&gt;gcc -m32 -g -o news_server news_server.c&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;目标：找出10个bug和漏洞&lt;/p&gt;
 &lt;ol&gt;
