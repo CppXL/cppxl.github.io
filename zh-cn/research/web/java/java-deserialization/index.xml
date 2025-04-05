@@ -69,16 +69,16 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;而后通过反射将PriorityQueue对象存储的两个BigInteger对象改为创建的TemplatesImpl对象。
 
-&lt;img alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/research/web/java-deserialization/CommonsBeanutils1-chain.zh-cn.assets/1.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/research/web/java-deserialization/CommonsBeanutils1-chain.zh-cn.assets/1.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;根因分析&lt;/strong&gt;
 根据前面调试知道，&lt;code&gt;CommonsBeanutils1&lt;/code&gt;序列化&lt;code&gt;PriorityQueue&lt;/code&gt;对象，其中&lt;code&gt;comparator&lt;/code&gt;指定为&lt;code&gt;BeanComparator&lt;/code&gt;，&lt;code&gt;PriorityQueue&lt;/code&gt;内存了两个&lt;code&gt;TemplatesImpl&lt;/code&gt;对象。&lt;/p&gt;
 &lt;p&gt;使用
 &lt;a href=&#34;https://www.ch35tnut.com/zh-cn/vulnerability/&#34;&gt;shiro 550&lt;/a&gt;环境，发送payload，在调试器中可以看到，首先反序列化&lt;code&gt;PriorityQueue&lt;/code&gt;对象
 
-&lt;img alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/research/web/java-deserialization/CommonsBeanutils1-chain.zh-cn.assets/2.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/research/web/java-deserialization/CommonsBeanutils1-chain.zh-cn.assets/2.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;在readObject断点，可以看到尝试反序列化&lt;code&gt;comparator&lt;/code&gt;，这里是&lt;code&gt;BeanComparator&lt;/code&gt;，并递归反序列化&lt;code&gt;TemplatesImpl&lt;/code&gt;
 
-&lt;img alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/research/web/java-deserialization/CommonsBeanutils1-chain.zh-cn.assets/3.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/research/web/java-deserialization/CommonsBeanutils1-chain.zh-cn.assets/3.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;而后readObject会调用heapify方法，跟进调用最后调用到comparator.compare&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;heapify&lt;/span&gt;() {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (size &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; 1) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; 1; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; 0; i&lt;span style=&#34;color:#f92672&#34;&gt;--&lt;/span&gt;)
@@ -127,7 +127,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
-&lt;img alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/research/web/java-deserialization/CommonsBeanutils1-chain.zh-cn.assets/4.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/research/web/java-deserialization/CommonsBeanutils1-chain.zh-cn.assets/4.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;跟进getProperty方法内，其中bean为&lt;code&gt;TemplatesImpl&lt;/code&gt;对象，会进入&lt;code&gt;bean = this.getSimpleProperty(bean, name);&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; Object &lt;span style=&#34;color:#a6e22e&#34;&gt;getProperty&lt;/span&gt;(Object bean, String name) &lt;span style=&#34;color:#66d9ef&#34;&gt;throws&lt;/span&gt; IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; PropertyUtilsBean.&lt;span style=&#34;color:#a6e22e&#34;&gt;getInstance&lt;/span&gt;().&lt;span style=&#34;color:#a6e22e&#34;&gt;getProperty&lt;/span&gt;(bean, name);
@@ -212,7 +212,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
-&lt;img alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/research/web/java-deserialization/CommonsBeanutils1-chain.zh-cn.assets/5.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/research/web/java-deserialization/CommonsBeanutils1-chain.zh-cn.assets/5.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;TemplatesImpl&lt;/code&gt;类中&lt;code&gt;getOutputProperties&lt;/code&gt;方法代码如下，会调用&lt;code&gt;newTransformer&lt;/code&gt;方法&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;synchronized&lt;/span&gt; Properties &lt;span style=&#34;color:#a6e22e&#34;&gt;getOutputProperties&lt;/span&gt;() {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt; {
@@ -367,7 +367,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
-&lt;img alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/research/web/java-deserialization/urldns.zh-cn.assets/2.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/research/web/java-deserialization/urldns.zh-cn.assets/2.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;跟进代码，equals代码如下，&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;protected&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;boolean&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;equals&lt;/span&gt;(URL u1, URL u2) {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        String ref1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; u1.&lt;span style=&#34;color:#a6e22e&#34;&gt;getRef&lt;/span&gt;();
@@ -471,7 +471,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;final&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; DEFAULT_INITIAL_CAPACITY &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 1 &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; 4;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;可以用如下图
 
-&lt;img alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/research/web/java-deserialization/urldns.zh-cn.assets/1.webp&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/research/web/java-deserialization/urldns.zh-cn.assets/1.webp&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;HashMap重写了readObject方法，反序列化HashMap数据时会调用重写的readObject方法，代码如下&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;readObject&lt;/span&gt;(java.&lt;span style=&#34;color:#a6e22e&#34;&gt;io&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;ObjectInputStream&lt;/span&gt; s)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;throws&lt;/span&gt; IOException, ClassNotFoundException {

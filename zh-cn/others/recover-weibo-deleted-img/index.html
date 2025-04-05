@@ -12,23 +12,23 @@
     <title>Recover Weibo Deleted Img - chestnut&#39;s blog</title>
 
     
-    <link href="/css/nucleus.css?1743499927" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1743499927" rel="stylesheet">
-    <link href="/css/hybrid.css?1743499927" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1743499927" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1743499927" rel="stylesheet">
-    <link href="/css/auto-complete.css?1743499927" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1743499927" rel="stylesheet">
-    <link href="/css/theme.css?1743499927" rel="stylesheet">
-    <link href="/css/tabs.css?1743499927" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1743499927" rel="stylesheet">
+    <link href="/css/nucleus.css?1743875323" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1743875323" rel="stylesheet">
+    <link href="/css/hybrid.css?1743875323" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1743875323" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1743875323" rel="stylesheet">
+    <link href="/css/auto-complete.css?1743875323" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1743875323" rel="stylesheet">
+    <link href="/css/theme.css?1743875323" rel="stylesheet">
+    <link href="/css/tabs.css?1743875323" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1743875323" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1743499927" rel="stylesheet">
+    <link href="/css/theme-blue.css?1743875323" rel="stylesheet">
     
     
-    <script src="/js/dayjs.min.js?1743499927"></script>
+    <script src="/js/dayjs.min.js?1743875323"></script>
 
-    <script src="/js/jquery-3.3.1.min.js?1743499927"></script>
+    <script src="/js/jquery-3.3.1.min.js?1743875323"></script>
     
     
       
@@ -103,14 +103,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1743499927"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1743499927"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1743875323"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1743875323"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/www.ch35tnut.com\/\/zh-cn";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1743499927"></script>
+<script type="text/javascript" src="/js/search.js?1743875323"></script>
 
     
   </div>
@@ -3102,22 +3102,22 @@
 <p>已知微博图片由CDN缓存，也就是全国各地连接同一个域名wx4.sinaimg.cn时，由于使用的DNS服务器不同，导致解析的IP地址不同，连接的服务器IP不一样，这是CDN实现负载均衡的一个基本操作，也是作为外部人员和CDN最直接的接触方式。</p>
 <p>而微博实现替换图片的方式就是302到和谐的图片地址上，从而达成和谐图片的效果。</p>
 <p>
-<img alt="" src="/images/others/recover-weibo-deleted-img.zh-cn.assets/1.png" /></p>
+<img loading="lazy" alt="" src="/images/others/recover-weibo-deleted-img.zh-cn.assets/1.png" /></p>
 <p>
-<img alt="" src="/images/others/recover-weibo-deleted-img.zh-cn.assets/2.png" /></p>
+<img loading="lazy" alt="" src="/images/others/recover-weibo-deleted-img.zh-cn.assets/2.png" /></p>
 <p>但由于图片存储在CDN上，所以此时即使图片在CDN上被302，但某台CDN服务器可能没有及时同步，当访问那台CDN服务器时还是可以拿到原始图片，那么现在的问题就变成了如何获取wx4.sinaimg.cn在全国的解析到的CDN IP地址。</p>
 <p>一种可行的办法是通过不同DNS服务器去解析wx4.sinaimg.cn获取到这个域名在全国不同地方所对应的IP地址，所以我搜索了全国公共的IP地址列表，成功找到了开源的列表</p>
 <pre tabindex="0"><code>https://public-dns.info/nameserver/cn.html
 </code></pre><p>所以只需要通过这些列表里面的DNS服务器解析域名，获取IP地址并手动连接，而后发送https请求即可。</p>
 <p>当然实战发现，除开很多DNS不可用之外，所解析到的IP地址偏少，相较于17ce和站长工具提供的解析列表明显会少很多。</p>
 <p>
-<img alt="" src="/images/others/recover-weibo-deleted-img.zh-cn.assets/3.png" /></p>
+<img loading="lazy" alt="" src="/images/others/recover-weibo-deleted-img.zh-cn.assets/3.png" /></p>
 <p>
-<img alt="" src="/images/others/recover-weibo-deleted-img.zh-cn.assets/4.png" /></p>
+<img loading="lazy" alt="" src="/images/others/recover-weibo-deleted-img.zh-cn.assets/4.png" /></p>
 <p>所以如果不嫌麻烦可以手动复制这些IP，而后发送请求。除此之外可以参考以下的ref。</p>
 <p>除了上面的获取CDN IP地址之外，还有其他免费的全国ping的网站，这里为了防止被403，所以读者可以自己寻找一下。</p>
 <p>
-<img alt="" src="/images/others/recover-weibo-deleted-img.zh-cn.assets/5.png" /></p>
+<img loading="lazy" alt="" src="/images/others/recover-weibo-deleted-img.zh-cn.assets/5.png" /></p>
 <p>
 <a href="https://www.helious.xyz/2023/11/27/the-trick-about-access-deleted-photos-of-weibo/" target="_blank"># 微博如何访问被夹的图片</a></p>
 
@@ -4961,19 +4961,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1743499927"></script>
-    <script src="/js/perfect-scrollbar.min.js?1743499927"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1743499927"></script>
-    <script src="/js/jquery.sticky.js?1743499927"></script>
-    <script src="/js/featherlight.min.js?1743499927"></script>
-    <script src="/js/highlight.pack.js?1743499927"></script>
+    <script src="/js/clipboard.min.js?1743875323"></script>
+    <script src="/js/perfect-scrollbar.min.js?1743875323"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1743875323"></script>
+    <script src="/js/jquery.sticky.js?1743875323"></script>
+    <script src="/js/featherlight.min.js?1743875323"></script>
+    <script src="/js/highlight.pack.js?1743875323"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1743499927"></script>
-    <script src="/js/learn.js?1743499927"></script>
-    <script src="/js/hugo-learn.js?1743499927"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1743875323"></script>
+    <script src="/js/learn.js?1743875323"></script>
+    <script src="/js/hugo-learn.js?1743875323"></script>
     
         
-            <script src="/mermaid/mermaid.js?1743499927"></script>
+            <script src="/mermaid/mermaid.js?1743875323"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
