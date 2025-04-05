@@ -47,22 +47,37 @@
 &lt;p&gt;已知微博图片由CDN缓存，也就是全国各地连接同一个域名wx4.sinaimg.cn时，由于使用的DNS服务器不同，导致解析的IP地址不同，连接的服务器IP不一样，这是CDN实现负载均衡的一个基本操作，也是作为外部人员和CDN最直接的接触方式。&lt;/p&gt;
 &lt;p&gt;而微博实现替换图片的方式就是302到和谐的图片地址上，从而达成和谐图片的效果。&lt;/p&gt;
 &lt;p&gt;
-&lt;img loading=&#34;lazy&#34; alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/others/recover-weibo-deleted-img.zh-cn.assets/1.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;&#34;src=&#34;https://www.ch35tnut.com/images/others/recover-weibo-deleted-img.zh-cn.assets/1.png&#34; width=&#34;1079&#34; height=&#34;425&#34;
+
+
+/&gt;&lt;/p&gt;
 &lt;p&gt;
-&lt;img loading=&#34;lazy&#34; alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/others/recover-weibo-deleted-img.zh-cn.assets/2.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;&#34;src=&#34;https://www.ch35tnut.com/images/others/recover-weibo-deleted-img.zh-cn.assets/2.png&#34; width=&#34;672&#34; height=&#34;619&#34;
+
+
+/&gt;&lt;/p&gt;
 &lt;p&gt;但由于图片存储在CDN上，所以此时即使图片在CDN上被302，但某台CDN服务器可能没有及时同步，当访问那台CDN服务器时还是可以拿到原始图片，那么现在的问题就变成了如何获取wx4.sinaimg.cn在全国的解析到的CDN IP地址。&lt;/p&gt;
 &lt;p&gt;一种可行的办法是通过不同DNS服务器去解析wx4.sinaimg.cn获取到这个域名在全国不同地方所对应的IP地址，所以我搜索了全国公共的IP地址列表，成功找到了开源的列表&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://public-dns.info/nameserver/cn.html
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;所以只需要通过这些列表里面的DNS服务器解析域名，获取IP地址并手动连接，而后发送https请求即可。&lt;/p&gt;
 &lt;p&gt;当然实战发现，除开很多DNS不可用之外，所解析到的IP地址偏少，相较于17ce和站长工具提供的解析列表明显会少很多。&lt;/p&gt;
 &lt;p&gt;
-&lt;img loading=&#34;lazy&#34; alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/others/recover-weibo-deleted-img.zh-cn.assets/3.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;&#34;src=&#34;https://www.ch35tnut.com/images/others/recover-weibo-deleted-img.zh-cn.assets/3.png&#34; width=&#34;1165&#34; height=&#34;187&#34;
+
+
+/&gt;&lt;/p&gt;
 &lt;p&gt;
-&lt;img loading=&#34;lazy&#34; alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/others/recover-weibo-deleted-img.zh-cn.assets/4.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;&#34;src=&#34;https://www.ch35tnut.com/images/others/recover-weibo-deleted-img.zh-cn.assets/4.png&#34; width=&#34;1103&#34; height=&#34;240&#34;
+
+
+/&gt;&lt;/p&gt;
 &lt;p&gt;所以如果不嫌麻烦可以手动复制这些IP，而后发送请求。除此之外可以参考以下的ref。&lt;/p&gt;
 &lt;p&gt;除了上面的获取CDN IP地址之外，还有其他免费的全国ping的网站，这里为了防止被403，所以读者可以自己寻找一下。&lt;/p&gt;
 &lt;p&gt;
-&lt;img loading=&#34;lazy&#34; alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/others/recover-weibo-deleted-img.zh-cn.assets/5.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;&#34;src=&#34;https://www.ch35tnut.com/images/others/recover-weibo-deleted-img.zh-cn.assets/5.png&#34; width=&#34;950&#34; height=&#34;135&#34;
+
+
+/&gt;&lt;/p&gt;
 &lt;p&gt;
 &lt;a href=&#34;https://www.helious.xyz/2023/11/27/the-trick-about-access-deleted-photos-of-weibo/&#34; target=&#34;_blank&#34;&gt;# 微博如何访问被夹的图片&lt;/a&gt;&lt;/p&gt;
 </description>
@@ -95,7 +110,10 @@
 &lt;p&gt;也是因为混沌，所以人并不能看清做出一件事之后产生的后果和这件事之间的因果，世界上并没有人眼可见的因果线将每件事串联起来，所以常常出现好人吃亏而坏人得利，并且坏人逍遥法外的情况。&lt;/p&gt;
 &lt;p&gt;或许世界上真的存在观测者对每个事件光锥进行观测，但很显然现阶段的人类还做不到。&lt;/p&gt;
 &lt;p&gt;
-&lt;img loading=&#34;lazy&#34; alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/others/hundun.zh-cn.assets/450px-World_line_%28zh-hans%29.svg.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;&#34;src=&#34;https://www.ch35tnut.com/images/others/hundun.zh-cn.assets/450px-World_line_%28zh-hans%29.svg.png&#34; width=&#34;450&#34; height=&#34;459&#34;
+
+
+/&gt;&lt;/p&gt;
 &lt;p&gt;人们总希望从混沌中找出有序的部分，因此发明了数学、物理以及计算机等等学科，尝试对物理世界进行观测，毫无疑问人类做到了，至少是部分做到了。从使用望远镜看宇宙爆炸的瞬间，到使用电子显微镜查看原子结构，这都是无数人类先贤努力的结果。&lt;/p&gt;
 &lt;p&gt;人长大的过程也是对物理世界进行观测的过程，长大的过程逐渐理解物理世界的规律，通过外部的熵增，造成自身的熵减，于是物理世界更加混沌，而人脑对物理世界的理解也更加深入。&lt;/p&gt;
 &lt;p&gt;人生在世，要做的是在混沌的世界找到属于自己的精确的点。&lt;/p&gt;
@@ -118,11 +136,17 @@
 &lt;p&gt;到了2025年，距离高中时代已经快十年了，这十年整个世界变化如此之大，再回首满是回忆。&lt;/p&gt;
 &lt;p&gt;昨天本来想去曳舞天下网站看一下，谷歌搜索居然搜不出来，后面才发现原来的网址shuffle.net.cn已经被灰产注册，成了盗版影视站。&lt;/p&gt;
 &lt;p&gt;
-&lt;img loading=&#34;lazy&#34; alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/others/shuffle.zh-cn.assets/1.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;&#34;src=&#34;https://www.ch35tnut.com/images/others/shuffle.zh-cn.assets/1.png&#34; width=&#34;1963&#34; height=&#34;1330&#34;
+
+
+/&gt;&lt;/p&gt;
 &lt;p&gt;我本来以为这个小众到不能再小众的舞种已经消失在时代的洪流里，结果在B站还看到去年还是前年在广州举办的比赛，整个也就几十个人。&lt;/p&gt;
 &lt;p&gt;通过互联网档案馆，才知道这个网站留在互联网最后的痕迹是在2023年，十年过去可能站长也从非主流少年成长为父亲了吧。而我也从少年成为社畜。&lt;/p&gt;
 &lt;p&gt;
-&lt;img loading=&#34;lazy&#34; alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/others/shuffle.zh-cn.assets/2.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;&#34;src=&#34;https://www.ch35tnut.com/images/others/shuffle.zh-cn.assets/2.png&#34; width=&#34;1799&#34; height=&#34;1207&#34;
+
+
+/&gt;&lt;/p&gt;
 &lt;p&gt;希望我十年后不会“死去”&lt;/p&gt;
 </description>
 
@@ -426,10 +450,17 @@
 &lt;h3 id=&#34;设置cddvd&#34;&gt;设置CD/DVD&lt;/h3&gt;
 &lt;p&gt;首先在虚拟机-设置的硬件选项卡下面的CD/DVD设置为使用ISO映像文件并找到windows server 2019镜像位置，如下图&lt;/p&gt;
 &lt;p&gt;
-&lt;img loading=&#34;lazy&#34; alt=&#34;image-20211117145213632&#34; src=&#34;https://www.ch35tnut.com/images/others/how-to-reset-password-administrator-on-windows-server-2019.assets/image-20211117145213632.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;image-20211117145213632&#34;src=&#34;https://www.ch35tnut.com/images/others/how-to-reset-password-administrator-on-windows-server-2019.assets/image-20211117145213632.png&#34; width=&#34;723&#34; height=&#34;318&#34;
+
+
+/&gt;&lt;/p&gt;
 &lt;p&gt;之后选择虚拟机-电源-开机时打开固件启动虚拟机，虚拟机就会进入BIOS，在BIOS里选择CD/DVD启动，即会进入下图。&lt;/p&gt;
 &lt;p&gt;
-&lt;img loading=&#34;lazy&#34;  src=&#34;https://www.osradar.com/wp-content/uploads/2019/10/pass-1024x768.jpeg&#34; alt=&#34;Windows Server 2019 Installation screen&#34; path=&#34;others/&#34; if=&#34;how-to-reset-password-administrator-on-windows-server-2019.zh-cn&#34;/&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;Windows Server 2019 Installation screen&#34;
+    src=&#34;https://www.osradar.com/wp-content/uploads/2019/10/pass-1024x768.jpeg&#34; path=&#34;others/&#34; if=&#34;how-to-reset-password-administrator-on-windows-server-2019.zh-cn&#34;
+
+
+/&gt;&lt;/p&gt;
 &lt;p&gt;参考链接&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;
@@ -451,7 +482,10 @@
 &lt;p&gt;整个网络分为结构分为三层，第一层模拟外网环境，第二层为DMZ区域，该区域通过边界路由器的端口映射，将第二层网络主机的一些端口映射到边界路由器上对外提供服务，第三层模拟办公网，该层网络为域网络，同时可以控制第二层网络的主机。&lt;/p&gt;
 &lt;p&gt;整个网络拓扑图如下：&lt;/p&gt;
 &lt;p&gt;
-&lt;img loading=&#34;lazy&#34; alt=&#34;拓扑图&#34; src=&#34;https://www.ch35tnut.com/images/others/vmware-based-implementation-of-small-domain-network-construction.zh-cn.assets/%E6%8B%93%E6%89%91%E5%9B%BE.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;拓扑图&#34;src=&#34;https://www.ch35tnut.com/images/others/vmware-based-implementation-of-small-domain-network-construction.zh-cn.assets/%E6%8B%93%E6%89%91%E5%9B%BE.png&#34; width=&#34;637&#34; height=&#34;292&#34;
+
+
+/&gt;&lt;/p&gt;
 &lt;p&gt;IP设置：&lt;/p&gt;
 &lt;p&gt;第一层网络为（外网）：192.168.59.0/24&lt;/p&gt;
 &lt;p&gt;第二层网络为（DMZ区域）：192.168.72.0/24&lt;/p&gt;
@@ -463,7 +497,10 @@
 &lt;h4 id=&#34;网络设置&#34;&gt;网络设置&lt;/h4&gt;
 &lt;p&gt;首先使用VMware的虚拟网络编辑器增加两个网络VMnet2、VMnet3，都勾选仅主机模式，同时取消下面两个勾，如下图：&lt;/p&gt;
 &lt;p&gt;
-&lt;img loading=&#34;lazy&#34; alt=&#34;虚拟网络编辑器图&#34; src=&#34;https://www.ch35tnut.com/images/others/vmware-based-implementation-of-small-domain-network-construction.zh-cn.assets/vmnet2.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;虚拟网络编辑器图&#34;src=&#34;https://www.ch35tnut.com/images/others/vmware-based-implementation-of-small-domain-network-construction.zh-cn.assets/vmnet2.png&#34; width=&#34;596&#34; height=&#34;527&#34;
+
+
+/&gt;&lt;/p&gt;
 &lt;p&gt;VMnet3同理，同时在DHCP设置处设置相应的IP地址和掩码。其中外层网络为nat模式，VMnet2为DMZ区域网络，VMnet3为办公网络&lt;/p&gt;
 &lt;h4 id=&#34;虚拟机搭建&#34;&gt;虚拟机搭建&lt;/h4&gt;
 &lt;p&gt;整个网络在最少情况下一共需要六台虚拟机，分为两台ROS，四台网络中的主机。&lt;/p&gt;
@@ -486,19 +523,34 @@
 &lt;p&gt;至此，两个网络的主机应该可以ping通同一个网络的主机。接下来设置两个ROS的IP地址。&lt;/p&gt;
 &lt;p&gt;打开winbox，点击Neighbors按钮，会自动嗅探网络内的存活的路由器，如下图所示。&lt;/p&gt;
 &lt;p&gt;
-&lt;img loading=&#34;lazy&#34; alt=&#34;winbox界面&#34; src=&#34;https://www.ch35tnut.com/images/others/vmware-based-implementation-of-small-domain-network-construction.zh-cn.assets/winbox.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;winbox界面&#34;src=&#34;https://www.ch35tnut.com/images/others/vmware-based-implementation-of-small-domain-network-construction.zh-cn.assets/winbox.png&#34; width=&#34;522&#34; height=&#34;518&#34;
+
+
+/&gt;&lt;/p&gt;
 &lt;p&gt;上图为边界路由器的IP地址，如果分配了IP地址则可以在浏览器通过IP地址浏览路由器的web界面，在如果没有分配IP地址则通过wibbox使用MAC地址登录&lt;/p&gt;
 &lt;p&gt;
-&lt;img loading=&#34;lazy&#34; alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/others/vmware-based-implementation-of-small-domain-network-construction.zh-cn.assets/winbox-mac.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;&#34;src=&#34;https://www.ch35tnut.com/images/others/vmware-based-implementation-of-small-domain-network-construction.zh-cn.assets/winbox-mac.png&#34; width=&#34;738&#34; height=&#34;529&#34;
+
+
+/&gt;&lt;/p&gt;
 &lt;p&gt;
-&lt;img loading=&#34;lazy&#34; alt=&#34;接口列表&#34; src=&#34;https://www.ch35tnut.com/images/others/vmware-based-implementation-of-small-domain-network-construction.zh-cn.assets/ros.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;接口列表&#34;src=&#34;https://www.ch35tnut.com/images/others/vmware-based-implementation-of-small-domain-network-construction.zh-cn.assets/ros.png&#34; width=&#34;1653&#34; height=&#34;968&#34;
+
+
+/&gt;&lt;/p&gt;
 &lt;p&gt;进入之后，在左侧选项卡会列出路由器拥有的所有网卡接口，点击之后进入到接口详情界面，在里面会列出该接口的一些基本信息，可以通过网卡的MAC分辨该网卡对应在vmware中的网卡，将两个网卡名称分别设置为ether1-wan和ether2-lan，之后在ip-&amp;gt;addresses选项卡中将ether-lan设置为下图。ether1-wan不用设置，因为该网卡网络类型为nat会自动dhcp分配&lt;/p&gt;
 &lt;p&gt;
-&lt;img loading=&#34;lazy&#34; alt=&#34;ether2-lanIP地址设置&#34; src=&#34;https://www.ch35tnut.com/images/others/vmware-based-implementation-of-small-domain-network-construction.zh-cn.assets/ether.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;ether2-lanIP地址设置&#34;src=&#34;https://www.ch35tnut.com/images/others/vmware-based-implementation-of-small-domain-network-construction.zh-cn.assets/ether.png&#34; width=&#34;383&#34; height=&#34;217&#34;
+
+
+/&gt;&lt;/p&gt;
 &lt;p&gt;之后在IP-&amp;gt;Firewall-&amp;gt;NAT中新建规则，chain：srcnat，out.interface:ether2-lan,action:masquerade&lt;/p&gt;
 &lt;p&gt;该规则将使得路由器两边的网络联通。&lt;/p&gt;
 &lt;p&gt;
-&lt;img loading=&#34;lazy&#34; alt=&#34;NAT规则&#34; src=&#34;https://www.ch35tnut.com/images/others/vmware-based-implementation-of-small-domain-network-construction.zh-cn.assets/nat.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;NAT规则&#34;src=&#34;https://www.ch35tnut.com/images/others/vmware-based-implementation-of-small-domain-network-construction.zh-cn.assets/nat.png&#34; width=&#34;1423&#34; height=&#34;150&#34;
+
+
+/&gt;&lt;/p&gt;
 &lt;p&gt;参考&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;

@@ -12,23 +12,23 @@
     <title>Mcp &#43; LLM = RCE? - chestnut&#39;s blog</title>
 
     
-    <link href="/css/nucleus.css?1743875861" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1743875861" rel="stylesheet">
-    <link href="/css/hybrid.css?1743875861" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1743875861" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1743875861" rel="stylesheet">
-    <link href="/css/auto-complete.css?1743875861" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1743875861" rel="stylesheet">
-    <link href="/css/theme.css?1743875861" rel="stylesheet">
-    <link href="/css/tabs.css?1743875861" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1743875861" rel="stylesheet">
+    <link href="/css/nucleus.css?1743877900" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1743877900" rel="stylesheet">
+    <link href="/css/hybrid.css?1743877900" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1743877900" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1743877900" rel="stylesheet">
+    <link href="/css/auto-complete.css?1743877900" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1743877900" rel="stylesheet">
+    <link href="/css/theme.css?1743877900" rel="stylesheet">
+    <link href="/css/tabs.css?1743877900" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1743877900" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1743875861" rel="stylesheet">
+    <link href="/css/theme-blue.css?1743877900" rel="stylesheet">
     
     
-    <script src="/js/dayjs.min.js?1743875861"></script>
+    <script src="/js/dayjs.min.js?1743877900"></script>
 
-    <script src="/js/jquery-3.3.1.min.js?1743875861"></script>
+    <script src="/js/jquery-3.3.1.min.js?1743877900"></script>
     
     
       
@@ -103,14 +103,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1743875861"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1743875861"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1743877900"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1743877900"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/www.ch35tnut.com\/\/zh-cn";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1743875861"></script>
+<script type="text/javascript" src="/js/search.js?1743877900"></script>
 
     
   </div>
@@ -3105,7 +3105,10 @@
 <nav id="TableOfContents"></nav>
 <p>MCP协议的推出让大模型有了感知现实世界的能力，并且使用现实世界的工具并打通数据孤岛。下面是MCP协议架构</p>
 <p>
-<img loading="lazy" alt="" src="/images/research/mcp/mcp-rce.zh-cn.assets/1.png" /></p>
+<img loading="lazy" alt=""src="/images/research/mcp/mcp-rce.zh-cn.assets/1.png" width="1046" height="708"
+
+
+/></p>
 <p>MCP的官网对其中执行步骤进行了详细说明，可以看出MCP协议相当于usb接口，联通各种设备（mcp server）和主机（大模型）</p>
 <ol>
 <li>客户端把问题发送给claude</li>
@@ -3116,7 +3119,10 @@
 </ol>
 <p>由于大模型可以通过MCP server间接操作物理机，这也带来了新的攻击面，比如攻击者可以制作恶意样本，mcp server在执行某一工具时，获取到恶意信息，返回给claude，让claude决定执行危险接口（能够执行命令、脚本的tools），这样攻击者就可以某一程度上的入侵mcp server。</p>
 <p>
-<img loading="lazy" alt="" src="/images/research/mcp/mcp-rce.zh-cn.assets/3.png" /></p>
+<img loading="lazy" alt=""src="/images/research/mcp/mcp-rce.zh-cn.assets/3.png" width="922" height="1109"
+
+
+/></p>
 <blockquote>
 <p>
 <a href="https://github.com/PipedreamHQ/awesome-mcp-servers" target="_blank">https://github.com/PipedreamHQ/awesome-mcp-servers</a></p></blockquote>
@@ -3154,18 +3160,33 @@
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>把恶意样本拖到ida里面，然后让大模型，尝试解密数据。</p>
 <p>
-<img loading="lazy" alt="" src="/images/research/mcp/mcp-rce.zh-cn.assets/6.png" /></p>
+<img loading="lazy" alt=""src="/images/research/mcp/mcp-rce.zh-cn.assets/6.png" width="1149" height="327"
+
+
+/></p>
 <p>大模型就会尝试通过mcp协议调用mcp server公开的tools，对我们的恶意样本进行分析，从而触发到执行脚本的模块。最后执行我们的代码。</p>
 <p>
-<img loading="lazy" alt="" src="/images/research/mcp/mcp-rce.zh-cn.assets/7.png" /></p>
+<img loading="lazy" alt=""src="/images/research/mcp/mcp-rce.zh-cn.assets/7.png" width="1182" height="914"
+
+
+/></p>
 <p>
-<img loading="lazy" alt="" src="/images/research/mcp/mcp-rce.zh-cn.assets/4.png" /></p>
+<img loading="lazy" alt=""src="/images/research/mcp/mcp-rce.zh-cn.assets/4.png" width="1746" height="1253"
+
+
+/></p>
 <p>当然这里还需要使用技巧，如果过于直白的使用<code>os.system</code>则会被大模型认为是恶意代码，拒绝执行</p>
 <p>
-<img loading="lazy" alt="" src="/images/research/mcp/mcp-rce.zh-cn.assets/2.png" /></p>
+<img loading="lazy" alt=""src="/images/research/mcp/mcp-rce.zh-cn.assets/2.png" width="1181" height="458"
+
+
+/></p>
 <p>不过还需要优化一下，claude在通过mcp执行脚本之后，发现没有输出，分析除了这其实是一个恶意脚本。</p>
 <p>
-<img loading="lazy" alt="" src="/images/research/mcp/mcp-rce.zh-cn.assets/5.png" /></p>
+<img loading="lazy" alt=""src="/images/research/mcp/mcp-rce.zh-cn.assets/5.png" width="1088" height="1545"
+
+
+/></p>
 <p>当然这并不是MCP协议设计的问题，更多的原因是是MCP server在实现时提供了脚本接口，大模型并不能预知执行某些动作之后的结果，此时就可以尝试进行一种另类的prompt注入。</p>
 <p>这很容易让人想起了简历prompt注入：某些公司通过大模型筛选简历，在简历中写下白色透明的词，对大模型进行注入，提高简历被捞的可能性。</p>
 <p>技术的发展消灭了某些攻击面，也带来了新的攻击面。keep thinking。</p>
@@ -5005,19 +5026,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1743875861"></script>
-    <script src="/js/perfect-scrollbar.min.js?1743875861"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1743875861"></script>
-    <script src="/js/jquery.sticky.js?1743875861"></script>
-    <script src="/js/featherlight.min.js?1743875861"></script>
-    <script src="/js/highlight.pack.js?1743875861"></script>
+    <script src="/js/clipboard.min.js?1743877900"></script>
+    <script src="/js/perfect-scrollbar.min.js?1743877900"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1743877900"></script>
+    <script src="/js/jquery.sticky.js?1743877900"></script>
+    <script src="/js/featherlight.min.js?1743877900"></script>
+    <script src="/js/highlight.pack.js?1743877900"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1743875861"></script>
-    <script src="/js/learn.js?1743875861"></script>
-    <script src="/js/hugo-learn.js?1743875861"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1743877900"></script>
+    <script src="/js/learn.js?1743877900"></script>
+    <script src="/js/hugo-learn.js?1743877900"></script>
     
         
-            <script src="/mermaid/mermaid.js?1743875861"></script>
+            <script src="/mermaid/mermaid.js?1743877900"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

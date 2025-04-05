@@ -22,7 +22,10 @@
 &lt;p&gt;根据
 &lt;a href=&#34;https://learn.microsoft.com/en-us/visualstudio/extensibility/internals/solution-user-options-dot-suo-file?view=vs-2022&#34; target=&#34;_blank&#34;&gt;微软文档&lt;/a&gt;，.suo是CompoundFile类文件，在打开.suo文件时会调用VS Package上的LoadUserOptions方法，使用Structured Storage Viewer打开攻击者制作的恶意.suio可以找到如下，很容易看出里面有一段序列化数据&lt;/p&gt;
 &lt;p&gt;
-&lt;img loading=&#34;lazy&#34; alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/research/apt/ocean_lotus/suo.assets/1.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;&#34;src=&#34;https://www.ch35tnut.com/images/research/apt/ocean_lotus/suo.assets/1.png&#34; width=&#34;1853&#34; height=&#34;1206&#34;
+
+
+/&gt;&lt;/p&gt;
 &lt;p&gt;根据
 &lt;a href=&#34;https://github.com/gmh5225/EvilSln/blob/54f54506f1cba57ed9fec5cf0698994821270b9d/README.md#L168&#34; target=&#34;_blank&#34;&gt;文章&lt;/a&gt;披露的Microsoft.Visual.dll，在其内找到如下代码，即在OnLoadOptions方法中会调用VsToolboxService.LoadOptions并把数据作为stream参数传进去&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Microsoft.VisualStudio.VSCorePackage  &lt;/span&gt;

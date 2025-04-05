@@ -20,7 +20,10 @@
       <guid>https://www.ch35tnut.com/zh-cn/research/web/mitmproxy-with-self-signed-certificate/</guid>
 <description>&lt;p&gt;在挖掘某些基于CS架构软件漏洞时，其服务端可能开启了HTTP服务，所以其看似是CS架构，但实际上还是BS架构，客户端只是一个另类的浏览器。&lt;/p&gt;
 &lt;p&gt;
-&lt;img loading=&#34;lazy&#34; alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/research/web/mitmproxy-with-self-signed-certificate.zh-cn.assets/1.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;&#34;src=&#34;https://www.ch35tnut.com/images/research/web/mitmproxy-with-self-signed-certificate.zh-cn.assets/1.png&#34; width=&#34;482&#34; height=&#34;90&#34;
+
+
+/&gt;&lt;/p&gt;
 &lt;p&gt;但我们可能会想要抓取client和server的通信流量，而此时会有两点问题。&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;client可能不会读取HTTP_PROXY和HTTPS_PROXY等系统变量，不会尝试走系统代理。&lt;/li&gt;
@@ -47,7 +50,10 @@
 &lt;code&gt;mitmweb --cert domain=temp.pem --ssl-insecure&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;
-&lt;img loading=&#34;lazy&#34; alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/research/web/mitmproxy-with-self-signed-certificate.zh-cn.assets/2.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;&#34;src=&#34;https://www.ch35tnut.com/images/research/web/mitmproxy-with-self-signed-certificate.zh-cn.assets/2.png&#34; width=&#34;664&#34; height=&#34;92&#34;
+
+
+/&gt;&lt;/p&gt;
 </description>
 
 </item>

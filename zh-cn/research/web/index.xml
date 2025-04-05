@@ -46,7 +46,10 @@
       <guid>https://www.ch35tnut.com/zh-cn/research/web/mitmproxy-with-self-signed-certificate/</guid>
 <description>&lt;p&gt;在挖掘某些基于CS架构软件漏洞时，其服务端可能开启了HTTP服务，所以其看似是CS架构，但实际上还是BS架构，客户端只是一个另类的浏览器。&lt;/p&gt;
 &lt;p&gt;
-&lt;img loading=&#34;lazy&#34; alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/research/web/mitmproxy-with-self-signed-certificate.zh-cn.assets/1.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;&#34;src=&#34;https://www.ch35tnut.com/images/research/web/mitmproxy-with-self-signed-certificate.zh-cn.assets/1.png&#34; width=&#34;482&#34; height=&#34;90&#34;
+
+
+/&gt;&lt;/p&gt;
 &lt;p&gt;但我们可能会想要抓取client和server的通信流量，而此时会有两点问题。&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;client可能不会读取HTTP_PROXY和HTTPS_PROXY等系统变量，不会尝试走系统代理。&lt;/li&gt;
@@ -73,7 +76,10 @@
 &lt;code&gt;mitmweb --cert domain=temp.pem --ssl-insecure&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;
-&lt;img loading=&#34;lazy&#34; alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/research/web/mitmproxy-with-self-signed-certificate.zh-cn.assets/2.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;&#34;src=&#34;https://www.ch35tnut.com/images/research/web/mitmproxy-with-self-signed-certificate.zh-cn.assets/2.png&#34; width=&#34;664&#34; height=&#34;92&#34;
+
+
+/&gt;&lt;/p&gt;
 </description>
 
 </item>
@@ -133,7 +139,10 @@ usefulness of 0xFEFF as a byte-order mark.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;li&gt;UTF-16会在字符串前面预置0xFFFE，&lt;code&gt;ĸ&lt;/code&gt;在UNICODE表中对应于0x0138，而后逐个打印，0x38变成了8&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;
-&lt;img loading=&#34;lazy&#34; alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/research/web/PHP-filter-RCE.zh-cn.assets/prepend_character8.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;&#34;src=&#34;https://www.ch35tnut.com/images/research/web/PHP-filter-RCE.zh-cn.assets/prepend_character8.png&#34; width=&#34;604&#34; height=&#34;447&#34;
+
+
+/&gt;&lt;/p&gt;
 &lt;p&gt;LANTIN6表如下：&lt;/p&gt;
 &lt;table&gt;
   &lt;thead&gt;
@@ -466,7 +475,10 @@ usefulness of 0xFEFF as a byte-order mark.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;/table&gt;
 &lt;p&gt;UNICODE如下：
 
-&lt;img loading=&#34;lazy&#34; alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/research/web/PHP-filter-RCE.zh-cn.assets/1.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;&#34;src=&#34;https://www.ch35tnut.com/images/research/web/PHP-filter-RCE.zh-cn.assets/1.png&#34; width=&#34;362&#34; height=&#34;214&#34;
+
+
+/&gt;&lt;/p&gt;
 &lt;p&gt;通过将恶意代码转化为base64形式，而后通过编码预置字符，最后使用&lt;code&gt;convert.base64-decode&lt;/code&gt;尝试解码预置的数据，就可以使得PHP filter最后解码出恶意代码。&lt;/p&gt;
 &lt;p&gt;当使用require时，且路径可控，就可以利用PHP filter执行任意代码。&lt;/p&gt;
 &lt;p&gt;参考链接&lt;/p&gt;

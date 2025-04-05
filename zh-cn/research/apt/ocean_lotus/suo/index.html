@@ -12,23 +12,23 @@
     <title>Suo 投毒 - chestnut&#39;s blog</title>
 
     
-    <link href="/css/nucleus.css?1743875860" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1743875860" rel="stylesheet">
-    <link href="/css/hybrid.css?1743875860" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1743875860" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1743875860" rel="stylesheet">
-    <link href="/css/auto-complete.css?1743875860" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1743875860" rel="stylesheet">
-    <link href="/css/theme.css?1743875860" rel="stylesheet">
-    <link href="/css/tabs.css?1743875860" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1743875860" rel="stylesheet">
+    <link href="/css/nucleus.css?1743877900" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1743877900" rel="stylesheet">
+    <link href="/css/hybrid.css?1743877900" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1743877900" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1743877900" rel="stylesheet">
+    <link href="/css/auto-complete.css?1743877900" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1743877900" rel="stylesheet">
+    <link href="/css/theme.css?1743877900" rel="stylesheet">
+    <link href="/css/tabs.css?1743877900" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1743877900" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1743875860" rel="stylesheet">
+    <link href="/css/theme-blue.css?1743877900" rel="stylesheet">
     
     
-    <script src="/js/dayjs.min.js?1743875860"></script>
+    <script src="/js/dayjs.min.js?1743877900"></script>
 
-    <script src="/js/jquery-3.3.1.min.js?1743875860"></script>
+    <script src="/js/jquery-3.3.1.min.js?1743877900"></script>
     
     
       
@@ -103,14 +103,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1743875860"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1743875860"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1743877900"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1743877900"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/www.ch35tnut.com\/\/zh-cn";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1743875860"></script>
+<script type="text/javascript" src="/js/search.js?1743877900"></script>
 
     
   </div>
@@ -3135,7 +3135,10 @@
 <p>根据
 <a href="https://learn.microsoft.com/en-us/visualstudio/extensibility/internals/solution-user-options-dot-suo-file?view=vs-2022" target="_blank">微软文档</a>，.suo是CompoundFile类文件，在打开.suo文件时会调用VS Package上的LoadUserOptions方法，使用Structured Storage Viewer打开攻击者制作的恶意.suio可以找到如下，很容易看出里面有一段序列化数据</p>
 <p>
-<img loading="lazy" alt="" src="/images/research/apt/ocean_lotus/suo.assets/1.png" /></p>
+<img loading="lazy" alt=""src="/images/research/apt/ocean_lotus/suo.assets/1.png" width="1853" height="1206"
+
+
+/></p>
 <p>根据
 <a href="https://github.com/gmh5225/EvilSln/blob/54f54506f1cba57ed9fec5cf0698994821270b9d/README.md#L168" target="_blank">文章</a>披露的Microsoft.Visual.dll，在其内找到如下代码，即在OnLoadOptions方法中会调用VsToolboxService.LoadOptions并把数据作为stream参数传进去</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#75715e">// Microsoft.VisualStudio.VSCorePackage  </span>
@@ -5123,19 +5126,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1743875860"></script>
-    <script src="/js/perfect-scrollbar.min.js?1743875860"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1743875860"></script>
-    <script src="/js/jquery.sticky.js?1743875860"></script>
-    <script src="/js/featherlight.min.js?1743875860"></script>
-    <script src="/js/highlight.pack.js?1743875860"></script>
+    <script src="/js/clipboard.min.js?1743877900"></script>
+    <script src="/js/perfect-scrollbar.min.js?1743877900"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1743877900"></script>
+    <script src="/js/jquery.sticky.js?1743877900"></script>
+    <script src="/js/featherlight.min.js?1743877900"></script>
+    <script src="/js/highlight.pack.js?1743877900"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1743875860"></script>
-    <script src="/js/learn.js?1743875860"></script>
-    <script src="/js/hugo-learn.js?1743875860"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1743877900"></script>
+    <script src="/js/learn.js?1743877900"></script>
+    <script src="/js/hugo-learn.js?1743877900"></script>
     
         
-            <script src="/mermaid/mermaid.js?1743875860"></script>
+            <script src="/mermaid/mermaid.js?1743877900"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

@@ -12,23 +12,23 @@
     <title>SSH隧道 - chestnut&#39;s blog</title>
 
     
-    <link href="/css/nucleus.css?1743875860" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1743875860" rel="stylesheet">
-    <link href="/css/hybrid.css?1743875860" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1743875860" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1743875860" rel="stylesheet">
-    <link href="/css/auto-complete.css?1743875860" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1743875860" rel="stylesheet">
-    <link href="/css/theme.css?1743875860" rel="stylesheet">
-    <link href="/css/tabs.css?1743875860" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1743875860" rel="stylesheet">
+    <link href="/css/nucleus.css?1743877900" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1743877900" rel="stylesheet">
+    <link href="/css/hybrid.css?1743877900" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1743877900" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1743877900" rel="stylesheet">
+    <link href="/css/auto-complete.css?1743877900" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1743877900" rel="stylesheet">
+    <link href="/css/theme.css?1743877900" rel="stylesheet">
+    <link href="/css/tabs.css?1743877900" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1743877900" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1743875860" rel="stylesheet">
+    <link href="/css/theme-blue.css?1743877900" rel="stylesheet">
     
     
-    <script src="/js/dayjs.min.js?1743875860"></script>
+    <script src="/js/dayjs.min.js?1743877900"></script>
 
-    <script src="/js/jquery-3.3.1.min.js?1743875860"></script>
+    <script src="/js/jquery-3.3.1.min.js?1743877900"></script>
     
     
       
@@ -103,14 +103,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1743875860"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1743875860"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1743877900"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1743877900"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/www.ch35tnut.com\/\/zh-cn";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1743875860"></script>
+<script type="text/javascript" src="/js/search.js?1743877900"></script>
 
     
   </div>
@@ -3153,16 +3153,28 @@
 </span></span></code></pre></div><p>在SSH Client运行命令<code>ssh -CfNg -L 127.0.0.1:1313:127.0.0.1:1313 root@a.b.c.d</code> ，将127.0.0.1:1313端口转发到SSH Server的127.0.0.1:1313端口上。此时SSH Client访问127.0.0.1:1313的结果跟访问在SSH Server端的127.0.0.1:1313结果一样。</p>
 <p>在SSH Client上</p>
 <p>
-<img loading="lazy" alt="image-20211119192913164" src="/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119192913164.png" /></p>
+<img loading="lazy" alt="image-20211119192913164"src="/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119192913164.png" width="576" height="27"
+
+
+/></p>
 <p>此时在SSH Client上的ssh会监听127.0.0.1:1313这个端口，该端口的TCP数据通过ssh隧道传输到SSH server上。</p>
 <p>
-<img loading="lazy" alt="image-20211119193054555" src="/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119193054555.png" /></p>
+<img loading="lazy" alt="image-20211119193054555"src="/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119193054555.png" width="707" height="85"
+
+
+/></p>
 <p>在SSH Server上，先监听127.0.0.1:1313端口，本文监听使用<code>hugo</code> 启动一个server。</p>
 <p>
-<img loading="lazy" alt="image-20211119193325467" src="/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119193325467.png" /></p>
+<img loading="lazy" alt="image-20211119193325467"src="/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119193325467.png" width="719" height="37"
+
+
+/></p>
 <p>在SSH Client上使用curl 127.0.0.1:1313命令时返回的内容即为SSH Server上127.0.0.1:1313的内容</p>
 <p>
-<img loading="lazy" alt="image-20211119194300415" src="/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119194300415.png" /></p>
+<img loading="lazy" alt="image-20211119194300415"src="/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119194300415.png" width="1097" height="453"
+
+
+/></p>
 <p>同时本地端口转发命令中remote ip不止限制在127.0.0.1上，remote ip可以是任何一个SSH Server能够连接的host，实际上本地端口转发过程中，实际上是把SSH Server当作跳板机，连通SSH Client和SSH Server另外一端的主机，如下：</p>
 <p><code>|SSH Client| &lt;-------------&gt;|SSH Server| &lt;--------------&gt;|SSH Client不能访问但是SSH Server能访问的主机|</code></p>
 <p>本地端口转发一般应用场景为在渗透测试过程中控制了目标网络中带有SSH Server的一台机器，通过这台机器做为跳板机来访问内网其他主机上的服务。一定程度上规避防火墙的流量告警（因为ssh流量为加密流量）</p>
@@ -3174,12 +3186,21 @@ SSH Server IP:a.b.c.d
 </code></pre><p>本次我们将SSH Client的3389端口转发到SSH Server（公网服务器）上，使得另外一台机器能够通过SSH Server的端口连接到位于局域网的SSH Client的远程桌面。</p>
 <p>在ssh client上运行命令</p>
 <p>
-<img loading="lazy" alt="image-20211119201056241" src="/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119201056241.png" /></p>
+<img loading="lazy" alt="image-20211119201056241"src="/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119201056241.png" width="571" height="21"
+
+
+/></p>
 <p>此时任何连接SSH Server:9898的请求都会被转发到SSH Client的58989端口上，该端口监听的服务为远程桌面服务。在另外一台电脑（不同于SSH Server和SSH Client）使用远程桌面连接SSH Server:9898</p>
 <p>
-<img loading="lazy" alt="image-20211119201321046" src="/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119201321046.png" /></p>
+<img loading="lazy" alt="image-20211119201321046"src="/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119201321046.png" width="473" height="289"
+
+
+/></p>
 <p>
-<img loading="lazy" alt="image-20211119201345710" src="/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119201345710.png" /></p>
+<img loading="lazy" alt="image-20211119201345710"src="/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119201345710.png" width="489" height="179"
+
+
+/></p>
 <p>同本地端口转发一样，远程端口转发命令中的local ip可以是任何一个SSH Client能够连接的host，此时SSH Client被当作跳板机，连通SSH Client另外一端和SSH Server端的主机。</p>
 <p><code>|SSH Serve能够连通的主机| &lt;--------------&gt; |SSH Client| &lt;--------------&gt; |SSH Client能访问但是SSH Server不能访问的主机|</code></p>
 <p>远程端口转发应用场景一般是将局域网的某些服务通过SSH隧道暴露在公网上，或者在渗透测试过程中，控制了内网的某台主机，通过远程端口转发，将该主机作为跳板机来访问内网其他服务，因为此时SSH是从内网连接到外网，在流量上没有那么可疑。</p>
@@ -3187,9 +3208,15 @@ SSH Server IP:a.b.c.d
 <p>在本地端口转发和远程端口转发过程中，一次性只能转发一个端口，在某些场景下效率太低了，而动态端口转发没有指定目的端口，相对于前两种来说更灵活。实际上动态端口转发即为SSH实现的SOCKS协议。命令格式:<code>ssh -D port &lt;username&gt;@&lt;SSH host&gt;</code>。</p>
 <p>在SSH Client执行命令即可在SSH Client和SSH Server之间建立socks5隧道，SSH Client可以连接该隧道来传输数据。</p>
 <p>
-<img loading="lazy" alt="image-20211119205247779" src="/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119205247779.png" /></p>
+<img loading="lazy" alt="image-20211119205247779"src="/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119205247779.png" width="375" height="23"
+
+
+/></p>
 <p>
-<img loading="lazy" alt="image-20211119205352295" src="/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119205352295.png" /></p>
+<img loading="lazy" alt="image-20211119205352295"src="/images/misc/tunnel/application-layer/ssh-tunnel.assets/image-20211119205352295.png" width="818" height="154"
+
+
+/></p>
 <h3 id="组合利用">组合利用</h3>
 <p>在一些情况下可以通过组合上面三种转发来达到意想不到的效果。</p>
 <p>例如，有两台位于互不相通的局域网主机，如果一台想要访问另外一台能够访问的服务时，可以以下面的方式达到目的</p>
@@ -5038,19 +5065,19 @@ SSH Server IP:a.b.c.d
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1743875860"></script>
-    <script src="/js/perfect-scrollbar.min.js?1743875860"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1743875860"></script>
-    <script src="/js/jquery.sticky.js?1743875860"></script>
-    <script src="/js/featherlight.min.js?1743875860"></script>
-    <script src="/js/highlight.pack.js?1743875860"></script>
+    <script src="/js/clipboard.min.js?1743877900"></script>
+    <script src="/js/perfect-scrollbar.min.js?1743877900"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1743877900"></script>
+    <script src="/js/jquery.sticky.js?1743877900"></script>
+    <script src="/js/featherlight.min.js?1743877900"></script>
+    <script src="/js/highlight.pack.js?1743877900"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1743875860"></script>
-    <script src="/js/learn.js?1743875860"></script>
-    <script src="/js/hugo-learn.js?1743875860"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1743877900"></script>
+    <script src="/js/learn.js?1743877900"></script>
+    <script src="/js/hugo-learn.js?1743877900"></script>
     
         
-            <script src="/mermaid/mermaid.js?1743875860"></script>
+            <script src="/mermaid/mermaid.js?1743877900"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

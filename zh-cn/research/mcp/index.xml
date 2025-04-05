@@ -20,7 +20,10 @@
       <guid>https://www.ch35tnut.com/zh-cn/research/mcp/mcp-rce/</guid>
 <description>&lt;p&gt;MCP协议的推出让大模型有了感知现实世界的能力，并且使用现实世界的工具并打通数据孤岛。下面是MCP协议架构&lt;/p&gt;
 &lt;p&gt;
-&lt;img loading=&#34;lazy&#34; alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/research/mcp/mcp-rce.zh-cn.assets/1.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;&#34;src=&#34;https://www.ch35tnut.com/images/research/mcp/mcp-rce.zh-cn.assets/1.png&#34; width=&#34;1046&#34; height=&#34;708&#34;
+
+
+/&gt;&lt;/p&gt;
 &lt;p&gt;MCP的官网对其中执行步骤进行了详细说明，可以看出MCP协议相当于usb接口，联通各种设备（mcp server）和主机（大模型）&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;客户端把问题发送给claude&lt;/li&gt;
@@ -31,7 +34,10 @@
 &lt;/ol&gt;
 &lt;p&gt;由于大模型可以通过MCP server间接操作物理机，这也带来了新的攻击面，比如攻击者可以制作恶意样本，mcp server在执行某一工具时，获取到恶意信息，返回给claude，让claude决定执行危险接口（能够执行命令、脚本的tools），这样攻击者就可以某一程度上的入侵mcp server。&lt;/p&gt;
 &lt;p&gt;
-&lt;img loading=&#34;lazy&#34; alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/research/mcp/mcp-rce.zh-cn.assets/3.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;&#34;src=&#34;https://www.ch35tnut.com/images/research/mcp/mcp-rce.zh-cn.assets/3.png&#34; width=&#34;922&#34; height=&#34;1109&#34;
+
+
+/&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;
 &lt;a href=&#34;https://github.com/PipedreamHQ/awesome-mcp-servers&#34; target=&#34;_blank&#34;&gt;https://github.com/PipedreamHQ/awesome-mcp-servers&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
@@ -69,18 +75,33 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;把恶意样本拖到ida里面，然后让大模型，尝试解密数据。&lt;/p&gt;
 &lt;p&gt;
-&lt;img loading=&#34;lazy&#34; alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/research/mcp/mcp-rce.zh-cn.assets/6.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;&#34;src=&#34;https://www.ch35tnut.com/images/research/mcp/mcp-rce.zh-cn.assets/6.png&#34; width=&#34;1149&#34; height=&#34;327&#34;
+
+
+/&gt;&lt;/p&gt;
 &lt;p&gt;大模型就会尝试通过mcp协议调用mcp server公开的tools，对我们的恶意样本进行分析，从而触发到执行脚本的模块。最后执行我们的代码。&lt;/p&gt;
 &lt;p&gt;
-&lt;img loading=&#34;lazy&#34; alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/research/mcp/mcp-rce.zh-cn.assets/7.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;&#34;src=&#34;https://www.ch35tnut.com/images/research/mcp/mcp-rce.zh-cn.assets/7.png&#34; width=&#34;1182&#34; height=&#34;914&#34;
+
+
+/&gt;&lt;/p&gt;
 &lt;p&gt;
-&lt;img loading=&#34;lazy&#34; alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/research/mcp/mcp-rce.zh-cn.assets/4.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;&#34;src=&#34;https://www.ch35tnut.com/images/research/mcp/mcp-rce.zh-cn.assets/4.png&#34; width=&#34;1746&#34; height=&#34;1253&#34;
+
+
+/&gt;&lt;/p&gt;
 &lt;p&gt;当然这里还需要使用技巧，如果过于直白的使用&lt;code&gt;os.system&lt;/code&gt;则会被大模型认为是恶意代码，拒绝执行&lt;/p&gt;
 &lt;p&gt;
-&lt;img loading=&#34;lazy&#34; alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/research/mcp/mcp-rce.zh-cn.assets/2.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;&#34;src=&#34;https://www.ch35tnut.com/images/research/mcp/mcp-rce.zh-cn.assets/2.png&#34; width=&#34;1181&#34; height=&#34;458&#34;
+
+
+/&gt;&lt;/p&gt;
 &lt;p&gt;不过还需要优化一下，claude在通过mcp执行脚本之后，发现没有输出，分析除了这其实是一个恶意脚本。&lt;/p&gt;
 &lt;p&gt;
-&lt;img loading=&#34;lazy&#34; alt=&#34;&#34; src=&#34;https://www.ch35tnut.com/images/research/mcp/mcp-rce.zh-cn.assets/5.png&#34; /&gt;&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;&#34;src=&#34;https://www.ch35tnut.com/images/research/mcp/mcp-rce.zh-cn.assets/5.png&#34; width=&#34;1088&#34; height=&#34;1545&#34;
+
+
+/&gt;&lt;/p&gt;
 &lt;p&gt;当然这并不是MCP协议设计的问题，更多的原因是是MCP server在实现时提供了脚本接口，大模型并不能预知执行某些动作之后的结果，此时就可以尝试进行一种另类的prompt注入。&lt;/p&gt;
 &lt;p&gt;这很容易让人想起了简历prompt注入：某些公司通过大模型筛选简历，在简历中写下白色透明的词，对大模型进行注入，提高简历被捞的可能性。&lt;/p&gt;
 &lt;p&gt;技术的发展消灭了某些攻击面，也带来了新的攻击面。keep thinking。&lt;/p&gt;
