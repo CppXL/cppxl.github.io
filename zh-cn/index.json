@@ -1,5 +1,12 @@
 [
 {
+	"uri": "https://www.ch35tnut.com/zh-cn/research/protocol/mcp/",
+	"title": "Mcp",
+	"tags": [],
+	"description": "",
+	"content": "Chapter X Some Chapter title Lorem Ipsum.\n"
+},
+{
 	"uri": "https://www.ch35tnut.com/zh-cn/research/mcp/",
 	"title": "Mcp",
 	"tags": [],
@@ -235,7 +242,7 @@
 	"title": "首页",
 	"tags": [],
 	"description": "",
-	"content": "学习记录 记录一些平时学习和生活的日常。\n生活 安全研究 漏洞分析 杂项 其他 时间线\nlazy load\r| 1 days ago\r给博客图片添加了lazy load\n2025\rMcp \u0026#43; LLM = RCE?\r1 day | 7 days ago\rMCP协议的推出让大模型有了感知现实世界\u0026hellip;\n2025\r奇怪的溢出\r1 day | 9 days ago\r考虑这样一段代码，是否存在溢出问题\u0026hellip;\n2025\r恢复微博图片\r1 day | 48 days ago\rtestddddd\n2025\rCVE-2024-6387 OpenSSH RCE\r1 day | 279 days ago\r如果客户端未在 LoginGraceTime 秒（默认情况下为 120，旧 OpenSSH 版本中为 600）内进行身份验证，则 sshd 的 SIGALRM 处理程序将被异步调用，但此信号handler\u0026hellip;.\n2024\r05-16至05-16\r| 326 days ago\rGHSL-2024-053 GitHub Actions 表达式注入漏洞\nGHSL-2024-053 GitHub Actions 表达式注入漏洞 2024\r05-06至05-06\r| 336 days ago\rmitmproxy 使用\nmitmproxy 自签名证书流量解密 2024\r04-01至04-18\r17 days | 371 days ago\rxz backdoor 脚本部分分析\nCVE-2024-3094 xz backdoor脚本部分分析 2024\r03-05至03-06\r1 day | 398 days ago\rivanti connect secure RCE 分析\nCVE-2023-46805\u0026amp;CVE-2024-21887 ivanti rce 分析 2024\r01-12至01-13\r1 day | 451 days ago\rGitLab 账户接管漏洞分析\nCVE-2023-7028 GitLab Account Takeover 分析 2024\r01-05至01-08\r3 days | 458 days ago\r研究了一下JAVA的URL DNS原理。\nJAVA URL DNS研究 2024\r12-29至12-29\r| 465 days ago\r填坑\nwindows CLFS 权限提升漏洞 CVE-2022-37969 windows CLFS 权限提升漏洞 CVE-2023-28252 Wordpress Backup Migration plugin RCE 2023\r12-05至12-06\r1 day | 489 days ago\r分析了CVE-2021-4034 polkit 权限提升漏洞，填坑。\npolkit 权限提升漏洞 2023\r11-30至12-01\r1 day | 494 days ago\r分析了CVE-2023-17530 Apache Struts OGNL 远程代码执行漏洞\nApache Struts OGNL 远程代码执行漏洞 2023\r11-20至11-25\r5 days | 504 days ago\r分析了在野利用的 CVE-2023-36036 Windows Cloud Files Mini Filter Driver 权限提升漏洞\nWindows Cloud Files Mini Filter Driver 权限提升漏洞 2023\r10-31至11-01\r1 day | 524 days ago\r分析了在野利用的wordpad 信息泄露漏洞\nwordpad 信息泄露漏洞 2023\r10-19至10-25\r6 days | 536 days ago\r分析了两个漏洞\nCitrix 信息泄露漏洞 squid 拒绝服务漏洞 2023\r10-14至10-15\r1 day | 541 days ago\r复现分析了curl 堆溢出漏洞\ncurl堆溢出漏洞 2023\r10-12至10-13\r1 day | 543 days ago\r复现分析了http2 快速重置攻击\nhttp rapid reset ddos attack 2023\r09-19至09-19\r| 566 days ago\r把之前写的文章整理到了博客\nwindows 错误报告服务权限提升漏洞 winrar 代码执行漏洞 2023\r09-14至09-18\r4 days | 571 days ago\r分析了以下9月补丁日的CVE-2023-38148, 分析文章：\nwindows ics rce 2023\r07-24至07-27\r3 days | 623 days ago\r前几天搭建Citrix ADC环境，实在是太难搭了，最后还是选择从公网找了个环境打了一下payload，diff了以下补丁，写了一个分析，可惜不能本地调试，看起来写exp应该挺简单的。分析见\ncitrix adc rce 更新：搭建了调试环境，调试了一下，更新在原链接 2023\r09-13至09-16\r3 days | 937 days ago\r这周再写一个基于rust的loader，写了一半发现加载的dll太多了，再想办法用动态加载的方式加载dll，感觉用rust做有点难。 用rust的内联汇编获取到了kernel32.dll和ntdll.dll的基址，还要继续完善。\n2022\r09-10至09-12\r2 days | 940 days ago\r中秋节，在家摸了几天🐟，啥都没干\n2022\r09-05至09-09\r4 days | 945 days ago\r这周编译了wireshark 1.8.5，通过diff1.8.5和1.8.6的源码找出1.8.5里面的漏洞，见\nwireshark 1.8.5代码审计 2022\r09-03至09-04\r1 day | 947 days ago\r这两天，给hugo主题增加了timeline的shortcode，见\n增加timeline功能 2022\r08-29至09-02\r4 days | 952 days ago\r周内看了一个几百行的代码，见\rnews_server审计\n2022\r黑客精神：Open, Share, Free\n"
+	"content": "学习记录 记录一些平时学习和生活的日常。\n生活 安全研究 漏洞分析 杂项 其他 时间线\nMcp\r| 2 days ago\r交互 . 按照https://m\u0026hellip;\n2025\rlazy load\r| 5 days ago\r给博客图片添加了lazy load\n2025\rMcp \u0026#43; LLM = RCE?\r1 day | 11 days ago\rMCP协议的推出让大模型有了感知现实世界\u0026hellip;\n2025\r奇怪的溢出\r1 day | 13 days ago\r考虑这样一段代码，是否存在溢出问题\u0026hellip;\n2025\r恢复微博图片\r1 day | 52 days ago\rtestddddd\n2025\rCVE-2024-6387 OpenSSH RCE\r1 day | 283 days ago\r如果客户端未在 LoginGraceTime 秒（默认情况下为 120，旧 OpenSSH 版本中为 600）内进行身份验证，则 sshd 的 SIGALRM 处理程序将被异步调用，但此信号handler\u0026hellip;.\n2024\r05-16至05-16\r| 330 days ago\rGHSL-2024-053 GitHub Actions 表达式注入漏洞\nGHSL-2024-053 GitHub Actions 表达式注入漏洞 2024\r05-06至05-06\r| 340 days ago\rmitmproxy 使用\nmitmproxy 自签名证书流量解密 2024\r04-01至04-18\r17 days | 375 days ago\rxz backdoor 脚本部分分析\nCVE-2024-3094 xz backdoor脚本部分分析 2024\r03-05至03-06\r1 day | 402 days ago\rivanti connect secure RCE 分析\nCVE-2023-46805\u0026amp;CVE-2024-21887 ivanti rce 分析 2024\r01-12至01-13\r1 day | 455 days ago\rGitLab 账户接管漏洞分析\nCVE-2023-7028 GitLab Account Takeover 分析 2024\r01-05至01-08\r3 days | 462 days ago\r研究了一下JAVA的URL DNS原理。\nJAVA URL DNS研究 2024\r12-29至12-29\r| 469 days ago\r填坑\nwindows CLFS 权限提升漏洞 CVE-2022-37969 windows CLFS 权限提升漏洞 CVE-2023-28252 Wordpress Backup Migration plugin RCE 2023\r12-05至12-06\r1 day | 493 days ago\r分析了CVE-2021-4034 polkit 权限提升漏洞，填坑。\npolkit 权限提升漏洞 2023\r11-30至12-01\r1 day | 498 days ago\r分析了CVE-2023-17530 Apache Struts OGNL 远程代码执行漏洞\nApache Struts OGNL 远程代码执行漏洞 2023\r11-20至11-25\r5 days | 508 days ago\r分析了在野利用的 CVE-2023-36036 Windows Cloud Files Mini Filter Driver 权限提升漏洞\nWindows Cloud Files Mini Filter Driver 权限提升漏洞 2023\r10-31至11-01\r1 day | 528 days ago\r分析了在野利用的wordpad 信息泄露漏洞\nwordpad 信息泄露漏洞 2023\r10-19至10-25\r6 days | 540 days ago\r分析了两个漏洞\nCitrix 信息泄露漏洞 squid 拒绝服务漏洞 2023\r10-14至10-15\r1 day | 545 days ago\r复现分析了curl 堆溢出漏洞\ncurl堆溢出漏洞 2023\r10-12至10-13\r1 day | 547 days ago\r复现分析了http2 快速重置攻击\nhttp rapid reset ddos attack 2023\r09-19至09-19\r| 570 days ago\r把之前写的文章整理到了博客\nwindows 错误报告服务权限提升漏洞 winrar 代码执行漏洞 2023\r09-14至09-18\r4 days | 575 days ago\r分析了以下9月补丁日的CVE-2023-38148, 分析文章：\nwindows ics rce 2023\r07-24至07-27\r3 days | 627 days ago\r前几天搭建Citrix ADC环境，实在是太难搭了，最后还是选择从公网找了个环境打了一下payload，diff了以下补丁，写了一个分析，可惜不能本地调试，看起来写exp应该挺简单的。分析见\ncitrix adc rce 更新：搭建了调试环境，调试了一下，更新在原链接 2023\r09-13至09-16\r3 days | 941 days ago\r这周再写一个基于rust的loader，写了一半发现加载的dll太多了，再想办法用动态加载的方式加载dll，感觉用rust做有点难。 用rust的内联汇编获取到了kernel32.dll和ntdll.dll的基址，还要继续完善。\n2022\r09-10至09-12\r2 days | 944 days ago\r中秋节，在家摸了几天🐟，啥都没干\n2022\r09-05至09-09\r4 days | 949 days ago\r这周编译了wireshark 1.8.5，通过diff1.8.5和1.8.6的源码找出1.8.5里面的漏洞，见\nwireshark 1.8.5代码审计 2022\r09-03至09-04\r1 day | 951 days ago\r这两天，给hugo主题增加了timeline的shortcode，见\n增加timeline功能 2022\r08-29至09-02\r4 days | 956 days ago\r周内看了一个几百行的代码，见\rnews_server审计\n2022\r黑客精神：Open, Share, Free\n"
 },
 {
 	"uri": "https://www.ch35tnut.com/zh-cn/life/",
@@ -257,6 +264,27 @@
 	"tags": [],
 	"description": "",
 	"content": "其他 timeline shortcode实现 虚拟机重置管理员密码 基于Vmware的小型域网络搭建 漏洞漫谈 奇怪的溢出 "
+},
+{
+	"uri": "https://www.ch35tnut.com/zh-cn/tags/",
+	"title": "Tags",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://www.ch35tnut.com/zh-cn/research/protocol/mcp/mcp/",
+	"title": "透视MCP交互",
+	"tags": ["研究"],
+	"description": "",
+	"content": "交互 . 按照\rhttps://mp.weixin.qq.com/s/DsKQ0vp4ywRlJRAdORKvqQ获取OpenRouter apikey。而后在cloudflare中配置ai gateway，并在右上角获取到api gateway地址\n而后在cline中配置，如下图，选择openai compatible\n配置好MCP server后，在聊天框中触发mcp，即可在cloudflare面板中看到具体的请求。\n可以看到在cline中会启动子进程，获取到现有的tools，当用户请求时，把获取到的tools及其描述放到提示词里面。\n{ \u0026#34;model\u0026#34;: \u0026#34;google/gemini-2.5-pro-exp-03-25:free\u0026#34;, \u0026#34;messages\u0026#34;: [ { \u0026#34;role\u0026#34;: \u0026#34;system\u0026#34;, \u0026#34;content\u0026#34;: \u0026#34;You are Cline, `use_mcp_tool` tool, and access the server\u0026#39;s resources via the `access_mcp_resource` tool.\\n\\n## git (`python -m mcp_server_ida`)\\n\\n### Available Tools\\ 把用户输入作为user放到请求的task里面\n{ \u0026#34;role\u0026#34;: \u0026#34;user\u0026#34;, \u0026#34;content\u0026#34;: [ { \u0026#34;type\u0026#34;: \u0026#34;text\u0026#34;, \u0026#34;text\u0026#34;: \u0026#34;\u0026lt;task\u0026gt;\\n\\\u0026#34;xxx\u0026lt;/task\u0026gt;\u0026#34; }, { 而后大模型会在response里面根据用户输入选择对应的tools并组合对应的参数，传给mcp client\n{ \u0026#34;id\u0026#34;: \u0026#34;gen--\u0026#34;, \u0026#34;provider\u0026#34;: \u0026#34;Google AI Studio\u0026#34;, \u0026#34;model\u0026#34;: \u0026#34;google/gemini-2.5-pro-exp-03-25\u0026#34;, \u0026#34;choices\u0026#34;: [ { \u0026#34;delta\u0026#34;: { \u0026#34;role\u0026#34;: \u0026#34;assistant\u0026#34;, \u0026#34;content\u0026#34;: \u0026#34;Okay, I will call the tool from the `mcp`.\\n\\n\u0026lt;use_mcp_tool\u0026gt;\\n\u0026lt;server_name\u0026gt;mcp\u0026lt;/server_name\u0026gt;\\n\u0026lt;tool_name\u0026gt;\u0026lt;/tool_name\u0026gt;\\n\u0026lt;arguments\u0026gt;\\n{\\n \\\u0026#34;\\\u0026#34;: \\\u0026#34;\\\u0026#34;,\\n \\\u0026#34;\\\u0026#34;: \\\\n}\\n\u0026lt;/arguments\u0026gt;\\n\u0026lt;/use_mcp_tool\u0026gt;\u0026#34; } 之后mcp client就可以把参数通过stdio传给mcp server，之后再次请求，把执行结果给大模型。\n{ \u0026#34;role\u0026#34;: \u0026#34;user\u0026#34;, \u0026#34;content\u0026#34;: [ { \u0026#34;type\u0026#34;: \u0026#34;text\u0026#34;, \u0026#34;text\u0026#34;: \u0026#34;[use_mcp_tool for \u0026#39;mcp\u0026#39;] Result:\u0026#34; }, { \u0026#34;type\u0026#34;: \u0026#34;text\u0026#34;, \u0026#34;text\u0026#34;: \u0026#34;successfully.\u0026#34; }, 大模型就可以根据mcp server执行结果，生成自然语言的回复给用户\n{ \u0026#34;id\u0026#34;: \u0026#34;gen-1744277319-\u0026#34;, \u0026#34;provider\u0026#34;: \u0026#34;Google AI Studio\u0026#34;, \u0026#34;model\u0026#34;: \u0026#34;google/gemini-2.5-pro-exp-03-25\u0026#34;, \u0026#34;choices\u0026#34;: [ { \u0026#34;delta\u0026#34;: { \u0026#34;role\u0026#34;: \u0026#34;assistant\u0026#34;, \u0026#34;content\u0026#34;: \u0026#34;\u0026lt;attempt_completion\u0026gt;\\n\u0026lt;result\u0026gt;\\n\\n\u0026lt;/result\u0026gt;\\n\u0026lt;/attempt_completion\u0026gt;\u0026#34; } } ], 那么从上面的交互过程你能想到什么攻击方式吗？\n"
+},
+{
+	"uri": "https://www.ch35tnut.com/zh-cn/tags/%E7%A0%94%E7%A9%B6/",
+	"title": "研究",
+	"tags": [],
+	"description": "",
+	"content": ""
 },
 {
 	"uri": "https://www.ch35tnut.com/zh-cn/research/mcp/mcp-rce/",
@@ -282,13 +310,6 @@
 {
 	"uri": "https://www.ch35tnut.com/zh-cn/tags/nextjs/",
 	"title": "Nextjs",
-	"tags": [],
-	"description": "",
-	"content": ""
-},
-{
-	"uri": "https://www.ch35tnut.com/zh-cn/tags/",
-	"title": "Tags",
 	"tags": [],
 	"description": "",
 	"content": ""
