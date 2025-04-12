@@ -19,8 +19,7 @@
       
       <guid>https://www.ch35tnut.com/zh-cn/research/protocol/mcp/mcp/</guid>
 <description>&lt;h3 id=&#34;交互&#34;&gt;交互&lt;/h3&gt;
-&lt;p&gt;.
-按照
+&lt;p&gt;按照
 &lt;a href=&#34;https://mp.weixin.qq.com/s/DsKQ0vp4ywRlJRAdORKvqQ&#34; target=&#34;_blank&#34;&gt;https://mp.weixin.qq.com/s/DsKQ0vp4ywRlJRAdORKvqQ&lt;/a&gt;获取OpenRouter apikey。而后在cloudflare中配置ai gateway，并在右上角获取到api gateway地址&lt;/p&gt;
 &lt;p&gt;
 &lt;img loading=&#34;lazy&#34; alt=&#34;1.png&#34;src=&#34;https://www.ch35tnut.com/images/research/protocol/mcp/mcp.zh-cn.assets/1.png&#34; width=&#34;2537&#34; height=&#34;1222&#34;
