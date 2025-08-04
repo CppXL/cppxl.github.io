@@ -152,5 +152,61 @@
 
 </item>
     
+    <item>
+<title>Cj</title>
+<link>https://www.ch35tnut.com/zh-cn/research/cj/</link>
+<pubDate>Mon, 04 Aug 2025 23:14:28 +0800</pubDate>
+      
+      <guid>https://www.ch35tnut.com/zh-cn/research/cj/</guid>
+<description>&lt;h3 id=&#34;前言&#34;&gt;前言&lt;/h3&gt;
+&lt;p&gt;7.30号华为开源了仓颉语言，在互联网上掀起了一波热度，作为第一个国产编程语言（不严谨的说），图灵完备且能够编译到linux、Windows和darwin(macos)，对于我们这行的人来说，这很适合用来写马，并且由于是新兴语言，杀软本身特征库比较少，所以理论上免杀性能会更好。&lt;/p&gt;
+&lt;p&gt;目前官方已有进程、加密、通信等库，对于一个后门或者说木马完全够用了。本文简短的对仓颉编程语言的免杀性，易用性以及反编译性能进行讨论。&lt;/p&gt;
+&lt;h3 id=&#34;抗杀软&#34;&gt;抗杀软&lt;/h3&gt;
+&lt;p&gt;为了检测抗杀软性能，此处编写简单的程序，核心逻辑为连接服务器指定端口，接收数据异或解密后作为命令执行，并将执行结果异或后返回给服务器。&lt;/p&gt;
+&lt;p&gt;效果如下：
+
+&lt;img loading=&#34;lazy&#34; alt=&#34;4.png&#34;src=&#34;https://www.ch35tnut.com/images/research/cj.zh-cn.assets/4.png&#34; width=&#34;1035&#34; height=&#34;834&#34;
+
+ style=&#34;width: 100%; max-width: 570px;&#34;
+/&gt;&lt;/p&gt;
+&lt;p&gt;下图为VT的检测，全绿。
+
+&lt;img loading=&#34;lazy&#34; alt=&#34;3.png&#34;src=&#34;https://www.ch35tnut.com/images/research/cj.zh-cn.assets/3.png&#34; width=&#34;2316&#34; height=&#34;998&#34;
+
+ style=&#34;width: 100%; max-width: 570px;&#34;
+/&gt;&lt;/p&gt;
+&lt;p&gt;为了测试和其他语言的对比，此处使用ai将仓颉代码转换为go&lt;/p&gt;
+&lt;p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;5.png&#34;src=&#34;https://www.ch35tnut.com/images/research/cj.zh-cn.assets/5.png&#34; width=&#34;1127&#34; height=&#34;1003&#34;
+
+ style=&#34;width: 100%; max-width: 570px;&#34;
+/&gt;&lt;/p&gt;
+&lt;p&gt;将go 编译所得的二进制文件上传到VT，被多家厂商标红。
+
+&lt;img loading=&#34;lazy&#34; alt=&#34;2.png&#34;src=&#34;https://www.ch35tnut.com/images/research/cj.zh-cn.assets/2.png&#34; width=&#34;2128&#34; height=&#34;881&#34;
+
+ style=&#34;width: 100%; max-width: 570px;&#34;
+/&gt;&lt;/p&gt;
+&lt;p&gt;不难看出仓颉相对go来说免杀性能是要更好的，在VT的行为栏里面甚至没有TCP连接相关行为。&lt;/p&gt;
+&lt;h3 id=&#34;逆向&#34;&gt;逆向&lt;/h3&gt;
+&lt;p&gt;作为没有历史包袱的现代语言，仓颉可以借鉴其他语言的有点，使用ida打开可以明显的看到里面携带了部分运行时的函数，如果读者逆向过rust语言则可以很明显的看出来和rust的二进制文件有一部分相似，&lt;/p&gt;
+&lt;p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;6.png&#34;src=&#34;https://www.ch35tnut.com/images/research/cj.zh-cn.assets/6.png&#34; width=&#34;718&#34; height=&#34;931&#34;
+
+ style=&#34;width: 100%; max-width: 570px;&#34;
+/&gt;&lt;/p&gt;
+&lt;p&gt;即都会在编译时展开一些函数，这无疑会对逆向造成一些困难，并且由于资料缺失相关结构体之类的信息比较难还原，所以这方面是要优于c、c++的。&lt;/p&gt;
+&lt;h3 id=&#34;结语&#34;&gt;结语&lt;/h3&gt;
+&lt;p&gt;作为刚开源的语言，对于信息安全从业者来说尤其是红队，免杀效果比较好，当然相对来说文档和第三方库缺失客观上也造成了编码难度的提升，资料缺失导致笔者的demo还写了几个小时，AI也没办法补全，而且目前只支持vscode安装插件的方式进行开发、调试，希望后续官方能够提升一下编码的体验吧。&lt;/p&gt;
+&lt;p&gt;文档&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;
+&lt;a href=&#34;https://cangjie-lang.cn/docs?url=%2F1.0.0%2Frelease_notes.html&#34; target=&#34;_blank&#34;&gt;https://cangjie-lang.cn/docs?url=%2F1.0.0%2Frelease_notes.html&lt;/a&gt;
+
+&lt;a href=&#34;https://developer.huawei.com/consumer/cn/doc/cangjie-guides-V5/cj-wp-abstract-V5&#34; target=&#34;_blank&#34;&gt;https://developer.huawei.com/consumer/cn/doc/cangjie-guides-V5/cj-wp-abstract-V5&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+
+</item>
+    
   </channel>
 </rss>
