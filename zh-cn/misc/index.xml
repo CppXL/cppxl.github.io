@@ -78,5 +78,36 @@
 
 </item>
     
+    <item>
+<title>Debug Uefi</title>
+<link>https://www.ch35tnut.com/zh-cn/misc/debug-uefi/</link>
+<pubDate>Mon, 13 Oct 2025 20:46:39 +0800</pubDate>
+      
+      <guid>https://www.ch35tnut.com/zh-cn/misc/debug-uefi/</guid>
+<description>&lt;p&gt;偶然的机会需要在UEFI boot阶段进行调试，但之前没接触过，不知道怎么搭建调试环境，网上搜了一些文章讲的一知半解的，遂写一下怎么设置相关环境。&lt;/p&gt;
+&lt;p&gt;现在一般使用Intel开源的UEFI编写相关代码并调试&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;
+&lt;a href=&#34;https://github.com/tianocore/edk2&#34; target=&#34;_blank&#34;&gt;https://github.com/tianocore/edk2&lt;/a&gt;
+下载好后进入vs2022开发人员提示终端执行，需要注意的是该项目依赖于NASM，需要设置环境变量&lt;code&gt;NASM_PREFIX&lt;/code&gt;指向nasm所在目录，此外还需要下载iasl，安装并添加到PATH环境变量。执行&lt;/p&gt;&lt;/blockquote&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;edksetup.bat Rebuild
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;而后就可以使用命令&lt;code&gt;build -p AppPkg\AppPkg.dsc -a IA32/X64&lt;/code&gt;编译相关模块了，对于本地调试环境主要要的是OvmfPkg这个包&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;build -a X64 -b DEBUG -p OvmfPkg/OvmfPkgX64.dsc
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;编译好之后将ovmf.fd拷贝到一个目录下，下载qemu for windows并安装，将其添加到环境变量内，随后需要制作qemu启动所需的hdd&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;qemu-img.exe create -f raw windows.img 60G
+qemu-system-x86_64.exe -L . -bios OVMF.fd -hdd windows.img -cdrom Windows.iso -boot d -m 4096 -smp 4 -debugcon file:debug.log -global isa-debugcon.iobase=0x402
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;之后启动系统&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;qemu-system-x86_64.exe -L . -bios OVMF.fd -hdd windows.img -cdrom .\win1020h2.iso -boot d -m 4096 -debugcon file:debug.log -global isa-debugcon.iobase=0x402  -m 4096 -smp 4  -boot menu=on,splash-time=5000
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;通过debuglog确定UEFI模块的entry point，这个地址一般是不变的，得到地址之后在qemu命令行添加&lt;code&gt;-s -S&lt;/code&gt;参数使得刚开始就停止，而后使用windbg附加。&lt;/p&gt;
+&lt;p&gt;
+&lt;img loading=&#34;lazy&#34; alt=&#34;4.png&#34;src=&#34;https://www.ch35tnut.com/images/misc/debug-uefi.zh-cn.assets/4.png&#34; width=&#34;965&#34; height=&#34;697&#34;
+
+ style=&#34;width: 100%; max-width: 570px;&#34;
+/&gt;&lt;/p&gt;
+&lt;p&gt;即可使用windbg进行调试。&lt;/p&gt;
+</description>
+
+</item>
+    
   </channel>
 </rss>

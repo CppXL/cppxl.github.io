@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0"
+    xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Web3 on chestnut&#39;s blog</title>
+        <link>https://www.ch35tnut.com/zh-cn/web3/</link>
+        <description>Recent content in Web3 on chestnut&#39;s blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <lastBuildDate>Sun, 28 Sep 2025 22:41:40 +0800</lastBuildDate>
+    
+        <atom:link href="https://www.ch35tnut.com/zh-cn/web3/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+<title>Solidity</title>
+<link>https://www.ch35tnut.com/zh-cn/web3/solidity/</link>
+<pubDate>Sun, 28 Sep 2025 22:42:50 +0800</pubDate>
+      
+      <guid>https://www.ch35tnut.com/zh-cn/web3/solidity/</guid>
+<description></description>
+
+</item>
+    
+  </channel>
+</rss>

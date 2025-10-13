@@ -1,5 +1,12 @@
 [
 {
+	"uri": "https://www.ch35tnut.com/zh-cn/web3/",
+	"title": "Web3",
+	"tags": [],
+	"description": "",
+	"content": "web3安全学习笔记 "
+},
+{
 	"uri": "https://www.ch35tnut.com/zh-cn/research/protocol/mcp/",
 	"title": "Mcp",
 	"tags": [],
@@ -242,7 +249,7 @@
 	"title": "首页",
 	"tags": [],
 	"description": "",
-	"content": "学习记录 记录一些平时学习和生活的日常。\n生活 安全研究 漏洞分析 杂项 其他 时间线\nCj\r| 2 days ago\r7.30号华为开源了仓颉语言，在互联网\u0026hellip;\n2025\r为什么我选择懒猫微服\r1 day | 43 days ago\r第一次刷到王总的帖子是在今年三月份，彼时\u0026hellip;\n2025\r透视MCP交互\r1 day | 118 days ago\r按照\rhttps://mp.weixin.qq.com/s/DsKQ0vp4ywRlJRAdORKvqQ获取O\u0026hellip;\n2025\rlazy load\r| 121 days ago\r给博客图片添加了lazy load\n2025\rMcp \u0026#43; LLM = RCE?\r1 day | 127 days ago\rMCP协议的推出让大模型有了感知现实世界\u0026hellip;\n2025\r奇怪的溢出\r1 day | 129 days ago\r考虑这样一段代码，是否存在溢出问题\u0026hellip;\n2025\r恢复微博图片\r1 day | 168 days ago\rtestddddd\n2025\rCVE-2024-6387 OpenSSH RCE\r1 day | 399 days ago\r如果客户端未在 LoginGraceTime 秒（默认情况下为 120，旧 OpenSSH 版本中为 600）内进行身份验证，则 sshd 的 SIGALRM 处理程序将被异步调用，但此信号handler\u0026hellip;.\n2024\r05-16至05-16\r| 446 days ago\rGHSL-2024-053 GitHub Actions 表达式注入漏洞\nGHSL-2024-053 GitHub Actions 表达式注入漏洞 2024\r05-06至05-06\r| 456 days ago\rmitmproxy 使用\nmitmproxy 自签名证书流量解密 2024\r04-01至04-18\r17 days | 491 days ago\rxz backdoor 脚本部分分析\nCVE-2024-3094 xz backdoor脚本部分分析 2024\r03-05至03-06\r1 day | 518 days ago\rivanti connect secure RCE 分析\nCVE-2023-46805\u0026amp;CVE-2024-21887 ivanti rce 分析 2024\r01-12至01-13\r1 day | 571 days ago\rGitLab 账户接管漏洞分析\nCVE-2023-7028 GitLab Account Takeover 分析 2024\r01-05至01-08\r3 days | 578 days ago\r研究了一下JAVA的URL DNS原理。\nJAVA URL DNS研究 2024\r12-29至12-29\r| 585 days ago\r填坑\nwindows CLFS 权限提升漏洞 CVE-2022-37969 windows CLFS 权限提升漏洞 CVE-2023-28252 Wordpress Backup Migration plugin RCE 2023\r12-05至12-06\r1 day | 609 days ago\r分析了CVE-2021-4034 polkit 权限提升漏洞，填坑。\npolkit 权限提升漏洞 2023\r11-30至12-01\r1 day | 614 days ago\r分析了CVE-2023-17530 Apache Struts OGNL 远程代码执行漏洞\nApache Struts OGNL 远程代码执行漏洞 2023\r11-20至11-25\r5 days | 624 days ago\r分析了在野利用的 CVE-2023-36036 Windows Cloud Files Mini Filter Driver 权限提升漏洞\nWindows Cloud Files Mini Filter Driver 权限提升漏洞 2023\r10-31至11-01\r1 day | 644 days ago\r分析了在野利用的wordpad 信息泄露漏洞\nwordpad 信息泄露漏洞 2023\r10-19至10-25\r6 days | 656 days ago\r分析了两个漏洞\nCitrix 信息泄露漏洞 squid 拒绝服务漏洞 2023\r10-14至10-15\r1 day | 661 days ago\r复现分析了curl 堆溢出漏洞\ncurl堆溢出漏洞 2023\r10-12至10-13\r1 day | 663 days ago\r复现分析了http2 快速重置攻击\nhttp rapid reset ddos attack 2023\r09-19至09-19\r| 686 days ago\r把之前写的文章整理到了博客\nwindows 错误报告服务权限提升漏洞 winrar 代码执行漏洞 2023\r09-14至09-18\r4 days | 691 days ago\r分析了以下9月补丁日的CVE-2023-38148, 分析文章：\nwindows ics rce 2023\r07-24至07-27\r3 days | 743 days ago\r前几天搭建Citrix ADC环境，实在是太难搭了，最后还是选择从公网找了个环境打了一下payload，diff了以下补丁，写了一个分析，可惜不能本地调试，看起来写exp应该挺简单的。分析见\ncitrix adc rce 更新：搭建了调试环境，调试了一下，更新在原链接 2023\r09-13至09-16\r3 days | 1057 days ago\r这周再写一个基于rust的loader，写了一半发现加载的dll太多了，再想办法用动态加载的方式加载dll，感觉用rust做有点难。 用rust的内联汇编获取到了kernel32.dll和ntdll.dll的基址，还要继续完善。\n2022\r09-10至09-12\r2 days | 1060 days ago\r中秋节，在家摸了几天🐟，啥都没干\n2022\r09-05至09-09\r4 days | 1065 days ago\r这周编译了wireshark 1.8.5，通过diff1.8.5和1.8.6的源码找出1.8.5里面的漏洞，见\nwireshark 1.8.5代码审计 2022\r09-03至09-04\r1 day | 1067 days ago\r这两天，给hugo主题增加了timeline的shortcode，见\n增加timeline功能 2022\r08-29至09-02\r4 days | 1072 days ago\r周内看了一个几百行的代码，见\rnews_server审计\n2022\r黑客精神：Open, Share, Free\n"
+	"content": "学习记录 记录一些平时学习和生活的日常。\n生活 安全研究 漏洞分析 杂项 其他 时间线\nDebug Uefi\r| 2 days ago\r偶然的机会需要在UEFI boot阶段进\u0026hellip;\n2025\rCj\r1 day | 72 days ago\r7.30号华为开源了仓颉语言，在互联网\u0026hellip;\n2025\r为什么我选择懒猫微服\r1 day | 113 days ago\r第一次刷到王总的帖子是在今年三月份，彼时\u0026hellip;\n2025\r透视MCP交互\r1 day | 188 days ago\r按照\rhttps://mp.weixin.qq.com/s/DsKQ0vp4ywRlJRAdORKvqQ获取O\u0026hellip;\n2025\rlazy load\r| 191 days ago\r给博客图片添加了lazy load\n2025\rMcp \u0026#43; LLM = RCE?\r1 day | 197 days ago\rMCP协议的推出让大模型有了感知现实世界\u0026hellip;\n2025\r奇怪的溢出\r1 day | 199 days ago\r考虑这样一段代码，是否存在溢出问题\u0026hellip;\n2025\r恢复微博图片\r1 day | 238 days ago\rtestddddd\n2025\rCVE-2024-6387 OpenSSH RCE\r1 day | 469 days ago\r如果客户端未在 LoginGraceTime 秒（默认情况下为 120，旧 OpenSSH 版本中为 600）内进行身份验证，则 sshd 的 SIGALRM 处理程序将被异步调用，但此信号handler\u0026hellip;.\n2024\r05-16至05-16\r| 516 days ago\rGHSL-2024-053 GitHub Actions 表达式注入漏洞\nGHSL-2024-053 GitHub Actions 表达式注入漏洞 2024\r05-06至05-06\r| 526 days ago\rmitmproxy 使用\nmitmproxy 自签名证书流量解密 2024\r04-01至04-18\r17 days | 561 days ago\rxz backdoor 脚本部分分析\nCVE-2024-3094 xz backdoor脚本部分分析 2024\r03-05至03-06\r1 day | 588 days ago\rivanti connect secure RCE 分析\nCVE-2023-46805\u0026amp;CVE-2024-21887 ivanti rce 分析 2024\r01-12至01-13\r1 day | 641 days ago\rGitLab 账户接管漏洞分析\nCVE-2023-7028 GitLab Account Takeover 分析 2024\r01-05至01-08\r3 days | 648 days ago\r研究了一下JAVA的URL DNS原理。\nJAVA URL DNS研究 2024\r12-29至12-29\r| 655 days ago\r填坑\nwindows CLFS 权限提升漏洞 CVE-2022-37969 windows CLFS 权限提升漏洞 CVE-2023-28252 Wordpress Backup Migration plugin RCE 2023\r12-05至12-06\r1 day | 679 days ago\r分析了CVE-2021-4034 polkit 权限提升漏洞，填坑。\npolkit 权限提升漏洞 2023\r11-30至12-01\r1 day | 684 days ago\r分析了CVE-2023-17530 Apache Struts OGNL 远程代码执行漏洞\nApache Struts OGNL 远程代码执行漏洞 2023\r11-20至11-25\r5 days | 694 days ago\r分析了在野利用的 CVE-2023-36036 Windows Cloud Files Mini Filter Driver 权限提升漏洞\nWindows Cloud Files Mini Filter Driver 权限提升漏洞 2023\r10-31至11-01\r1 day | 714 days ago\r分析了在野利用的wordpad 信息泄露漏洞\nwordpad 信息泄露漏洞 2023\r10-19至10-25\r6 days | 726 days ago\r分析了两个漏洞\nCitrix 信息泄露漏洞 squid 拒绝服务漏洞 2023\r10-14至10-15\r1 day | 731 days ago\r复现分析了curl 堆溢出漏洞\ncurl堆溢出漏洞 2023\r10-12至10-13\r1 day | 733 days ago\r复现分析了http2 快速重置攻击\nhttp rapid reset ddos attack 2023\r09-19至09-19\r| 756 days ago\r把之前写的文章整理到了博客\nwindows 错误报告服务权限提升漏洞 winrar 代码执行漏洞 2023\r09-14至09-18\r4 days | 761 days ago\r分析了以下9月补丁日的CVE-2023-38148, 分析文章：\nwindows ics rce 2023\r07-24至07-27\r3 days | 813 days ago\r前几天搭建Citrix ADC环境，实在是太难搭了，最后还是选择从公网找了个环境打了一下payload，diff了以下补丁，写了一个分析，可惜不能本地调试，看起来写exp应该挺简单的。分析见\ncitrix adc rce 更新：搭建了调试环境，调试了一下，更新在原链接 2023\r09-13至09-16\r3 days | 1127 days ago\r这周再写一个基于rust的loader，写了一半发现加载的dll太多了，再想办法用动态加载的方式加载dll，感觉用rust做有点难。 用rust的内联汇编获取到了kernel32.dll和ntdll.dll的基址，还要继续完善。\n2022\r09-10至09-12\r2 days | 1130 days ago\r中秋节，在家摸了几天🐟，啥都没干\n2022\r09-05至09-09\r4 days | 1135 days ago\r这周编译了wireshark 1.8.5，通过diff1.8.5和1.8.6的源码找出1.8.5里面的漏洞，见\nwireshark 1.8.5代码审计 2022\r09-03至09-04\r1 day | 1137 days ago\r这两天，给hugo主题增加了timeline的shortcode，见\n增加timeline功能 2022\r08-29至09-02\r4 days | 1142 days ago\r周内看了一个几百行的代码，见\rnews_server审计\n2022\r黑客精神：Open, Share, Free\n"
 },
 {
 	"uri": "https://www.ch35tnut.com/zh-cn/life/",
@@ -266,11 +273,32 @@
 	"content": "其他 timeline shortcode实现 虚拟机重置管理员密码 基于Vmware的小型域网络搭建 漏洞漫谈 奇怪的溢出 "
 },
 {
+	"uri": "https://www.ch35tnut.com/zh-cn/misc/debug-uefi/",
+	"title": "Debug Uefi",
+	"tags": [],
+	"description": "",
+	"content": "偶然的机会需要在UEFI boot阶段进行调试，但之前没接触过，不知道怎么搭建调试环境，网上搜了一些文章讲的一知半解的，遂写一下怎么设置相关环境。\n现在一般使用Intel开源的UEFI编写相关代码并调试\nhttps://github.com/tianocore/edk2 下载好后进入vs2022开发人员提示终端执行，需要注意的是该项目依赖于NASM，需要设置环境变量NASM_PREFIX指向nasm所在目录，此外还需要下载iasl，安装并添加到PATH环境变量。执行\nedksetup.bat Rebuild 而后就可以使用命令build -p AppPkg\\AppPkg.dsc -a IA32/X64编译相关模块了，对于本地调试环境主要要的是OvmfPkg这个包\nbuild -a X64 -b DEBUG -p OvmfPkg/OvmfPkgX64.dsc 编译好之后将ovmf.fd拷贝到一个目录下，下载qemu for windows并安装，将其添加到环境变量内，随后需要制作qemu启动所需的hdd\nqemu-img.exe create -f raw windows.img 60G qemu-system-x86_64.exe -L . -bios OVMF.fd -hdd windows.img -cdrom Windows.iso -boot d -m 4096 -smp 4 -debugcon file:debug.log -global isa-debugcon.iobase=0x402 之后启动系统\nqemu-system-x86_64.exe -L . -bios OVMF.fd -hdd windows.img -cdrom .\\win1020h2.iso -boot d -m 4096 -debugcon file:debug.log -global isa-debugcon.iobase=0x402 -m 4096 -smp 4 -boot menu=on,splash-time=5000 通过debuglog确定UEFI模块的entry point，这个地址一般是不变的，得到地址之后在qemu命令行添加-s -S参数使得刚开始就停止，而后使用windbg附加。\n即可使用windbg进行调试。\n"
+},
+{
+	"uri": "https://www.ch35tnut.com/zh-cn/web3/solidity/",
+	"title": "Solidity",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
 	"uri": "https://www.ch35tnut.com/zh-cn/research/cj/",
 	"title": "Cj",
 	"tags": [],
 	"description": "",
 	"content": "前言 7.30号华为开源了仓颉语言，在互联网上掀起了一波热度，作为第一个国产编程语言（不严谨的说），图灵完备且能够编译到linux、Windows和darwin(macos)，对于我们这行的人来说，这很适合用来写马，并且由于是新兴语言，杀软本身特征库比较少，所以理论上免杀性能会更好。\n目前官方已有进程、加密、通信等库，对于一个后门或者说木马完全够用了。本文简短的对仓颉编程语言的免杀性，易用性以及反编译性能进行讨论。\n抗杀软 为了检测抗杀软性能，此处编写简单的程序，核心逻辑为连接服务器指定端口，接收数据异或解密后作为命令执行，并将执行结果异或后返回给服务器。\n效果如下： 下图为VT的检测，全绿。 为了测试和其他语言的对比，此处使用ai将仓颉代码转换为go\n将go 编译所得的二进制文件上传到VT，被多家厂商标红。 不难看出仓颉相对go来说免杀性能是要更好的，在VT的行为栏里面甚至没有TCP连接相关行为。\n逆向 作为没有历史包袱的现代语言，仓颉可以借鉴其他语言的有点，使用ida打开可以明显的看到里面携带了部分运行时的函数，如果读者逆向过rust语言则可以很明显的看出来和rust的二进制文件有一部分相似，\n即都会在编译时展开一些函数，这无疑会对逆向造成一些困难，并且由于资料缺失相关结构体之类的信息比较难还原，所以这方面是要优于c、c++的。\n结语 作为刚开源的语言，对于信息安全从业者来说尤其是红队，免杀效果比较好，当然相对来说文档和第三方库缺失客观上也造成了编码难度的提升，资料缺失导致笔者的demo还写了几个小时，AI也没办法补全，而且目前只支持vscode安装插件的方式进行开发、调试，希望后续官方能够提升一下编码的体验吧。\n文档\nhttps://cangjie-lang.cn/docs?url=%2F1.0.0%2Frelease_notes.html https://developer.huawei.com/consumer/cn/doc/cangjie-guides-V5/cj-wp-abstract-V5\n"
+},
+{
+	"uri": "https://www.ch35tnut.com/zh-cn/life/first-arch/",
+	"title": "First Arch",
+	"tags": [],
+	"description": "",
+	"content": ""
 },
 {
 	"uri": "https://www.ch35tnut.com/zh-cn/life/why-lzc/",
